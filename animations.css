@@ -1,0 +1,144 @@
+/* ─── CC Fest · Animations ────────────────────────────────────────────
+ * Owner: Shristi
+ *
+ * This file is loaded after styles.css and owns all motion on the site.
+ * Target elements via the .anim-* hook classes already on the HTML —
+ * never change layout, color, or typography here.
+ *
+ * Scroll-triggered reveals: animations.js adds .is-visible to
+ * .anim-scroll elements when they enter the viewport. Everything
+ * else triggers on page load.
+ *
+ * Always add a counterpart rule inside the prefers-reduced-motion
+ * block at the bottom whenever you add a new animation.
+ * ─────────────────────────────────────────────────────────────────── */
+
+
+/* ── Keyframes ─────────────────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ruleExpand {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── Page-load: nav ────────────────────────────────────────────────── */
+
+.anim-nav {
+  animation: slideDown 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/* ── Page-load: hero ───────────────────────────────────────────────── */
+
+.anim-hero-title {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.anim-hero-rule {
+  animation: ruleExpand 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.anim-hero-sub {
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+
+/* ── Scroll-triggered: default hidden state ────────────────────────── */
+/* animations.js adds .is-visible when the element enters the viewport  */
+
+.anim-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.anim-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ── Scroll-triggered: staggered chips ────────────────────────────── */
+/* Each .anim-chip gets its delay set by animations.js via              */
+/* --stagger-delay so chips cascade in left-to-right.                  */
+
+.anim-chip {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger-delay, 0ms),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger-delay, 0ms);
+}
+
+.anim-chip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ── Upcoming band ─────────────────────────────────────────────────── */
+
+.anim-upcoming-copy {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.anim-upcoming-copy.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.anim-upcoming-meta {
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.25s,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+}
+
+.anim-upcoming-meta.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* ── Reduced motion: disable everything ───────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-nav,
+  .anim-hero-title,
+  .anim-hero-rule,
+  .anim-hero-sub {
+    animation: none;
+  }
+
+  .anim-scroll,
+  .anim-chip,
+  .anim-upcoming-copy,
+  .anim-upcoming-meta {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -11,11 +11,12 @@
     <title>CC Fest — Creative Coding Festival</title>
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header anim-nav">
       <a class="logo" href="./" aria-label="CC Fest home">CC Fest</a>
       <nav aria-label="Main navigation">
         <a href="register/">Events</a>
@@ -29,9 +30,9 @@
 
       <!-- ── Hero ── -->
       <section class="home-hero page-width" aria-label="CC Fest">
-        <h1 class="home-hero-title">CC FEST</h1>
-        <hr class="hero-rule">
-        <p class="home-hero-sub">
+        <h1 class="home-hero-title anim-hero-title">CC FEST</h1>
+        <hr class="hero-rule anim-hero-rule">
+        <p class="home-hero-sub anim-hero-sub">
           A free and friendly gathering for creative coding —
           workshops, talks, and community.
         </p>
@@ -40,7 +41,7 @@
       <!-- ── Upcoming event band ── -->
       <section class="upcoming-band" aria-labelledby="upcoming-title">
         <div class="page-width upcoming-inner">
-          <div class="upcoming-copy">
+          <div class="upcoming-copy anim-scroll anim-upcoming-copy">
             <p class="eyebrow upcoming-eyebrow">Upcoming · Virtual · Free</p>
             <h2 id="upcoming-title">Virtual CC Fest 2026</h2>
             <p>
@@ -49,7 +50,7 @@
             </p>
             <a class="button button-light" href="register/">View event &amp; register →</a>
           </div>
-          <div class="upcoming-facts">
+          <div class="upcoming-facts anim-scroll anim-upcoming-meta">
             <div><span>Format</span><strong>Virtual</strong></div>
             <div><span>Date</span><strong>TBC 2026</strong></div>
             <div><span>Cost</span><strong>Free</strong></div>
@@ -60,11 +61,11 @@
 
       <!-- ── About ── -->
       <section class="section page-width home-about" id="about" aria-labelledby="about-title">
-        <div class="about-lead">
+        <div class="about-lead anim-scroll">
           <p class="eyebrow">About CC Fest</p>
           <h2 id="about-title">Creative coding<br>for everyone.</h2>
         </div>
-        <div class="about-body">
+        <div class="about-body anim-scroll">
           <p>
             CC Fest is a free and friendly event for anyone curious about
             creative code. Come spend a few hours with us — make interactive
@@ -93,7 +94,7 @@
               <p>CC Fest has been gathering creative coders since 2016.</p>
             </div>
           </div>
-          <div class="past-events-body">
+          <div class="past-events-body anim-scroll">
             <p>
               We hosted our first virtual event on <strong>July 11, 2020</strong>.
               Previous in-person CC Fests have taken place in New York City,
@@ -106,16 +107,16 @@
             </p>
           </div>
           <div class="location-chips" aria-label="Past CC Fest locations">
-            <div class="location-chip"><strong>NYC</strong><span>Oct 2016 · NYU ITP</span></div>
-            <div class="location-chip"><strong>NYC</strong><span>2017 · NYU ITP</span></div>
-            <div class="location-chip"><strong>LA</strong><span>2018</span></div>
-            <div class="location-chip"><strong>SF</strong><span>2019</span></div>
-            <div class="location-chip"><strong>Virtual</strong><span>Jul 2020</span></div>
-            <div class="location-chip"><strong>Virtual</strong><span>2021</span></div>
-            <div class="location-chip"><strong>Virtual</strong><span>2022</span></div>
-            <div class="location-chip"><strong>Virtual</strong><span>2023</span></div>
-            <div class="location-chip"><strong>Virtual</strong><span>2024</span></div>
-            <div class="location-chip"><strong>Virtual</strong><span>2025</span></div>
+            <div class="location-chip anim-chip"><strong>NYC</strong><span>Oct 2016 · NYU ITP</span></div>
+            <div class="location-chip anim-chip"><strong>NYC</strong><span>2017 · NYU ITP</span></div>
+            <div class="location-chip anim-chip"><strong>LA</strong><span>2018</span></div>
+            <div class="location-chip anim-chip"><strong>SF</strong><span>2019</span></div>
+            <div class="location-chip anim-chip"><strong>Virtual</strong><span>Jul 2020</span></div>
+            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2021</span></div>
+            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2022</span></div>
+            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2023</span></div>
+            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2024</span></div>
+            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2025</span></div>
           </div>
         </div>
       </section>
@@ -129,7 +130,7 @@
             <p>Get notified about upcoming events and CC Fest news.</p>
           </div>
         </div>
-        <p class="mailing-body">
+        <p class="mailing-body anim-scroll">
           To join the CC Fest mailing list, send an email to
           <a href="mailto:mrkhatndv@gmail.com?subject=Join mailing list">mrkhatndv@gmail.com</a>
           with the subject line <em>Join mailing list</em>.
@@ -170,5 +171,7 @@
       <p>Creative coding for connection, expression, and learning.</p>
       <a href="mailto:mrkhatndv@gmail.com">mrkhatndv@gmail.com</a>
     </footer>
+
+    <script src="animations.js" defer></script>
   </body>
 </html>
