@@ -1,14 +1,42 @@
+/* ─── CC Fest · Shared styles ─────────────────────────────────────────
+ * Covers: base reset, layout utilities, nav, footer,
+ *         /register page sections, and homepage sections.
+ *
+ * File ownership
+ *   Layout & content  →  Saber   (this file)
+ *   Motion            →  Shristi (animations.css + animations.js)
+ *   Visual design     →  Francesca (Figma: CC Fest — Redesign)
+ * ─────────────────────────────────────────────────────────────────── */
+
+
+/* ── Design tokens ─────────────────────────────────────────────────
+ * All colours and layout values live here. Update a token and it
+ * propagates everywhere — never use bare hex values in component rules.
+ * ─────────────────────────────────────────────────────────────────── */
+
 :root {
-  --ink: #1d1d1d;
-  --muted: #666;
-  --paper: #f4f4f1;
-  --surface: #fff;
-  --tint: #ecece8;
-  --line: #aaa;
-  --soft-line: #d4d4ce;
+  /* Background hierarchy */
+  --paper:   #f4f4f1;    /* page background — warm off-white */
+  --surface: #fff;       /* card / element surface — pure white */
+  --tint:    #ecece8;    /* tinted section background */
+
+  /* Text */
+  --ink:   #1d1d1d;      /* primary text and dark backgrounds */
+  --muted: #666;         /* secondary text, labels, captions */
+
+  /* Borders */
+  --line:      #aaa;     /* primary border — major section dividers */
+  --soft-line: #d4d4ce;  /* subtle border — internal dividers */
+
+  /* Accent (used sparingly — currently just the animation placeholder label) */
+  --accent: #2952e8;
+
+  /* Layout */
   --page-width: 1120px;
-  --page-pad: clamp(1rem, 4vw, 3rem);
+  --page-pad: clamp(1rem, 4vw, 3rem); /* responsive horizontal padding */
 }
+
+/* ── Reset & base ────────────────────────────────────────────────── */
 
 * {
   box-sizing: border-box;
@@ -32,6 +60,8 @@ a {
   text-underline-offset: 0.2em;
 }
 
+/* ── Accessibility utilities ─────────────────────────────────────── */
+
 .skip-link {
   position: fixed;
   z-index: 10;
@@ -52,24 +82,15 @@ a {
   outline-offset: 3px;
 }
 
+/* ── Layout ──────────────────────────────────────────────────────── */
+
 .page-width {
   width: min(100%, var(--page-width));
   margin-inline: auto;
   padding-inline: var(--page-pad);
 }
 
-.wireframe-label {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.45rem var(--page-pad);
-  color: var(--muted);
-  background: var(--tint);
-  border-bottom: 1px solid var(--line);
-  font-family: monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+/* ── Navigation ─────────────────────────────────────────────────── */
 
 .site-header {
   display: flex;
@@ -92,6 +113,8 @@ a {
   gap: clamp(1rem, 3vw, 2.5rem);
   font-size: 0.86rem;
 }
+
+/* ── Register page ───────────────────────────────────────────────── */
 
 .hero {
   padding-top: clamp(5rem, 10vw, 9rem);
@@ -384,6 +407,8 @@ a {
   color: var(--muted);
 }
 
+/* ── Register page: responsive ───────────────────────────────────── */
+
 @media (max-width: 850px) {
   .keynote-grid {
     grid-template-columns: 1fr;
@@ -450,6 +475,9 @@ a {
     gap: 0.75rem;
   }
 }
+
+/* ── Accessibility: reduced motion ───────────────────────────────── */
+/* animations.css has its own reduced-motion block for .anim-* rules. */
 
 @media (prefers-reduced-motion: reduce) {
   html {
