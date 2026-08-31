@@ -5,216 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Wireframe for a single virtual CC Fest event page."
+      content="CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community."
     >
     <meta name="theme-color" content="#f4f4f1">
-    <title>Virtual CC Fest 2026 — Wireframe</title>
-    <link rel="icon" href="data:,">
+    <title>CC Fest — Creative Coding Festival</title>
+    <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <div class="wireframe-label" role="note">
-      <span>Wireframe</span>
-      <span>Content structure only — not final design</span>
-    </div>
-
     <header class="site-header">
-      <a class="logo" href="#top" aria-label="CC Fest home">CC Fest</a>
+      <a class="logo" href="./" aria-label="CC Fest home">CC Fest</a>
       <nav aria-label="Main navigation">
-        <a href="#keynotes">Keynotes</a>
-        <a href="#sessions">Sessions</a>
-        <a href="#registration">Registration</a>
+        <a href="register/">Events</a>
+        <a href="#mailing-list">Mailing List</a>
+        <a href="#past-events">Past Events</a>
+        <a href="#code-of-conduct">Code of Conduct</a>
       </nav>
     </header>
 
     <main id="main-content">
-      <section class="hero page-width" id="top" aria-labelledby="event-title">
-        <p class="eyebrow">10th anniversary edition · Online</p>
-        <h1 id="event-title">
-          virtual CC Fest on
-          <span class="blank">________</span>, 2026
-        </h1>
-        <p class="hero-summary">
-          A free gathering for creative coding workshops, talks, and community.
+
+      <!-- ── Hero ── -->
+      <section class="home-hero page-width" aria-label="CC Fest">
+        <h1 class="home-hero-title">CC FEST</h1>
+        <hr class="hero-rule">
+        <p class="home-hero-sub">
+          A free and friendly gathering for creative coding —
+          workshops, talks, and community.
         </p>
-        <div class="hero-actions">
-          <a class="button button-solid" href="#registration">Register</a>
-          <a class="button" href="#sessions">View sessions</a>
-        </div>
       </section>
 
-      <section class="event-facts" aria-label="Event details">
-        <div class="page-width facts-grid">
-          <div>
-            <span>Format</span>
-            <strong>Virtual</strong>
+      <!-- ── Upcoming event band ── -->
+      <section class="upcoming-band" aria-labelledby="upcoming-title">
+        <div class="page-width upcoming-inner">
+          <div class="upcoming-copy">
+            <p class="eyebrow upcoming-eyebrow">Upcoming · Virtual · Free</p>
+            <h2 id="upcoming-title">Virtual CC Fest 2026</h2>
+            <p>
+              Workshops, talks, and community for creative coders of all levels.
+              Date to be announced — register your interest now.
+            </p>
+            <a class="button button-light" href="register/">View event &amp; register →</a>
           </div>
-          <div>
-            <span>Date</span>
-            <strong>To be confirmed</strong>
-          </div>
-          <div>
-            <span>Cost</span>
-            <strong>Free</strong>
-          </div>
-          <div>
-            <span>Experience</span>
-            <strong>All levels</strong>
+          <div class="upcoming-facts">
+            <div><span>Format</span><strong>Virtual</strong></div>
+            <div><span>Date</span><strong>TBC 2026</strong></div>
+            <div><span>Cost</span><strong>Free</strong></div>
+            <div><span>Experience</span><strong>All levels</strong></div>
           </div>
         </div>
       </section>
 
-      <section class="section page-width" id="keynotes" aria-labelledby="keynotes-title">
-        <div class="section-heading">
-          <p>01</p>
-          <div>
-            <h2 id="keynotes-title">Keynotes</h2>
-            <p>Profile image, name, and biography for each keynote speaker.</p>
-          </div>
+      <!-- ── About ── -->
+      <section class="section page-width home-about" id="about" aria-labelledby="about-title">
+        <div class="about-lead">
+          <p class="eyebrow">About CC Fest</p>
+          <h2 id="about-title">Creative coding<br>for everyone.</h2>
         </div>
-
-        <div class="keynote-grid">
-          <article class="keynote-card">
-            <div class="profile-placeholder profile-large" aria-label="Keynote profile photo placeholder">
-              <span>Profile photo</span>
-            </div>
-            <div class="keynote-copy">
-              <p class="placeholder-label">Keynote 01</p>
-              <h3>[Keynote name]</h3>
-              <p>
-                [Short biography. Approximately 60–100 words introducing the
-                speaker, their work, and their relationship to creative coding.]
-              </p>
-              <span class="placeholder-link">[Speaker website]</span>
-            </div>
-          </article>
-
-          <article class="keynote-card">
-            <div class="profile-placeholder profile-large" aria-label="Keynote profile photo placeholder">
-              <span>Profile photo</span>
-            </div>
-            <div class="keynote-copy">
-              <p class="placeholder-label">Keynote 02</p>
-              <h3>[Keynote name]</h3>
-              <p>
-                [Short biography. Approximately 60–100 words introducing the
-                speaker, their work, and their relationship to creative coding.]
-              </p>
-              <span class="placeholder-link">[Speaker website]</span>
-            </div>
-          </article>
+        <div class="about-body">
+          <p>
+            CC Fest is a free and friendly event for anyone curious about
+            creative code. Come spend a few hours with us — make interactive
+            and engaging digital art, animation, and games, work with AI or
+            hardware, and explore many other options. Hear from keynote
+            speakers on important and timely topics related to creative coding.
+          </p>
+          <div class="welcome-block">
+            <p class="eyebrow">We welcome</p>
+            <ul class="welcome-list">
+              <li>Students, artists, hobbyists, creatives, and tinkerers who are curious to learn</li>
+              <li>Educators and community organizers who are looking for inspiration</li>
+              <li>Everyone who would like to learn more about creative code and our community</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
+      <!-- ── Past events ── -->
+      <section class="section section-tinted" id="past-events" aria-labelledby="past-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>02</p>
+            <p>History</p>
             <div>
-              <h2 id="sessions-title">Sessions</h2>
-              <p>Schedule, presenter details, level, and workshop information.</p>
+              <h2 id="past-title">Past Events</h2>
+              <p>CC Fest has been gathering creative coders since 2016.</p>
             </div>
           </div>
-
-          <div class="session-list">
-            <article class="session-card">
-              <p class="session-time">[9:00–9:45]</p>
-              <div class="profile-placeholder profile-small" aria-label="Presenter profile photo placeholder">
-                <span>Photo</span>
-              </div>
-              <div class="session-presenter">
-                <p class="placeholder-label">Presenter</p>
-                <h3>[Presenter name]</h3>
-                <p>[One- or two-sentence presenter biography.]</p>
-              </div>
-              <div class="session-details">
-                <div class="tag-row">
-                  <span>[Beginner]</span>
-                  <span>[Workshop]</span>
-                </div>
-                <h3>[Session title]</h3>
-                <p>
-                  [Session description, what participants will make or learn,
-                  and any software or materials they should have ready.]
-                </p>
-              </div>
-            </article>
-
-            <article class="session-card">
-              <p class="session-time">[10:00–10:45]</p>
-              <div class="profile-placeholder profile-small" aria-label="Presenter profile photo placeholder">
-                <span>Photo</span>
-              </div>
-              <div class="session-presenter">
-                <p class="placeholder-label">Presenter</p>
-                <h3>[Presenter name]</h3>
-                <p>[One- or two-sentence presenter biography.]</p>
-              </div>
-              <div class="session-details">
-                <div class="tag-row">
-                  <span>[All levels]</span>
-                  <span>[Talk]</span>
-                </div>
-                <h3>[Session title]</h3>
-                <p>
-                  [Session description, what participants will make or learn,
-                  and any software or materials they should have ready.]
-                </p>
-              </div>
-            </article>
-
-            <article class="session-card">
-              <p class="session-time">[11:00–11:45]</p>
-              <div class="profile-placeholder profile-small" aria-label="Presenter profile photo placeholder">
-                <span>Photo</span>
-              </div>
-              <div class="session-presenter">
-                <p class="placeholder-label">Presenter</p>
-                <h3>[Presenter name]</h3>
-                <p>[One- or two-sentence presenter biography.]</p>
-              </div>
-              <div class="session-details">
-                <div class="tag-row">
-                  <span>[Intermediate]</span>
-                  <span>[Workshop]</span>
-                </div>
-                <h3>[Session title]</h3>
-                <p>
-                  [Session description, what participants will make or learn,
-                  and any software or materials they should have ready.]
-                </p>
-              </div>
-            </article>
+          <div class="past-events-body">
+            <p>
+              We hosted our first virtual event on <strong>July 11, 2020</strong>.
+              Previous in-person CC Fests have taken place in New York City,
+              Los Angeles, and San Francisco.
+              <a href="https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb" target="_blank" rel="noopener">Read about the first CC Fest at NYU&#8209;ITP in October 2016.</a>
+            </p>
+            <p>
+              Want to organize a CC Fest in your city?
+              <a href="mailto:mrkhatndv@gmail.com">Email Saber Khan.</a>
+            </p>
+          </div>
+          <div class="location-chips" aria-label="Past CC Fest locations">
+            <div class="location-chip"><strong>NYC</strong><span>Oct 2016 · NYU ITP</span></div>
+            <div class="location-chip"><strong>NYC</strong><span>2017 · NYU ITP</span></div>
+            <div class="location-chip"><strong>LA</strong><span>2018</span></div>
+            <div class="location-chip"><strong>SF</strong><span>2019</span></div>
+            <div class="location-chip"><strong>Virtual</strong><span>Jul 2020</span></div>
+            <div class="location-chip"><strong>Virtual</strong><span>2021</span></div>
+            <div class="location-chip"><strong>Virtual</strong><span>2022</span></div>
+            <div class="location-chip"><strong>Virtual</strong><span>2023</span></div>
+            <div class="location-chip"><strong>Virtual</strong><span>2024</span></div>
+            <div class="location-chip"><strong>Virtual</strong><span>2025</span></div>
           </div>
         </div>
       </section>
 
-      <section class="section page-width" id="registration" aria-labelledby="registration-title">
+      <!-- ── Mailing list ── -->
+      <section class="section page-width" id="mailing-list" aria-labelledby="mailing-title">
         <div class="section-heading">
-          <p>03</p>
+          <p>Stay in touch</p>
           <div>
-            <h2 id="registration-title">Registration</h2>
-            <p>The Eventbrite checkout or event widget will live here.</p>
+            <h2 id="mailing-title">Mailing List</h2>
+            <p>Get notified about upcoming events and CC Fest news.</p>
           </div>
         </div>
+        <p class="mailing-body">
+          To join the CC Fest mailing list, send an email to
+          <a href="mailto:mrkhatndv@gmail.com?subject=Join mailing list">mrkhatndv@gmail.com</a>
+          with the subject line <em>Join mailing list</em>.
+        </p>
+      </section>
 
-        <div class="embed-placeholder">
-          <span>Eventbrite embed</span>
-          <strong>[Registration module]</strong>
-          <p>Event ID and embed code to be added after the event is created.</p>
+      <!-- ── Code of conduct ── -->
+      <section class="section section-tinted" id="code-of-conduct" aria-labelledby="coc-title">
+        <div class="page-width">
+          <div class="section-heading">
+            <p>Community</p>
+            <div>
+              <h2 id="coc-title">Code of Conduct</h2>
+              <p>CC Fest is dedicated to a harassment-free experience for everyone.</p>
+            </div>
+          </div>
+          <div class="coc-body">
+            <p>
+              We do not tolerate harassment of participants in any form. This
+              code of conduct applies to all CC Fest spaces — online and
+              in-person — including chat channels, event venues, and social
+              media. Participants asked to stop any harassing behavior are
+              expected to comply immediately.
+            </p>
+            <p>
+              If you experience or witness unacceptable behavior, or have any
+              other concerns, please contact an organizer at
+              <a href="mailto:mrkhatndv@gmail.com">mrkhatndv@gmail.com</a>.
+            </p>
+          </div>
         </div>
       </section>
 
-      <aside class="history-note" aria-label="CC Fest history note">
-        <div class="page-width history-note-inner">
-          <p>CC Fest began on</p>
-          <strong>October 22, 2016</strong>
-          <p>at NYU ITP with 40 participants.</p>
-        </div>
-      </aside>
     </main>
 
     <footer class="site-footer page-width">
