@@ -60,9 +60,12 @@
 
 
 /* ── Scroll-triggered: default hidden state ────────────────────────── */
-/* animations.js adds .is-visible when the element enters the viewport  */
+/* Hidden states are gated behind .js (added by an inline <script> in  */
+/* <head> before this file loads). Without JS the class is never set,  */
+/* so content is always visible — no JS, no invisible sections.        */
+/* animations.js adds .is-visible when the element enters the viewport. */
 
-.anim-scroll {
+.js .anim-scroll {
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -80,7 +83,7 @@
 /* Each .anim-chip gets its delay set by animations.js via              */
 /* --stagger-delay so chips cascade in left-to-right.                  */
 
-.anim-chip {
+.js .anim-chip {
   opacity: 0;
   transform: translateY(16px);
   transition:
@@ -96,7 +99,7 @@
 
 /* ── Upcoming band ─────────────────────────────────────────────────── */
 
-.anim-upcoming-copy {
+.js .anim-upcoming-copy {
   opacity: 0;
   transform: translateX(-20px);
   transition:
@@ -109,7 +112,7 @@
   transform: translateX(0);
 }
 
-.anim-upcoming-meta {
+.js .anim-upcoming-meta {
   opacity: 0;
   transform: translateX(20px);
   transition:
@@ -133,10 +136,12 @@
     animation: none;
   }
 
-  .anim-scroll,
-  .anim-chip,
-  .anim-upcoming-copy,
-  .anim-upcoming-meta {
+  /* Cover both the .js-gated and un-gated forms so reduced-motion users
+     always see content immediately regardless of JS state. */
+  .js .anim-scroll,
+  .js .anim-chip,
+  .js .anim-upcoming-copy,
+  .js .anim-upcoming-meta {
     opacity: 1;
     transform: none;
     transition: none;
