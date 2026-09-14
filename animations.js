@@ -43,3 +43,63 @@
     observer.observe(el);
   });
 })();
+
+
+/* ─── CC Fest · Monogram mode switcher ─────────────────────────────────
+ * Owner: Shristi
+ *
+ * Clicking a .mode-btn swaps #monogramWrap's [data-mode] — animations.css
+ * keys each mode's look (color, transforms, etc.) off that attribute on
+ * the shared monogram markup. Also updates the "10 years of ___" label
+ * and keeps each button's selected state (.is-active + aria-selected)
+ * in sync.
+ * ─────────────────────────────────────────────────────────────────── */
+
+(function () {
+  const modesNav = document.querySelector('.modes-list');
+  const monogramWrap = document.getElementById('monogramWrap');
+  const labelRight = document.getElementById('labelRight');
+
+  if (!modesNav || !monogramWrap) return;
+
+  function setMode(mode, label) {
+    monogramWrap.dataset.mode = mode;
+    if (labelRight) labelRight.textContent = label;
+
+    modesNav.querySelectorAll('.mode-btn').forEach(function (btn) {
+      const isActive = btn.dataset.mode === mode;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+      btn.tabIndex = isActive ? 0 : -1;
+    });
+  }
+
+  modesNav.querySelectorAll('.mode-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setMode(btn.dataset.mode, btn.textContent.trim());
+    });
+  });
+
+  // Roving tabindex: arrow keys move focus + selection between tabs
+  modesNav.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+    const buttons = Array.from(modesNav.querySelectorAll('.mode-btn'));
+    const currentIndex = buttons.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
+
+    e.preventDefault();
+    const nextIndex = e.key === 'ArrowRight'
+      ? (currentIndex + 1) % buttons.length
+      : (currentIndex - 1 + buttons.length) % buttons.length;
+    const nextBtn = buttons[nextIndex];
+
+    nextBtn.focus();
+    setMode(nextBtn.dataset.mode, nextBtn.textContent.trim());
+  });
+
+  // Sync initial selection to whichever mode the markup already shows
+  const initialBtn = modesNav.querySelector('.mode-btn[data-mode="' + monogramWrap.dataset.mode + '"]')
+    || modesNav.querySelector('.mode-btn');
+  if (initialBtn) setMode(initialBtn.dataset.mode, initialBtn.textContent.trim());
+})();

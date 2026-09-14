@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community."
-    >
-    <meta name="theme-color" content="#f4f4f1">
+    />
+    <meta name="theme-color" content="#f4f4f1" />
     <title>CC Fest — Creative Coding Festival</title>
-    <link rel="icon" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="animations.css" />
     <!-- Adds .js to <html> before any CSS is applied so animations.css
          can gate hidden states behind this class. Content stays visible
          for users with JS disabled. -->
-    <script>document.documentElement.classList.add('js')</script>
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -31,23 +33,133 @@
     </header>
 
     <main id="main-content">
-
       <!-- ── Hero ── -->
       <section class="home-hero page-width" aria-label="CC Fest">
         <h1 class="home-hero-title anim-hero-title">CC FEST</h1>
-        <hr class="hero-rule anim-hero-rule">
+        <hr class="hero-rule anim-hero-rule" />
         <p class="home-hero-sub anim-hero-sub">
-          A free and friendly gathering for creative coding —
-          workshops, talks, and community.
+          A free and friendly gathering for creative coding — workshops, talks,
+          and community.
         </p>
       </section>
 
       <!-- ── Animation placeholder (Shristi) ── -->
       <section class="anim-stage" aria-label="Animation">
+        <div class="modes-nav">
+          <div
+            class="modes-list"
+            role="tablist"
+            aria-label="CC Fest monogram modes"
+          >
+            <button class="mode-btn" data-mode="creativity">Creativity</button>
+            <button class="mode-btn" data-mode="change">Change</button>
+            <button class="mode-btn" data-mode="connection">Connection</button>
+            <button class="mode-btn" data-mode="celebration">
+              Celebration
+            </button>
+            <button class="mode-btn" data-mode="collaboration">
+              Collaboration
+            </button>
+            <button class="mode-btn" data-mode="creative-commons">
+              Creative Commons
+            </button>
+            <button class="mode-btn" data-mode="conversations">
+              Conversations
+            </button>
+            <button class="mode-btn" data-mode="community">Community</button>
+            <button class="mode-btn" data-mode="curiosity">Curiosity</button>
+            <button class="mode-btn" data-mode="coding">Coding</button>
+          </div>
+        </div>
+
         <div class="anim-stage-inner">
-          <p class="eyebrow anim-stage-label">Animation</p>
+          <div class="monogram-wrap" id="monogramWrap" data-mode="curiosity">
+            <svg
+              class="cc-mono"
+              viewBox="-98.2 -49.01 1072.4 618.16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <pattern
+                  id="dotPattern"
+                  width="18"
+                  height="18"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <circle cx="4" cy="4" r="3.4" fill="#F44C2D" />
+                </pattern>
+                <pattern
+                  id="ccTilePattern"
+                  patternUnits="userSpaceOnUse"
+                  x="0"
+                  y="0"
+                  width="546.04"
+                  height="546.04"
+                >
+                  <g
+                    class="cc-tile-shape"
+                    transform="translate(-55.177 0) translate(220.155 260.070) scale(1.15) translate(-220.155 -260.070)"
+                  >
+                    <path
+                      d="M79.7563 447.5C79.4119 447.18 79.0674 446.855 78.7274 446.53C29.9808 399.276 1.74451 334.769 0.10407 266.907C-1.88025 197.043 24.5512 129.368 73.356 79.3511C120.993 29.8952 186.318 1.37443 254.978 0.0506321C323.997 -1.30978 390.712 24.9392 440.31 72.9638L363.127 151.042C350.043 164.459 336.858 177.771 323.573 190.987C320.781 188.831 317.848 186.343 315.037 184.113C278.447 159.156 233.598 159.95 199.161 188.809C180.7 204.283 169.2 226.651 166.75 250.558C161.453 302.238 198.838 348.297 250.891 353.402C271.85 355.546 292.916 350.528 310.654 339.167C314.989 336.395 319.347 332.797 323.321 329.539L439.639 448.003C394.129 491.978 333.971 517.581 270.721 519.892C210.655 522.516 151.544 504.146 103.538 467.936C96.2298 462.444 86.5221 453.759 79.7563 447.5Z"
+                    />
+                  </g>
+                </pattern>
+                <symbol id="ccCopyright" viewBox="0 0 471 471">
+                  <path
+                    d="M225.947 0.183537C355.791 -4.90228 465.143 96.3315 470.118 226.226C475.09 356.121 373.799 465.429 243.947 470.292C114.251 475.15 5.1437 373.973 0.175587 244.234C-4.7921 114.495 96.2579 5.26327 225.947 0.183537ZM240.132 422.967C343.716 420.207 425.472 334.018 422.802 230.397C420.132 126.777 334.04 44.9155 230.456 47.5001C126.746 50.0876 44.7958 136.334 47.4697 240.078C50.1436 343.822 136.428 425.731 240.132 422.967Z"
+                  />
+                  <path
+                    d="M233.686 94.3178C240.971 93.631 253.508 94.158 260.891 95.1874C299.061 100.511 330.996 120.435 354.078 151.118C351.361 153.63 345.479 157.813 342.376 160.126C334.997 165.568 327.661 171.073 320.371 176.641C319.439 175.271 318.489 173.913 317.523 172.567C303.477 153.098 280.959 138.403 257.132 134.627C232.503 130.488 207.248 136.476 187.096 151.233C179.948 156.425 174.413 161.786 168.674 168.673C111.534 237.249 164.072 348.545 255.924 336.051C272.284 333.826 284.812 327.358 298.188 317.606C308.94 309.086 312.335 304.595 320.57 293.867C329.246 301.293 344.445 311.859 354.053 318.992C351.417 323.278 347.772 327.429 344.394 331.138C292.127 388.512 204.183 392.028 147.031 339.196C89.5581 286.069 86.515 195.473 139.903 138.326C163.761 112.788 198.519 95.4778 233.686 94.3178Z"
+                  />
+                </symbol>
+              </defs>
+              <g
+                transform="translate(-55.177 0) translate(220.155 260.070) scale(1.15) translate(-220.155 -260.070)"
+              >
+                <path
+                  class="cc-path cc-path-left"
+                  d="M79.7563 447.5C79.4119 447.18 79.0674 446.855 78.7274 446.53C29.9808 399.276 1.74451 334.769 0.10407 266.907C-1.88025 197.043 24.5512 129.368 73.356 79.3511C120.993 29.8952 186.318 1.37443 254.978 0.0506321C323.997 -1.30978 390.712 24.9392 440.31 72.9638L363.127 151.042C350.043 164.459 336.858 177.771 323.573 190.987C320.781 188.831 317.848 186.343 315.037 184.113C278.447 159.156 233.598 159.95 199.161 188.809C180.7 204.283 169.2 226.651 166.75 250.558C161.453 302.238 198.838 348.297 250.891 353.402C271.85 355.546 292.916 350.528 310.654 339.167C314.989 336.395 319.347 332.797 323.321 329.539L439.639 448.003C394.129 491.978 333.971 517.581 270.721 519.892C210.655 522.516 151.544 504.146 103.538 467.936C96.2298 462.444 86.5221 453.759 79.7563 447.5Z"
+                />
+              </g>
+              <g
+                transform="translate(55.177 0) translate(655.842 260.070) scale(1.15) translate(-655.842 -260.070)"
+              >
+                <path
+                  class="cc-path cc-path-right"
+                  d="M515.443 447.5C515.098 447.18 514.754 446.855 514.414 446.53C465.667 399.276 437.431 334.769 435.791 266.907C433.806 197.043 460.238 129.368 509.042 79.3511C556.68 29.8952 622.005 1.37443 690.664 0.0506321C759.683 -1.30978 826.398 24.9392 875.997 72.9638L798.814 151.042C785.729 164.459 772.544 177.771 759.259 190.987C756.468 188.831 753.535 186.343 750.723 184.113C714.133 159.156 669.285 159.95 634.847 188.809C616.387 204.283 604.886 226.651 602.437 250.558C597.139 302.238 634.525 348.297 686.578 353.402C707.537 355.546 728.602 350.528 746.341 339.167C750.676 336.395 755.033 332.797 759.008 329.539L875.325 448.003C829.816 491.978 769.657 517.581 706.408 519.892C646.342 522.516 587.231 504.146 539.225 467.936C531.916 462.444 522.209 453.759 515.443 447.5Z"
+                />
+              </g>
+              <path
+                class="cc-pacman cc-pacman-left"
+                d="M 376.459 48.589 A 299.079 299.079 0 1 0 376.459 471.551 L 164.978 260.07 Z"
+              />
+              <path
+                class="cc-pacman cc-pacman-right"
+                d="M 922.499 48.589 A 299.079 299.079 0 1 0 922.499 471.551 L 711.018 260.07 Z"
+              />
+            </svg>
+
+            <div class="cc-text">
+              <div class="cc-text-left" id="labelLeft">10 years of</div>
+              <div class="cc-text-right" id="labelRight" aria-live="polite">
+                Curiosity
+              </div>
+            </div>
+
+            <div
+              class="curiosity-dot curiosity-dot-left"
+              aria-hidden="true"
+            ></div>
+            <div
+              class="curiosity-dot curiosity-dot-right"
+              aria-hidden="true"
+            ></div>
+          </div>
+          <!-- <p class="eyebrow anim-stage-label">Animation</p>
           <p class="anim-stage-hint">Shristi — your canvas lives here</p>
-          <p class="anim-stage-note">Replace this section with your work.<br>Hook into <code>.anim-stage</code> in animations.css.</p>
+          <p class="anim-stage-note">Replace this section with your work.<br>Hook into <code>.anim-stage</code> in animations.css.</p> -->
         </div>
       </section>
 
@@ -61,7 +173,9 @@
               Workshops, talks, and community for creative coders of all levels.
               Date to be announced — register your interest now.
             </p>
-            <a class="button button-light" href="register/">View event &amp; register →</a>
+            <a class="button button-light" href="register/"
+              >View event &amp; register →</a
+            >
           </div>
           <div class="upcoming-facts anim-scroll anim-upcoming-meta">
             <div><span>Format</span><strong>Virtual</strong></div>
@@ -73,32 +187,49 @@
       </section>
 
       <!-- ── About ── -->
-      <section class="section page-width home-about" id="about" aria-labelledby="about-title">
+      <section
+        class="section page-width home-about"
+        id="about"
+        aria-labelledby="about-title"
+      >
         <div class="about-lead anim-scroll">
           <p class="eyebrow">About CC Fest</p>
-          <h2 id="about-title">Creative coding<br>for everyone.</h2>
+          <h2 id="about-title">Creative coding<br />for everyone.</h2>
         </div>
         <div class="about-body anim-scroll">
           <p>
             CC Fest is a free and friendly event for anyone curious about
-            creative code. Come spend a few hours with us — make interactive
-            and engaging digital art, animation, and games, work with AI or
-            hardware, and explore many other options. Hear from keynote
-            speakers on important and timely topics related to creative coding.
+            creative code. Come spend a few hours with us — make interactive and
+            engaging digital art, animation, and games, work with AI or
+            hardware, and explore many other options. Hear from keynote speakers
+            on important and timely topics related to creative coding.
           </p>
           <div class="welcome-block">
             <p class="eyebrow">We welcome</p>
             <ul class="welcome-list">
-              <li>Students, artists, hobbyists, creatives, and tinkerers who are curious to learn</li>
-              <li>Educators and community organizers who are looking for inspiration</li>
-              <li>Everyone who would like to learn more about creative code and our community</li>
+              <li>
+                Students, artists, hobbyists, creatives, and tinkerers who are
+                curious to learn
+              </li>
+              <li>
+                Educators and community organizers who are looking for
+                inspiration
+              </li>
+              <li>
+                Everyone who would like to learn more about creative code and
+                our community
+              </li>
             </ul>
           </div>
         </div>
       </section>
 
       <!-- ── Past events ── -->
-      <section class="section section-tinted" id="past-events" aria-labelledby="past-title">
+      <section
+        class="section section-tinted"
+        id="past-events"
+        aria-labelledby="past-title"
+      >
         <div class="page-width">
           <div class="section-heading">
             <p>History</p>
@@ -109,10 +240,16 @@
           </div>
           <div class="past-events-body anim-scroll">
             <p>
-              We hosted our first virtual event on <strong>July 11, 2020</strong>.
-              Previous in-person CC Fests have taken place in New York City,
-              Los Angeles, and San Francisco.
-              <a href="https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb" target="_blank" rel="noopener">Read about the first CC Fest at NYU&#8209;ITP in October 2016.</a>
+              We hosted our first virtual event on
+              <strong>July 11, 2020</strong>. Previous in-person CC Fests have
+              taken place in New York City, Los Angeles, and San Francisco.
+              <a
+                href="https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb"
+                target="_blank"
+                rel="noopener"
+                >Read about the first CC Fest at NYU&#8209;ITP in October
+                2016.</a
+              >
             </p>
             <p>
               Want to organize a CC Fest in your city?
@@ -120,22 +257,46 @@
             </p>
           </div>
           <div class="location-chips" aria-label="Past CC Fest locations">
-            <div class="location-chip anim-chip"><strong>NYC</strong><span>Oct 2016 · NYU ITP</span></div>
-            <div class="location-chip anim-chip"><strong>NYC</strong><span>2017 · NYU ITP</span></div>
-            <div class="location-chip anim-chip"><strong>LA</strong><span>2018</span></div>
-            <div class="location-chip anim-chip"><strong>SF</strong><span>2019</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>Jul 2020</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2021</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2022</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2023</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2024</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2025</span></div>
+            <div class="location-chip anim-chip">
+              <strong>NYC</strong><span>Oct 2016 · NYU ITP</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>NYC</strong><span>2017 · NYU ITP</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>LA</strong><span>2018</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>SF</strong><span>2019</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>Virtual</strong><span>Jul 2020</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>Virtual</strong><span>2021</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>Virtual</strong><span>2022</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>Virtual</strong><span>2023</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>Virtual</strong><span>2024</span>
+            </div>
+            <div class="location-chip anim-chip">
+              <strong>Virtual</strong><span>2025</span>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- ── Mailing list ── -->
-      <section class="section page-width" id="mailing-list" aria-labelledby="mailing-title">
+      <section
+        class="section page-width"
+        id="mailing-list"
+        aria-labelledby="mailing-title"
+      >
         <div class="section-heading">
           <p>Stay in touch</p>
           <div>
@@ -145,19 +306,28 @@
         </div>
         <p class="mailing-body anim-scroll">
           To join the CC Fest mailing list, send an email to
-          <a href="mailto:mrkhanatndv@gmail.com?subject=Join mailing list">mrkhanatndv@gmail.com</a>
+          <a href="mailto:mrkhanatndv@gmail.com?subject=Join mailing list"
+            >mrkhanatndv@gmail.com</a
+          >
           with the subject line <em>Join mailing list</em>.
         </p>
       </section>
 
       <!-- ── Code of conduct ── -->
-      <section class="section section-tinted" id="code-of-conduct" aria-labelledby="coc-title">
+      <section
+        class="section section-tinted"
+        id="code-of-conduct"
+        aria-labelledby="coc-title"
+      >
         <div class="page-width">
           <div class="section-heading">
             <p>Community</p>
             <div>
               <h2 id="coc-title">Code of Conduct</h2>
-              <p>CC Fest is dedicated to a harassment-free experience for everyone.</p>
+              <p>
+                CC Fest is dedicated to a harassment-free experience for
+                everyone.
+              </p>
             </div>
           </div>
           <div class="coc-body">
@@ -176,7 +346,6 @@
           </div>
         </div>
       </section>
-
     </main>
 
     <footer class="site-footer page-width">
