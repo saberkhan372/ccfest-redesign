@@ -45,35 +45,40 @@
 
       <!-- ── Animation placeholder (Shristi) ── -->
       <section class="anim-stage" aria-label="Animation">
-        <div class="modes-nav">
-          <div
-            class="modes-list"
-            role="tablist"
-            aria-label="CC Fest monogram modes"
-          >
-            <button class="mode-btn" data-mode="creativity">Creativity</button>
-            <button class="mode-btn" data-mode="change">Change</button>
-            <button class="mode-btn" data-mode="connection">Connection</button>
-            <button class="mode-btn" data-mode="celebration">
-              Celebration
-            </button>
-            <button class="mode-btn" data-mode="collaboration">
-              Collaboration
-            </button>
-            <button class="mode-btn" data-mode="creative-commons">
-              Creative Commons
-            </button>
-            <button class="mode-btn" data-mode="conversations">
-              Conversations
-            </button>
-            <button class="mode-btn" data-mode="community">Community</button>
-            <button class="mode-btn" data-mode="curiosity">Curiosity</button>
-            <button class="mode-btn" data-mode="coding">Coding</button>
-          </div>
+        <div
+          class="modes-list"
+          role="tablist"
+          aria-label="CC Fest monogram modes"
+        >
+          <button class="mode-btn" data-mode="creativity">Creativity</button>
+          <button class="mode-btn" data-mode="change">Change</button>
+          <button class="mode-btn" data-mode="connection">Connection</button>
+          <button class="mode-btn" data-mode="celebration">Celebration</button>
+          <button class="mode-btn" data-mode="collaboration">
+            Collaboration
+          </button>
+          <button class="mode-btn" data-mode="creative-commons">
+            Creative Commons
+          </button>
+          <button class="mode-btn" data-mode="conversations">
+            Conversations
+          </button>
+          <button class="mode-btn" data-mode="community">Community</button>
+          <button class="mode-btn" data-mode="curiosity">Curiosity</button>
+          <button class="mode-btn" data-mode="coding">Coding</button>
         </div>
 
-        <div class="anim-stage-inner">
+        <div class="anim-stage-main">
           <div class="monogram-wrap" id="monogramWrap" data-mode="curiosity">
+            <div class="fx-layer fx-scanlines" aria-hidden="true"></div>
+            <div class="fx-layer fx-orbit" aria-hidden="true"></div>
+            <div class="fx-layer fx-connection" aria-hidden="true"></div>
+            <div
+              class="fx-layer fx-confetti"
+              id="confettiLayer"
+              aria-hidden="true"
+            ></div>
+
             <svg
               class="cc-mono"
               viewBox="-98.2 -49.01 1072.4 618.16"
@@ -89,6 +94,18 @@
                 >
                   <circle cx="4" cy="4" r="3.4" fill="#F44C2D" />
                 </pattern>
+                <linearGradient
+                  id="creativityGradient"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                >
+                  <stop offset="0%" stop-color="#F44C2D" />
+                  <stop offset="45%" stop-color="#FFB020" />
+                  <stop offset="75%" stop-color="#F92C8B" />
+                  <stop offset="100%" stop-color="#7B3FF2" />
+                </linearGradient>
                 <pattern
                   id="ccTilePattern"
                   patternUnits="userSpaceOnUse"
@@ -115,6 +132,16 @@
                   />
                 </symbol>
               </defs>
+
+              <rect
+                class="cc-tile-bg fx-layer"
+                x="-3000"
+                y="-3000"
+                width="6300"
+                height="6300"
+                fill="url(#ccTilePattern)"
+              />
+
               <g
                 transform="translate(-55.177 0) translate(220.155 260.070) scale(1.15) translate(-220.155 -260.070)"
               >
@@ -141,11 +168,13 @@
               />
             </svg>
 
-            <div class="cc-text">
-              <div class="cc-text-left" id="labelLeft">10 years of</div>
-              <div class="cc-text-right" id="labelRight" aria-live="polite">
-                Curiosity
-              </div>
+            <div class="cc-text cc-text-left" id="labelLeft">10 years of</div>
+            <div
+              class="cc-text cc-text-right"
+              id="labelRight"
+              aria-live="polite"
+            >
+              Curiosity
             </div>
 
             <div
@@ -156,10 +185,22 @@
               class="curiosity-dot curiosity-dot-right"
               aria-hidden="true"
             ></div>
+
+            <svg
+              class="cc-copyright cc-copyright-left"
+              viewBox="0 0 471 471"
+              aria-hidden="true"
+            >
+              <use href="#ccCopyright" />
+            </svg>
+            <svg
+              class="cc-copyright cc-copyright-right"
+              viewBox="0 0 471 471"
+              aria-hidden="true"
+            >
+              <use href="#ccCopyright" />
+            </svg>
           </div>
-          <!-- <p class="eyebrow anim-stage-label">Animation</p>
-          <p class="anim-stage-hint">Shristi — your canvas lives here</p>
-          <p class="anim-stage-note">Replace this section with your work.<br>Hook into <code>.anim-stage</code> in animations.css.</p> -->
         </div>
       </section>
 

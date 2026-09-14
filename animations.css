@@ -23,7 +23,9 @@
 :root{
   font-size: 16px;
    --cc-orange: #f44c2d;
-   --accent-ink: #0a2b2a;
+   --cc-neutral: #b7b7b7;
+   --pill-bg: #1e1f22;
+   --pill-fg: #f5f5f5;
 }
 
 /* ── Keyframes ─────────────────────────────────────────────────────── */
@@ -160,79 +162,89 @@
   }
 }
 
+/* ---------- base canvas ---------- */
+
 .anim-stage {
-  display: flex;
-  flex-direction: column;
   position: relative;
-  height: 90vh;
+  height: 95dvh;
   width: 100vw;
   min-height: 480px;
+  padding: clamp(16px, 3vh, 36px) clamp(16px, 4vw, 48px);
   /* background: var(--paper); */
   border-top: 1px dashed var(--line);
   border-bottom: 1px dashed var(--line);
   overflow: hidden;
 }
 
-.anim-stage .modes-nav{
-  flex: 0 0 auto;
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  padding: 1.2rem;
-  flex-wrap: wrap;
-}
+/* ---------- mode buttons ---------- */
 
-.modes-list > button {
-  padding: 0;
-  background: none;
-	color: inherit;
-	border: none;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+
+.modes-list {
+  position: absolute;
+  right: clamp(16px, 4vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  align-items: flex-end;
+  gap: 8px;
 }
 
 .modes-list > .mode-btn {
-  padding: 4px 8px;
-  outline: 1px solid var(--muted);
-  color: var(--accent, #2952e8);
-  font-family: caslon;
-  font-size: 0.9rem;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: caslon, 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
   font-weight: normal;
-  transition: background 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-    color 0.4s cubic-bezier(0.19, 1, 0.22, 1),
-    outline-color 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  background: var(--paper);
+  color: var(--accent);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
 }
 
 .modes-list > .mode-btn:hover {
-  background: var(--accent, #2952e8);
-  color: var(--paper);
+  transform: translateY(-4px);
+}
+
+.modes-list > .mode-btn:active {
+  transform: translateY(0);
 }
 
 .modes-list > .mode-btn.is-active {
-  background: var(--accent, #2952e8);
-  outline-color: var(--accent, #2952e8);
-  color: var(--paper);
-  font-weight: 600;
+  background: var(--cc-neutral);
+  color: var(--accent-ink);
 }
 
-.anim-stage-inner {
-    flex: 1 1 auto;
-    min-height: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+.modes-list > .mode-btn:focus-visible {
+  outline: 2px solid var(--cc-neutral);
+  outline-offset: 2px;
+}
+
+/* ---------- monogram stage ---------- */
+
+.anim-stage-main {
+  width: 100%;
+  height: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 1px solid green;
 }
 
 .monogram-wrap {
     position: relative;
-    width: min(800px, 72vmin, 90vw);
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
+    width: min(1200px, 80vmin, 90vw);
     aspect-ratio: 1072.4 / 618.16;
+}
+
+.cc-mono {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
 }
 
 .cc-path {
@@ -259,12 +271,275 @@
     transform: translate(-50%, -50%);
 }
 
+/* fx-layer hooks: one full-bleed overlay per mode-specific effect
+   (scanlines, orbit, connection, confetti, and the tiled background).
+   Hidden until a mode's own rule turns it on, e.g.
+   [data-mode="coding"] .fx-scanlines { display: block; } */
+.fx-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: none;
+}
+
 /* =====================================================================
-   MODE 9 — Curiosity
+   MODE 1 — Creativity: animated rainbow gradient fill
+   ===================================================================== */
+
+[data-mode="creativity"] .cc-path {
+    fill: url(#creativityGradient);
+    animation: creativityHue 5s linear infinite;
+}
+
+@keyframes creativityHue {
+    from { filter: hue-rotate(0deg); }
+    to { filter: hue-rotate(360deg); }
+}
+
+/* =====================================================================
+   MODE 2 — Change: squash/stretch morph, offset between the two Cs
+   ===================================================================== */
+
+[data-mode="change"] .cc-path-left {
+    animation: changeMorph 2.6s ease-in-out infinite;
+    transform-origin: 30% 50%;
+}
+
+[data-mode="change"] .cc-path-right {
+    animation: changeMorph 2.6s ease-in-out infinite 1.3s;
+    transform-origin: 70% 50%;
+}
+
+@keyframes changeMorph {
+    0%, 100% { transform: scale(1, 1); }
+    50% { transform: scale(0.86, 1.14); }
+}
+
+/* =====================================================================
+   MODE 3 — Connection: pulsing dashed line + glow linking the two Cs
+   ===================================================================== */
+
+[data-mode="connection"] .fx-connection {
+    display: block;
+}
+
+.fx-connection::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 34%;
+    width: 32%;
+    height: 0;
+    border-top: 3px dashed var(--cc-neutral);
+    transform: translateY(-50%);
+    animation: connectionDash 1.2s linear infinite;
+    opacity: 0.85;
+}
+
+@keyframes connectionDash {
+    to { stroke-dashoffset: -16px; border-color: var(--cc-neutral); background-position: -32px 0; }
+}
+
+[data-mode="connection"] .cc-path {
+    filter: drop-shadow(0 0 10px rgba(22, 201, 194, 0.55));
+    animation: connectionPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes connectionPulse {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(22, 201, 194, 0.35)); }
+    50% { filter: drop-shadow(0 0 16px rgba(22, 201, 194, 0.7)); }
+}
+
+/* =====================================================================
+   MODE 4 — Celebration: confetti burst + bounce
+   ===================================================================== */
+
+[data-mode="celebration"] .fx-confetti {
+    display: block;
+}
+
+[data-mode="celebration"] .cc-mono {
+    animation: celebrationBounce 0.6s ease;
+}
+
+@keyframes celebrationBounce {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    animation-name: confettiFall;
+    animation-timing-function: cubic-bezier(0.4, 0.1, 0.6, 1);
+    animation-fill-mode: forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--drift, 0px), 60vh) rotate(540deg); opacity: 0; }
+}
+
+/* =====================================================================
+   MODE 5 — Collaboration: the two Cs drift apart and re-merge
+   ===================================================================== */
+
+[data-mode="collaboration"] .cc-path-left {
+    animation: collabLeft 2.8s ease-in-out infinite;
+}
+
+[data-mode="collaboration"] .cc-path-right {
+    animation: collabRight 2.8s ease-in-out infinite;
+}
+
+@keyframes collabLeft {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-3.5%); }
+}
+
+@keyframes collabRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3.5%); }
+}
+
+/* =====================================================================
+   MODE 6 — Creative Commons: © flashes over the labels, then the C
+   multiplies into a tiled grid across the canvas
+   ===================================================================== */
+
+[data-mode="creative-commons"] .cc-path {
+    opacity: 0;
+}
+
+/* align labels with the tile grid's hole centers for this mode only,
+   and shrink them so they clear the (smaller) tile hole cleanly */
+[data-mode="creative-commons"] .cc-text-left {
+    left: 28.84%;
+}
+
+[data-mode="creative-commons"] .cc-text-right {
+    left: 84.76%;
+    color: var(--cc-neutral);
+}
+
+.cc-tile-shape {
+    fill: var(--ink);
+}
+
+.cc-tile-bg {
+    opacity: 0;
+    transform-box: view-box;
+    transform-origin: 437.998px 260.07px;
+    transform: scale(0.85);
+}
+
+[data-mode="creative-commons"] .cc-tile-bg {
+    display: block;
+    /* animation: ccTilesReveal 0.5s ease-out 0.4s forwards; */
+}
+
+@keyframes ccTilesReveal {
+    to { opacity: 1; transform: scale(1); }
+}
+
+.cc-copyright {
+    position: absolute;
+    top: 50%;
+    width: 40vmin;
+    height: 40vmin;
+    transform: translate(-50%, -50%);
+    background: none;
+    border-radius: 999px;
+    fill: var(--cc-orange);
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+}
+
+.cc-copyright-left { left: 20%; }
+.cc-copyright-right { left: 80%; }
+
+[data-mode="creative-commons"] .cc-copyright {
+    display: block;
+    opacity: 1;
+    /* animation: ccRevealLabel 0.4s steps(1) forwards; */
+}
+
+@keyframes ccRevealLabel {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* =====================================================================
+   MODE 7 — Conversations: the Cs morph into chomping Pac-Man circles
+   ===================================================================== */
+
+.cc-pacman {
+    fill: var(--cc-orange);
+    opacity: 0;
+    display: none;
+    transform-box: view-box;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    pointer-events: none;
+}
+
+.cc-pacman-left {
+    transform-origin: 164.978px 260.07px;
+}
+
+.cc-pacman-right {
+    transform-origin: 711.018px 260.07px;
+}
+
+[data-mode="conversations"] .cc-pacman {
+    display: block;
+}
+
+/* both sides: form change (C -> Pac-Man) happens on mode select, not hover */
+[data-mode="conversations"] .cc-path-left,
+[data-mode="conversations"] .cc-path-right {
+    opacity: 0;
+}
+
+[data-mode="conversations"] .cc-pacman-left,
+[data-mode="conversations"] .cc-pacman-right {
+    opacity: 1;
+}
+
+/* hover only adds: the right pacman flips to face left, then chomps */
+#monogramWrap[data-mode="conversations"]:hover .cc-pacman-right {
+    transform: rotate(180deg);
+    animation: pacmanChompRight 0.36s steps(1, jump-end) 0.3s infinite;
+}
+
+[data-mode="conversations"] .cc-text-left{
+    color: var(--ink);
+}
+
+[data-mode="conversations"] .cc-text-right {color: var(--cc-neutral); mix-blend-mode: difference;}
+
+@keyframes pacmanChompRight {
+    0%, 100% { d: path("M 922.499 48.589 A 299.079 299.079 0 1 0 922.499 471.551 L 711.018 260.07 Z"); }
+    50%      { d: path("M 1010.051 254.85 A 299.079 299.079 0 1 0 1010.051 265.29 L 711.018 260.07 Z"); }
+}
+
+/* =====================================================================
+   MODE 8 — Community: halftone dot-pattern fill
+   ===================================================================== */
+
+[data-mode="community"] .cc-path {
+    fill: url(#dotPattern);
+}
+
+/* =====================================================================
+   MODE 9 — Curiosity: hover to curl the Cs into a question mark (default)
    ===================================================================== */
 
 [data-mode="curiosity"] .cc-text-right {
-    color: var(--cc-orange);
+    color: var(--cc-neutral);
 }
 
 [data-mode="curiosity"] .cc-path {
@@ -284,9 +559,9 @@
 .curiosity-dot {
     position: absolute;
     top: 103.6%;
-    width: clamp(120px, 6vmin, 60px);
-    height: clamp(120px, 6vmin, 60px);
-    margin-top: clamp(12px, 2.6vmin, 22px);
+    width: clamp(16%, 12vmin, 20vw);
+    aspect-ratio: 1;
+    margin-top: 2%;
     border-radius: 50%;
     background: var(--ink);
     transform: translate(-50%, -15%) scale(0.3);
@@ -308,9 +583,35 @@
     opacity: 1;
 }
 
-.cc-mono {
-    width: 100%;
-    height: 100%;
+/* =====================================================================
+   MODE 10 — Coding: terminal glitch + scanlines
+   ===================================================================== */
+
+[data-mode="coding"] .cc-path {
+    fill: #16c92e;
+    animation: codingGlitch 2.4s steps(1) infinite;
+}
+
+@keyframes codingGlitch {
+    0%, 89%, 100% { transform: translate(0, 0); filter: none; }
+    90% { transform: translate(-3px, 1px); filter: hue-rotate(40deg); }
+    92% { transform: translate(3px, -1px); filter: hue-rotate(-30deg); }
+    94% { transform: translate(0, 0); filter: none; }
+}
+
+[data-mode="coding"] .fx-scanlines {
     display: block;
-    overflow: visible;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(22, 201, 46, 0.08) 0px,
+        rgba(22, 201, 46, 0.08) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    mix-blend-mode: multiply;
+}
+
+[data-mode="coding"] .cc-text-right,
+[data-mode="coding"] .cc-text-left {
+    font-family: 'Courier New', monospace;
 }
