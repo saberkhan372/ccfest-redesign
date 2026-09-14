@@ -15,7 +15,6 @@
 @font-face {
     font-family: 'caslon';
     src: url('assets/caslon/LibreCaslonCondensed-Medium.woff2') format('woff2');
-    font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
@@ -160,17 +159,25 @@
     transform: none;
     transition: none;
   }
+
+  .anim-stage-main[data-mode="creative-commons"] {
+    animation: none;
+    clip-path: none;
+  }
 }
 
 /* ---------- base canvas ---------- */
 
 .anim-stage {
+  /* Single source of truth for the monogram's width, shared with
+     .cc-text below via calc() so the labels track its actual size/
+     position from up here — even though they're no longer nested
+     inside .monogram-wrap. */
+  --mono-w: min(1200px, 80vmin, 90vw);
   position: relative;
   height: 95dvh;
   width: 100vw;
   min-height: 480px;
-  padding: clamp(16px, 3vh, 36px) clamp(16px, 4vw, 48px);
-  /* background: var(--paper); */
   border-top: 1px dashed var(--line);
   border-bottom: 1px dashed var(--line);
   overflow: hidden;
@@ -182,11 +189,13 @@
 .modes-list {
   position: absolute;
   right: clamp(16px, 4vw, 48px);
+  top: clamp(16px, 3vh, 36px);
   display: flex;
   flex-wrap: wrap;
   justify-content: end;
   align-items: flex-end;
   gap: 8px;
+  z-index: 2;
 }
 
 .modes-list > .mode-btn {
@@ -254,21 +263,30 @@
 
 .cc-text {
     position: absolute;
+    /* monogram-wrap is centered both ways in .anim-stage-main, and
+       .anim-stage-main fills .anim-stage exactly — so the vertical
+       midpoint is shared and needs no adjustment. Horizontal offsets
+       do need one: they're expressed as distance from that same shared
+       center, scaled by --mono-w (the monogram's actual current width),
+       instead of a plain % of a box .cc-text is no longer inside. */
     top: 50%;
     font-weight: 500;
     font-size: clamp(1rem, 3.1vmin, 2rem);
     white-space: nowrap;
     pointer-events: none;
+    z-index: 10;
 }
 
 .cc-text-left {
-    left: 36%;
+    left: calc(50% - 0.14 * var(--mono-w));
     transform: translate(-50%, -50%);
+    color: var(--ink);
 }
 
 .cc-text-right {
-    left: 85%;
+    left: calc(50% + 0.35 * var(--mono-w));
     transform: translate(-50%, -50%);
+    color: var(--cc-neutral);
 }
 
 /* fx-layer hooks: one full-bleed overlay per mode-specific effect
@@ -415,57 +433,44 @@
     opacity: 0;
 }
 
-/* align labels with the tile grid's hole centers for this mode only,
-   and shrink them so they clear the (smaller) tile hole cleanly */
-[data-mode="creative-commons"] .cc-text-left {
-    left: 28.84%;
+/* Tiled wallpaper: */
+.anim-stage-main {
+    background-image: none;
+    background-repeat: repeat;
+    background-size: 40vmin 40vmin;
+    background-position: 35% 50%;
 }
 
-[data-mode="creative-commons"] .cc-text-right {
-    left: 84.76%;
-    color: var(--cc-neutral);
+.anim-stage-main[data-mode="creative-commons"] {
+    background-image: url('assets/animation/CC.png');
+    /* steps() turns the left-to-right clip-path sweep into discrete jumps,
+       so columns of the tiled copyright mark snap into view one at a time
+       instead of a smooth continuous wipe. */
+    animation: ccColumnReveal 1.4s steps(20, end) forwards;
 }
 
-.cc-tile-shape {
-    fill: var(--ink);
-}
-
-.cc-tile-bg {
-    opacity: 0;
-    transform-box: view-box;
-    transform-origin: 437.998px 260.07px;
-    transform: scale(0.85);
-}
-
-[data-mode="creative-commons"] .cc-tile-bg {
-    display: block;
-    /* animation: ccTilesReveal 0.5s ease-out 0.4s forwards; */
-}
-
-@keyframes ccTilesReveal {
-    to { opacity: 1; transform: scale(1); }
+@keyframes ccColumnReveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
 }
 
 .cc-copyright {
     position: absolute;
     top: 50%;
-    width: 40vmin;
-    height: 40vmin;
+    width: 55.78%;
+    aspect-ratio: 1;
     transform: translate(-50%, -50%);
-    background: none;
-    border-radius: 999px;
-    fill: var(--cc-orange);
     opacity: 0;
     display: none;
     pointer-events: none;
 }
 
-.cc-copyright-left { left: 20%; }
-.cc-copyright-right { left: 80%; }
+.cc-copyright-left { left: 28.82%; }
+.cc-copyright-right { left: 79.74%; }
 
 [data-mode="creative-commons"] .cc-copyright {
     display: block;
-    opacity: 1;
+    opacity: 0;
     /* animation: ccRevealLabel 0.4s steps(1) forwards; */
 }
 
@@ -487,11 +492,11 @@
 }
 
 .cc-pacman-left {
-    transform-origin: 164.978px 260.07px;
+    transform-origin: 210.88px 260.07px;
 }
 
 .cc-pacman-right {
-    transform-origin: 711.018px 260.07px;
+    transform-origin: 756.921px 260.07px;
 }
 
 [data-mode="conversations"] .cc-pacman {
@@ -515,15 +520,11 @@
     animation: pacmanChompRight 0.36s steps(1, jump-end) 0.3s infinite;
 }
 
-[data-mode="conversations"] .cc-text-left{
-    color: var(--ink);
-}
-
 [data-mode="conversations"] .cc-text-right {color: var(--cc-neutral); mix-blend-mode: difference;}
 
 @keyframes pacmanChompRight {
-    0%, 100% { d: path("M 922.499 48.589 A 299.079 299.079 0 1 0 922.499 471.551 L 711.018 260.07 Z"); }
-    50%      { d: path("M 1010.051 254.85 A 299.079 299.079 0 1 0 1010.051 265.29 L 711.018 260.07 Z"); }
+    0%, 100% { d: path("M 968.402 48.589 A 299.079 299.079 0 1 0 968.402 471.551 L 756.921 260.07 Z"); }
+    50%      { d: path("M 1056 260.07 A 299.079 299.079 0 1 0 457.842 260.07 A 299.079 299.079 0 1 0 1056 260.07 L 756.921 260.07 Z"); }
 }
 
 /* =====================================================================
@@ -537,10 +538,6 @@
 /* =====================================================================
    MODE 9 — Curiosity: hover to curl the Cs into a question mark (default)
    ===================================================================== */
-
-[data-mode="curiosity"] .cc-text-right {
-    color: var(--cc-neutral);
-}
 
 [data-mode="curiosity"] .cc-path {
     transform-box: fill-box;
@@ -559,7 +556,10 @@
 .curiosity-dot {
     position: absolute;
     top: 103.6%;
-    width: clamp(16%, 12vmin, 20vw);
+    /* 20.12% = the cc-path's inner (hole) circle diameter as a % of the
+       monogram's width — matches the C's own inner radius exactly, so
+       the dot scales with the glyph instead of the viewport. */
+    width: 20.12%;
     aspect-ratio: 1;
     margin-top: 2%;
     border-radius: 50%;

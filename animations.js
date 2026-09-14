@@ -58,12 +58,23 @@
 (function () {
   const modesNav = document.querySelector('.modes-list');
   const monogramWrap = document.getElementById('monogramWrap');
+  const stageMain = document.querySelector('.anim-stage-main');
+  const stage = document.querySelector('.anim-stage');
   const labelRight = document.getElementById('labelRight');
 
   if (!modesNav || !monogramWrap) return;
 
   function setMode(mode, label) {
     monogramWrap.dataset.mode = mode;
+    // Mirrored onto .anim-stage-main too: its own [data-mode="creative-commons"]
+    // rule toggles the tiled copyright-mark background-image directly on the
+    // stage itself (not a descendant of #monogramWrap), so it needs the
+    // attribute on that element too.
+    if (stageMain) stageMain.dataset.mode = mode;
+    // And onto .anim-stage: .cc-text lives there now (a sibling of
+    // .anim-stage-main, not a descendant of it or #monogramWrap), so its
+    // [data-mode="…"] .cc-text-* rules need this ancestor to carry it too.
+    if (stage) stage.dataset.mode = mode;
     if (labelRight) labelRight.textContent = label;
 
     modesNav.querySelectorAll('.mode-btn').forEach(function (btn) {

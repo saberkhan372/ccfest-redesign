@@ -133,15 +133,7 @@
                 </symbol>
               </defs>
 
-              <rect
-                class="cc-tile-bg fx-layer"
-                x="-3000"
-                y="-3000"
-                width="6300"
-                height="6300"
-                fill="url(#ccTilePattern)"
-              />
-
+              <!-- Curiosity Question Marks -->
               <g
                 transform="translate(-55.177 0) translate(220.155 260.070) scale(1.15) translate(-220.155 -260.070)"
               >
@@ -158,24 +150,16 @@
                   d="M515.443 447.5C515.098 447.18 514.754 446.855 514.414 446.53C465.667 399.276 437.431 334.769 435.791 266.907C433.806 197.043 460.238 129.368 509.042 79.3511C556.68 29.8952 622.005 1.37443 690.664 0.0506321C759.683 -1.30978 826.398 24.9392 875.997 72.9638L798.814 151.042C785.729 164.459 772.544 177.771 759.259 190.987C756.468 188.831 753.535 186.343 750.723 184.113C714.133 159.156 669.285 159.95 634.847 188.809C616.387 204.283 604.886 226.651 602.437 250.558C597.139 302.238 634.525 348.297 686.578 353.402C707.537 355.546 728.602 350.528 746.341 339.167C750.676 336.395 755.033 332.797 759.008 329.539L875.325 448.003C829.816 491.978 769.657 517.581 706.408 519.892C646.342 522.516 587.231 504.146 539.225 467.936C531.916 462.444 522.209 453.759 515.443 447.5Z"
                 />
               </g>
+              <!-- Conversations Pacmen -->
               <path
                 class="cc-pacman cc-pacman-left"
-                d="M 376.459 48.589 A 299.079 299.079 0 1 0 376.459 471.551 L 164.978 260.07 Z"
+                d="M 422.361 48.589 A 299.079 299.079 0 1 0 422.361 471.551 L 210.88 260.07 Z"
               />
               <path
                 class="cc-pacman cc-pacman-right"
-                d="M 922.499 48.589 A 299.079 299.079 0 1 0 922.499 471.551 L 711.018 260.07 Z"
+                d="M 968.402 48.589 A 299.079 299.079 0 1 0 968.402 471.551 L 756.921 260.07 Z"
               />
             </svg>
-
-            <div class="cc-text cc-text-left" id="labelLeft">10 years of</div>
-            <div
-              class="cc-text cc-text-right"
-              id="labelRight"
-              aria-live="polite"
-            >
-              Curiosity
-            </div>
 
             <div
               class="curiosity-dot curiosity-dot-left"
@@ -201,6 +185,14 @@
               <use href="#ccCopyright" />
             </svg>
           </div>
+        </div>
+
+        <!-- Independent of anim-stage-main/monogram-wrap on purpose — sits
+             above every mode's graphics (like .modes-list) and is never
+             touched by a mode's opacity/clip-path/etc. transitions. -->
+        <div class="cc-text cc-text-left" id="labelLeft">10 years of</div>
+        <div class="cc-text cc-text-right" id="labelRight" aria-live="polite">
+          Curiosity
         </div>
       </section>
 
