@@ -290,7 +290,6 @@
 }
 
 /* fx-layer hooks: one full-bleed overlay per mode-specific effect
-   (scanlines, orbit, connection, confetti, and the tiled background).
    Hidden until a mode's own rule turns it on, e.g.
    [data-mode="coding"] .fx-scanlines { display: block; } */
 .fx-layer {
@@ -315,22 +314,25 @@
 }
 
 /* =====================================================================
-   MODE 2 — Change: squash/stretch morph, offset between the two Cs
+   MODE 2 — Change: p5.js polygon morph, driven by change-sketch.js.
+   The static Cs hide; #changeCanvas (an .fx-layer, like the others)
+   shows and takes over, drawing two vertex-built circles/polygons in
+   the exact same spots at the exact same radius.
    ===================================================================== */
 
-[data-mode="change"] .cc-path-left {
-    animation: changeMorph 2.6s ease-in-out infinite;
-    transform-origin: 30% 50%;
+[data-mode="change"] .cc-path {
+    opacity: 0;
 }
 
-[data-mode="change"] .cc-path-right {
-    animation: changeMorph 2.6s ease-in-out infinite 1.3s;
-    transform-origin: 70% 50%;
+[data-mode="change"] .fx-change {
+    display: block;
 }
 
-@keyframes changeMorph {
-    0%, 100% { transform: scale(1, 1); }
-    50% { transform: scale(0.86, 1.14); }
+/* p5's <canvas> defaults to inline-level, which leaves a few stray
+   pixels of baseline gap inside its host — pin it to block-level. */
+.fx-change canvas {
+    display: block;
+    overflow: visible;
 }
 
 /* =====================================================================

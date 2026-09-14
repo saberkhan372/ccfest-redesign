@@ -18,6 +18,7 @@
     <script>
       document.documentElement.classList.add("js");
     </script>
+    <script src="assets/p5.min.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -69,9 +70,8 @@
         </div>
 
         <div class="anim-stage-main">
-          <div class="monogram-wrap" id="monogramWrap" data-mode="curiosity">
+          <div class="monogram-wrap" id="monogramWrap" data-mode="change">
             <div class="fx-layer fx-scanlines" aria-hidden="true"></div>
-            <div class="fx-layer fx-orbit" aria-hidden="true"></div>
             <div class="fx-layer fx-connection" aria-hidden="true"></div>
             <div
               class="fx-layer fx-confetti"
@@ -187,9 +187,21 @@
           </div>
         </div>
 
-        <!-- Independent of anim-stage-main/monogram-wrap on purpose — sits
-             above every mode's graphics (like .modes-list) and is never
-             touched by a mode's opacity/clip-path/etc. transitions. -->
+        <!-- change-sketch.js mounts its p5 canvas here. A sibling of
+             .anim-stage-main (not nested in #monogramWrap) so the canvas
+             gets the entire stage's bounds — plenty of room for a thick
+             stroke to bleed past a circle's radius with no clipping,
+             unlike being sized tightly to monogram-wrap. Still only
+             visible for data-mode="change": .anim-stage already carries
+             the synced data-mode attribute (see animations.js), so the
+             existing [data-mode="change"] .fx-change rule matches here
+             with no extra wiring needed. -->
+        <div
+          class="fx-layer fx-change"
+          id="changeCanvas"
+          aria-hidden="true"
+        ></div>
+
         <div class="cc-text cc-text-left" id="labelLeft">10 years of</div>
         <div class="cc-text cc-text-right" id="labelRight" aria-live="polite">
           Curiosity
@@ -388,5 +400,6 @@
     </footer>
 
     <script src="animations.js" defer></script>
+    <script src="change-sketch.js" defer></script>
   </body>
 </html>
