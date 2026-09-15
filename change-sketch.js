@@ -5,7 +5,7 @@
 const CC_LEFT_X = 0.2882;
 const CC_RIGHT_X = 0.7974;
 const CC_CENTER_Y = 0.5;
-const CC_RADIUS = 0.2789;
+const CC_RADIUS = 0.242522;
 const GAP_ANGLE = Math.PI / 2;
 const STROKE_WEIGHT_FRACTION = 60 / 600;
 const EDGE_SAFE_ZONE = 80;

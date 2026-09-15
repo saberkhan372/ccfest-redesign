@@ -398,7 +398,7 @@
 }
 
 /* =====================================================================
-   MODE 4 — Celebration: confetti burst + bounce
+   MODE 4 — Celebration 
    ===================================================================== */
 
 [data-mode="celebration"] .fx-confetti {
@@ -432,7 +432,8 @@
 }
 
 /* =================================
-   MODE 5 — Collaboration: the two Cs drift apart and re-merge ========*/
+   MODE 5 — Collaboration: the two Cs drift apart and re-merge 
+========*/
 
 .cc-string {
     stroke: var(--ink);
@@ -453,14 +454,14 @@
 [data-mode="collaboration"] .cc-unit-left {
     transform-box: fill-box;
     transform-origin: 50% 0%;
-    translate: 3.92% 0;
+    translate: 12.006% 0;
     animation: firstball 0.9s alternate ease-in infinite;
 }
 
 [data-mode="collaboration"] .cc-unit-right {
     transform-box: fill-box;
     transform-origin: 50% 0%;
-    translate: -3.92% 0;
+    translate: -12.006% 0;
     animation: lastball 0.9s alternate ease-out infinite;
 }
 
@@ -550,11 +551,11 @@
 }
 
 .cc-pacman-left {
-    transform-origin: 210.88px 260.07px;
+    transform-origin: 204.892px 260.069px;
 }
 
 .cc-pacman-right {
-    transform-origin: 756.921px 260.07px;
+    transform-origin: 750.933px 260.069px;
 }
 
 [data-mode="conversations"] .cc-pacman {
@@ -581,12 +582,12 @@
 [data-mode="conversations"] .cc-text-right {color: var(--cc-neutral); mix-blend-mode: difference;}
 
 @keyframes pacmanChompRight {
-    0%, 100% { d: path("M 968.402 48.589 A 299.079 299.079 0 1 0 968.402 471.551 L 756.921 260.07 Z"); }
-    50%      { d: path("M 1056 260.07 A 299.079 299.079 0 1 0 457.842 260.07 A 299.079 299.079 0 1 0 1056 260.07 L 756.921 260.07 Z"); }
+    0%, 100% { d: path("M 934.830 76.173 A 260.069 260.069 0 1 0 934.830 443.966 L 750.933 260.069 Z"); }
+    50%      { d: path("M 1011.002 260.069 A 260.069 260.069 0 1 0 490.864 260.069 A 260.069 260.069 0 1 0 1011.002 260.069 L 750.933 260.069 Z"); }
 }
 
 /* =====================================================================
-   MODE 8 — Community: halftone dot-pattern fill
+   MODE 8 — Community: 
    ===================================================================== */
 
 
@@ -601,22 +602,21 @@
 }
 
 #monogramWrap[data-mode="curiosity"]:hover .cc-path-left {
-    transform: translateX(-16%) rotate(135deg);
+    transform: translateX(-16%) translateY(-16%) rotate(135deg);
 }
 
 #monogramWrap[data-mode="curiosity"]:hover .cc-path-right {
-    transform: translateX(16%) rotate(135deg);
+    transform: translateX(16%) translateY(-16%) rotate(135deg);
 }
 
 .curiosity-dot {
     position: absolute;
-    top: 103.6%;
+    top: 100%;
     /* 20.12% = the cc-path's inner (hole) circle diameter as a % of the
        monogram's width — matches the C's own inner radius exactly, so
        the dot scales with the glyph instead of the viewport. */
-    width: 20.12%;
+    width: 17.4957%;
     aspect-ratio: 1;
-    margin-top: 2%;
     border-radius: 50%;
     background: var(--ink);
     transform: translate(-50%, -15%) scale(0.3);
@@ -634,7 +634,7 @@
 .curiosity-dot-right { left: 80.51%; }
 
 #monogramWrap[data-mode="curiosity"]:hover .curiosity-dot {
-    transform: translate(-50%, 0) scale(1);
+    transform: translate(-50%, -32%) scale(1);
     opacity: 1;
 }
 
