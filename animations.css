@@ -19,12 +19,6 @@
     font-display: swap;
 }
 
-@font-face {
-  font-family: 'Areal';
-  src: url('assets/ABCArealSemiMono-Medium.woff2');
-  font-style: normal;
-}
-
 :root{
   font-size: 16px;
    --cc-orange: #f44c2d;
