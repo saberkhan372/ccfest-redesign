@@ -72,7 +72,6 @@
         <div class="anim-stage-main">
           <div class="monogram-wrap" id="monogramWrap" data-mode="change">
             <div class="fx-layer fx-scanlines" aria-hidden="true"></div>
-            <div class="fx-layer fx-connection" aria-hidden="true"></div>
             <div
               class="fx-layer fx-confetti"
               id="confettiLayer"
@@ -188,19 +187,60 @@
         </div>
 
         <!-- change-sketch.js mounts its p5 canvas here. A sibling of
-             .anim-stage-main (not nested in #monogramWrap) so the canvas
-             gets the entire stage's bounds — plenty of room for a thick
-             stroke to bleed past a circle's radius with no clipping,
-             unlike being sized tightly to monogram-wrap. Still only
-             visible for data-mode="change": .anim-stage already carries
-             the synced data-mode attribute (see animations.js), so the
-             existing [data-mode="change"] .fx-change rule matches here
-             with no extra wiring needed. -->
+             .anim-stage-main (not nested in #monogramWrap) -->
         <div
           class="fx-layer fx-change"
           id="changeCanvas"
           aria-hidden="true"
         ></div>
+
+        <!-- "Connection" mode: two Cs built from 7 primitive pieces (4
+             arcs + 3 dots). At rest each piece's `d` draws it assembled
+             into the two Cs; on hover it transitions to a scattered `d`
+             — same command structure (verified: identical M/C/Z
+             sequence per piece), so the browser morphs smoothly between
+             them instead of us computing per-piece translate/rotate
+             transforms by hand. A sibling of .anim-stage-main for the
+             same reason as #changeCanvas: the scattered layout needs far
+             more room than #monogramWrap's own box. viewBox is sized to
+             comfortably contain both the assembled and scattered extents
+             at once (both states live in the same coordinate space, just
+             translated so the assembled state sits roughly centered). -->
+        <svg
+          class="fx-layer fx-connection-canvas"
+          id="connectionCanvas"
+          viewBox="-30 -10 1780 960"
+          aria-hidden="true"
+        >
+          <path
+            class="cc-connection-piece cc-connection-piece-1"
+            d="M1135.8816 172.027 C1152.1216 170.6373 1171.9176 171.4875 1172.0056 192.7085 C1172.0744 209.2283 1145.8704 211.6723 1134.5296 212.514 C1077.0832 216.7824 1027.3984 235.2 983.6976 273.772 C938.6576 312.7336 908.4312 366.048 898.1208 424.716 C895.048 441.9632 894.1544 457.9568 893.0672 475.4512 C891.5856 477.7144 889.0744 480.4904 887.2584 482.624 C870.488 492.228 854.6752 485.3296 854.596 465.0872 C854.0776 333.3016 946.1592 215.7549 1072.5272 181.0347 C1091.972 175.6921 1115.6712 173.6674 1135.8816 172.027 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-2"
+            d="M856.0768 494.312 C854.6872 478.072 855.5376 458.276 876.7584 458.188 C893.2784 458.1192 895.7224 484.3232 896.564 495.664 C900.832 553.1104 919.2504 602.7952 957.8224 646.4968 C996.784 691.5368 1050.0976 721.7624 1108.7664 732.0728 C1126.0136 735.1456 1142.0072 736.0392 1159.5008 737.1264 C1161.7648 738.608 1164.5408 741.1192 1166.6736 742.9352 C1176.2784 759.7056 1169.38 775.5184 1149.1368 775.5976 C1017.352 776.116 899.8048 684.0344 865.0848 557.6664 C859.7424 538.2224 857.7176 514.5224 856.0768 494.312 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-3"
+            d="M867.228 432.732 C883.6632 430.0728 900.2512 436.5016 910.608 449.5416 C920.9648 462.5824 923.48 480.2024 917.1728 495.6184 C910.8752 511.0352 896.7448 521.8456 880.2144 523.888 C855.3216 526.9648 832.5472 509.532 829.0072 484.688 C825.4664 459.8432 842.464 436.7376 867.228 432.732 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-4"
+            d="M776.0376 615.1088 C792.4728 612.4496 809.0608 618.8776 819.4176 631.9184 C829.7744 644.9592 832.2896 662.5792 825.9824 677.9952 C819.684 693.412 805.5544 704.2224 789.024 706.2648 C764.1312 709.3416 741.3568 691.9088 737.816 667.0648 C734.276 642.22 751.2736 619.1144 776.0376 615.1088 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-5"
+            d="M776.0376 237.3245 C792.4728 234.665 809.0608 241.0934 819.4176 254.1344 C829.7744 267.1744 832.2896 284.7944 825.9824 300.2104 C819.684 315.6272 805.5544 326.4376 789.024 328.4808 C764.1312 331.5576 741.3568 314.124 737.816 289.28 C734.276 264.4352 751.2736 241.3298 776.0376 237.3245 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-6"
+            d="M585.3114 458.1952 C616.0854 457.9912 607.8515 480.9176 611.2262 503.8704 C622.3872 579.7872 692.5696 639.2024 768.8648 640.8016 C779.2168 641.0192 789.2104 645.6728 792.1896 656.3352 C793.576 661.2232 792.8648 666.4672 790.2296 670.8112 C786.7464 676.5608 781.9296 679.0968 775.6952 680.7224 C765.388 681.2864 756.3336 680.4968 746.1472 679.2176 C649.192 667.0376 574.9766 585.4512 568.2338 488.3616 C567.2419 474.0824 568.7826 461.4392 585.3114 458.1952 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-7"
+            d="M585.3114 498.5192 C616.0854 498.7232 607.8515 475.7968 611.2262 452.844 C622.3872 376.9264 692.5696 317.512 768.8648 315.9128 C779.2168 315.6952 789.2104 311.0416 792.1896 300.3792 C793.576 295.4912 792.8648 290.2464 790.2296 285.9032 C786.7464 280.1536 781.9296 277.6168 775.6952 275.992 C765.388 275.4272 756.3336 276.2176 746.1472 277.4968 C649.192 289.6768 574.9766 371.2624 568.2338 468.352 C567.2419 482.632 568.7826 495.2752 585.3114 498.5192 Z"
+          />
+        </svg>
 
         <div class="cc-text cc-text-left" id="labelLeft">10 years of</div>
         <div class="cc-text cc-text-right" id="labelRight" aria-live="polite">

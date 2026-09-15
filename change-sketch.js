@@ -14,12 +14,6 @@ let stageEl;
 let monogramWrap;
 let changeHost;
 
-//start at roughly the middle rather than either end.
-let hasMouseMoved = false;
-
-function mouseMoved() {
-  hasMouseMoved = true;
-}
 
 // Monogram's box translated into stage-local (= canvas-local) pixels.
 let stageW = 1;
@@ -65,18 +59,18 @@ function windowResized() {
 function draw() {
   if (!monogramWrap || monogramWrap.dataset.mode !== 'change') return;
   background(60, 1 ,96, 15);
-  const mx = hasMouseMoved ? mouseX : width / 2 - 4;
-  const increment = map(mx, EDGE_SAFE_ZONE, width - EDGE_SAFE_ZONE, 0.01, PI, true);
+  const mx = mouseX;
+  const increment = map(mx, EDGE_SAFE_ZONE, width - EDGE_SAFE_ZONE, PI, 0.01,  true);
   // stroke() is centered on the path, so it bleeds outward by half its
   // own weight beyond whatever radius we draw at
   const strokeW = monoW * STROKE_WEIGHT_FRACTION;
   const r = monoW * CC_RADIUS - strokeW / 2;
-  strokeCap(SQUARE);
+  strokeCap(PROJECT);
   strokeWeight(strokeW);
   stroke(360 - (0.4 * frameCount) % 360, 54, 95);
 
-  const start = GAP_ANGLE / 2;
-  const end = TWO_PI - GAP_ANGLE / 2;
+  const start = 0;
+  const end = TWO_PI - GAP_ANGLE;
 
   const leftCx = monoOffsetX + monoW * CC_LEFT_X;
   const rightCx = monoOffsetX + monoW * CC_RIGHT_X;
@@ -84,13 +78,13 @@ function draw() {
 
   beginShape()
     for (let a = start; a < end; a += increment) {
-    vertex(leftCx + r * cos(a) + random(-1, 1), cy + r * sin(a) + random(-1, 1));
+    vertex(leftCx + r * cos(a) + random(-0.5, 0.5), cy + r * sin(a) + random(-0.5, 0.5));
   }
   endShape();
   stroke((0.4 * frameCount) % 360, 54, 95);
   beginShape()
     for (let a = start; a < end; a += increment) {
-     vertex(rightCx + r * cos(a) + random(-1, 1), cy + r * sin(a) + random(-1, 1));
+     vertex(rightCx + r * cos(a) + random(-0.5, 0.5), cy + r * sin(a) + random(-0.5, 0.5));
   }
   endShape();
 }

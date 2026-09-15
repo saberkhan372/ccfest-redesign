@@ -263,12 +263,6 @@
 
 .cc-text {
     position: absolute;
-    /* monogram-wrap is centered both ways in .anim-stage-main, and
-       .anim-stage-main fills .anim-stage exactly — so the vertical
-       midpoint is shared and needs no adjustment. Horizontal offsets
-       do need one: they're expressed as distance from that same shared
-       center, scaled by --mono-w (the monogram's actual current width),
-       instead of a plain % of a box .cc-text is no longer inside. */
     top: 50%;
     font-weight: 500;
     font-size: clamp(1rem, 3.1vmin, 2rem);
@@ -336,38 +330,68 @@
 }
 
 /* =====================================================================
-   MODE 3 — Connection: pulsing dashed line + glow linking the two Cs
+   MODE 3 — Connection
    ===================================================================== */
 
-[data-mode="connection"] .fx-connection {
-    display: block;
-}
-
-.fx-connection::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 34%;
-    width: 32%;
-    height: 0;
-    border-top: 3px dashed var(--cc-neutral);
-    transform: translateY(-50%);
-    animation: connectionDash 1.2s linear infinite;
-    opacity: 0.85;
-}
-
-@keyframes connectionDash {
-    to { stroke-dashoffset: -16px; border-color: var(--cc-neutral); background-position: -32px 0; }
-}
-
 [data-mode="connection"] .cc-path {
-    filter: drop-shadow(0 0 10px rgba(22, 201, 194, 0.55));
-    animation: connectionPulse 1.8s ease-in-out infinite;
+    opacity: 0;
 }
 
-@keyframes connectionPulse {
-    0%, 100% { filter: drop-shadow(0 0 4px rgba(22, 201, 194, 0.35)); }
-    50% { filter: drop-shadow(0 0 16px rgba(22, 201, 194, 0.7)); }
+[data-mode="connection"] .fx-connection-canvas {
+    display: block;
+    /* .fx-layer sets pointer-events: none (it's usually a decorative,
+       non-interactive overlay) — this one needs hover, so opt back in,
+       only while it's actually the visible layer. */
+    pointer-events: auto;
+}
+
+.cc-connection-piece {
+    fill: var(--cc-orange);
+    /* pointer-events: auto (the default SVG behavior, "visiblePainted")
+       restricts hit-testing to each piece's own filled area — hovering
+       empty space inside the canvas's (much larger) viewBox shouldn't
+       count, only actually touching a piece should. */
+    pointer-events: auto;
+    transition: d 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Small per-piece delay so the scatter/reassembly reads as a cascade
+   rather than all 7 pieces snapping in lockstep. */
+.cc-connection-piece-2 { transition-delay: 0.02s; }
+.cc-connection-piece-3 { transition-delay: 0.04s; }
+.cc-connection-piece-4 { transition-delay: 0.06s; }
+.cc-connection-piece-5 { transition-delay: 0.08s; }
+.cc-connection-piece-6 { transition-delay: 0.1s; }
+.cc-connection-piece-7 { transition-delay: 0.12s; }
+
+/* Hovering any one piece bubbles up to :hover on the whole canvas, so
+   all 7 scatter together rather than only the one under the pointer. */
+.fx-connection-canvas:hover .cc-connection-piece-1 {
+    d: path("M1415.968 163.7912C1428.432 153.2903 1441.832 138.6913 1426.888 123.6238C1415.256 111.894 1395 128.6945 1386.384 136.1186C1342.744 173.721 1294.592 195.8304 1236.416 199.4576C1177.016 203.7552 1117.944 187.4296 1069.168 153.2352C1054.8 143.2123 1042.856 132.5351 1029.72 120.9337C1027.072 120.3806 1023.328 120.1937 1020.536 119.9694C1001.888 125.0362 995.584 141.0958 1009.84 155.4657C1102.664 249.0184 1250.896 267.0248 1364.8 202.22C1382.328 192.2488 1400.52 176.9224 1415.968 163.7912Z");
+}
+
+.fx-connection-canvas:hover .cc-connection-piece-2 {
+    d: path("M1284.84 833.9296C1268.616 835.5208 1248.816 834.916 1248.464 813.6976C1248.192 797.18 1274.36 794.4112 1285.688 793.4296C1343.08 788.4496 1392.536 769.4184 1435.752 730.308C1480.304 690.7912 1509.872 637.1072 1519.456 578.316C1522.312 561.032 1523.008 545.028 1523.88 527.5224C1525.336 525.24 1527.808 522.4336 1529.6 520.2784C1546.248 510.4664 1562.144 517.1688 1562.472 537.4088C1564.624 669.1776 1474.008 787.856 1348.08 824.1384C1328.704 829.7216 1305.032 832.0392 1284.84 833.9296Z");
+}
+
+.fx-connection-canvas:hover .cc-connection-piece-3 {
+    d: path("M512.3072 424.192C528.7432 421.532 545.3312 427.9608 555.688 441.0016C566.0448 454.0416 568.56 471.6616 562.2528 487.0776C555.9544 502.4944 541.8248 513.3048 525.2936 515.348C500.4016 518.4248 477.6272 500.9912 474.0864 476.1472C470.5464 451.3024 487.544 428.1968 512.3072 424.192Z");
+}
+
+.fx-connection-canvas:hover .cc-connection-piece-4 {
+    d: path("M819.5072 752.992C835.9432 750.332 852.5312 756.7608 862.888 769.8016C873.2448 782.8416 875.76 800.4616 869.4528 815.8776C863.1544 831.2944 849.0248 842.1048 832.4936 844.148C807.6016 847.2248 784.8272 829.7912 781.2864 804.9472C777.7464 780.1024 794.744 756.9968 819.5072 752.992Z");
+}
+
+.fx-connection-canvas:hover .cc-connection-piece-5 {
+    d: path("M409.9072 94.5917C426.3432 91.9323 442.9312 98.3606 453.288 111.4013C463.6448 124.4419 466.16 142.0618 459.8528 157.4778C453.5544 172.8947 439.4248 183.7048 422.8936 185.748C398.0016 188.8248 375.2272 171.3915 371.6864 146.5474C368.1464 121.7025 385.144 98.597 409.9072 94.5917Z");
+}
+
+.fx-connection-canvas:hover .cc-connection-piece-6 {
+    d: path("M562.2152 679.6768C555.7856 709.772 535.1712 696.7936 512.0304 695.1448C435.4912 689.692 362.3544 745.4288 344.3584 819.588C341.9168 829.6504 335.22 838.4072 324.1656 839.02C319.0936 839.3208 314.1256 837.4976 310.4512 833.988C305.5872 829.348 304.148 824.0984 303.9032 817.66C305.5728 807.4728 308.2944 798.8016 311.7376 789.1296C344.5152 697.0736 440.172 642.1736 536.4352 656.5024C550.5936 658.6096 562.608 662.8368 562.2152 679.6768Z");
+}
+
+.fx-connection-canvas:hover .cc-connection-piece-7 {
+    d: path("M263.5424 452.6248C284.4136 430.0088 261.9184 420.66 247.2202 402.7104C198.6042 343.3432 201.929 251.4488 252.116 193.9624C258.9256 186.1616 262.2136 175.64 256.336 166.2578C253.656 161.9417 249.2995 158.936 244.3135 157.9599C237.717 156.6642 232.5989 158.5174 227.1992 162.0331C219.8421 169.274 214.33 176.5008 208.4174 184.8928C152.1425 264.7792 162.4949 374.584 229.7396 444.94C239.6298 455.288 250.0151 462.6616 263.5424 452.6248Z");
 }
 
 /* =====================================================================
