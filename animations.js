@@ -66,10 +66,7 @@
 
   function setMode(mode, label) {
     monogramWrap.dataset.mode = mode;
-    // Mirrored onto .anim-stage-main too: its own [data-mode="creative-commons"]
-    // rule toggles the tiled copyright-mark background-image directly on the
-    // stage itself (not a descendant of #monogramWrap), so it needs the
-    // attribute on that element too.
+    // Mirrored onto .anim-stage-main too for creative commons
     if (stageMain) stageMain.dataset.mode = mode;
     // And onto .anim-stage: .cc-text lives there now (a sibling of
     // .anim-stage-main, not a descendant of it or #monogramWrap), so its
