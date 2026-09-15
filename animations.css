@@ -19,6 +19,12 @@
     font-display: swap;
 }
 
+@font-face {
+  font-family: 'Areal';
+  src: url('assets/ABCArealSemiMono-Medium.woff2');
+  font-style: normal;
+}
+
 :root{
   font-size: 16px;
    --cc-orange: #f44c2d;
@@ -269,12 +275,14 @@
     white-space: nowrap;
     pointer-events: none;
     z-index: 10;
+    font-family: caslon;
 }
 
 .cc-text-left {
     left: calc(50% - 0.14 * var(--mono-w));
     transform: translate(-50%, -50%);
     color: var(--ink);
+    
 }
 
 .cc-text-right {
@@ -343,6 +351,7 @@
        non-interactive overlay) — this one needs hover, so opt back in,
        only while it's actually the visible layer. */
     pointer-events: auto;
+    margin-top: clamp(2rem, 2vmin, 2vh);
 }
 
 .cc-connection-piece {
@@ -428,26 +437,55 @@
     100% { transform: translate(var(--drift, 0px), 60vh) rotate(540deg); opacity: 0; }
 }
 
-/* =====================================================================
-   MODE 5 — Collaboration: the two Cs drift apart and re-merge
-   ===================================================================== */
+/* =================================
+   MODE 5 — Collaboration: the two Cs drift apart and re-merge ========*/
+
+.cc-string {
+    stroke: var(--ink);
+    stroke-width: 12px;
+    opacity: 0;
+}
+
+[data-mode="collaboration"] .cc-string {
+    opacity: 1;
+}
 
 [data-mode="collaboration"] .cc-path-left {
-    animation: collabLeft 2.8s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scaleX(-1);
 }
 
-[data-mode="collaboration"] .cc-path-right {
-    animation: collabRight 2.8s ease-in-out infinite;
+[data-mode="collaboration"] .cc-unit-left {
+    transform-box: fill-box;
+    transform-origin: 50% 0%;
+    translate: 3.92% 0;
+    animation: firstball 0.9s alternate ease-in infinite;
 }
 
-@keyframes collabLeft {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-3.5%); }
+[data-mode="collaboration"] .cc-unit-right {
+    transform-box: fill-box;
+    transform-origin: 50% 0%;
+    translate: -3.92% 0;
+    animation: lastball 0.9s alternate ease-out infinite;
 }
 
-@keyframes collabRight {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(3.5%); }
+@keyframes firstball {
+  0% {
+    transform: rotate(30deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes lastball {
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
 }
 
 /* =====================================================================
@@ -468,7 +506,7 @@
 }
 
 .anim-stage-main[data-mode="creative-commons"] {
-    background-image: url('assets/animation/CC.png');
+    background-image: url('assets/animation/creative-commons.png');
     /* steps() turns the left-to-right clip-path sweep into discrete jumps,
        so columns of the tiled copyright mark snap into view one at a time
        instead of a smooth continuous wipe. */
