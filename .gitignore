@@ -7,3 +7,8 @@ Shristi-ccfest-redesign-10-years-origin/
 figma-to-html/
 figma-to-html (1)/
 figma-to-html-registration (2)/
+
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata

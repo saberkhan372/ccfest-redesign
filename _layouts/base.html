@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="{{ page.description }}"
+    >
+    <meta name="theme-color" content="#edede9">
+    <title>{{ page.title }}</title>
+    <link rel="icon" href="{{ page.root }}assets/favicon.png">
+    <link rel="stylesheet" href="{{ page.root }}styles.css">
+{%- if page.home %}
+    <link rel="stylesheet" href="animations.css">
+    <!-- Adds .js to <html> before any CSS is applied so animations.css
+         can gate hidden states behind this class. Content stays visible
+         for users with JS disabled. -->
+    <script>document.documentElement.classList.add('js')</script>
+{%- endif %}
+    <link rel="stylesheet" href="{{ page.root }}redesign.css">
+  </head>
+  <body class="{{ page.body_class }}">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header{% if page.home %} anim-nav{% endif %}">
+      {% if page.nav == "event" %}{% include logo-header-event.html href=page.home_href %}{% else %}{% include logo-header.html href=page.home_href %}{% endif %}
+      {% if page.nav == "event" %}{% include nav-event.html %}{% else %}{% include nav-main.html root=page.root current=page.nav_current %}{% endif %}
+    </header>
+
+{{ content }}
+    <footer class="site-footer page-width">
+      {% include logo-footer.html %}
+      <p>Creative coding for connection, expression, and learning.</p>
+      <a href="mailto:mrkhanatndv@gmail.com">mrkhanatndv@gmail.com</a>
+      <p class="design-credits">Design: <a href="https://franciscajose.com/">Francisca José Rodrigues</a> · Interactives: <a href="https://shristi.super.site/">Shristi Singh</a></p>
+    </footer>
+{%- if page.home %}
+
+    <script src="assets/p5.min.js" defer></script>
+    <script src="animations.js" defer></script>
+    <script src="change-sketch.js" defer></script>
+    <script src="interaction.js" defer></script>
+{%- endif %}
+  </body>
+</html>

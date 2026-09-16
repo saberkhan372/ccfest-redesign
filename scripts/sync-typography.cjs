@@ -29,10 +29,11 @@ const root = path.join(__dirname, '..');
 const { nodes } = JSON.parse(fs.readFileSync(path.join(root, 'design/figma-typography.json'), 'utf8'));
 
 /*
- * Which elements get lettering, per page.
+ * Which elements get lettering, per file.
  * Each entry is [tag, a unique attribute of that element, Figma node id].
  * The attribute must appear inside the opening tag and match only one element.
- * Every page also gets the footer logo, appended below.
+ * The header and footer logos live in `_includes/`, because every page now
+ * shares one header and footer through `_layouts/base.html`.
  */
 const pages = {
   'index.html': [
@@ -42,22 +43,22 @@ const pages = {
     ['h2', 'id="past-title"', '218:170'],
     ['h2', 'id="mailing-title"', '218:209'],
     ['h2', 'id="coc-title"', '218:215'],
-    ['a', 'class="logo"', '218:106'],
   ],
   'register/index.html': [
     ['h1', 'id="event-title"', '251:741'],
     ['h2', 'id="keynotes-title"', '251:765'],
     ['h2', 'id="sessions-title"', '251:788'],
     ['h2', 'id="registration-title"', '251:843'],
-    ['a', 'class="logo"', '251:734'],
   ],
-  'events/index.html': [['a', 'class="logo"', '218:106']],
-  'past-events/index.html': [['h1', 'id="page-title"', '218:170'], ['a', 'class="logo"', '218:106']],
-  'mailing-list/index.html': [['h1', 'id="page-title"', '218:209'], ['a', 'class="logo"', '218:106']],
-  'code-of-conduct/index.html': [['h1', 'id="page-title"', '218:215'], ['a', 'class="logo"', '218:106']],
-};
+  'past-events/index.html': [['h1', 'id="page-title"', '218:170']],
+  'mailing-list/index.html': [['h1', 'id="page-title"', '218:209']],
+  'code-of-conduct/index.html': [['h1', 'id="page-title"', '218:215']],
 
-const FOOTER_LOGO = ['strong', 'class="logo"', '218:218'];
+  /* Shared header and footer. The event page has its own header logo node. */
+  '_includes/logo-header.html': [['a', 'class="logo"', '218:106']],
+  '_includes/logo-header-event.html': [['a', 'class="logo"', '251:734']],
+  '_includes/logo-footer.html': [['strong', 'class="logo"', '218:218']],
+};
 
 const escapeHtml = s => s
   .replaceAll('&', '&amp;')
@@ -104,7 +105,7 @@ function render(id) {
 for (const [file, elements] of Object.entries(pages)) {
   let html = fs.readFileSync(path.join(root, file), 'utf8');
 
-  for (const [tag, match, id] of [...elements, FOOTER_LOGO]) {
+  for (const [tag, match, id] of elements) {
     // Match the whole element, then replace its contents with the generated spans.
     // [^>]* cannot cross a ">", so this only matches the element's own opening tag.
     const element = new RegExp(`<${tag}([^>]*${match}[^>]*)>[\\s\\S]*?<\\/${tag}>`);
