@@ -25,7 +25,7 @@ Donations go to the organizer, not to a registered charity, so tools limited to 
 2. **Choose Zoom as the location.** Connect Zoom at luma.com/settings, then let Luma create the meeting or paste an existing one. Guests register on Luma, not Zoom, and each gets a personal `luma.com/join/…` link.
 3. **Connect Stripe** (calendar → Payment → Get Started → Link Existing Account). Until Stripe is connected, the ticket editor has no Paid option. Enter bank or identity details yourself; an agent must not.
 4. **Set up donations on the ticket.** Registration → the ticket → Edit → **Paid** → turn on **Flexible Pricing**. Set a Minimum of 0, so people can still register for free, and a Suggested amount, which Luma requires. Guests then see "Suggested Donation $10.00 · Pay what you want".
-5. **Optional: ask about the mailing list.** Add a registration question such as "Add me to the CC Fest mailing list". Luma guests don't reach EmailOctopus on their own, so import only the people who said yes.
+5. **Ask about the mailing list.** Registration → Custom Questions → Add Question → **Checkbox**, with Required off. The 2026 event asks "Add me to the CC Fest mailing list for news about future events (optional; unsubscribe anytime)". Luma guests don't reach EmailOctopus on their own: export the guest list from Luma (Guests tab) and import only the people who ticked it.
 6. **Put it on the site** through Pages CMS, under "Upcoming event":
    - **Registration link:** the event's public Luma URL.
    - **Luma event ID:** the `evt-…` value from Manage event → More → Embed Registration Button. Pasting the whole snippet also works; the site pulls out the ID.

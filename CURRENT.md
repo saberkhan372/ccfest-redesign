@@ -173,5 +173,8 @@ Send Shristi the review notes above (confetti listeners first). Check the live h
 ## Published
 - Saber reports Stripe verified and a location added in Luma (2026-09-16). He asked for registration on the site ("can you add registration to site?"). Committed on `luma-registration`, fast-forwarded `main`, pushed.
 
+- Pushed as `0c0d03b`; GitHub Pages built it ~2 min later. On the live site, /register/ Register opens the dialog with the real event ("Suggested Donation $10.00 · Pay what you want").
+- Luma registration now has an optional, unrequired checkbox question: "Add me to the CC Fest mailing list for news about future events (optional; unsubscribe anytime)". Luma doesn't sync to EmailOctopus: export guests from Luma, import only those who ticked it.
+
 ## Next task
-Add the Zoom Events link in Luma when Saber sends it. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.
+Add the Zoom Events link in Luma when Saber sends it. Before the event, import mailing-list opt-ins from Luma into EmailOctopus. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.
