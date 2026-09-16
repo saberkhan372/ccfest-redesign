@@ -1,0 +1,305 @@
+/* ============================================================================
+ * redesign.css — Francisca's visual design, layered over styles.css.
+ *
+ * HOW THE STYLESHEETS STACK (later files win):
+ *   1. styles.css      base layout and structure          (Saber)
+ *   2. animations.css  motion, homepage only              (Shristi)
+ *   3. redesign.css    this file: the current look        (Saber + Francisca)
+ *
+ * Change the LOOK here. Leave styles.css for structure and animations.css for
+ * Shristi's motion, so her pull request stays easy to compare and merge.
+ *
+ * WHERE THINGS ARE (in order):
+ *   1. Fonts
+ *   2. Design tokens
+ *   3. Shared: body, header, footer, labels
+ *   4. Homepage
+ *   5. Event page            (register/)
+ *   6. Inner pages           (events/, past-events/, mailing-list/, code-of-conduct/)
+ *   7. Interactive overrides (Shristi's monogram)
+ *   8. Figma lettering hooks
+ *   9. Responsive
+ *  10. Reduced motion
+ *
+ * NOTES
+ *   - Rules are one per line to keep this file short and scannable.
+ *   - Order matters within a section: later rules of equal weight win.
+ *   - Heading sizes live here, NOT in the generated lettering spans, so
+ *     headings stay responsive. See docs/TYPOGRAPHY.md.
+ *   - Colours come from the tokens below wherever possible.
+ *   - To update the design after Francisca sends a new Figma frame, see
+ *     docs/UPDATING.md.
+ * ========================================================================= */
+
+/* --- 1. Fonts ------------------------------------------------------------ */
+/* Self-hosted so the variable width/weight axes work offline. Licences sit next to the files. */
+@font-face { font-family: Anybody; src: url('assets/fonts/Anybody[wdth,wght].ttf') format('truetype'); font-style: normal; font-weight: 100 900; font-stretch: 50% 150%; font-display: swap; }
+@font-face { font-family: Anybody; src: url('assets/fonts/Anybody-Italic[wdth,wght].ttf') format('truetype'); font-style: italic; font-weight: 100 900; font-stretch: 50% 150%; font-display: swap; }
+@font-face { font-family: 'Overpass Mono'; src: url('assets/fonts/OverpassMono[wght].ttf') format('truetype'); font-weight: 300 700; font-display: swap; }
+
+/* --- 2. Design tokens ---------------------------------------------------- */
+/* Overrides the defaults in styles.css. Change a colour here and it updates everywhere. */
+:root {
+ --paper: #edede9;      /* page background */
+ --surface: #f4f4f1;    /* header, tinted sections */
+ --tint: #e5e5e2;       /* subtle fills */
+ --ink: #18181a;        /* text and dark bands */
+ --muted: #62625e;      /* secondary text */
+ --line: #c4c4c0;       /* borders */
+ --soft-line: #dcdcd8;  /* lighter borders */
+ --accent: #2d5bff;     /* blue: buttons, links, some headings */
+ --orange: #ff4d2e;     /* upcoming band, event facts */
+ --lime: #c5ff32;       /* mailing list, registration band */
+ --cc-orange: var(--orange);  /* kept: older names used by styles.css */
+ --accent-ink: var(--ink);
+ --page-width: 1440px;  /* Figma frame width */
+ --page-pad: clamp(1.25rem, 4.45vw, 4rem);
+}
+
+/* --- 3. Shared ----------------------------------------------------------- */
+body { font-family: Anybody, Arial, sans-serif; font-weight: 300; font-kerning: normal; }
+h1,h2,h3,p { overflow-wrap: break-word; }
+button { font: inherit; }
+.site-header { min-height: 56px; background: var(--surface); }
+.site-header nav { font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+.site-header nav a { text-decoration: none; padding-block: .5rem; }
+.site-header nav a:hover { color: var(--accent); text-decoration: underline; }
+.site-header nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: .35em; }
+.logo { font-size: 13px; font-weight: 500; letter-spacing: .05em; font-variation-settings: 'wdth' 71; white-space: nowrap; }
+/* Small mono labels: eyebrows, fact labels, section numbers, tags. */
+.eyebrow,.event-facts span,.section-heading > p,.session-time,.tag-row span,.upcoming-facts span,.location-chip span { font-family: 'Overpass Mono', monospace; font-size: 10px; letter-spacing: .07em; }
+.button { font-size: 14px; font-weight: 500; padding: .85rem 1.5rem; }
+.button-light,.button-solid { color: white; background: var(--accent); border-color: var(--accent); }
+.button:hover { filter: brightness(.9); }
+.site-footer { font-size: 12px; border-top: 1px solid var(--line); gap: 1.5rem; }
+.site-footer strong.logo { font-size: 12px; }
+.design-credits { grid-column: 1 / -1; font-size: 11px; }  /* designer credits: keep on every page */
+
+/* --- 4. Homepage --------------------------------------------------------- */
+.home-hero { overflow: hidden; position: relative; padding-top: clamp(3rem,6.7vw,6rem); padding-bottom: clamp(3rem,6.7vw,6rem); }
+/* Giant italic "CC FEST". Size is 400/1440 of the viewport, matching the Figma frame. */
+.home-hero-title { position: relative; z-index: 1; font-family: Anybody, sans-serif; font-style: italic; font-weight: 400; font-variation-settings: 'wdth' 71; font-size: clamp(5rem,27.7778vw,25rem); letter-spacing: 0; line-height: .8; white-space: nowrap; margin: 0 0 2.5rem; }
+.hero-rule { position: relative; z-index: 1; margin-bottom: 2.5rem; }
+.home-hero-sub { font-size: clamp(.9rem,1.25vw,18px); line-height: 1.7; max-width: 480px; }
+.hero-shape { position: absolute; bottom: calc(clamp(65px,20vw,285px) * -1.169); left: 0; width: clamp(65px,20vw,285px); height: auto; object-fit: contain; pointer-events: none; }
+/* Upcoming event band (orange) */
+.upcoming-band { background: var(--orange); color: var(--ink); }
+.upcoming-copy > p { color: var(--ink); }
+.upcoming-copy h2 { font-size: clamp(2rem,4.4444vw,4rem); font-weight: 300; letter-spacing: 0; text-transform: uppercase; }
+.upcoming-facts { border: 0; background: #444; }
+.upcoming-facts > div { background: #161614; }
+.upcoming-facts span { color: #ff795f; }
+.upcoming-facts strong { color: white; font-size: 15px; }
+/* About */
+.home-about { grid-template-columns: minmax(220px,340px) minmax(0,1fr); gap: clamp(2rem,6.7vw,6rem); }
+.about-lead h2 { color: var(--accent); font-weight: 700; font-size: clamp(2rem,3.1vw,44px); max-width: 300px; }
+.about-body > p,.welcome-list { font-size: 15px; line-height: 1.75; }
+.welcome-block .eyebrow { color: var(--accent); }
+.welcome-list { list-style: none; padding: 0; }
+.welcome-list li { position: relative; padding-left: 1.5rem; }
+.welcome-list li::before { content: '→'; color: var(--accent); position: absolute; left: 0; }
+/* Past events summary (full list lives on past-events/) */
+#past-events { background: var(--surface); border: 0; }
+#past-events .section-heading { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: baseline; }
+#past-events .section-heading h2 { font-size: clamp(2rem,3vw,40px); font-weight: 700; letter-spacing: -.03em; }
+#past-events .section-heading div > p { display: none; }
+.location-chip { min-width: 0; background: var(--paper); padding: .625rem 1rem; }
+.location-chip strong { font-size: 14px; font-weight: 600; }
+.location-chip span { font-size: 9px; }
+/* Mailing list strip (lime) */
+.mailing-section { background: var(--lime); display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding-inline: max(var(--page-pad), calc((100% - var(--page-width)) / 2 + var(--page-pad))); }
+.mailing-section .section-heading { display: block; margin: 0; padding: 0; border: 0; }
+.mailing-section h2 { color: #8f260f; font-size: clamp(1.75rem,3vw,36px); font-weight: 600; }
+.mailing-section .section-heading div > p { display: none; }
+.mailing-body { margin: 0; align-self: center; color: var(--ink); font-size: 15px; }
+/* Code of conduct summary (full text lives on code-of-conduct/) */
+#code-of-conduct { background: var(--surface); border: 0; }
+#code-of-conduct > .page-width { display: grid; grid-template-columns: minmax(190px,.5fr) minmax(0,1fr); gap: 5rem; }
+#code-of-conduct .section-heading { display: block; border: 0; padding: 0; margin: 0; }
+#code-of-conduct .section-heading div > p { display: none; }
+#code-of-conduct h2 { font-size: clamp(2rem,3vw,36px); line-height: 1; max-width: 220px; margin-top: .75rem; font-weight: 300; }
+.coc-body { position: relative; }
+.coc-body p { color: var(--accent); font-weight: 400; }
+.community-shape { position: absolute; left: -4.5rem; top: 1rem; width: 70px; height: 70px; object-fit: contain; }
+
+/* --- 5. Event page (register/) ------------------------------------------- */
+/* Follows Figma frame 251:732. Speakers, sessions, and registration are not
+   confirmed, so those areas keep honest "to be announced" copy in her layouts.
+   Replace that copy when details are confirmed — see docs/UPDATING.md. */
+.event-page { background: var(--surface); }
+.event-page .section { padding-block: clamp(3.5rem,6.1vw,88px); }
+/* Hero. The long rule in the title is Francisca's blank date, typed as underscores. */
+.hero { padding-block: clamp(3.5rem,6.1vw,88px) clamp(3rem,5.6vw,80px); }
+.hero > .eyebrow { color: #b12b14; letter-spacing: .08em; }  /* darker than Figma's orange for legibility on paper */
+.hero h1 { margin: 1.5rem 0; font-size: clamp(2.6rem,5vw,72px); font-weight: 300; text-transform: uppercase; max-width: 8.7em; letter-spacing: 0; line-height: 1.08; }
+.hero-summary { margin-bottom: 1.5rem; color: #787873; font-size: 18px; font-weight: 300; }
+/* Facts strip (orange). NOTE: white on orange is ~3.3:1 — below WCAG AA. As designed; flagged with Francisca. */
+.event-facts { background: var(--orange); border: 0; }
+.facts-grid > div,.facts-grid > div:first-child { border: 0; padding-inline: 0; }
+.event-facts span { color: #161614; font-size: 11px; letter-spacing: .06em; }
+.facts-grid strong { color: #fff; font-size: 20px; font-weight: 500; }
+/* Numbered section headings: "01" beside the title. */
+.event-page .section-heading { grid-template-columns: auto minmax(0,1fr); column-gap: clamp(1rem,3.2vw,46px); margin-bottom: clamp(2rem,3.9vw,56px); padding-bottom: 0; border: 0; }
+.event-page .section-heading > p { padding-top: .9rem; color: #787873; font-size: 13px; white-space: nowrap; }
+.event-page .section-heading div > p { margin-top: .6rem; color: #787873; font-size: 16px; }
+.event-page .section-heading h2 { font-weight: 700; font-size: clamp(1.75rem,4.5vw,36px); letter-spacing: 0; }
+/* Keynotes: lime shape, then one card per speaker. */
+.keynote-layout { display: grid; grid-template-columns: minmax(120px,210px) repeat(2,minmax(0,1fr)); gap: clamp(1.5rem,2.6vw,37px); align-items: start; }
+.keynote-layout > img { width: 100%; height: 200px; object-fit: contain; transform: rotate(-110.06deg); }
+.keynote-layout .keynote-card { display: block; padding: 0; background: none; border: 0; }  /* resets the older card styling in styles.css */
+.keynote-card .eyebrow { font-size: 11px; }
+.keynote-card h3 { margin: .6rem 0; font-size: 24px; font-weight: 700; line-height: 1.2; }
+.keynote-card p { max-width: 500px; margin: 0; color: #787873; font-size: 15px; }
+/* Sessions: one .session-row per session (time / presenter / details). */
+.session-row { display: grid; grid-template-columns: 125px 220px minmax(0,500px); gap: 28px; padding-block: 28px; border-top: 1px solid #dadad7; }
+.session-row .session-time { margin: 0; color: var(--accent); font-size: 12px; letter-spacing: 0; text-transform: none; }
+.session-presenter .eyebrow { font-size: 10px; }
+.session-presenter strong { display: block; margin-top: 6px; font-size: 15px; font-weight: 500; }
+.session-row .tag-row { margin-bottom: 10px; }
+.session-row .tag-row span { padding: 5px 10px; color: var(--accent); background: #dadad7; border: 0; border-radius: 3px; font-size: 12px; letter-spacing: 0; text-transform: none; }
+.session-row h3 { margin: 0 0 10px; font-size: 18px; font-weight: 700; }
+.session-row p { margin: 0; color: #787873; font-size: 14px; }
+/* Registration band (lime). These rules follow the section-heading ones above on purpose. */
+.registration-band { background: var(--lime); }
+.registration-band .section-heading > p { color: var(--muted); }
+.registration-band .section-heading h2 { color: var(--accent); }
+.registration-band .section-heading div > p { color: var(--accent); font-weight: 500; }
+/* Dashed box standing in for the Eventbrite widget until there is an event id. */
+.embed-notice { display: grid; justify-items: center; gap: 12px; padding: clamp(1.5rem,4vw,2.5rem); text-align: center; background: rgba(45,91,255,.15); border: 1px dashed #dadad7; }
+.embed-notice .eyebrow { color: #3f3f3b; font-size: 11px; }
+.embed-notice h3 { margin: 0; font-size: 22px; font-weight: 700; }
+.embed-notice p { max-width: 460px; margin: 0; color: var(--ink); font-size: 14px; }
+/* Blue half-circle sitting on the history band, exported from Figma. */
+.history-shape { display: flex; justify-content: center; background: var(--surface); }
+.history-shape img { display: block; width: 185px; height: auto; }
+.event-page .history-note { display: flex; align-items: center; min-height: 80px; padding-block: 1rem; background: #1a1a18; }
+.event-page .history-note-inner p { color: #e5e5e0; font-weight: 300; }
+.event-page .history-note-inner strong { color: #e5e5e0; font-size: 18px; font-weight: 700; text-transform: uppercase; }
+.event-page .history-note-inner .caps { text-transform: uppercase; }
+.event-page .history-note-inner b { font-weight: 400; }
+.event-page .site-footer strong.logo { font-size: 16px; }
+
+/* --- 6. Inner pages ------------------------------------------------------ */
+/* events/, past-events/, mailing-list/, code-of-conduct/ — all <body class="inner-page …">. */
+.inner-page { background: var(--surface); }
+.hero.page-hero { padding-block: clamp(3.5rem,7vw,6rem) clamp(2.5rem,5vw,4rem); }
+.hero.page-hero h1 { margin: 1rem 0 1.5rem; font-size: clamp(2.75rem,7vw,88px); font-weight: 700; line-height: 1; letter-spacing: -.03em; text-transform: none; max-width: 900px; }
+.page-hero .hero-summary { max-width: 640px; color: var(--muted); }
+.inner-page .section-heading h2 { font-weight: 700; font-size: clamp(1.75rem,4.5vw,36px); letter-spacing: -.02em; }
+/* events/: one card per upcoming event; add .event-card-orange to feature one. */
+.event-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; }
+.event-card { display: grid; grid-template-columns: minmax(0,1fr) minmax(220px,300px); gap: clamp(1.5rem,4vw,3rem); padding: clamp(1.5rem,4vw,2.5rem); background: var(--paper); border: 1px solid var(--line); }
+.event-card h3 { margin: .75rem 0; font-size: clamp(1.6rem,3vw,36px); font-weight: 600; line-height: 1.1; }
+.event-card p { max-width: 620px; color: var(--muted); }
+.event-card .button { margin-top: .5rem; }
+.event-card dl { margin: 0; display: grid; gap: 1rem; align-content: start; }
+.event-card dt { font-family: 'Overpass Mono', monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.event-card dd { margin: .2rem 0 0; font-size: 17px; font-weight: 500; }
+.event-card-orange { background: var(--orange); border-color: var(--orange); }
+.event-card-orange p,.event-card-orange .eyebrow,.event-card-orange dt { color: var(--ink); }
+/* past-events/: one row per event, newest first. */
+.past-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.past-row { display: grid; grid-template-columns: 9rem 12rem minmax(0,1fr); gap: .25rem 2rem; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+.past-row time { font-family: 'Overpass Mono', monospace; font-size: 13px; }
+.past-place { font-weight: 600; }
+.past-row a,.past-title { font-size: 17px; }
+.past-row a { color: var(--accent); }
+/* mailing-list/: lime panel. No form — this is a static site, so people email to join. */
+.signup-panel { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(2rem,6vw,5rem); padding: clamp(2rem,5vw,4rem); background: var(--lime); }
+.signup-panel h2 { margin: .75rem 0 1rem; color: #8f260f; font-size: clamp(1.6rem,3vw,36px); font-weight: 600; line-height: 1.1; }
+.signup-panel p { color: var(--ink); }
+.signup-list { margin: .75rem 0 0; padding-left: 1.25rem; display: grid; gap: .75rem; font-size: 15px; line-height: 1.6; }
+.signup-note { max-width: 640px; margin-top: 1.5rem; color: var(--muted); font-size: 14px; }
+/* code-of-conduct/: sticky contents list beside long-form text. */
+.coc-layout { display: grid; grid-template-columns: minmax(180px,240px) minmax(0,1fr); gap: clamp(2rem,6vw,6rem); align-items: start; }
+.coc-toc { position: sticky; top: 1.5rem; }
+.coc-toc ol { list-style: none; margin: .75rem 0 0; padding: 0; display: grid; gap: .6rem; font-size: 14px; }
+.prose { max-width: 780px; font-size: 16px; line-height: 1.75; }
+.prose h2 { margin: 3.5rem 0 1rem; color: var(--accent); font-size: clamp(1.5rem,2.6vw,30px); font-weight: 600; line-height: 1.15; scroll-margin-top: 1.5rem; }
+.prose h2:first-child { margin-top: 0; }
+.prose h3 { margin: 0 0 .75rem; font-size: 18px; font-weight: 600; }
+.prose ul,.prose ol { padding-left: 1.25rem; }
+.prose li + li { margin-top: .5rem; }
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.contact-card { margin: 1.5rem 0; padding: 1.5rem; background: var(--paper); border: 1px solid var(--line); }
+.contact-card p { margin: .35rem 0; }
+
+/* --- 7. Interactive overrides (Shristi's monogram) ----------------------- */
+/* Host-side only: her artwork stays in animations.css / animations.js / change-sketch.js.
+   Keep changes here so her pull request merges cleanly. */
+.anim-stage { display: block; width: 100%; height: clamp(560px,80vh,850px); min-height: 560px; border: 0; --mono-w: min(1000px,75vmin,84vw); }
+.anim-stage::before { content: none; }  /* removes the old wireframe placeholder box */
+.anim-stage-main { outline: 0; }
+.monogram-wrap { width: var(--mono-w); }
+.modes-list { inset: 1.5rem var(--page-pad) auto; justify-content: center; align-items: center; }
+.modes-list > .mode-btn { font-family: Anybody, sans-serif; font-size: 12px; padding: .6rem .8rem; color: var(--ink); border: 1px solid var(--line); border-radius: 0; }
+.modes-list > .mode-btn.is-active { background: var(--accent); color: white; border-color: var(--accent); }
+.modes-list > .mode-btn:focus-visible { outline: 3px solid var(--ink); }
+.cc-text { font-family: Anybody, sans-serif; font-size: clamp(.8rem,2vmin,1.25rem); font-weight: 500; }
+.cc-text-right { color: var(--ink); }
+.motion-toggle { position: absolute; bottom: 1.25rem; right: var(--page-pad); border: 1px solid var(--line); padding: .5rem .8rem; font-size: 12px; background: var(--paper); color: var(--ink); z-index: 11; cursor: pointer; }
+/* Without JavaScript the controls are hidden and motion is frozen. */
+html:not(.js) .modes-list,html:not(.js) .motion-toggle { display: none; }
+.anim-stage.is-paused *,html:not(.js) .anim-stage * { animation-play-state: paused !important; transition: none !important; }
+.anim-stage.is-paused[data-mode="change"] .cc-path { opacity: 1; }
+.anim-stage.is-paused .fx-change { display: none; }
+/* Keep the static monogram visible if p5.js cannot load. */
+.anim-stage:not(.canvas-ready)[data-mode="change"] .cc-path { opacity: 1; }
+
+/* --- 8. Figma lettering hooks -------------------------------------------- */
+/* The <span data-figma-run> elements are generated by scripts/sync-typography.cjs
+   from design/figma-typography.json. Don't hand-edit them; see docs/TYPOGRAPHY.md. */
+[data-figma-node] { font-synthesis: none; }  /* never fake a weight the font doesn't have */
+[data-figma-run] { font-kerning: normal; }
+.logo[data-figma-node="251:734"] { font-size: 16px; }  /* event page header logo is larger in Figma */
+
+/* --- 9. Responsive ------------------------------------------------------- */
+@media (max-width: 900px) {
+ /* Homepage */
+ .home-about { grid-template-columns: 1fr; }
+ .upcoming-facts { max-width: 100%; }
+ #code-of-conduct > .page-width { grid-template-columns: 1fr; gap: 2rem; }
+ .community-shape { position: static; float: right; margin: 0 0 1rem 1rem; }
+ .mailing-section { grid-template-columns: 1fr; gap: 1.5rem; }
+ .site-footer { grid-template-columns: 1fr; }
+ .hero-shape { width: 65px; height: auto; bottom: -76px; }
+ /* Event page */
+ .keynote-layout { grid-template-columns: 1fr 1fr; }
+ .keynote-layout > img { grid-column: 1 / -1; width: 140px; height: 140px; }
+ .session-row { grid-template-columns: 125px minmax(0,1fr); }
+ .session-row .session-time { grid-column: auto; }  /* cancels a wider rule in styles.css */
+ .session-row .session-details { grid-column: 1 / -1; }
+ /* Inner pages */
+ .event-card,.signup-panel,.coc-layout,.do-dont { grid-template-columns: 1fr; }
+ .coc-toc { position: static; }
+}
+@media (max-width: 650px) {
+ /* Homepage */
+ .site-header nav { gap: .35rem 1rem; font-size: 11px; justify-content: flex-start; }
+ .home-hero-title { font-size: 24vw; }
+ .home-hero-sub { max-width: 280px; }
+ #past-events .section-heading { flex-direction: column; gap: .5rem; }
+ /* Event page */
+ .keynote-layout { grid-template-columns: 1fr; }
+ .keynote-layout > img { width: 110px; height: 110px; }
+ .session-row { display: flex; flex-direction: column; gap: .75rem; }  /* flex avoids stray grid columns */
+ .event-page .section-heading { column-gap: 1rem; }
+ .history-shape img { width: 120px; }
+ .facts-grid { gap: 1rem; }
+ .facts-grid strong { font-size: 17px; }
+ /* Inner pages */
+ .past-row { grid-template-columns: 1fr; }
+ /* Interactive */
+ .anim-stage { min-height: 540px; height: 540px; }
+ .modes-list { gap: .35rem; }
+ .modes-list > .mode-btn { font-size: 11px; padding: .5rem; }
+ .cc-text { top: auto; bottom: 4.5rem; left: auto; transform: none; font-size: 14px; }
+ .cc-text-left { left: var(--page-pad); }
+ .cc-text-right { right: var(--page-pad); }
+}
+
+/* --- 10. Reduced motion -------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+ .anim-stage *, .anim-stage *::before, .anim-stage *::after { animation: none !important; transition: none !important; }
+ .anim-stage-main[data-mode="creative-commons"] { clip-path: none; }
+}

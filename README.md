@@ -3,11 +3,20 @@
 Static site for CC Fest — a free and friendly gathering for creative coding.
 Live at **saberkhan372.github.io/ccfest-redesign/**
 
-No build step. Open any `.html` file in a browser, or run a local server:
+No build step. For a local preview, run a server from this directory:
 
 ```
-npx serve .
+python3 -m http.server 8876 --bind 127.0.0.1
 ```
+
+## Docs
+
+| Doc | For |
+|---|---|
+| [docs/UPDATING.md](docs/UPDATING.md) | **Start here for updates:** Francisca's Figma work, Shristi's pull request, confirmed event details |
+| [docs/TEMPLATE.md](docs/TEMPLATE.md) | How the site is built; recipes for new pages and sections |
+| [docs/TYPOGRAPHY.md](docs/TYPOGRAPHY.md) | Figma lettering to CSS, and how to verify it |
+| [AGENTS.md](AGENTS.md) | Rules and checklists for AI coding agents |
 
 ---
 
@@ -17,6 +26,10 @@ npx serve .
 |---|---|
 | `/` | `index.html` — homepage |
 | `/register/` | `register/index.html` — event details and registration |
+| `/events/` | `events/index.html` — upcoming events (Virtual CC Fest, Visible Java) |
+| `/past-events/` | `past-events/index.html` — archive with agenda links |
+| `/mailing-list/` | `mailing-list/index.html` — how to join |
+| `/code-of-conduct/` | `code-of-conduct/index.html` — full code of conduct |
 
 ---
 
@@ -29,10 +42,13 @@ npx serve .
 | `styles.css` | Saber | All layout, typography, and base styles |
 | `animations.css` | **Shristi** | All motion — keyframes, transitions, scroll-reveal states |
 | `animations.js` | **Shristi** | IntersectionObserver that triggers scroll animations |
-| `assets/` | Saber | Favicon and any image assets |
+| `redesign.css` | Saber + Francisca | Integrated visual design, variable type, responsive adaptations |
+| `interaction.js` | Saber | Motion pause and reduced-motion integration |
+| `change-sketch.js` | Shristi + Saber | Polygon interactive and canvas lifecycle |
+| `assets/` | Saber | Local fonts/licenses, original design SVGs, p5, and images |
 | Figma: CC Fest — Redesign | **Francesca** | Visual design, spacing, colour, and component specs |
 
-**Rule:** each person edits only their files. Cross-file changes need a conversation first.
+**Coordination:** discuss cross-file changes with the owner. This provisional integration follows Saber’s request to combine the designs; preserve the supplied designer folders for comparison with Shristi’s forthcoming PR.
 
 ---
 
@@ -60,3 +76,8 @@ HTML elements carry `.anim-*` hook classes. Shristi's `animations.css` targets t
 ## Deployment
 
 Push to `main` — GitHub Pages deploys automatically from the root of the `main` branch.
+
+
+## September 15 integration draft
+
+Open [homepage](http://127.0.0.1:8876/) or [event page](http://127.0.0.1:8876/register/) after starting the server. See [DESIGN-INTEGRATION.md](DESIGN-INTEGRATION.md) for source references, typography findings, review points, and browser checks. [CURRENT.md](CURRENT.md) records remaining launch work. No event date, speaker roster, schedule, or Eventbrite ID is confirmed in this draft. Nothing has been deployed.

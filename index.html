@@ -7,7 +7,7 @@
       name="description"
       content="CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community."
     >
-    <meta name="theme-color" content="#f4f4f1">
+    <meta name="theme-color" content="#edede9">
     <title>CC Fest — Creative Coding Festival</title>
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="styles.css">
@@ -16,17 +16,18 @@
          can gate hidden states behind this class. Content stays visible
          for users with JS disabled. -->
     <script>document.documentElement.classList.add('js')</script>
+    <link rel="stylesheet" href="redesign.css">
   </head>
-  <body>
+  <body class="home-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header anim-nav">
-      <a class="logo" href="./" aria-label="CC Fest home">CC Fest</a>
+      <a class="logo" href="./" aria-label="CC Fest home" data-figma-node="218:106"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 500; font-weight: 500; font-style: normal; letter-spacing: 0.05em; text-transform: none">CC</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 71, 'wght' 500; font-weight: 500; font-style: normal; letter-spacing: 0.05em; text-transform: none"> FEST</span></a>
       <nav aria-label="Main navigation">
-        <a href="register/">Events</a>
-        <a href="#mailing-list">Mailing List</a>
-        <a href="#past-events">Past Events</a>
-        <a href="#code-of-conduct">Code of Conduct</a>
+        <a href="events/">Events</a>
+        <a href="mailing-list/">Mailing List</a>
+        <a href="past-events/">Past Events</a>
+        <a href="code-of-conduct/">Code of Conduct</a>
       </nav>
     </header>
 
@@ -34,7 +35,8 @@
 
       <!-- ── Hero ── -->
       <section class="home-hero page-width" aria-label="CC Fest">
-        <h1 class="home-hero-title anim-hero-title">CC FEST</h1>
+        <h1 class="home-hero-title anim-hero-title" data-figma-node="218:113"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 71, 'wght' 400; font-weight: 400; font-style: italic; letter-spacing: -0.03em; text-transform: none">CC </span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 71, 'wght' 400; font-weight: 400; font-style: italic; letter-spacing: 0em; text-transform: none">FEST</span></h1>
+        <img class="hero-shape" src="assets/design/hero-shape.svg" alt="" aria-hidden="true">
         <hr class="hero-rule anim-hero-rule">
         <p class="home-hero-sub anim-hero-sub">
           A free and friendly gathering for creative coding —
@@ -42,13 +44,200 @@
         </p>
       </section>
 
-      <!-- ── Animation placeholder (Shristi) ── -->
-      <section class="anim-stage" aria-label="Animation">
-        <div class="anim-stage-inner">
-          <p class="eyebrow anim-stage-label">Animation</p>
-          <p class="anim-stage-hint">Shristi — your canvas lives here</p>
-          <p class="anim-stage-note">Replace this section with your work.<br>Hook into <code>.anim-stage</code> in animations.css.</p>
+      <!-- Shristi’s supplied interactive, provisional until her PR. -->
+      <section class="anim-stage" aria-label="Ten years of creative coding" data-mode="creativity">
+        <div
+          class="modes-list"
+          role="group"
+          aria-label="CC Fest monogram modes"
+        >
+          <button class="mode-btn" data-mode="creativity">Creativity</button>
+          <button class="mode-btn" data-mode="change">Change</button>
+          <button class="mode-btn" data-mode="connection">Connection</button>
+          <button class="mode-btn" data-mode="celebration">Celebration</button>
+          <button class="mode-btn" data-mode="collaboration">
+            Collaboration
+          </button>
+          <button class="mode-btn" data-mode="creative-commons">
+            Creative Commons
+          </button>
+          <button class="mode-btn" data-mode="conversations">
+            Conversations
+          </button>
+          <button class="mode-btn" data-mode="community">Community</button>
+          <button class="mode-btn" data-mode="curiosity">Curiosity</button>
+          <button class="mode-btn" data-mode="coding">Coding</button>
         </div>
+
+        <div class="anim-stage-main">
+          <div class="monogram-wrap" id="monogramWrap" data-mode="creativity">
+            <div class="fx-layer fx-scanlines" aria-hidden="true"></div>
+            <div
+              class="fx-layer fx-confetti"
+              id="confettiLayer"
+              aria-hidden="true"
+            ></div>
+
+            <svg
+              class="cc-mono" aria-hidden="true"
+              viewBox="-98.2 -49.01 1072.4 618.16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <pattern
+                  id="dotPattern"
+                  width="18"
+                  height="18"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <circle cx="4" cy="4" r="3.4" fill="#F44C2D" />
+                </pattern>
+                <linearGradient
+                  id="creativityGradient"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                >
+                  <stop offset="0%" stop-color="#F44C2D" />
+                  <stop offset="45%" stop-color="#FFB020" />
+                  <stop offset="75%" stop-color="#F92C8B" />
+                  <stop offset="100%" stop-color="#7B3FF2" />
+                </linearGradient>
+                <symbol id="ccCopyright" viewBox="0 0 471 471">
+                  <path
+                    d="M225.947 0.183537C355.791 -4.90228 465.143 96.3315 470.118 226.226C475.09 356.121 373.799 465.429 243.947 470.292C114.251 475.15 5.1437 373.973 0.175587 244.234C-4.7921 114.495 96.2579 5.26327 225.947 0.183537ZM240.132 422.967C343.716 420.207 425.472 334.018 422.802 230.397C420.132 126.777 334.04 44.9155 230.456 47.5001C126.746 50.0876 44.7958 136.334 47.4697 240.078C50.1436 343.822 136.428 425.731 240.132 422.967Z"
+                  />
+                  <path
+                    d="M233.686 94.3178C240.971 93.631 253.508 94.158 260.891 95.1874C299.061 100.511 330.996 120.435 354.078 151.118C351.361 153.63 345.479 157.813 342.376 160.126C334.997 165.568 327.661 171.073 320.371 176.641C319.439 175.271 318.489 173.913 317.523 172.567C303.477 153.098 280.959 138.403 257.132 134.627C232.503 130.488 207.248 136.476 187.096 151.233C179.948 156.425 174.413 161.786 168.674 168.673C111.534 237.249 164.072 348.545 255.924 336.051C272.284 333.826 284.812 327.358 298.188 317.606C308.94 309.086 312.335 304.595 320.57 293.867C329.246 301.293 344.445 311.859 354.053 318.992C351.417 323.278 347.772 327.429 344.394 331.138C292.127 388.512 204.183 392.028 147.031 339.196C89.5581 286.069 86.515 195.473 139.903 138.326C163.761 112.788 198.519 95.4778 233.686 94.3178Z"
+                  />
+                </symbol>
+              </defs>
+
+              <g
+                transform="translate(-55.177 0) translate(220.155 260.070) scale(1.15) translate(-220.155 -260.070)"
+              >
+                <g class="cc-unit cc-unit-left">
+                  <line
+                    class="cc-string cc-string-left"
+                    x1="220.155"
+                    y1="-600px"
+                    x2="220.155"
+                    y2="10"
+                    vector-effect="non-scaling-stroke"
+                  />
+                  <path
+                    class="cc-path cc-path-left"
+                    d="M79.7563 447.5C79.4119 447.18 79.0674 446.855 78.7274 446.53C29.9808 399.276 1.74451 334.769 0.10407 266.907C-1.88025 197.043 24.5512 129.368 73.356 79.3511C120.993 29.8952 186.318 1.37443 254.978 0.0506321C323.997 -1.30978 390.712 24.9392 440.31 72.9638L363.127 151.042C350.043 164.459 336.858 177.771 323.573 190.987C320.781 188.831 317.848 186.343 315.037 184.113C278.447 159.156 233.598 159.95 199.161 188.809C180.7 204.283 169.2 226.651 166.75 250.558C161.453 302.238 198.838 348.297 250.891 353.402C271.85 355.546 292.916 350.528 310.654 339.167C314.989 336.395 319.347 332.797 323.321 329.539L439.639 448.003C394.129 491.978 333.971 517.581 270.721 519.892C210.655 522.516 151.544 504.146 103.538 467.936C96.2298 462.444 86.5221 453.759 79.7563 447.5Z"
+                  />
+                </g>
+              </g>
+              <g
+                transform="translate(55.177 0) translate(655.842 260.070) scale(1.15) translate(-655.842 -260.070)"
+              >
+                <g class="cc-unit cc-unit-right">
+                  <line
+                    class="cc-string cc-string-right"
+                    x1="655.842"
+                    y1="-600px"
+                    x2="655.842"
+                    y2="10px"
+                    vector-effect="non-scaling-stroke"
+                  />
+                  <path
+                    class="cc-path cc-path-right"
+                    d="M515.443 447.5C515.098 447.18 514.754 446.855 514.414 446.53C465.667 399.276 437.431 334.769 435.791 266.907C433.806 197.043 460.238 129.368 509.042 79.3511C556.68 29.8952 622.005 1.37443 690.664 0.0506321C759.683 -1.30978 826.398 24.9392 875.997 72.9638L798.814 151.042C785.729 164.459 772.544 177.771 759.259 190.987C756.468 188.831 753.535 186.343 750.723 184.113C714.133 159.156 669.285 159.95 634.847 188.809C616.387 204.283 604.886 226.651 602.437 250.558C597.139 302.238 634.525 348.297 686.578 353.402C707.537 355.546 728.602 350.528 746.341 339.167C750.676 336.395 755.033 332.797 759.008 329.539L875.325 448.003C829.816 491.978 769.657 517.581 706.408 519.892C646.342 522.516 587.231 504.146 539.225 467.936C531.916 462.444 522.209 453.759 515.443 447.5Z"
+                  />
+                </g>
+              </g>
+              <!-- Conversations Pacmen -->
+              <path
+                class="cc-pacman cc-pacman-left"
+                d="M 422.361 48.589 A 299.079 299.079 0 1 0 422.361 471.551 L 210.88 260.07 Z"
+              />
+              <path
+                class="cc-pacman cc-pacman-right"
+                d="M 968.402 48.589 A 299.079 299.079 0 1 0 968.402 471.551 L 756.921 260.07 Z"
+              />
+            </svg>
+            <!-- Curiosity Question Marks -->
+            <div
+              class="curiosity-dot curiosity-dot-left"
+              aria-hidden="true"
+            ></div>
+            <div
+              class="curiosity-dot curiosity-dot-right"
+              aria-hidden="true"
+            ></div>
+            <!-- Creative Commons -->
+            <svg
+              class="cc-copyright cc-copyright-left"
+              viewBox="0 0 471 471"
+              aria-hidden="true"
+            >
+              <use href="#ccCopyright" />
+            </svg>
+            <svg
+              class="cc-copyright cc-copyright-right"
+              viewBox="0 0 471 471"
+              aria-hidden="true"
+            >
+              <use href="#ccCopyright" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- change-sketch.js mounts its p5 canvas here. A sibling of
+             .anim-stage-main (not nested in #monogramWrap) -->
+        <div
+          class="fx-layer fx-change"
+          id="changeCanvas"
+          aria-hidden="true"
+        ></div>
+
+        <!-- Connection-->
+        <svg
+          class="fx-layer fx-connection-canvas"
+          id="connectionCanvas"
+          viewBox="-30 -10 1780 960"
+          aria-hidden="true"
+        >
+          <path
+            class="cc-connection-piece cc-connection-piece-1"
+            d="M1135.8816 172.027 C1152.1216 170.6373 1171.9176 171.4875 1172.0056 192.7085 C1172.0744 209.2283 1145.8704 211.6723 1134.5296 212.514 C1077.0832 216.7824 1027.3984 235.2 983.6976 273.772 C938.6576 312.7336 908.4312 366.048 898.1208 424.716 C895.048 441.9632 894.1544 457.9568 893.0672 475.4512 C891.5856 477.7144 889.0744 480.4904 887.2584 482.624 C870.488 492.228 854.6752 485.3296 854.596 465.0872 C854.0776 333.3016 946.1592 215.7549 1072.5272 181.0347 C1091.972 175.6921 1115.6712 173.6674 1135.8816 172.027 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-2"
+            d="M856.0768 494.312 C854.6872 478.072 855.5376 458.276 876.7584 458.188 C893.2784 458.1192 895.7224 484.3232 896.564 495.664 C900.832 553.1104 919.2504 602.7952 957.8224 646.4968 C996.784 691.5368 1050.0976 721.7624 1108.7664 732.0728 C1126.0136 735.1456 1142.0072 736.0392 1159.5008 737.1264 C1161.7648 738.608 1164.5408 741.1192 1166.6736 742.9352 C1176.2784 759.7056 1169.38 775.5184 1149.1368 775.5976 C1017.352 776.116 899.8048 684.0344 865.0848 557.6664 C859.7424 538.2224 857.7176 514.5224 856.0768 494.312 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-3"
+            d="M867.228 432.732 C883.6632 430.0728 900.2512 436.5016 910.608 449.5416 C920.9648 462.5824 923.48 480.2024 917.1728 495.6184 C910.8752 511.0352 896.7448 521.8456 880.2144 523.888 C855.3216 526.9648 832.5472 509.532 829.0072 484.688 C825.4664 459.8432 842.464 436.7376 867.228 432.732 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-4"
+            d="M776.0376 615.1088 C792.4728 612.4496 809.0608 618.8776 819.4176 631.9184 C829.7744 644.9592 832.2896 662.5792 825.9824 677.9952 C819.684 693.412 805.5544 704.2224 789.024 706.2648 C764.1312 709.3416 741.3568 691.9088 737.816 667.0648 C734.276 642.22 751.2736 619.1144 776.0376 615.1088 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-5"
+            d="M776.0376 237.3245 C792.4728 234.665 809.0608 241.0934 819.4176 254.1344 C829.7744 267.1744 832.2896 284.7944 825.9824 300.2104 C819.684 315.6272 805.5544 326.4376 789.024 328.4808 C764.1312 331.5576 741.3568 314.124 737.816 289.28 C734.276 264.4352 751.2736 241.3298 776.0376 237.3245 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-6"
+            d="M585.3114 458.1952 C616.0854 457.9912 607.8515 480.9176 611.2262 503.8704 C622.3872 579.7872 692.5696 639.2024 768.8648 640.8016 C779.2168 641.0192 789.2104 645.6728 792.1896 656.3352 C793.576 661.2232 792.8648 666.4672 790.2296 670.8112 C786.7464 676.5608 781.9296 679.0968 775.6952 680.7224 C765.388 681.2864 756.3336 680.4968 746.1472 679.2176 C649.192 667.0376 574.9766 585.4512 568.2338 488.3616 C567.2419 474.0824 568.7826 461.4392 585.3114 458.1952 Z"
+          />
+          <path
+            class="cc-connection-piece cc-connection-piece-7"
+            d="M585.3114 498.5192 C616.0854 498.7232 607.8515 475.7968 611.2262 452.844 C622.3872 376.9264 692.5696 317.512 768.8648 315.9128 C779.2168 315.6952 789.2104 311.0416 792.1896 300.3792 C793.576 295.4912 792.8648 290.2464 790.2296 285.9032 C786.7464 280.1536 781.9296 277.6168 775.6952 275.992 C765.388 275.4272 756.3336 276.2176 746.1472 277.4968 C649.192 289.6768 574.9766 371.2624 568.2338 468.352 C567.2419 482.632 568.7826 495.2752 585.3114 498.5192 Z"
+          />
+        </svg>
+
+        <div class="cc-text cc-text-left" id="labelLeft">10 years of</div>
+        <div class="cc-text cc-text-right" id="labelRight" aria-live="polite">
+          Creativity
+        </div>
+        <button class="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
       </section>
 
       <!-- ── Upcoming event band ── -->
@@ -56,12 +245,12 @@
         <div class="page-width upcoming-inner">
           <div class="upcoming-copy anim-scroll anim-upcoming-copy">
             <p class="eyebrow upcoming-eyebrow">Upcoming · Virtual · Free</p>
-            <h2 id="upcoming-title">Virtual CC Fest 2026</h2>
+            <h2 id="upcoming-title" aria-label="Virtual CC Fest 2026" data-figma-node="218:127"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l </span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> F</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wght' 200, 'wdth' 100; font-weight: 200; font-style: italic; letter-spacing: 0em; text-transform: uppercase">2026</span></h2>
             <p>
               Workshops, talks, and community for creative coders of all levels.
-              Date to be announced — register your interest now.
+              Date to be announced — join the mailing list for updates.
             </p>
-            <a class="button button-light" href="register/">View event &amp; register →</a>
+            <a class="button button-light" href="register/">Explore the event →</a>
           </div>
           <div class="upcoming-facts anim-scroll anim-upcoming-meta">
             <div><span>Format</span><strong>Virtual</strong></div>
@@ -76,7 +265,7 @@
       <section class="section page-width home-about" id="about" aria-labelledby="about-title">
         <div class="about-lead anim-scroll">
           <p class="eyebrow">About CC Fest</p>
-          <h2 id="about-title">Creative coding<br>for everyone.</h2>
+          <h2 id="about-title" data-figma-node="218:150"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">Creative coding<br>for everyone.</span></h2>
         </div>
         <div class="about-body anim-scroll">
           <p>
@@ -101,9 +290,9 @@
       <section class="section section-tinted" id="past-events" aria-labelledby="past-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>History</p>
+            <p>10 years · 2016–2025</p>
             <div>
-              <h2 id="past-title">Past Events</h2>
+              <h2 id="past-title" data-figma-node="218:170"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">P</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">a</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">st Eve</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 78, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">s</span></h2>
               <p>CC Fest has been gathering creative coders since 2016.</p>
             </div>
           </div>
@@ -118,6 +307,7 @@
               Want to organize a CC Fest in your city?
               <a href="mailto:mrkhanatndv@gmail.com">Email Saber Khan.</a>
             </p>
+            <p><a href="past-events/">See all past events and agendas →</a></p>
           </div>
           <div class="location-chips" aria-label="Past CC Fest locations">
             <div class="location-chip anim-chip"><strong>NYC</strong><span>Oct 2016 · NYU ITP</span></div>
@@ -135,11 +325,11 @@
       </section>
 
       <!-- ── Mailing list ── -->
-      <section class="section page-width" id="mailing-list" aria-labelledby="mailing-title">
+      <section class="section mailing-section" id="mailing-list" aria-labelledby="mailing-title">
         <div class="section-heading">
           <p>Stay in touch</p>
           <div>
-            <h2 id="mailing-title">Mailing List</h2>
+            <h2 id="mailing-title" data-figma-node="218:209"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.025em; text-transform: none">Join the mailing list.</span></h2>
             <p>Get notified about upcoming events and CC Fest news.</p>
           </div>
         </div>
@@ -156,11 +346,12 @@
           <div class="section-heading">
             <p>Community</p>
             <div>
-              <h2 id="coc-title">Code of Conduct</h2>
+              <h2 id="coc-title" data-figma-node="218:215"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 336; font-weight: 336; font-style: normal; letter-spacing: -0.025em; text-transform: none">Code of<br>Conduct</span></h2>
               <p>CC Fest is dedicated to a harassment-free experience for everyone.</p>
             </div>
           </div>
           <div class="coc-body">
+            <img class="community-shape" src="assets/design/community-shape.svg" alt="" aria-hidden="true">
             <p>
               We do not tolerate harassment of participants in any form. This
               code of conduct applies to all CC Fest spaces — online and
@@ -173,6 +364,7 @@
               other concerns, please contact an organizer at
               <a href="mailto:mrkhanatndv@gmail.com">mrkhanatndv@gmail.com</a>.
             </p>
+            <p><a href="code-of-conduct/">Read the full code of conduct →</a></p>
           </div>
         </div>
       </section>
@@ -180,11 +372,15 @@
     </main>
 
     <footer class="site-footer page-width">
-      <strong>CC Fest</strong>
+      <strong class="logo" data-figma-node="218:218"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 75, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">C</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">C</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none"> </span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 74, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">F</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.01em; text-transform: none">E</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">S</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 88, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">T</span></strong>
       <p>Creative coding for connection, expression, and learning.</p>
       <a href="mailto:mrkhanatndv@gmail.com">mrkhanatndv@gmail.com</a>
+      <p class="design-credits">Design: <a href="https://franciscajose.com/">Francisca José Rodrigues</a> · Interactives: <a href="https://shristi.super.site/">Shristi Singh</a></p>
     </footer>
 
+    <script src="assets/p5.min.js" defer></script>
     <script src="animations.js" defer></script>
+    <script src="change-sketch.js" defer></script>
+    <script src="interaction.js" defer></script>
   </body>
 </html>

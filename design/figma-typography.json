@@ -1,0 +1,2374 @@
+{
+  "fileKey": "jMiMzds3qYD2mO5w2Dsg4P",
+  "extracted": "2026-09-15",
+  "inventory": [
+    {
+      "frame": "218:104",
+      "nodes": [
+        {
+          "id": "218:106",
+          "text": "CC FEST",
+          "runs": 2
+        },
+        {
+          "id": "218:108",
+          "text": "Events",
+          "runs": 1
+        },
+        {
+          "id": "218:109",
+          "text": "Past Events",
+          "runs": 1
+        },
+        {
+          "id": "218:110",
+          "text": "Mailing List",
+          "runs": 1
+        },
+        {
+          "id": "218:111",
+          "text": "Code of Conduct",
+          "runs": 1
+        },
+        {
+          "id": "218:113",
+          "text": "CC FEST",
+          "runs": 2
+        },
+        {
+          "id": "218:117",
+          "text": "A free and friendly gathering for creative coding\n— workshops, talks, and community —",
+          "runs": 1
+        },
+        {
+          "id": "218:120",
+          "text": "ANIMATION",
+          "runs": 1
+        },
+        {
+          "id": "218:121",
+          "text": "Shristi — your canvas lives here",
+          "runs": 1
+        },
+        {
+          "id": "218:122",
+          "text": "Replace this section with your animation.\nHook into .anim-stage in animations.css.",
+          "runs": 1
+        },
+        {
+          "id": "218:126",
+          "text": "UPCOMING · VIRTUAL · FREE",
+          "runs": 1
+        },
+        {
+          "id": "218:127",
+          "text": "Virtual CC Fest 2026",
+          "runs": 10
+        },
+        {
+          "id": "218:128",
+          "text": "Workshops, talks, and community for creative coders of all levels.\nDate to be announced — register your interest now.",
+          "runs": 1
+        },
+        {
+          "id": "218:130",
+          "text": "View event & register →",
+          "runs": 1
+        },
+        {
+          "id": "218:134",
+          "text": "FORMAT",
+          "runs": 1
+        },
+        {
+          "id": "218:135",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "218:137",
+          "text": "DATE",
+          "runs": 1
+        },
+        {
+          "id": "218:138",
+          "text": "TBC 2026",
+          "runs": 1
+        },
+        {
+          "id": "218:141",
+          "text": "COST",
+          "runs": 1
+        },
+        {
+          "id": "218:142",
+          "text": "Free",
+          "runs": 1
+        },
+        {
+          "id": "218:144",
+          "text": "LEVELS",
+          "runs": 1
+        },
+        {
+          "id": "218:145",
+          "text": "All welcome",
+          "runs": 1
+        },
+        {
+          "id": "218:149",
+          "text": "ABOUT CC FEST",
+          "runs": 1
+        },
+        {
+          "id": "218:150",
+          "text": "Creative coding\nfor everyone.",
+          "runs": 1
+        },
+        {
+          "id": "218:152",
+          "text": "CC Fest is a free and friendly event for anyone curious about creative code. Come spend a few hours with us — make interactive and engaging digital art, animation, and games, work with AI or hardware, and explore many other options. Hear from keynote speakers on important and timely topics related to creative coding.",
+          "runs": 1
+        },
+        {
+          "id": "218:156",
+          "text": "WE WELCOME",
+          "runs": 1
+        },
+        {
+          "id": "218:159",
+          "text": "→",
+          "runs": 1
+        },
+        {
+          "id": "218:160",
+          "text": "Students, artists, hobbyists, creatives, and tinkerers who are curious to learn",
+          "runs": 1
+        },
+        {
+          "id": "218:162",
+          "text": "→",
+          "runs": 1
+        },
+        {
+          "id": "218:163",
+          "text": "Educators and community organizers who are looking for inspiration",
+          "runs": 1
+        },
+        {
+          "id": "218:165",
+          "text": "→",
+          "runs": 1
+        },
+        {
+          "id": "218:166",
+          "text": "Everyone who would like to learn more about creative code and our community",
+          "runs": 1
+        },
+        {
+          "id": "218:170",
+          "text": "Past Events",
+          "runs": 6
+        },
+        {
+          "id": "218:172",
+          "text": "10 YEARS · 2016–2025",
+          "runs": 1
+        },
+        {
+          "id": "218:173",
+          "text": "We hosted our first virtual event on July 11, 2020. Previous in-person CC Fests\nhave taken place in New York City, Los Angeles, and San Francisco.\n\nWant to organize a CC Fest in your city? Email Saber Khan.",
+          "runs": 1
+        },
+        {
+          "id": "218:176",
+          "text": "NYC",
+          "runs": 1
+        },
+        {
+          "id": "218:177",
+          "text": "OCT 2016 · NYU ITP",
+          "runs": 1
+        },
+        {
+          "id": "218:179",
+          "text": "NYC",
+          "runs": 1
+        },
+        {
+          "id": "218:180",
+          "text": "2017 · NYU ITP",
+          "runs": 1
+        },
+        {
+          "id": "218:182",
+          "text": "LA",
+          "runs": 1
+        },
+        {
+          "id": "218:183",
+          "text": "2018",
+          "runs": 1
+        },
+        {
+          "id": "218:185",
+          "text": "SF",
+          "runs": 1
+        },
+        {
+          "id": "218:186",
+          "text": "2019",
+          "runs": 1
+        },
+        {
+          "id": "218:188",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "218:189",
+          "text": "JUL 2020",
+          "runs": 1
+        },
+        {
+          "id": "218:191",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "218:192",
+          "text": "2021",
+          "runs": 1
+        },
+        {
+          "id": "218:194",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "218:195",
+          "text": "2022",
+          "runs": 1
+        },
+        {
+          "id": "218:197",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "218:198",
+          "text": "2023",
+          "runs": 1
+        },
+        {
+          "id": "218:200",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "218:201",
+          "text": "2024",
+          "runs": 1
+        },
+        {
+          "id": "218:203",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "218:204",
+          "text": "2025",
+          "runs": 1
+        },
+        {
+          "id": "218:208",
+          "text": "STAY IN TOUCH",
+          "runs": 1
+        },
+        {
+          "id": "218:209",
+          "text": "Join the mailing list.",
+          "runs": 1
+        },
+        {
+          "id": "218:210",
+          "text": "Send an email to mrkhanatndv@gmail.com with the subject\nline \"Join mailing list\" to get notified about upcoming events.",
+          "runs": 1
+        },
+        {
+          "id": "218:214",
+          "text": "COMMUNITY",
+          "runs": 1
+        },
+        {
+          "id": "218:215",
+          "text": "Code of\nConduct",
+          "runs": 1
+        },
+        {
+          "id": "218:216",
+          "text": "CC Fest is dedicated to providing a harassment-free experience for everyone. We do not tolerate harassment of participants in any form. This code of conduct applies to all CC Fest spaces — online and in-person — including chat channels, event venues, and social media.\n\nParticipants asked to stop any harassing behavior are expected to comply immediately. If you experience or witness unacceptable behavior, please contact mrkhanatndv@gmail.com.",
+          "runs": 1
+        },
+        {
+          "id": "218:218",
+          "text": "CC FEST",
+          "runs": 7
+        },
+        {
+          "id": "218:220",
+          "text": "Creative coding for connection, expression, and learning.",
+          "runs": 1
+        },
+        {
+          "id": "218:222",
+          "text": "mrkhanatndv@gmail.com",
+          "runs": 1
+        }
+      ]
+    },
+    {
+      "frame": "251:732",
+      "nodes": [
+        {
+          "id": "251:734",
+          "text": "CC FEST",
+          "runs": 2
+        },
+        {
+          "id": "251:736",
+          "text": "Keynotes",
+          "runs": 1
+        },
+        {
+          "id": "251:737",
+          "text": "Sessions",
+          "runs": 1
+        },
+        {
+          "id": "251:738",
+          "text": "Registration",
+          "runs": 1
+        },
+        {
+          "id": "251:740",
+          "text": "10TH ANNIVERSARY EDITION · ONLINE",
+          "runs": 1
+        },
+        {
+          "id": "251:741",
+          "text": "Virtual CC Fest ________, 2026",
+          "runs": 12
+        },
+        {
+          "id": "251:742",
+          "text": "A free gathering for creative coding — workshops, talks, and community.",
+          "runs": 1
+        },
+        {
+          "id": "251:745",
+          "text": "Register",
+          "runs": 1
+        },
+        {
+          "id": "251:747",
+          "text": "View sessions",
+          "runs": 1
+        },
+        {
+          "id": "251:750",
+          "text": "FORMAT",
+          "runs": 1
+        },
+        {
+          "id": "251:751",
+          "text": "Virtual",
+          "runs": 1
+        },
+        {
+          "id": "251:753",
+          "text": "DATE",
+          "runs": 1
+        },
+        {
+          "id": "251:754",
+          "text": "To be confirmed",
+          "runs": 1
+        },
+        {
+          "id": "251:756",
+          "text": "COST",
+          "runs": 1
+        },
+        {
+          "id": "251:757",
+          "text": "Free",
+          "runs": 1
+        },
+        {
+          "id": "251:759",
+          "text": "EXPERIENCE",
+          "runs": 1
+        },
+        {
+          "id": "251:760",
+          "text": "All levels",
+          "runs": 1
+        },
+        {
+          "id": "251:763",
+          "text": "01",
+          "runs": 1
+        },
+        {
+          "id": "251:765",
+          "text": "Keynotes",
+          "runs": 8
+        },
+        {
+          "id": "251:766",
+          "text": "Profile image, name, and biography for each keynote speaker.",
+          "runs": 1
+        },
+        {
+          "id": "251:770",
+          "text": "Profile photo",
+          "runs": 1
+        },
+        {
+          "id": "251:772",
+          "text": "KEYNOTE 01",
+          "runs": 1
+        },
+        {
+          "id": "251:773",
+          "text": "[Keynote name]",
+          "runs": 1
+        },
+        {
+          "id": "251:774",
+          "text": "[Short biography. Approximately 60–100 words introducing the speaker, their work, and their relationship to creative coding.]",
+          "runs": 1
+        },
+        {
+          "id": "251:775",
+          "text": "[Speaker website]",
+          "runs": 1
+        },
+        {
+          "id": "251:778",
+          "text": "Profile photo",
+          "runs": 1
+        },
+        {
+          "id": "251:780",
+          "text": "KEYNOTE 02",
+          "runs": 1
+        },
+        {
+          "id": "251:781",
+          "text": "[Keynote name]",
+          "runs": 1
+        },
+        {
+          "id": "251:782",
+          "text": "[Short biography. Approximately 60–100 words introducing the speaker, their work, and their relationship to creative coding.]",
+          "runs": 1
+        },
+        {
+          "id": "251:783",
+          "text": "[Speaker website]",
+          "runs": 1
+        },
+        {
+          "id": "251:786",
+          "text": "02",
+          "runs": 1
+        },
+        {
+          "id": "251:788",
+          "text": "Sessions",
+          "runs": 8
+        },
+        {
+          "id": "251:789",
+          "text": "Schedule, presenter details, level, and workshop information.",
+          "runs": 1
+        },
+        {
+          "id": "251:792",
+          "text": "[9:00–9:45]",
+          "runs": 1
+        },
+        {
+          "id": "251:794",
+          "text": "Photo",
+          "runs": 1
+        },
+        {
+          "id": "251:796",
+          "text": "PRESENTER",
+          "runs": 1
+        },
+        {
+          "id": "251:797",
+          "text": "[Presenter name]",
+          "runs": 1
+        },
+        {
+          "id": "251:798",
+          "text": "[One- or two-sentence presenter biography.]",
+          "runs": 1
+        },
+        {
+          "id": "251:802",
+          "text": "[Beginner]",
+          "runs": 1
+        },
+        {
+          "id": "251:804",
+          "text": "[Workshop]",
+          "runs": 1
+        },
+        {
+          "id": "251:805",
+          "text": "[Session title]",
+          "runs": 1
+        },
+        {
+          "id": "251:806",
+          "text": "[Session description, what participants will make or learn, and any software or materials they should have ready.]",
+          "runs": 1
+        },
+        {
+          "id": "251:808",
+          "text": "[10:00–10:45]",
+          "runs": 1
+        },
+        {
+          "id": "251:810",
+          "text": "Photo",
+          "runs": 1
+        },
+        {
+          "id": "255:1318",
+          "text": "PRESENTER",
+          "runs": 1
+        },
+        {
+          "id": "255:1319",
+          "text": "[Presenter name]",
+          "runs": 1
+        },
+        {
+          "id": "255:1320",
+          "text": "[One- or two-sentence presenter biography.]",
+          "runs": 1
+        },
+        {
+          "id": "251:818",
+          "text": "[All levels]",
+          "runs": 1
+        },
+        {
+          "id": "251:820",
+          "text": "[Talk]",
+          "runs": 1
+        },
+        {
+          "id": "251:821",
+          "text": "[Session title]",
+          "runs": 1
+        },
+        {
+          "id": "251:822",
+          "text": "[Session description, what participants will make or learn, and any software or materials they should have ready.]",
+          "runs": 1
+        },
+        {
+          "id": "251:824",
+          "text": "[11:00–11:45]",
+          "runs": 1
+        },
+        {
+          "id": "251:826",
+          "text": "Photo",
+          "runs": 1
+        },
+        {
+          "id": "255:1323",
+          "text": "PRESENTER",
+          "runs": 1
+        },
+        {
+          "id": "255:1324",
+          "text": "[Presenter name]",
+          "runs": 1
+        },
+        {
+          "id": "255:1325",
+          "text": "[One- or two-sentence presenter biography.]",
+          "runs": 1
+        },
+        {
+          "id": "251:834",
+          "text": "[Intermediate]",
+          "runs": 1
+        },
+        {
+          "id": "251:836",
+          "text": "[Workshop]",
+          "runs": 1
+        },
+        {
+          "id": "251:837",
+          "text": "[Session title]",
+          "runs": 1
+        },
+        {
+          "id": "251:838",
+          "text": "[Session description, what participants will make or learn, and any software or materials they should have ready.]",
+          "runs": 1
+        },
+        {
+          "id": "251:841",
+          "text": "03",
+          "runs": 1
+        },
+        {
+          "id": "251:843",
+          "text": "Registration",
+          "runs": 9
+        },
+        {
+          "id": "251:844",
+          "text": "The Eventbrite checkout or event widget will live here.",
+          "runs": 1
+        },
+        {
+          "id": "251:846",
+          "text": "EVENTBRITE EMBED",
+          "runs": 1
+        },
+        {
+          "id": "251:847",
+          "text": "[Registration module]",
+          "runs": 1
+        },
+        {
+          "id": "251:848",
+          "text": "Event ID and embed code to be added after the event is created.",
+          "runs": 1
+        },
+        {
+          "id": "251:850",
+          "text": "CC Fest began on",
+          "runs": 1
+        },
+        {
+          "id": "251:851",
+          "text": "October 22, 2016",
+          "runs": 1
+        },
+        {
+          "id": "251:852",
+          "text": "at NYU ITP with 40 participants.",
+          "runs": 1
+        },
+        {
+          "id": "251:855",
+          "text": "CC Fest",
+          "runs": 1
+        },
+        {
+          "id": "251:856",
+          "text": "Creative coding for connection, expression, and learning.",
+          "runs": 1
+        },
+        {
+          "id": "251:857",
+          "text": "mrkhanatndv@gmail.com",
+          "runs": 1
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "218:106",
+      "text": "CC FEST",
+      "width": 52,
+      "height": 13,
+      "runs": [
+        {
+          "text": "CC",
+          "font": {
+            "family": "Anybody",
+            "style": "Medium",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 500
+            }
+          },
+          "size": 13,
+          "weight": 500,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 5
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": " FEST",
+          "font": {
+            "family": "Anybody",
+            "style": "Medium",
+            "variationSettings": {
+              "wdth": 71,
+              "wght": 500
+            }
+          },
+          "size": 13,
+          "weight": 500,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 5
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "218:113",
+      "text": "CC FEST",
+      "width": 1100,
+      "height": 200,
+      "runs": [
+        {
+          "text": "CC ",
+          "font": {
+            "family": "Anybody",
+            "style": "Italic",
+            "variationSettings": {
+              "wdth": 71,
+              "wght": 400
+            }
+          },
+          "size": 400,
+          "weight": 400,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 50
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "FEST",
+          "font": {
+            "family": "Anybody",
+            "style": "Italic",
+            "variationSettings": {
+              "wdth": 71,
+              "wght": 400
+            }
+          },
+          "size": 400,
+          "weight": 400,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 50
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "218:127",
+      "text": "Virtual CC Fest 2026",
+      "width": 972,
+      "height": 80,
+      "runs": [
+        {
+          "text": "Virt",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wght": 300,
+              "wdth": 100
+            }
+          },
+          "size": 64,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "u",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 300
+            }
+          },
+          "size": 64,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -7
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "a",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wdth": 85,
+              "wght": 300
+            }
+          },
+          "size": 64,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "l ",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wght": 300,
+              "wdth": 100
+            }
+          },
+          "size": 64,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "CC",
+          "font": {
+            "family": "Anybody",
+            "style": "Regular",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 432
+            }
+          },
+          "size": 64,
+          "weight": 432,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": " F",
+          "font": {
+            "family": "Anybody",
+            "style": "Regular",
+            "variationSettings": {
+              "wdth": 100,
+              "wght": 432
+            }
+          },
+          "size": 64,
+          "weight": 432,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "e",
+          "font": {
+            "family": "Anybody",
+            "style": "Regular",
+            "variationSettings": {
+              "wdth": 65,
+              "wght": 432
+            }
+          },
+          "size": 64,
+          "weight": 432,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "st",
+          "font": {
+            "family": "Anybody",
+            "style": "Regular",
+            "variationSettings": {
+              "wdth": 100,
+              "wght": 432
+            }
+          },
+          "size": 64,
+          "weight": 432,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": " ",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wght": 300,
+              "wdth": 100
+            }
+          },
+          "size": 64,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "2026",
+          "font": {
+            "family": "Anybody",
+            "style": "ExtraLight Italic",
+            "variationSettings": {
+              "wght": 200,
+              "wdth": 100
+            }
+          },
+          "size": 64,
+          "weight": 200,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 104.99999523162842
+          },
+          "case": "UPPER",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "218:170",
+      "text": "Past Events",
+      "width": 266,
+      "height": 41,
+      "runs": [
+        {
+          "text": "P",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 40,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "a",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 700
+            }
+          },
+          "size": 40,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "st Eve",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 40,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "n",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 78,
+              "wght": 700
+            }
+          },
+          "size": 40,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "t",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 700
+            }
+          },
+          "size": 40,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "s",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 40,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "218:218",
+      "text": "CC FEST",
+      "width": 54,
+      "height": 12,
+      "runs": [
+        {
+          "text": "C",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 75,
+              "wght": 700
+            }
+          },
+          "size": 12,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 6
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "C",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 120,
+              "wght": 700
+            }
+          },
+          "size": 12,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 6
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": " ",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 12,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 6
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "F",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 74,
+              "wght": 700
+            }
+          },
+          "size": 12,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 6
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "E",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 120,
+              "wght": 700
+            }
+          },
+          "size": 12,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -1
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "S",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 700
+            }
+          },
+          "size": 12,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "T",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 88,
+              "wght": 700
+            }
+          },
+          "size": 12,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 6
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "251:734",
+      "text": "CC FEST",
+      "width": 52,
+      "height": 13,
+      "runs": [
+        {
+          "text": "CC",
+          "font": {
+            "family": "Anybody",
+            "style": "Medium",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 500
+            }
+          },
+          "size": 16,
+          "weight": 500,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 5
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": " FEST",
+          "font": {
+            "family": "Anybody",
+            "style": "Medium",
+            "variationSettings": {
+              "wdth": 71,
+              "wght": 500
+            }
+          },
+          "size": 16,
+          "weight": 500,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 5
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "251:741",
+      "text": "Virtual CC Fest ________, 2026",
+      "width": 624,
+      "height": 156,
+      "runs": [
+        {
+          "text": "Virt",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wght": 300,
+              "wdth": 100
+            }
+          },
+          "size": 72,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "u",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 300
+            }
+          },
+          "size": 72,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -7
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "a",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wdth": 85,
+              "wght": 300
+            }
+          },
+          "size": 72,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "l",
+          "font": {
+            "family": "Anybody",
+            "style": "Light",
+            "variationSettings": {
+              "wght": 300,
+              "wdth": 100
+            }
+          },
+          "size": 72,
+          "weight": 300,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": " ",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 72,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "CC",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 432
+            }
+          },
+          "size": 72,
+          "weight": 432,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": " ",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 72,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "F",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 100,
+              "wght": 472
+            }
+          },
+          "size": 72,
+          "weight": 472,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "e",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 65,
+              "wght": 472
+            }
+          },
+          "size": 72,
+          "weight": 472,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": "st",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 100,
+              "wght": 472
+            }
+          },
+          "size": 72,
+          "weight": 472,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "UPPER",
+          "features": {}
+        },
+        {
+          "text": " ________, ",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 72,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "2026",
+          "font": {
+            "family": "Anybody",
+            "style": "Thin Italic",
+            "variationSettings": {
+              "wght": 100,
+              "wdth": 100
+            }
+          },
+          "size": 72,
+          "weight": 100,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 100
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "251:765",
+      "text": "Keynotes",
+      "width": 213,
+      "height": 37,
+      "runs": [
+        {
+          "text": "K",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "e",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "y",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 129,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "n",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 120,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "o",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 90,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "t",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "e",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 130,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "s",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "251:788",
+      "text": "Sessions",
+      "width": 211,
+      "height": 37,
+      "runs": [
+        {
+          "text": "S",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "e",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 120,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "s",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "s",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 130,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "i",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "o",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 110,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "n",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 90,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "s",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 125,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "251:843",
+      "text": "Registration",
+      "width": 267,
+      "height": 37,
+      "runs": [
+        {
+          "text": "R",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 150,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "e",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 110,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "gi",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "s",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 90,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -1
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "t",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 120,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "r",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 60,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "ati",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "o",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wdth": 140,
+              "wght": 700
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -2
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        },
+        {
+          "text": "n",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "218:150",
+      "text": "Creative coding\nfor everyone.",
+      "width": 300,
+      "height": 100,
+      "runs": [
+        {
+          "text": "Creative coding\nfor everyone.",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 44,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -3
+          },
+          "line": {
+            "unit": "PERCENT",
+            "value": 110.00000238418579
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "218:209",
+      "text": "Join the mailing list.",
+      "width": 440,
+      "height": 50,
+      "runs": [
+        {
+          "text": "Join the mailing list.",
+          "font": {
+            "family": "Anybody",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700,
+              "wdth": 100
+            }
+          },
+          "size": 36,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -2.5
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "218:215",
+      "text": "Code of\nConduct",
+      "width": 280,
+      "height": 80,
+      "runs": [
+        {
+          "text": "Code of\nConduct",
+          "font": {
+            "family": "Anybody",
+            "style": "Regular",
+            "variationSettings": {
+              "wdth": 120,
+              "wght": 336
+            }
+          },
+          "size": 36,
+          "weight": 336,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": -2.5
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    },
+    {
+      "id": "251:855",
+      "text": "CC Fest",
+      "width": 71,
+      "height": 19,
+      "runs": [
+        {
+          "text": "CC Fest",
+          "font": {
+            "family": "Syne",
+            "style": "Bold",
+            "variationSettings": {
+              "wght": 700
+            }
+          },
+          "size": 16,
+          "weight": 700,
+          "spacing": {
+            "unit": "PERCENT",
+            "value": 0
+          },
+          "line": {
+            "unit": "AUTO"
+          },
+          "case": "ORIGINAL",
+          "features": {}
+        }
+      ]
+    }
+  ]
+}
