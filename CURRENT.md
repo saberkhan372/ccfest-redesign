@@ -178,7 +178,7 @@ Send Shristi the review notes above (confetti listeners first). Check the live h
 
 - Saber saw the live dialog unstyled and tiny. Cause: a stylesheet cached from before the deploy (the live CSS was correct). Fix: `?v=<build revision>` on local CSS/JS in `_layouts/base.html` and on `registration.js`. Dialog widened to 1000×900 max. `verify.cjs` passes on a build with a simulated revision; local builds are byte-identical except `redesign.css`. Dialog screenshots at 1440 and 1024 checked.
 
-- Code of conduct now credits its author, linked to https://marieflanagan.com/about/. Saber wrote "Marie Claire Flanagan"; her page gives "Marie LeBlanc Flanagan" ("marieclaire" only in her social handles), so the credit uses the latter. Confirm with Saber.
+- Code of conduct now credits its author, linked to https://marieflanagan.com/about/. Saber confirmed the name "Marie Claire Flanagan" (her page shows "Marie LeBlanc Flanagan"; Saber chose the former).
 - Pushed on Saber's instruction ("commit all and push").
 
 ## Next task
