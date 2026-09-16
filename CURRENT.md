@@ -137,5 +137,8 @@ Superseded — see “Next task” in the last section. Obtain explicit deployme
 - **Phone stage height** stays at 540px (§9). Nothing crops at 320/390, but she asked for no clipping; her 95dvh would make it a full phone screen.
 - Review notes for Shristi (not posted anywhere): document-wide confetti listeners; `change-sketch.js` never stops its loop; `#ccCopyright` symbol removed but still referenced; debugging outline and `100vw`; hover-only interactions; unhandled rejection if a scribble fetch fails; unused assets (`CC.png`, `cc-copyright.svg`, `scribble-1/2.svg` ≈ 610KB, 10 of 11 Caslon files).
 
+## Published
+- Saber reviewed and approved on 2026-09-16 (“looks good. commit and push”), keeping the current button/label typography and the 540px phone stage. `main` fast-forwarded to `shristi-pr-1` and pushed; GitHub Pages deploys `main` to https://saberkhan372.github.io/ccfest-redesign/.
+
 ## Next task
-Saber reviews branch `shristi-pr-1` (preview: build with Jekyll, serve with `npx http-server`). If approved, fast-forward `main` to it and push — that publishes the site and marks PR #1 merged. Decide the button/label typography first. Send Shristi the review notes.
+Send Shristi the review notes above (confetti listeners first). Check the live homepage on a real phone and in Safari.
