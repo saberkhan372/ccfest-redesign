@@ -7,7 +7,7 @@ root: "../"
 home_href: "../"
 nav: "event"
 ---
-{% assign event = site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}{% assign keynote_count = 0 %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}{% assign keynote_count = keynote_count | plus: 1 %}{% endif %}{% endfor %}{% assign session_count = 0 %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}{% assign session_count = session_count | plus: 1 %}{% endif %}{% endfor %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
+{% assign event = site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}{% assign keynote_count = 0 %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}{% assign keynote_count = keynote_count | plus: 1 %}{% endif %}{% endfor %}{% assign session_count = 0 %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}{% assign session_count = session_count | plus: 1 %}{% endif %}{% endfor %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}{% assign luma_event_id = event.luma_event_id | default: "" | strip %}{% assign donation_note = event.donation_note | default: "" | strip %}    <main id="main-content">
       <section class="hero page-width" id="top" aria-labelledby="event-title">
         <p class="eyebrow">{{ event.eyebrow | escape }}</p>
         <h1 id="event-title"{% if event_date == "" %} aria-label="{{ event.name | escape }}"{% endif %} data-figma-node="251:741"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">F</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="10" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none"> October 17, </span><span data-figma-run="11" style="font-family: 'Anybody'; font-variation-settings: 'wght' 100, 'wdth' 100; font-weight: 100; font-style: italic; letter-spacing: 0em; text-transform: none">2026</span></h1>
@@ -104,12 +104,24 @@ nav: "event"
             <p class="eyebrow">{{ event.cost | escape }} · Online · {{ event.level | escape }}</p>
 {% if registration_url != "" %}            <h3>Registration is open.</h3>
             <p>Save your place at {{ event.name | escape }}.</p>
-            <a class="button button-solid" href="{{ event.registration_url | escape }}" target="_blank" rel="noopener">Register ↗</a>
+{% if donation_note != "" %}            <p>{{ donation_note | escape }}</p>
+{% endif %}            <a class="button button-solid" href="{{ registration_url | escape }}" target="_blank" rel="noopener"{% if luma_event_id != "" %} data-luma-event="{{ luma_event_id | escape }}"{% endif %}>Register<span class="external-mark" aria-hidden="true"> ↗</span></a>
 {% else %}            <h3>Be the first to know.</h3>
             <p>We’re getting ready for the next CC Fest. Get an email when the date and registration are announced.</p>
             <a class="button button-solid" href="../mailing-list/">Join the mailing list →</a>
 {% endif %}          </div>
-        </div>
+{% if registration_url != "" and luma_event_id != "" %}
+          <!-- Luma's form, opened by registration.js. Without JavaScript the Register link goes to Luma instead. -->
+          <dialog class="registration-dialog" id="registration-dialog" aria-labelledby="registration-dialog-title">
+            <div class="registration-dialog-bar">
+              <p class="eyebrow" id="registration-dialog-title">Register · {{ event.name | escape }}</p>
+              <button type="button" class="button registration-dialog-close">Close</button>
+            </div>
+            <iframe title="Registration form for {{ event.name | escape }}, provided by Luma" allow="payment; fullscreen"></iframe>
+            <p class="registration-dialog-note">Form not loading? <a href="{{ registration_url | escape }}" target="_blank" rel="noopener">Register on Luma instead ↗</a></p>
+          </dialog>
+          <script src="{{ page.root }}registration.js" defer></script>
+{% endif %}        </div>
       </section>
 
       <div class="history-shape" aria-hidden="true"><img src="../assets/design/registration-shape.svg" alt=""></div>

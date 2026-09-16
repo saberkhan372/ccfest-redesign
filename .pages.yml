@@ -32,7 +32,9 @@ content:
       - { name: format, label: Format, type: string, description: "e.g. Virtual" }
       - { name: cost, label: Cost, type: string, description: "e.g. Free" }
       - { name: level, label: Experience level, type: string, description: "e.g. All levels" }
-      - { name: registration_url, label: Registration link, type: string, description: "Leave empty until registration is really open — the page then invites people to the mailing list instead." }
+      - { name: registration_url, label: Registration link, type: string, description: "The Luma event page, e.g. https://luma.com/…. Leave empty until registration is really open — the page then invites people to the mailing list instead." }
+      - { name: luma_event_id, label: Luma event ID, type: string, required: false, description: "Optional. Starts with evt-. In Luma: Manage event → More → Embed Registration Button. With it, Register opens the form on this page; without it, Register links to Luma." }
+      - { name: donation_note, label: Donation note, type: text, required: false, description: "Shown beside the Register button once registration is open. Only mention donations if the Luma ticket really has a flexible amount. Leave empty to hide." }
 
   - name: keynotes
     label: Keynote speakers

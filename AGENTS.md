@@ -23,11 +23,12 @@ python3 -m http.server 8876 --bind 127.0.0.1
 - **Never push, deploy, or email without Saber's explicit approval.** Pushing `main` publishes the live site.
 - **Never edit the designers' source folders:** `Shristi-ccfest-redesign-10-years-origin/`, `figma-to-html/`, `figma-to-html (1)/`, `figma-to-html-registration (2)/`. Reference only.
 - **Never edit the Figma file.** Read-only calls.
+- **Never call donations tax-deductible.** They go to the organizer, not a registered charity.
 - **Don't invent content.** No made-up dates, speakers, times, prices, or registration links, and never ship Figma's bracketed placeholders (`[Keynote name]`). Use the honest "to be announced" copy already in the layouts.
 - **Don't hand-edit `data-figma-run` spans.** Change `design/figma-typography.json`, then run `node scripts/sync-typography.cjs`.
 - **Shristi's work arrives by pull request.** Merge it on a branch as in [docs/UPDATING.md](docs/UPDATING.md) §2 — never straight onto `main`, and never revert `main` to make a merge easier.
 - **Keep the designer credits** (`.design-credits`) in every footer.
-- **Respect ownership.** `animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, and `coding-power.js` are Shristi's and stay identical to her branch; Figma is Francisca's. Host-side changes go in `redesign.css` or `interaction.js` — and say so in your summary.
+- **Respect ownership.** `animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, and `coding-power.js` are Shristi's and stay identical to her branch; Figma is Francisca's. Host-side changes go in `redesign.css`, `interaction.js` or `registration.js` — and say so in your summary.
 
 ## Where changes go
 
@@ -37,6 +38,7 @@ python3 -m http.server 8876 --bind 127.0.0.1
 | Page structure or content | That page's `index.html` |
 | Base layout primitives used everywhere | `styles.css` (rare) |
 | Motion preferences, pause behaviour | `interaction.js` |
+| Registration popup (Luma) | `registration.js`; setup in [docs/REGISTRATION.md](docs/REGISTRATION.md) |
 | Figma lettering | `design/figma-typography.json` + `scripts/sync-typography.cjs` |
 
 Match the surrounding style: one-line CSS rules grouped under the section comments in `redesign.css`, semantic HTML with `aria-labelledby` sections, relative asset paths.

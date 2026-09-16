@@ -27,3 +27,7 @@
 - **Old `http-server` processes linger on ports 8880–8888** from earlier sessions. Pick a free port (8895 was used on 2026-09-16) rather than assuming 8881 serves the current build.
 
 - **Jekyll copies every untracked file in the repo root into the build,** including the ~500MB screen recordings. Build from a copy that excludes `*.mov`, or move the recordings out.
+
+- **Luma event pages refuse to be framed; only the embed URL works.** `luma.com/<slug>` and `luma.com/event/evt-…` send `X-Frame-Options: SAMEORIGIN`, while `luma.com/embed/event/evt-…/simple` has no such header. The dialog needs the `evt-…` id, not the public URL. (If anyone does switch to Luma's `checkout-button.js`, the script tag needs `id="luma-checkout"`: the script finds its own stylesheet through that id, and without it requests `/checkout-button.css` from our own site.)
+
+- **Escape doesn't close the registration dialog while focus is inside Luma's form.** Key presses inside a cross-origin iframe never reach the page. Close and the backdrop still work.

@@ -2,7 +2,7 @@
 
 Step-by-step for the updates that actually come up: new design work from Francisca, Shristi's interactive, and confirmed event details.
 
-Related: [CMS.md](CMS.md) (editing content without code) · [MAILING-LIST.md](MAILING-LIST.md) (sign-ups and sending) · [TEMPLATE.md](TEMPLATE.md) (how the site is built) · [TYPOGRAPHY.md](TYPOGRAPHY.md) (the lettering pipeline) · [../AGENTS.md](../AGENTS.md) (rules for AI agents).
+Related: [CMS.md](CMS.md) (editing content without code) · [MAILING-LIST.md](MAILING-LIST.md) (sign-ups and sending) · [REGISTRATION.md](REGISTRATION.md) (Luma registration and donations) · [TEMPLATE.md](TEMPLATE.md) (how the site is built) · [TYPOGRAPHY.md](TYPOGRAPHY.md) (the lettering pipeline) · [../AGENTS.md](../AGENTS.md) (rules for AI agents).
 
 **Before any update**
 
@@ -78,7 +78,8 @@ Only put in what's actually confirmed. Everything below starts as "to be announc
 | Event date | `_data/event.yml` → `date`. Fills the facts strip, the homepage band and the Events card at once. |
 | Keynote speakers | `_data/keynotes.yml` |
 | Session schedule | `_data/sessions.yml` |
-| Registration link | `_data/event.yml` → `registration_url` |
+| Registration link | `_data/event.yml` → `registration_url`, plus `luma_event_id` for the on-page form. Setup: [REGISTRATION.md](REGISTRATION.md) |
+| Donation note | `_data/event.yml` → `donation_note` (only if the Luma ticket takes donations) |
 | A past event | `_data/past_events.yml` → `events`, newest first |
 
 All five are also forms in the CMS, so this is usually a job for the admin UI rather than the editor.

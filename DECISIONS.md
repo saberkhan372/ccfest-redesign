@@ -35,3 +35,11 @@
 ## 2026-09-16 — Her full-height stage on desktop
 **Why:** Her PR asks that the 95dvh stage not be shortened, since each mode draws across all of it; the earlier `clamp(560px,80vh,850px)` override and the smaller monogram size were removed. Phones keep 540px pending her view.
 **Rejected:** Keeping the shorter desktop stage for page rhythm.
+
+## 2026-09-16 — Luma for registration and donations, replacing Eventbrite
+**Why:** Saber pays for Eventbrite and wanted to stop, while still collecting donations. Luma is free for free registrations, takes a donation at sign-up like the old Eventbrite "donate as you RSVP" setup, and sends each guest a personal Zoom link, reminders and a calendar invite. Its cut is 5% of donations plus Stripe's fees. There is no nonprofit entity, so nonprofit-only tools don't apply and donations aren't tax-deductible. Comparison in `docs/REGISTRATION.md`.
+**Rejected:** A site form going to EmailOctopus with Ko-fi donations (no platform cut, but donating becomes a separate step and the Zoom links and reminders are sent by hand); Humanitix (~$1.29 per donation); Givebutter and Zeffy (organizations or nonprofits only).
+
+## 2026-09-16 — Luma's form in our own `<dialog>`, not Luma's button script
+**Why:** Luma's `checkout-button.js` has to load on every page view, Escape doesn't close its overlay, and its close button has no label. `registration.js` loads Luma's documented embed URL into a native dialog only when someone clicks Register, so Escape, focus return and a labelled Close come from the browser. The Register link still goes to Luma without JavaScript.
+**Rejected:** Luma's script, as above; an always-visible iframe in the dashed box (contacts Luma on every visit, and a fixed-height frame is cramped on phones).

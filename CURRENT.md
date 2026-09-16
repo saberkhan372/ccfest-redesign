@@ -142,3 +142,36 @@ Superseded — see “Next task” in the last section. Obtain explicit deployme
 
 ## Next task
 Send Shristi the review notes above (confetti listeners first). Check the live homepage on a real phone and in Safari.
+
+## Independent preservation review — 2026-09-16 (Codex)
+- Compared merge `9227497` against its first parent `7c3c78d`. Homepage source outside the interactive section is byte-identical. All five inner-page sources, shared includes, Figma typography data, design assets and Anybody/Overpass font files are unchanged. Host CSS changes are confined to the interactive; base CSS removes its old placeholder rules.
+- All six Shristi-owned CSS/JS files match PR head `aef1c20` byte-for-byte. GitHub confirms PR #1 merged, and the Pages workflow for current HEAD `e667d30` succeeded.
+- Retrieved and inspected Francisca's current homepage and Register Figma screenshots. Existing integration differences remain: desktop interactive uses 95dvh; phones use 540px; mode controls retain the approved host styling; history-band lettering is still an approximation. October 17 is already in both event data and the generated title; older blank-date/placeholder notes above are stale.
+- Independently verified typography generation matches all eight target files using intercepted writes (no source changes), homepage preservation, file comparisons, and clean `git diff --check` before this note.
+- Not independently verified: rendered visual fidelity, four-width browser checks, motion tests, fresh Jekyll build, or the video. Playwright is available but Chrome aborts on launch in this sandbox; the computer-use runtime also failed to initialize. Earlier Claude browser results remain reported results, not repeated checks. Web retrieval of the deployed pages failed; deployment success is confirmed through GitHub.
+- No site code changed, committed, pushed, or published by this review. The session-wrap skill was not found under the installed skill/plugin locations; recorded this handoff directly.
+- Next: compare deployed homepage/Register visually with Francisca at desktop and phone sizes, especially the taller interactive and existing history-band typography limitation.
+
+## Luma registration and donations — 2026-09-16 (Claude, branch `luma-registration`, uncommitted)
+- Saber wants to stop paying for Eventbrite and still take donations. Compared Luma, a site form (EmailOctopus + Ko-fi) and Humanitix; **Saber chose Luma**. Reasons and prices (checked 2026-09-16) in `docs/REGISTRATION.md` and DECISIONS.md.
+- New CMS fields in `_data/event.yml` / `.pages.yml`: `luma_event_id` and `donation_note`. `donation_note` is pre-filled from his Sept 2025 wording (Zoom license, stipends for presenters and keynotes). It shows only once registration is open. **Confirm it still holds.**
+- `register/index.html`: when open, the donation note plus a Register link. With a Luma id, the link opens a native `<dialog>` loading `luma.com/embed/event/<id>/simple` (new host file `registration.js`, styles in `redesign.css` §5). Without JavaScript it links to Luma.
+- `scripts/verify.cjs` tests the popup when an id is set and prints SKIP otherwise.
+- **Luma event created 2026-09-16 on Saber's approval:** "Virtual CC Fest 2026", Sat Oct 17, 9:00am–12:30pm PT, public at https://luma.com/ascrcgll, id `evt-Ex8pvBo4PmxsrzG`. Schedule from Drive doc "Virtual CC Fest - October 17, 2026"; cover is a 1080px screenshot of Shristi's Creativity mode. Both values are now in `_data/event.yml` on this branch.
+- Stripe linked by Saber (Luma shows the account "ccfest.rocks", status "Incomplete — pending verification" at 07:37 PT). Ticket "Standard" is now Paid → Flexible Pricing, suggested $10 (Saber's choice), minimum 0. The public embed shows "Suggested Donation $10.00 · Pay what you want". Guest-side $0 checkout not tested, to avoid registering a real guest.
+- Still open on Luma: no location. Saber will send the Zoom Events link.
+
+## Verified
+- Unconfigured build: all six pages **byte-identical** to the baseline. Only `redesign.css` and the new `registration.js` differ. `verify.cjs` passes (the popup check SKIPs). Sync script is a no-op; `git diff --check` clean.
+- Throwaway build pointed at a stranger's public Luma event, with a pasted snippet as the "id": the value is escaped and the id extracted. `verify.cjs` passes in full, including opening, Escape, and focus returning. Luma's form rendered in the popup at desktop and 375px, where the popup fills the screen. Closing returns focus, with no page overflow. Nothing was registered.
+
+## Not verified
+- The real event in the popup: loads and `verify.cjs` passes against it. Not yet: donation ticket, Stripe payout, Zoom link, confirmation email.
+- Whether Luma accepts a $0 minimum on a flexible ticket (docs don't say; the fallback is two ticket types).
+- Safari/Firefox and real phones for the dialog.
+
+## Published
+- Saber reports Stripe verified and a location added in Luma (2026-09-16). He asked for registration on the site ("can you add registration to site?"). Committed on `luma-registration`, fast-forwarded `main`, pushed.
+
+## Next task
+Add the Zoom Events link in Luma when Saber sends it. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.

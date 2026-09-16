@@ -10,7 +10,7 @@ Related: [UPDATING.md](UPDATING.md) · [TEMPLATE.md](TEMPLATE.md) · [TYPOGRAPHY
 
 | Now a form field | Still in code or Figma |
 |---|---|
-| Event name, date, format, cost, level, registration link | Every layout, colour, and spacing rule |
+| Event name, date, format, cost, level, registration link, Luma event ID, donation note | Every layout, colour, and spacing rule |
 | Keynote speakers, sessions | Francisca's lettered headings (`data-figma-run` spans) |
 | The past-event archive and the homepage location badges | Shristi's interactive and all the motion |
 | Camps and programmes on /events/ | The prose on the About, Mailing List, and Code of Conduct pages |
@@ -28,6 +28,8 @@ The announcement states are structural, not copy:
 | `keynotes` | The two "to be announced" keynote cards Francisca designed |
 | `sessions` | The single "to be announced" session row |
 | `event.registration_url` | The mailing-list invitation instead of a registration button |
+| `event.luma_event_id` | Register links to Luma instead of opening the form on the page ([REGISTRATION.md](REGISTRATION.md)) |
+| `event.donation_note` | No donation line beside the Register button |
 
 So nobody ever has to invent a date or a speaker to make a page look finished. Clearing a field in the CMS is exactly as safe as never filling it in.
 

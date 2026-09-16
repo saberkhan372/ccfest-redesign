@@ -16,6 +16,8 @@
  *   visible. Then, on the homepage only: the ten monogram modes, keyboard
  *   selection, the canvas pausing and resuming, reduced motion, offscreen
  *   suspension, and that content still shows with JavaScript switched off.
+ *   Once registration is configured with a Luma event id, also the registration
+ *   dialog: it opens, loads Luma, closes on Escape, and returns focus.
  *
  * WHEN YOU ADD A PAGE
  *   Add its path to PAGES below.
@@ -119,12 +121,34 @@ const WIDTHS = [320, 390, 768, 1440];
     assert.equal(await page.evaluate(() => isLooping()), false, 'offscreen canvas should suspend');
     console.log('PASS ten mode selections, keyboard selection, scribble and canvas load, confetti and canvas pause/resume, reduced motion, offscreen suspension');
 
+    /* Registration dialog. It only exists once _data/event.yml has registration_url and luma_event_id. */
+    const register = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await register.goto(new URL('register/', base).href);
+    const lumaLink = register.locator('[data-luma-event]');
+    if (await lumaLink.count()) {
+      const dialog = register.locator('#registration-dialog');
+      await lumaLink.click();
+      assert.equal(await dialog.evaluate(d => d.open), true, 'Register should open the dialog');
+      assert.match(await dialog.locator('iframe').getAttribute('src'), /^https:\/\/luma\.com\/embed\/event\/evt-/);
+      await register.keyboard.press('Escape');
+      assert.equal(await dialog.evaluate(d => d.open), false, 'Escape should close the dialog');
+      assert.equal(await register.evaluate(() => document.activeElement.hasAttribute('data-luma-event')), true, 'focus should return to Register');
+      console.log('PASS registration dialog opens, loads Luma, closes on Escape, returns focus');
+    } else {
+      console.log('SKIP registration dialog: no Luma event id in _data/event.yml yet');
+    }
+    await register.close();
+
     /* Without JavaScript the controls hide, but the content still shows. */
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(base);
     assert.equal(await noJS.locator('.motion-toggle').isVisible(), false);
     assert.equal(await noJS.locator('.modes-list').isVisible(), false);
     assert.equal(await noJS.locator('.upcoming-copy').evaluate(e => getComputedStyle(e).opacity), '1');
+    await noJS.goto(new URL('register/', base).href);
+    if (await noJS.locator('[data-luma-event]').count()) {
+      assert.match(await noJS.locator('[data-luma-event]').getAttribute('href'), /^https:/, 'Register should still link to Luma');
+    }
     console.log('PASS no-JavaScript content fallback');
 
     assert.deepEqual(errors, []);
