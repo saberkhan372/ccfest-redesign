@@ -1,8 +1,16 @@
 # Site-wide details that appear in the footer and across several pages.
 # Edited through Pages CMS; read by _layouts/base.html and the pages.
 
+# The address is still what every mailto link uses — it is simply no longer
+# printed on the page as text, so it is not sitting there for scrapers either.
 email: mrkhanatndv@gmail.com
 tagline: Creative coding for connection, expression, and learning.
+
+# Shown in the footer in place of a bare address. Leave `linkedin` empty and
+# that icon is not rendered at all.
+organizer:
+  name: Saber Khan
+  linkedin: https://www.linkedin.com/in/edsaber/
 
 # Keep both credits. The designers asked for them on every page.
 credits:

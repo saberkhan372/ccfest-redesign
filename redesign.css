@@ -74,6 +74,11 @@ button { font: inherit; }
 .site-footer { font-size: 12px; border-top: 1px solid var(--line); gap: 1.5rem; }
 .site-footer strong.logo { font-size: 12px; }
 .design-credits { grid-column: 1 / -1; font-size: 11px; }  /* designer credits: keep on every page */
+.organizer { display: flex; align-items: center; gap: .5rem; }
+.icon-links { display: inline-flex; gap: .4rem; }
+.icon-link { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; color: var(--ink); }
+.icon-link:hover { color: var(--accent); }
+.icon-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* --- 4. Homepage --------------------------------------------------------- */
 .home-hero { overflow: hidden; position: relative; padding-top: clamp(3rem,6.7vw,6rem); padding-bottom: clamp(3rem,6.7vw,6rem); }

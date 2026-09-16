@@ -14,7 +14,7 @@ Related: [UPDATING.md](UPDATING.md) · [TEMPLATE.md](TEMPLATE.md) · [TYPOGRAPHY
 | Keynote speakers, sessions | Francisca's lettered headings (`data-figma-run` spans) |
 | The past-event archive and the homepage location badges | Shristi's interactive and all the motion |
 | Camps and programmes on /events/ | The prose on the About, Mailing List, and Code of Conduct pages |
-| Contact email, footer tagline, designer credits | |
+| Contact email, footer tagline, organizer name and LinkedIn, designer credits | |
 
 Nothing in the admin UI can reach the lettering. It is generated from `design/figma-typography.json` by `scripts/sync-typography.cjs`, which the CMS never runs.
 

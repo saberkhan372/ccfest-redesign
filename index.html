@@ -302,7 +302,7 @@ home: true
         </div>
         <p class="mailing-body anim-scroll">
           To join the CC Fest mailing list, send an email to
-          <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.email | escape }}</a>
+          <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.organizer.name | escape }}</a>
           with the subject line <em>Join mailing list</em>.
         </p>
       </section>
@@ -328,8 +328,8 @@ home: true
             </p>
             <p>
               If you experience or witness unacceptable behavior, or have any
-              other concerns, please contact an organizer at
-              <a href="mailto:{{ site.data.site.email | escape }}">{{ site.data.site.email | escape }}</a>.
+              other concerns, please contact
+              <a href="mailto:{{ site.data.site.email | escape }}">{{ site.data.site.organizer.name | escape }}</a>.
             </p>
             <p><a href="code-of-conduct/">Read the full code of conduct →</a></p>
           </div>

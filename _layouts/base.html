@@ -32,7 +32,7 @@
     <footer class="site-footer page-width">
       {% include logo-footer.html %}
       <p>{{ site.data.site.tagline | escape }}</p>
-      <a href="mailto:{{ site.data.site.email | escape }}">{{ site.data.site.email | escape }}</a>
+      {% include contact-links.html %}
       <p class="design-credits">{% for credit in site.data.site.credits %}{{ credit.role | escape }}: <a href="{{ credit.url | escape }}">{{ credit.name | escape }}</a>{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
     </footer>
 {%- if page.home %}

@@ -23,14 +23,14 @@ nav_current: "mailing-list"
             <div class="signup-embed"><script async src="https://{{ embed_host | escape }}/form/{{ embed_form_id | escape }}.js" data-form="{{ embed_form_id | escape }}"></script></div>
             <noscript>
               <p>The sign-up form needs JavaScript. {% if signup_url != "" %}<a href="{{ signup_url | escape }}">Sign up on EmailOctopus</a>, or email{% else %}Email{% endif %}
-              <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.email | escape }}</a> with the subject line <em>Join mailing list</em>.</p>
+              <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.organizer.name | escape }}</a> with the subject line <em>Join mailing list</em>.</p>
             </noscript>
 {% elsif signup_url != "" %}            <h2 id="join-title">Sign up.</h2>
             <p>The sign-up form opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.</p>
             <a class="button button-solid" href="{{ signup_url | escape }}" target="_blank" rel="noopener">Join the mailing list ↗</a>
 {% else %}            <h2 id="join-title">Send one email.</h2>
             <p>
-              Email <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.email | escape }}</a>
+              Email <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.organizer.name | escape }}</a>
               with the subject line <em>Join mailing list</em>, and you’ll be added to the list.
             </p>
             <a class="button button-solid" href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">Join the mailing list →</a>
@@ -46,11 +46,11 @@ nav_current: "mailing-list"
         </div>
 {% if embed_form_id != "" or signup_url != "" %}        <p class="signup-note">
           We respect your privacy. Every CC Fest email carries an unsubscribe link, or write to
-          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.email | escape }}</a>
+          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.organizer.name | escape }}</a>
           and we’ll take you off the list.
         </p>{% else %}        <p class="signup-note">
           We respect your privacy. Unsubscribe any time by emailing
-          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.email | escape }}</a>
+          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.organizer.name | escape }}</a>
           or replying to any CC Fest email.
         </p>{% endif %}
       </section>
