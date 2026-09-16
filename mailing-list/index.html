@@ -7,7 +7,7 @@ root: "../"
 home_href: "../"
 nav_current: "mailing-list"
 ---
-{% assign list = site.data.site.mailing_list %}{% assign signup_url = list.signup_url | default: "" | strip %}{% assign form_action = list.form_action | default: "" | strip %}{% assign email_field = list.email_field | default: "field_0" | strip %}{% assign honeypot_field = list.honeypot_field | default: "" | strip %}    <main id="main-content">
+{% assign list = site.data.site.mailing_list %}{% assign signup_url = list.signup_url | default: "" | strip %}{% assign embed_form_id = list.embed_form_id | default: "" | strip %}{% assign embed_host = list.embed_host | default: "" | strip %}    <main id="main-content">
       <section class="hero page-hero page-width" aria-labelledby="page-title">
         <p class="eyebrow">Stay in touch</p>
         <h1 id="page-title" data-figma-node="218:209"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.025em; text-transform: none">Join the mailing list.</span></h1>
@@ -18,14 +18,13 @@ nav_current: "mailing-list"
         <div class="signup-panel">
           <div>
             <p class="eyebrow">How to join</p>
-{% if form_action != "" %}            <h2 id="join-title">Sign up.</h2>
-            <p>Add your email and we’ll send you a note to confirm. Nothing else, and never your address to anyone.</p>
-            <form class="signup-form" action="{{ form_action | escape }}" method="post">
-              <label for="signup-email">Email address</label>
-              <input id="signup-email" type="email" name="{{ email_field | escape }}" autocomplete="email" placeholder="you@example.com" required>
-{% if honeypot_field != "" %}              <div class="signup-trap" aria-hidden="true"><input type="text" name="{{ honeypot_field | escape }}" tabindex="-1" autocomplete="off"></div>
-{% endif %}              <button class="button button-solid" type="submit">Join the mailing list →</button>
-            </form>
+{% if embed_form_id != "" %}            <h2 id="join-title">Sign up.</h2>
+            <p>Add your email below and we’ll send a note to confirm. The form is run by EmailOctopus, who send the list for us.</p>
+            <div class="signup-embed"><script async src="https://{{ embed_host | escape }}/form/{{ embed_form_id | escape }}.js" data-form="{{ embed_form_id | escape }}"></script></div>
+            <noscript>
+              <p>The sign-up form needs JavaScript. {% if signup_url != "" %}<a href="{{ signup_url | escape }}">Sign up on EmailOctopus</a>, or email{% else %}Email{% endif %}
+              <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.email | escape }}</a> with the subject line <em>Join mailing list</em>.</p>
+            </noscript>
 {% elsif signup_url != "" %}            <h2 id="join-title">Sign up.</h2>
             <p>The sign-up form opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.</p>
             <a class="button button-solid" href="{{ signup_url | escape }}" target="_blank" rel="noopener">Join the mailing list ↗</a>
@@ -45,7 +44,7 @@ nav_current: "mailing-list"
             </ul>
           </div>
         </div>
-{% if form_action != "" or signup_url != "" %}        <p class="signup-note">
+{% if embed_form_id != "" or signup_url != "" %}        <p class="signup-note">
           We respect your privacy. Every CC Fest email carries an unsubscribe link, or write to
           <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.email | escape }}</a>
           and we’ll take you off the list.

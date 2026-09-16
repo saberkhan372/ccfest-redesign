@@ -133,10 +133,9 @@ content:
         type: object
         description: "Leave every field empty and the site keeps the 'email us to join' flow. Fill ONE of the first two."
         fields:
-          - { name: signup_url, label: "EmailOctopus hosted sign-up page", type: string, required: false, description: "The safest option: the buttons link straight to it." }
-          - { name: form_action, label: "Or: the form's action URL", type: string, required: false, description: "From the EmailOctopus embed code, to put the form on the page itself." }
-          - { name: email_field, label: "Email field name", type: string, required: false, description: "From the same embed code, usually field_0. A wrong name means signups vanish without an error." }
-          - { name: honeypot_field, label: "Spam-trap field name", type: string, required: false, description: "From the same embed code, the hidden field whose name starts with hp." }
+          - { name: embed_form_id, label: "EmailOctopus form id", type: string, required: false, description: "The id in the embed snippet: <script src=\".../form/<ID>.js\" data-form=\"<ID>\">. Paste just the id. Empty means the page keeps the 'email us to join' text." }
+          - { name: embed_host, label: "Embed host", type: string, required: false, description: "The host from that same snippet, e.g. eomail5.com. Take it from the snippet rather than assuming." }
+          - { name: signup_url, label: "Hosted sign-up page (fallback)", type: string, required: false, description: "Shown to visitors without JavaScript, and used on its own if no form id is set." }
       - name: credits
         label: Designer credits
         type: object

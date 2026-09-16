@@ -15,22 +15,20 @@ credits:
 
 # Mailing list.
 #
-# Leave all of this empty and the site keeps the "email us to join" flow it uses
-# today — which is what it should keep doing until a real form has been tested
-# with a real submission. The Squarespace form failed silently for months; this
-# one does not go live until someone watches a test signup arrive.
+# Sign-ups go to EmailOctopus. Leave every field empty and the site keeps the
+# "email us to join" flow it used before — which is what it should do until a
+# real test sign-up has been watched arriving. The Squarespace form failed
+# silently for months; this one does not go live on a hope.
 #
-# Fill ONE of these two:
-#   signup_url   the EmailOctopus hosted landing page. Safest: the buttons just
-#                link to it, and there is no markup of ours to get wrong.
-#   form_action  the action URL from the EmailOctopus embed code, to put the form
-#                on the page itself, styled to match the site.
-#
-# If you use form_action, copy email_field and honeypot_field out of that same
-# embed code. EmailOctopus generates those names per form, and a wrong name means
-# signups vanish without an error.
+# embed_form_id  The id from the EmailOctopus embed snippet: the script tag
+#                reads <script async src="https://eomail5.com/form/<ID>.js"
+#                data-form="<ID>">. Paste just the ID.
+# embed_host     The host in that same snippet. It is part of the snippet
+#                EmailOctopus gives you, so take it from there rather than
+#                assuming it stays eomail5.com forever.
+# signup_url     A hosted EmailOctopus page. Used as the fallback for visitors
+#                without JavaScript, and on its own if you prefer a plain link.
 mailing_list:
+  embed_form_id: 8133f682-b182-11f1-89de-6f96882e7f57
+  embed_host: eomail5.com
   signup_url:
-  form_action:
-  email_field: field_0
-  honeypot_field:
