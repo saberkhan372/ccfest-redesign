@@ -43,3 +43,7 @@
 ## 2026-09-16 — Luma's form in our own `<dialog>`, not Luma's button script
 **Why:** Luma's `checkout-button.js` has to load on every page view, Escape doesn't close its overlay, and its close button has no label. `registration.js` loads Luma's documented embed URL into a native dialog only when someone clicks Register, so Escape, focus return and a labelled Close come from the browser. The Register link still goes to Luma without JavaScript.
 **Rejected:** Luma's script, as above; an always-visible iframe in the dashed box (contacts Luma on every visit, and a fixed-height frame is cramped on phones).
+
+## 2026-09-16 — No pause button; a floating "Upcoming" reminder instead
+**Why:** Shristi and Saber, meeting 2026-09-16. By then the button paused only the interactive, and someone who paused and forgot would find every mode dead. All of its motion starts only when someone picks a mode or points at it, and the rest of the page is still after load, so a sitewide pause wasn't needed. The corner it used now holds a floating reminder for the upcoming event, shown on every page while registration is open. The system "reduce motion" setting still stills the canvas, confetti and scribble.
+**Rejected:** Resetting pause on every mode change (then it pauses nothing); a sitewide floating pause control (puts a non-problem on every page); dropping reduced-motion support along with the button.

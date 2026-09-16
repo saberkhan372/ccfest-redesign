@@ -44,7 +44,8 @@ python3 -m http.server 8876 --bind 127.0.0.1
 | `animations.js` | **Shristi** | Scroll reveals and the monogram mode switcher |
 | `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, `coding-power.js` | **Shristi** | The interactive modes (p5 canvas, confetti, scribble draw-in, power icons) |
 | `redesign.css` | Saber + Francisca | Integrated visual design, variable type, responsive adaptations |
-| `interaction.js` | Saber | Motion pause, reduced motion, and the p5 canvas lifecycle |
+| `interaction.js` | Saber | Reduced motion and the p5 canvas lifecycle |
+| `event-banner.js` | Saber | The floating "Upcoming" reminder while registration is open |
 | `assets/` | Saber | Local fonts/licenses, original design SVGs, p5, and images |
 | Figma: CC Fest — Redesign | **Francesca** | Visual design, spacing, colour, and component specs |
 

@@ -48,4 +48,6 @@ Donations go to the organizer, not to a registered charity, so tools limited to 
 - **Inside the form, Escape does nothing:** keyboard focus is in Luma's frame, which the page can't listen to. Close and the backdrop both work. Escape works while focus is on Close.
 - **A school network that blocks luma.com** blocks the popup and the link alike. The popup's footer links to Luma directly for people whose frames are blocked.
 
-Styles are in `redesign.css` §5 (`.registration-dialog`). `scripts/verify.cjs` tests the popup once an event ID is set, and says SKIP until then.
+**The floating "Upcoming" reminder** appears on every page while `registration_url` is set (`_layouts/base.html`, `event-banner.js`). It links to the registration section. Hide lasts for the visit, it steps aside while the registration section is on screen, and it removes itself two days after the event date even if nobody clears the link.
+
+Styles are in `redesign.css` §5 (`.registration-dialog`, `.event-banner`). `scripts/verify.cjs` tests the popup once an event ID is set, and says SKIP until then.

@@ -33,3 +33,7 @@
 - **Escape doesn't close the registration dialog while focus is inside Luma's form.** Key presses inside a cross-origin iframe never reach the page. Close and the backdrop still work.
 
 - **After a deploy, a browser can show the new page with the previous deploy's CSS.** GitHub Pages serves every file with `cache-control: max-age=600`, so for up to ten minutes a visitor can get new HTML with a cached stylesheet. That is how the registration dialog first appeared unstyled, at the browser's default 300×150 iframe size. `_layouts/base.html` now adds `?v=<commit>` (`site.github.build_revision`) to local CSS and JS URLs. The value only exists on GitHub's builders, so local builds print plain URLs and stay byte-identical. Any new local stylesheet or script needs the same `{{ v }}`.
+
+- **A component with its own `display` ignores the `hidden` attribute.** The browser's `[hidden] { display: none }` has the lowest specificity, so `.event-banner { display: flex }` kept the reminder on screen after Hide was pressed. Every such component needs its own `[hidden] { display: none }`.
+
+- **Scroll with `behavior: 'instant'` in browser checks.** The site scrolls smoothly, so a check that calls `scrollTo()` and then measures reads positions mid-scroll. It made the footer-overlap check fail at random.

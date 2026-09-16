@@ -27,7 +27,7 @@ The announcement states are structural, not copy:
 | `event.date` | "To be confirmed", and "TBC <year>" where space is tight |
 | `keynotes` | The two "to be announced" keynote cards Francisca designed |
 | `sessions` | The single "to be announced" session row |
-| `event.registration_url` | The mailing-list invitation instead of a registration button |
+| `event.registration_url` | The mailing-list invitation instead of a registration button, and no floating "Upcoming" reminder on any page |
 | `event.luma_event_id` | Register links to Luma instead of opening the form on the page ([REGISTRATION.md](REGISTRATION.md)) |
 | `event.donation_note` | No donation line beside the Register button |
 

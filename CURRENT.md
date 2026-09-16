@@ -181,5 +181,13 @@ Send Shristi the review notes above (confetti listeners first). Check the live h
 - Code of conduct now credits its author, linked to https://marieflanagan.com/about/. Saber confirmed the name "Marie Claire Flanagan" (her page shows "Marie LeBlanc Flanagan"; Saber chose the former).
 - Pushed on Saber's instruction ("commit all and push").
 
+## Shristi's feedback, 2026-09-16 (meeting with Saber; the AI notes call her "Christy")
+- **Pause button removed** (index.html, interaction.js, redesign.css §7/§10, verify.cjs). `prefers-reduced-motion` still stops the canvas and SVG wobble and hides confetti/scribble draw-in. See DECISIONS.md.
+- **Floating "Upcoming" reminder** on every page while `registration_url` is set: `_layouts/base.html` plus new `event-banner.js`. Links to the registration section, Hide lasts for the visit (sessionStorage), steps aside while #registration is on screen, and removes itself 2 days after the event date. Footer gets bottom padding so it never covers the credits (verify checks this at 4 widths × 6 pages).
+- **Responsiveness:** found two jumps, fixed both. (1) At ≤650px the mode labels jumped from inside the Cs to the stage's bottom corners, far from the art; now each sits 8px under its C, centred (measured 320–650 in Creativity and Creative Commons, inside stage, no collision). (2) The hero half-circle snapped from 180px to 65px at 900px and overlapped the tagline at 651–768 when unpinned; now it scales smoothly and stays clear. It also covered "coding" at 320px, pre-existing, fixed with hero bottom padding. Shristi's "custom positioning" in her own branch may supersede (1).
+- **p5 performance (measured, Playwright/CDP, 1440×900):** page script ≤14 ms/s at normal CPU (Change mode, the busiest), ≤30 ms/s at 4× CPU throttle. Moving the mouse outside the stage costs no more than inside or idle. Scrolled away, the canvas stops (~2 ms/s). Load: one 136 ms long task at 4× (parsing p5, 249 KB gzipped). 32 rapid page loads: no errors, one canvas, looping correctly after.
+- **Mouse scoping:** not changed. No performance case. Doing it means editing Shristi's files (confetti listens on `document`; change-sketch reads p5's window-wide `mouseX`), so it's hers to decide in her new branch.
+- Not done by agent: Saber's editorial paragraphs per mode, Shristi's new branch, post-fest redesign.
+
 ## Next task
 Add the Zoom Events link in Luma when Saber sends it. Before the event, import mailing-list opt-ins from Luma into EmailOctopus. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.

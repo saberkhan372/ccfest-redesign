@@ -13,9 +13,10 @@
  * WHAT IT CHECKS
  *   Every page at four widths: no sideways scrolling, no failed images, no broken
  *   in-page links, no duplicate ids, fonts actually loaded, scroll-reveal content
- *   visible. Then, on the homepage only: the ten monogram modes, keyboard
- *   selection, the canvas pausing and resuming, reduced motion, offscreen
- *   suspension, and that content still shows with JavaScript switched off.
+ *   visible, and the floating event reminder never covering the footer credits.
+ *   Then, on the homepage only: the ten monogram modes, keyboard selection,
+ *   reduced motion, offscreen suspension, and that content still shows with
+ *   JavaScript switched off.
  *   Once registration is configured with a Luma event id, also the registration
  *   dialog: it opens, loads Luma, closes on Escape, and returns focus.
  *
@@ -60,12 +61,22 @@ const WIDTHS = [320, 390, 768, 1440];
         }));
         assert.deepEqual(state, { overflow: false, brokenImages: [], brokenAnchors: [], duplicateIds: [], hiddenCopy: 0, font: true }, `${width}px ${path}`);
 
+        // At the very bottom, the floating reminder (when registration is open) must not sit on the credits.
+        const covered = await page.evaluate(() => {
+          scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' });  // the site scrolls smoothly otherwise
+          const banner = document.querySelector('.event-banner');
+          if (!banner || banner.hidden) return false;
+          const a = banner.getBoundingClientRect(), b = document.querySelector('.design-credits').getBoundingClientRect();
+          return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+        });
+        assert.equal(covered, false, `${width}px ${path}: event reminder covers the credits`);
+
         await page.evaluate(() => scrollTo(0, 0));
         if (width === 390 || width === 1440) {
           await page.screenshot({ path: `/tmp/ccfest-${path ? path.replace(/\/$/, '') : 'home'}-${width}.png`, fullPage: true });
         }
       }
-      console.log(`PASS pages, fonts, images, anchors, reveal visibility, overflow at ${width}px`);
+      console.log(`PASS pages, fonts, images, anchors, reveal visibility, overflow, event reminder clear of credits at ${width}px`);
       await page.close();
     }
 
@@ -85,14 +96,8 @@ const WIDTHS = [320, 390, 768, 1440];
     assert.equal(await page.locator('#scribbleLeftPath, #scribbleRightPath').count(), 2, 'scribble paths should load');
     assert.equal(await page.locator('.anim-stage.canvas-ready').count(), 1, 'p5 canvas should mount');
 
-    // Pausing hides the confetti and stops the scribble wobble (an SVG animation CSS cannot reach).
-    await page.locator('.mode-btn[data-mode="celebration"]').click();
-    await page.locator('.motion-toggle').click();
-    assert.equal(await page.locator('#confettiLayer').isVisible(), false, 'paused confetti should hide');
-    assert.equal(await page.evaluate(() => document.querySelector('.cc-mono').animationsPaused()), true);
-    await page.locator('.motion-toggle').click();
-    assert.equal(await page.locator('#confettiLayer').isVisible(), true);
-    assert.equal(await page.evaluate(() => document.querySelector('.cc-mono').animationsPaused()), false);
+    // There is no pause button any more (decided with Shristi, 2026-09-16).
+    assert.equal(await page.locator('.motion-toggle').count(), 0);
 
     // Arrow keys move selection along the button group.
     await page.locator('.mode-btn').first().focus();
@@ -102,24 +107,43 @@ const WIDTHS = [320, 390, 768, 1440];
     // The p5 canvas ("Change" mode) runs only when it should.
     await page.waitForTimeout(200);
     assert.equal(await page.evaluate(() => isLooping()), true);
-    await page.locator('.motion-toggle').click();
-    await page.waitForTimeout(100);
-    assert.equal(await page.evaluate(() => isLooping()), false, 'pause button should stop the canvas');
-    await page.locator('.motion-toggle').click();
-    assert.equal(await page.evaluate(() => isLooping()), true, 'resume should restart the canvas');
 
+    // The system "reduce motion" setting stills the canvas, hides confetti and stops the scribble wobble.
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.waitForTimeout(150);
     assert.equal(await page.evaluate(() => isLooping()), false, 'reduced motion should stop the canvas');
-    assert.equal(await page.locator('.motion-toggle').getAttribute('aria-pressed'), 'true');
+    assert.equal(await page.evaluate(() => document.querySelector('.cc-mono').animationsPaused()), true);
+    await page.locator('.mode-btn[data-mode="celebration"]').click();
+    assert.equal(await page.locator('#confettiLayer').isVisible(), false, 'reduced motion should hide confetti');
     await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.waitForTimeout(150);
+    assert.equal(await page.evaluate(() => document.querySelector('.cc-mono').animationsPaused()), false);
+    assert.equal(await page.locator('#confettiLayer').isVisible(), true);
 
     // Scrolling the canvas out of view suspends it.
     await page.locator('.mode-btn[data-mode="change"]').click();
     await page.locator('footer').scrollIntoViewIfNeeded();
     await page.waitForTimeout(150);
     assert.equal(await page.evaluate(() => isLooping()), false, 'offscreen canvas should suspend');
-    console.log('PASS ten mode selections, keyboard selection, scribble and canvas load, confetti and canvas pause/resume, reduced motion, offscreen suspension');
+    console.log('PASS ten mode selections, keyboard selection, scribble and canvas load, reduced motion, offscreen suspension');
+
+    /* Floating event reminder: Hide lasts for the visit, and it steps aside for the registration section. */
+    if (await page.locator('.event-banner').count()) {
+      await page.locator('.event-banner-close').click();
+      assert.equal(await page.locator('.event-banner').isVisible(), false, 'Hide should hide the reminder');
+      await page.goto(new URL('events/', base).href);
+      assert.equal(await page.locator('.event-banner').isVisible(), false, 'Hide should last for the visit');
+      const fresh = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+      await fresh.goto(new URL('register/', base).href);
+      assert.equal(await fresh.locator('.event-banner').isVisible(), true);
+      await fresh.locator('#registration').scrollIntoViewIfNeeded();
+      await fresh.waitForTimeout(200);
+      assert.equal(await fresh.locator('.event-banner').isVisible(), false, 'reminder should step aside on the registration section');
+      await fresh.close();
+      console.log('PASS event reminder hides for the visit and steps aside for the registration section');
+    } else {
+      console.log('SKIP event reminder: no registration link in _data/event.yml');
+    }
 
     /* Registration dialog. It only exists once _data/event.yml has registration_url and luma_event_id. */
     const register = await browser.newPage({ viewport: { width: 1440, height: 900 } });
@@ -142,7 +166,6 @@ const WIDTHS = [320, 390, 768, 1440];
     /* Without JavaScript the controls hide, but the content still shows. */
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(base);
-    assert.equal(await noJS.locator('.motion-toggle').isVisible(), false);
     assert.equal(await noJS.locator('.modes-list').isVisible(), false);
     assert.equal(await noJS.locator('.upcoming-copy').evaluate(e => getComputedStyle(e).opacity), '1');
     await noJS.goto(new URL('register/', base).href);

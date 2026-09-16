@@ -28,7 +28,7 @@ python3 -m http.server 8876 --bind 127.0.0.1
 - **Don't hand-edit `data-figma-run` spans.** Change `design/figma-typography.json`, then run `node scripts/sync-typography.cjs`.
 - **Shristi's work arrives by pull request.** Merge it on a branch as in [docs/UPDATING.md](docs/UPDATING.md) §2 — never straight onto `main`, and never revert `main` to make a merge easier.
 - **Keep the designer credits** (`.design-credits`) in every footer.
-- **Respect ownership.** `animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, and `coding-power.js` are Shristi's and stay identical to her branch; Figma is Francisca's. Host-side changes go in `redesign.css`, `interaction.js` or `registration.js` — and say so in your summary.
+- **Respect ownership.** `animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, and `coding-power.js` are Shristi's and stay identical to her branch; Figma is Francisca's. Host-side changes go in `redesign.css`, `interaction.js`, `event-banner.js` or `registration.js` — and say so in your summary.
 
 ## Where changes go
 
@@ -37,7 +37,8 @@ python3 -m http.server 8876 --bind 127.0.0.1
 | Colours, fonts, sizes, spacing, responsive fixes | The matching numbered section of `redesign.css` |
 | Page structure or content | That page's `index.html` |
 | Base layout primitives used everywhere | `styles.css` (rare) |
-| Motion preferences, pause behaviour | `interaction.js` |
+| Reduced motion, p5 canvas lifecycle | `interaction.js` |
+| Floating "Upcoming" reminder | `_layouts/base.html`, `event-banner.js` |
 | Registration popup (Luma) | `registration.js`; setup in [docs/REGISTRATION.md](docs/REGISTRATION.md) |
 | Figma lettering | `design/figma-typography.json` + `scripts/sync-typography.cjs` |
 
@@ -63,8 +64,8 @@ Match the surrounding style: one-line CSS rules grouped under the section commen
 
 **Interactive / motion change**
 - [ ] Works with JavaScript disabled (content visible, controls hidden)
-- [ ] Honours `prefers-reduced-motion` and the pause button
-- [ ] Canvas stops when offscreen, hidden, or paused
+- [ ] Honours `prefers-reduced-motion` (there is no pause button, by decision; see DECISIONS.md)
+- [ ] Canvas stops when offscreen, hidden, in another mode, or under reduced motion
 
 ## Verify before reporting done
 

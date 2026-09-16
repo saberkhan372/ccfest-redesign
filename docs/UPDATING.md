@@ -58,13 +58,13 @@ Her branch started before Jekyll and the CMS, so a plain merge conflicts. Her PR
    git merge --no-commit shristi-pr-<number>
    ```
 2. **Take her files whole**: `git checkout --theirs <file>` for any of her files that conflict. Don't hand-patch her keyframes or scripts. Her earlier snapshot in `Shristi-ccfest-redesign-10-years-origin/` is still there for comparison; never edit it.
-3. **Keep our `index.html`** (`git checkout --ours index.html`; it is a Jekyll page) and copy her `<section class="anim-stage">` into it. Re-add the host parts: `aria-label` and `data-mode="creativity"` on the section, `role="tab"` on each button (her script sets `aria-selected`), `aria-hidden="true"` on the artwork SVG, the starting label text, and the `.motion-toggle` button.
+3. **Keep our `index.html`** (`git checkout --ours index.html`; it is a Jekyll page) and copy her `<section class="anim-stage">` into it. Re-add the host parts: `aria-label` and `data-mode="creativity"` on the section, `role="tab"` on each button (her script sets `aria-selected`), `aria-hidden="true"` on the artwork SVG, and the starting label text. (There is no pause button any more; don't re-add one.)
 4. **New scripts** go in the `page.home` block at the end of `_layouts/base.html`, before `interaction.js`.
 5. **Host-side needs** live here, never in her files:
-   - `redesign.css` section 7: stage width, button and label type, pause button, no-JS and paused states, Change-canvas blending, Connection layer sizing
-   - `interaction.js`: pause button, `prefers-reduced-motion`, SVG animation pausing, and the p5 lifecycle (the canvas stops when paused, offscreen, in a hidden tab, or in another mode)
+   - `redesign.css` section 7: stage width, button and label type, phone label positions, no-JS and reduced-motion states, Change-canvas blending, Connection layer sizing
+   - `interaction.js`: `prefers-reduced-motion`, SVG animation pausing, and the p5 lifecycle (the canvas stops offscreen, in a hidden tab, in another mode, or under reduced motion)
 6. **Don't shorten the stage on desktop.** Each mode uses her full `95dvh` stage, and she asked that it not be clipped. Phones use 540px (section 9); check nothing crops there.
-7. **Check it**: `scripts/verify.cjs` (ten modes, arrow keys, pause, reduced motion, offscreen, no JavaScript), then look at every mode at 1440 and 390px against her recording or description. The other pages should build byte-identical to `main`.
+7. **Check it**: `scripts/verify.cjs` (ten modes, arrow keys, reduced motion, offscreen, no JavaScript), then look at every mode at 1440 and 390px against her recording or description. The other pages should build byte-identical to `main`.
 8. **Keep her credit** in the footer (`.design-credits`).
 
 ---

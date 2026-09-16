@@ -30,7 +30,8 @@ Use port 8876 — see [../GOTCHAS.md](../GOTCHAS.md).
 | `redesign.css` | The current look, layered on the base. Sectioned and commented. | Saber + Francisca |
 | `animations.js` | Scroll reveals and the mode switcher | **Shristi** |
 | `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, `coding-power.js` | Change, Celebration, Creativity, and Coding modes | **Shristi** |
-| `interaction.js` | Pause button, reduced motion, p5 canvas lifecycle | Saber |
+| `interaction.js` | Reduced motion, p5 canvas lifecycle | Saber |
+| `event-banner.js` | Floating "Upcoming" reminder: Hide for the visit, steps aside on the registration section | Saber |
 | `assets/fonts/` | Anybody (variable, upright + italic), Overpass Mono, with licences | — |
 | `assets/design/` | SVG shapes exported from Figma | — |
 | `design/figma-typography.json` | Letter-level type data read from Figma | generated |
@@ -160,9 +161,9 @@ Keep: `lang`, the skip link, one `<h1>`, `aria-labelledby` on each section, `ari
 
 - Tabs `.mode-btn[role="tab"][data-mode]`: creativity, change, connection, celebration, collaboration, creative-commons, conversations, community, curiosity, coding.
 - `animations.js` copies the chosen mode onto `#monogramWrap`, `.anim-stage-main`, and `.anim-stage`; CSS styles each mode via `[data-mode="…"]`.
-- "Change" draws on a p5.js canvas (`change-sketch.js`); `interaction.js` runs it only while visible, selected, and not paused.
+- "Change" draws on a p5.js canvas (`change-sketch.js`); `interaction.js` runs it only while visible, selected, and without reduced motion.
 - Celebration, Creativity, and Coding have their own scripts; Creativity fetches its scribbles from `assets/animation/` at runtime.
-- `.motion-toggle` pauses everything; `prefers-reduced-motion` pauses automatically.
+- There is no pause button: every mode moves only once someone picks it or points at it. `prefers-reduced-motion` stills the canvas, confetti, and scribble automatically.
 - Updating it from her pull requests: [UPDATING.md](UPDATING.md#2-shristis-interactive-her-pull-requests).
 
 ## Animation hooks
