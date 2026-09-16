@@ -226,13 +226,13 @@ home: true
               Workshops, talks, and community for creative coders of all levels.
               {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }} — join the mailing list for updates.{% else %}Date to be announced — join the mailing list for updates.{% endif %}
             </p>
-            <a class="button button-light" href="register/">Explore the event →</a>
+            <a class="button button-light" href="register/">View event &amp; register →</a>
           </div>
           <div class="upcoming-facts anim-scroll anim-upcoming-meta">
             <div><span>Format</span><strong>{{ event.format | escape }}</strong></div>
             <div><span>Date</span><strong>{% if event_date != "" %}{{ event.date | date: "%b %-d, %Y" }}{% else %}TBC {{ event.year | escape }}{% endif %}</strong></div>
             <div><span>Cost</span><strong>{{ event.cost | escape }}</strong></div>
-            <div><span>Experience</span><strong>{{ event.level | escape }}</strong></div>
+            <div><span>Levels</span><strong>{{ event.level | escape }}</strong></div>
           </div>
         </div>
       </section>

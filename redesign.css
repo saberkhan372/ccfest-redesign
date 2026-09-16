@@ -49,7 +49,7 @@
  --soft-line: #dcdcd8;  /* lighter borders */
  --accent: #2d5bff;     /* blue: buttons, links, some headings */
  --orange: #ff4d2e;     /* upcoming band, event facts */
- --lime: #c5ff32;       /* mailing list, registration band */
+ --lime: #c8ff32;       /* mailing list, registration band */
  --cc-orange: var(--orange);  /* kept: older names used by styles.css */
  --accent-ink: var(--ink);
  --page-width: 1440px;  /* Figma frame width */
