@@ -204,3 +204,12 @@ Send Shristi the review notes above (confetti listeners first). Check the live h
 
 ## Next task
 Add the Zoom Events link in Luma when Saber sends it. Before the event, import mailing-list opt-ins from Luma into EmailOctopus. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.
+
+## Final nav and content updates — 2026-09-16 (Claude, branch `final-updates`, uncommitted)
+- **Register in the main nav**, first item, on every page that uses `nav-main` (the register page keeps its own in-page nav).
+- **Visible Java page** at `/events/visible-java/`, adapted from ccfest.rocks/visible-java. The orange facts band, eyebrow and summary come from its entry in `_data/camps.yml`. The rest of the copy is written into the page. The Events card now links to it; `event-card.html` opens full `https://` links in a new tab and treats anything else as a page on this site. Interest list links to the same Google Form ccfest.rocks embeds (a link, not an iframe).
+- **Past Events: new "Camps and classes" section** from `classes` in `_data/past_events.yml` (CMS form added): Learning Machines (Summer 2026), Coding Camp (Spring 2026), Teacher Camp (Fall 2025), Spring 2025, Teacher Camp (Fall 2024). Sources: ccfest.rocks/learning-machines and /teacher-camp-fall-2024. Sections renumbered 01–03.
+- New styles in `redesign.css` §6 (host-side). `verify.cjs` PAGES includes the new page.
+- Verified: `jekyll build --safe`; only the nav, the Events card, Past Events, `redesign.css` and the new page differ from the baseline. In the in-app browser, all 7 pages at 320/390/768/1440 have no overflow, one h1, no duplicate IDs or broken in-page anchors, and no console errors. Screenshots at 1440 and 390 checked.
+- Not verified: `verify.cjs` (Playwright not installed here), Safari/Firefox.
+- Open: the Spring 2026 class links to a `notion.so` page, which may need a Notion login (the others are public `notion.site` pages). The Spring 2025 camp's name isn't on ccfest.rocks, so it's listed as "CC Fest camp, Spring 2025". The new page has no Figma lettering for Francisca to review.

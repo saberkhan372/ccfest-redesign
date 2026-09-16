@@ -24,7 +24,7 @@ Use port 8876 — see [../GOTCHAS.md](../GOTCHAS.md).
 |---|---|---|
 | `index.html` | Homepage | Saber |
 | `register/index.html` | Event page (Figma frame 251:732) | Saber |
-| `events/`, `past-events/`, `mailing-list/`, `code-of-conduct/` | Inner pages (`body.inner-page`). **Best starting point for a new page.** | Saber |
+| `events/`, `events/visible-java/`, `past-events/`, `mailing-list/`, `code-of-conduct/` | Inner pages (`body.inner-page`). **Best starting point for a new page.** | Saber |
 | `styles.css` | Base layout: tokens, header, sections, buttons, footer | Saber |
 | `animations.css` | Motion: load and scroll reveals, the ten-mode interactive | **Shristi** |
 | `redesign.css` | The current look, layered on the base. Sectioned and commented. | Saber + Francisca |

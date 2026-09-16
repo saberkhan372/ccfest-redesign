@@ -85,6 +85,35 @@ events:
     url: "https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb"
     link_text: "The first CC Fest"
 
+# `classes` is the "Camps and classes" list on /past-events/: CC Fest's
+# multi-week courses for educators, newest first. Same fields as `events`.
+classes:
+  - datetime: "2026-07-11"
+    date_label: "Summer 2026"
+    place: "Online"
+    url: "https://ccfest.rocks/learning-machines"
+    link_text: "Learning Machines: Text, Images, Video"
+  - datetime: "2026"
+    date_label: "Spring 2026"
+    place: "Online"
+    url: "https://www.notion.so/CC-Fest-Coding-Camp-Spring-2026-3369950a7da981169ceffb7d3dbd73e9"
+    link_text: "CC Fest Coding Camp"
+  - datetime: "2025"
+    date_label: "Fall 2025"
+    place: "Online"
+    url: "https://sustaining-boursin-d41.notion.site/CC-Fest-Teacher-Camp-Fall-2025-2c79950a7da980c78031c7654914e69f"
+    link_text: "CC Fest Teacher Camp"
+  - datetime: "2025"
+    date_label: "Spring 2025"
+    place: "Online"
+    url: "https://sustaining-boursin-d41.notion.site/CC-Fest-Updates-Spring-2025-1f19950a7da9807cbcfde70bd40b2d77"
+    link_text: "CC Fest camp, Spring 2025"
+  - datetime: "2024-09-26"
+    date_label: "Fall 2024"
+    place: "Online · Zoom"
+    url: "https://ccfest.rocks/teacher-camp-fall-2024"
+    link_text: "Teacher Camp: ten weekly sessions on art-making with p5.js"
+
 chips:
   - label: "NYC"
     note: "Oct 2016 · NYU ITP"

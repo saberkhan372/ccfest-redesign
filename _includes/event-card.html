@@ -3,7 +3,7 @@
                 <p class="eyebrow">{{ include.camp.eyebrow | escape }}</p>
                 <h3>{{ include.camp.name | escape }}</h3>
                 <p>{{ include.camp.description | escape }}</p>
-                <a class="button button-solid" href="{{ include.camp.url | escape }}" target="_blank" rel="noopener">{{ include.camp.link_text | escape }} ↗</a>
+                {% assign camp_url = include.camp.url | default: "" | strip %}{% if camp_url contains "://" %}<a class="button button-solid" href="{{ camp_url | escape }}" target="_blank" rel="noopener">{{ include.camp.link_text | escape }} ↗</a>{% else %}<a class="button button-solid" href="{{ camp_url | escape }}">{{ include.camp.link_text | escape }} →</a>{% endif %}
               </div>
               <dl>
 {% for fact in include.camp.facts %}                <div><dt>{{ fact.label | escape }}</dt><dd>{{ fact.value | escape }}</dd></div>

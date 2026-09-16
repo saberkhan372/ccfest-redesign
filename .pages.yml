@@ -122,6 +122,18 @@ content:
           - { name: url, label: Agenda link, type: string, required: false, description: "Leave empty when there is no agenda to link to, and fill in the title below instead." }
           - { name: link_text, label: Agenda link text, type: string, required: false, description: "The arrow is added for you." }
           - { name: title, label: Title (when there is no link), type: string, required: false }
+      - name: classes
+        label: Camps and classes (newest first)
+        type: object
+        list: true
+        description: "Multi-week camps and courses, listed under the archive on Past Events."
+        fields:
+          - { name: datetime, label: Machine-readable date, type: string, description: "YYYY-MM-DD, or just the year." }
+          - { name: date_label, label: Date as shown, type: string, description: "e.g. Fall 2024" }
+          - { name: place, label: Place, type: string, description: "e.g. Online" }
+          - { name: url, label: Link, type: string, required: false }
+          - { name: link_text, label: Link text, type: string, required: false, description: "The arrow is added for you." }
+          - { name: title, label: Title (when there is no link), type: string, required: false }
       - name: chips
         label: Homepage location badges
         type: object
@@ -145,7 +157,7 @@ content:
           - { name: name, label: Name, type: string }
           - { name: eyebrow, label: Small line above the name, type: string }
           - { name: description, label: Description, type: text }
-          - { name: url, label: Link, type: string }
+          - { name: url, label: Link, type: string, description: "A page on this site relative to Events (e.g. visible-java/), or a full https:// link, which opens in a new tab." }
           - { name: link_text, label: Link text, type: string, description: "The arrow is added for you." }
           - name: facts
             label: Facts

@@ -29,7 +29,7 @@ const { chromium } = require('playwright');
 const base = process.argv[2] || 'http://127.0.0.1:8876/';
 
 /* Paths are relative to `base`. '' is the homepage. */
-const PAGES = ['', 'register/', 'events/', 'past-events/', 'mailing-list/', 'code-of-conduct/'];
+const PAGES = ['', 'register/', 'events/', 'events/visible-java/', 'past-events/', 'mailing-list/', 'code-of-conduct/'];
 const WIDTHS = [320, 390, 768, 1440];
 
 (async () => {

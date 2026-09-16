@@ -1,12 +1,13 @@
 # Educator camps and other standing programmes shown on /events/.
 # Each camp's `facts` are the label/value pairs listed beside the description;
-# add or remove rows freely.
+# add or remove rows freely. A `url` with no "https://" is a page on this site,
+# relative to /events/ (e.g. visible-java/); full URLs open in a new tab.
 
 camps:
   - name: "Visible Java: Processing for AP CS A"
     eyebrow: Educator camp · Online · Free
     description: A hands-on camp for educators who want to teach AP Computer Science A through animation, interaction, visual models, and student-made projects.
-    url: https://ccfest.rocks/visible-java
+    url: visible-java/
     link_text: Details & interest list
     facts:
       - { label: Format, value: Four live online sessions }

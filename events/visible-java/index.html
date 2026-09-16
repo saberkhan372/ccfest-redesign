@@ -1,0 +1,149 @@
+---
+layout: base
+title: "Visible Java: Processing for AP CS A — CC Fest"
+description: "A free CC Fest educator camp: teach AP Computer Science A through Processing, with animation, interaction, visual models, and student-made projects."
+body_class: "inner-page camp-page"
+root: "../../"
+home_href: "../../"
+nav_current: "events"
+---
+{% assign camp = site.data.camps.camps | where: "url", "visible-java/" | first %}{% assign interest_url = "https://docs.google.com/forms/d/e/1FAIpQLSejHAD2X6rUvnoSzIv8aSlFvJc0BZT46u7sIsKbSqt2xQBo_Q/viewform" %}    <main id="main-content">
+      <section class="hero page-hero page-width" aria-labelledby="page-title">
+        <p class="eyebrow"><a href="../">Events</a> / {{ camp.eyebrow | escape }}</p>
+        <h1 id="page-title">Visible Java</h1>
+        <p class="hero-summary">Processing for AP CS A. {{ camp.description | escape }}</p>
+        <div class="hero-actions">
+          <a class="button button-solid" href="{{ interest_url }}" target="_blank" rel="noopener">Join the interest list ↗</a>
+          <a class="button" href="#arc">See the workshop arc</a>
+        </div>
+      </section>
+
+      <section class="event-facts" aria-label="Camp details">
+        <div class="page-width facts-grid">
+{% for fact in camp.facts %}          <div>
+            <span>{{ fact.label | escape }}</span>
+            <strong>{{ fact.value | escape }}</strong>
+          </div>
+{% endfor %}        </div>
+      </section>
+
+      <section class="section section-tinted" id="concept" aria-labelledby="concept-title">
+        <div class="page-width camp-intro">
+          <div class="prose">
+            <p class="eyebrow">The concept</p>
+            <h2 id="concept-title">Teach the Java students can see.</h2>
+            <p>Processing keeps Java’s core ideas intact while making every variable, loop, condition, and object produce visible behavior. That gives students a concrete way to reason about code before translating their work into standard AP-style Java.</p>
+            <h3>Who this is for</h3>
+            <ul>
+              <li>Current and future AP Computer Science A teachers</li>
+              <li>Creative coding educators moving from p5.js to Java</li>
+              <li>Teachers looking for visual ways to teach abstraction and objects</li>
+              <li>Anyone curious about connecting open-ended projects to AP CSA reasoning</li>
+            </ul>
+          </div>
+          <figure class="camp-code">
+            <figcaption>// Java that moves</figcaption>
+            <pre><code>float x = 60;
+
+void draw() {
+  background(12, 107, 99);
+  circle(x, height / 2, 48);
+  x = x + 2;
+}</code></pre>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section page-width" id="arc" aria-labelledby="arc-title">
+        <div class="section-heading">
+          <p>01</p>
+          <div>
+            <h2 id="arc-title">Proposed workshop arc</h2>
+            <p>Four sessions from sketch to AP task, moving from Processing’s immediate feedback to the standard Java forms students need.</p>
+          </div>
+        </div>
+        <ol class="camp-steps">
+          <li><h3>From sketch to Java</h3><p><code>setup()</code>, <code>draw()</code>, variables, methods, scope, and what Processing supplies behind the scenes.</p></li>
+          <li><h3>Logic you can see</h3><p>Conditionals, loops, state, input, debugging, and animations students can pause and trace.</p></li>
+          <li><h3>Objects become worlds</h3><p>Classes, constructors, arrays, <code>ArrayList</code>, and collections of visual objects that interact.</p></li>
+          <li><h3>From creative project to AP task</h3><p>Translate Processing work into standard Java, AP-style methods, testing, and written reasoning.</p></li>
+          <li class="camp-step-optional"><h3>Optional studio</h3><p>Adapt one project for your own classroom, get feedback, and share it with the group.</p></li>
+        </ol>
+      </section>
+
+      <section class="section section-tinted" id="outcomes" aria-labelledby="outcomes-title">
+        <div class="page-width">
+          <div class="section-heading">
+            <p>02</p>
+            <div>
+              <h2 id="outcomes-title">What you will leave with</h2>
+              <p>Tools you can teach with immediately.</p>
+            </div>
+          </div>
+          <ul class="camp-steps camp-steps-plain">
+            <li><h3>Runnable Processing sketches</h3><p>Small, expressive programs that make Java concepts observable and debuggable.</p></li>
+            <li><h3>AP-aligned translation activities</h3><p>Prompts that move from a sketch into standard Java methods, classes, arrays, and reasoning.</p></li>
+            <li><h3>Adaptable project prompts</h3><p>Creative constraints flexible enough for different classrooms and student interests.</p></li>
+            <li><h3>A clearer bridge to Java</h3><p>A practical way to connect visual experimentation with precise AP CSA vocabulary and expectations.</p></li>
+          </ul>
+          <h3 class="camp-subhead">Sample classroom directions</h3>
+          <ul class="camp-steps camp-steps-plain">
+            <li><h3>One idea, three environments</h3><p>Compare the same program as a Processing sketch, a plain Java class, and an AP-style method.</p></li>
+            <li><h3>Port a finished sketch</h3><p>Separate model from drawing code, then test the model in standard Java.</p></li>
+            <li><h3>Translate API boundaries</h3><p>Identify what Processing provides and what the student’s own Java is responsible for.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section page-width" id="logistics" aria-labelledby="logistics-title">
+        <div class="section-heading">
+          <p>03</p>
+          <div>
+            <h2 id="logistics-title">Format and logistics</h2>
+            <p>A practical pilot, shaped with the first cohort.</p>
+          </div>
+        </div>
+        <dl class="camp-facts">
+          <div><dt>Format</dt><dd>Four live online workshops + optional studio</dd></div>
+          <div><dt>Session length</dt><dd>90–120 minutes</dd></div>
+          <div><dt>Cost</dt><dd>Free</dd></div>
+          <div><dt>Prerequisites</dt><dd>Java comfort helps; no Processing experience required</dd></div>
+          <div><dt>Technology</dt><dd>A laptop or desktop that can run Processing and Java</dd></div>
+          <div><dt>Dates</dt><dd>Selected from interest-list availability</dd></div>
+        </dl>
+      </section>
+
+      <section class="section section-tinted" id="faq" aria-labelledby="faq-title">
+        <div class="page-width">
+          <div class="section-heading">
+            <p>04</p>
+            <div>
+              <h2 id="faq-title">Frequently asked questions</h2>
+            </div>
+          </div>
+          <div class="camp-faq">
+            <details><summary>Is Processing the same as p5.js?</summary><p>No. They share a creative coding philosophy and similar drawing APIs, but Processing uses Java while p5.js uses JavaScript. This camp focuses on Java because the goal is a direct bridge to AP Computer Science A.</p></details>
+            <details><summary>How does this align with AP Computer Science A?</summary><p>We use Processing to make variables, control flow, classes, arrays, and algorithms visible, then explicitly translate projects into standard Java methods, classes, tests, and AP-style written reasoning.</p></details>
+            <details><summary>Do I need prior Processing experience?</summary><p>No. Basic Java familiarity is useful, but the first session starts with Processing’s sketch structure and explains what it provides behind the scenes.</p></details>
+            <details><summary>Is this an official College Board workshop?</summary><p>No. This is an independent CC Fest educator camp designed to complement AP CSA teaching, not an official College Board professional development event.</p></details>
+            <details><summary>Are the dates final?</summary><p>Not yet. The interest form will help choose a schedule that works for the first cohort.</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-width" id="interest" aria-labelledby="interest-title">
+        <div class="signup-panel">
+          <div>
+            <p class="eyebrow">Join the pilot</p>
+            <h2 id="interest-title">Interested? Help shape the first camp.</h2>
+          </div>
+          <div>
+            <p>Share a little about your teaching context, experience, and availability. This is an interest list, not a binding registration.</p>
+            <div class="hero-actions">
+              <a class="button button-solid" href="{{ interest_url }}" target="_blank" rel="noopener">Open the interest form ↗</a>
+            </div>
+            <p class="signup-note">Questions? Email <a href="mailto:{{ site.data.site.email | escape }}?subject=Visible%20Java">{{ site.data.site.email | escape }}</a>.</p>
+          </div>
+        </div>
+      </section>
+    </main>
