@@ -1,0 +1,139 @@
+# Pages CMS — the editing forms at app.pagescms.org.
+#
+# Each entry below is one form over one data file. Saving a form commits to this
+# repository; GitHub Pages then rebuilds the site, usually inside a minute.
+#
+# WHAT IS DELIBERATELY NOT HERE
+#   Layout, colour, and Francisca's lettering. The lettered headings are
+#   generated from design/figma-typography.json by scripts/sync-typography.cjs,
+#   and no form can reach them. See docs/TYPOGRAPHY.md.
+#
+# LEAVING A FIELD EMPTY IS A REAL ANSWER
+#   An empty date shows "To be confirmed", an empty keynote list shows the
+#   "to be announced" cards, and an empty registration link keeps the mailing
+#   list invitation. Never type a placeholder to make a page look finished.
+
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: event
+    label: Upcoming event
+    type: file
+    path: _data/event.yml
+    icon: calendar
+    fields:
+      - { name: name, label: Event name, type: string, description: "Used for the facts, the card on Events, and screen readers. The big lettered title on the page is Figma artwork and does not change with this." }
+      - { name: year, label: Year, type: number, description: "Shown as 'TBC 2026' on the homepage while the date is unconfirmed." }
+      - { name: eyebrow, label: Small line above the title, type: string }
+      - { name: summary, label: One-line summary, type: text }
+      - { name: date, label: Date, type: date, description: "Leave empty for 'To be confirmed'. Do not invent a date." }
+      - { name: format, label: Format, type: string, description: "e.g. Virtual" }
+      - { name: cost, label: Cost, type: string, description: "e.g. Free" }
+      - { name: level, label: Experience level, type: string, description: "e.g. All levels" }
+      - { name: registration_url, label: Registration link, type: string, description: "Leave empty until registration is really open — the page then invites people to the mailing list instead." }
+
+  - name: keynotes
+    label: Keynote speakers
+    type: file
+    path: _data/keynotes.yml
+    icon: mic
+    fields:
+      - name: keynotes
+        label: Keynotes
+        type: object
+        list: true
+        description: "Leave this empty until speakers are confirmed; the page shows its 'to be announced' cards by itself."
+        fields:
+          - { name: label, label: Label, type: string, description: "e.g. Keynote 01" }
+          - { name: name, label: Name or talk title, type: string }
+          - { name: bio, label: Bio, type: text }
+          - { name: url, label: Website, type: string, required: false }
+
+  - name: sessions
+    label: Sessions
+    type: file
+    path: _data/sessions.yml
+    icon: list
+    fields:
+      - name: sessions
+        label: Sessions
+        type: object
+        list: true
+        description: "Leave empty until the schedule is settled; the page shows its announcement row by itself."
+        fields:
+          - { name: time, label: Time, type: string, description: "e.g. 10:00–11:00 ET" }
+          - { name: presenter, label: Presenter, type: string }
+          - { name: presenter_bio, label: Presenter bio, type: text, required: false }
+          - { name: title, label: Session title, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: tags, label: Tags, type: string, list: true, description: "Short labels, e.g. All levels, Workshops" }
+
+  - name: past_events
+    label: Past events
+    type: file
+    path: _data/past_events.yml
+    icon: archive
+    fields:
+      - name: events
+        label: Archive (newest first)
+        type: object
+        list: true
+        fields:
+          - { name: datetime, label: Machine-readable date, type: string, description: "YYYY-MM-DD, or just the year when only the year is known." }
+          - { name: date_label, label: Date as shown, type: string, description: "e.g. Mar 21, 2026, or 2019" }
+          - { name: place, label: Place, type: string, description: "e.g. Virtual, or NYC · NYU ITP" }
+          - { name: url, label: Agenda link, type: string, required: false, description: "Leave empty when there is no agenda to link to, and fill in the title below instead." }
+          - { name: link_text, label: Agenda link text, type: string, required: false, description: "The arrow is added for you." }
+          - { name: title, label: Title (when there is no link), type: string, required: false }
+      - name: chips
+        label: Homepage location badges
+        type: object
+        list: true
+        description: "The short badges on the homepage. They summarise the archive, so several events can share one badge."
+        fields:
+          - { name: label, label: Place, type: string, description: "e.g. NYC" }
+          - { name: note, label: When, type: string, description: "e.g. Oct 2016 · NYU ITP" }
+
+  - name: camps
+    label: Camps and programmes
+    type: file
+    path: _data/camps.yml
+    icon: graduation-cap
+    fields:
+      - name: camps
+        label: Camps
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: eyebrow, label: Small line above the name, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: url, label: Link, type: string }
+          - { name: link_text, label: Link text, type: string, description: "The arrow is added for you." }
+          - name: facts
+            label: Facts
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: value, label: Value, type: string }
+
+  - name: site
+    label: Site details
+    type: file
+    path: _data/site.yml
+    icon: settings
+    fields:
+      - { name: email, label: Contact email, type: string, description: "Appears in every footer and in the mailing-list links." }
+      - { name: tagline, label: Footer tagline, type: text }
+      - name: credits
+        label: Designer credits
+        type: object
+        list: true
+        description: "Francisca and Shristi asked for these on every page. Please keep them."
+        fields:
+          - { name: role, label: Role, type: string }
+          - { name: name, label: Name, type: string }
+          - { name: url, label: Website, type: string }

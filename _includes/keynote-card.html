@@ -2,5 +2,5 @@
             <p class="eyebrow">{{ include.keynote.label }}</p>
             <h3>{{ include.keynote.name }}</h3>
             <p>{{ include.keynote.bio }}</p>
-{% if include.keynote.url %}            <a class="button" href="{{ include.keynote.url }}" target="_blank" rel="noopener">More about {{ include.keynote.name }} ↗</a>
+{% assign url = include.keynote.url | default: "" | strip %}{% if url != "" %}            <a class="button" href="{{ include.keynote.url }}" target="_blank" rel="noopener">More about {{ include.keynote.name }} ↗</a>
 {% endif %}          </article>

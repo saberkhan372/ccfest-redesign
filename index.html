@@ -7,7 +7,7 @@ root: ""
 home_href: "./"
 home: true
 ---
-{% assign event = site.data.event %}    <main id="main-content">
+{% assign event = site.data.event %}{% assign event_date = event.date | default: "" | strip %}    <main id="main-content">
 
       <!-- ── Hero ── -->
       <section class="home-hero page-width" aria-label="CC Fest">
@@ -224,13 +224,13 @@ home: true
             <h2 id="upcoming-title" aria-label="{{ event.name }}" data-figma-node="218:127"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l </span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> F</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wght' 200, 'wdth' 100; font-weight: 200; font-style: italic; letter-spacing: 0em; text-transform: uppercase">2026</span></h2>
             <p>
               Workshops, talks, and community for creative coders of all levels.
-              {% if event.date %}{{ event.date | date: "%A, %B %-d, %Y" }} — join the mailing list for updates.{% else %}Date to be announced — join the mailing list for updates.{% endif %}
+              {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }} — join the mailing list for updates.{% else %}Date to be announced — join the mailing list for updates.{% endif %}
             </p>
             <a class="button button-light" href="register/">Explore the event →</a>
           </div>
           <div class="upcoming-facts anim-scroll anim-upcoming-meta">
             <div><span>Format</span><strong>{{ event.format }}</strong></div>
-            <div><span>Date</span><strong>{% if event.date %}{{ event.date | date: "%b %-d, %Y" }}{% else %}TBC {{ event.year }}{% endif %}</strong></div>
+            <div><span>Date</span><strong>{% if event_date != "" %}{{ event.date | date: "%b %-d, %Y" }}{% else %}TBC {{ event.year }}{% endif %}</strong></div>
             <div><span>Cost</span><strong>{{ event.cost }}</strong></div>
             <div><span>Experience</span><strong>{{ event.level }}</strong></div>
           </div>

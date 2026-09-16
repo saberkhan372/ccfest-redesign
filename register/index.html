@@ -7,7 +7,7 @@ root: "../"
 home_href: "../"
 nav: "event"
 ---
-{% assign event = site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}    <main id="main-content">
+{% assign event = site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}{% assign keynote_count = keynotes | size %}{% assign session_count = sessions | size %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
       <section class="hero page-width" id="top" aria-labelledby="event-title">
         <p class="eyebrow">{{ event.eyebrow }}</p>
         <h1 id="event-title" aria-label="{{ event.name }}" data-figma-node="251:741"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">F</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="10" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none"> ________, </span><span data-figma-run="11" style="font-family: 'Anybody'; font-variation-settings: 'wght' 100, 'wdth' 100; font-weight: 100; font-style: italic; letter-spacing: 0em; text-transform: none">2026</span></h1>
@@ -26,7 +26,7 @@ nav: "event"
           </div>
           <div>
             <span>Date</span>
-            <strong>{% if event.date %}{{ event.date | date: "%B %-d, %Y" }}{% else %}To be confirmed{% endif %}</strong>
+            <strong>{% if event_date != "" %}{{ event.date | date: "%B %-d, %Y" }}{% else %}To be confirmed{% endif %}</strong>
           </div>
           <div>
             <span>Cost</span>
@@ -44,13 +44,13 @@ nav: "event"
           <p>01</p>
           <div>
             <h2 id="keynotes-title" data-figma-node="251:765"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">K</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 129, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">y</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
-            <p>Meet the creative coders sharing their ideas.{% if keynotes == empty %} Speakers to be announced.{% endif %}</p>
+            <p>Meet the creative coders sharing their ideas.{% if keynote_count == 0 %} Speakers to be announced.{% endif %}</p>
           </div>
         </div>
 
         <div class="keynote-layout">
           <img src="../assets/design/keynote-shape.svg" alt="" aria-hidden="true">
-{% if keynotes == empty %}          <article class="keynote-card">
+{% if keynote_count == 0 %}          <article class="keynote-card">
             <p class="eyebrow">Keynote 01</p>
             <h3>New perspectives.</h3>
             <p>Speaker to be announced. Keynote speakers and their stories are on the way.</p>
@@ -70,11 +70,11 @@ nav: "event"
             <p>02</p>
             <div>
               <h2 id="sessions-title" data-figma-node="251:788"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">S</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">i</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 125, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
-              <p>Workshops and talks for creative coders.{% if sessions == empty %} The schedule will be announced here.{% endif %}</p>
+              <p>Workshops and talks for creative coders.{% if session_count == 0 %} The schedule will be announced here.{% endif %}</p>
             </div>
           </div>
 
-{% if sessions == empty %}          <div class="session-row">
+{% if session_count == 0 %}          <div class="session-row">
             <p class="session-time">Times TBA</p>
             <div class="session-presenter">
               <p class="eyebrow">Presenters</p>
@@ -96,13 +96,13 @@ nav: "event"
             <p>03</p>
             <div>
               <h2 id="registration-title" data-figma-node="251:843"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">R</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">gi</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.01em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 60, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">r</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">ati</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 140, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.02em; text-transform: none">o</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span></h2>
-              <p>{% if event.registration_url %}Registration is open. Sign up to save your place.{% else %}Registration is not open yet. Join the mailing list to hear when it opens.{% endif %}</p>
+              <p>{% if registration_url != "" %}Registration is open. Sign up to save your place.{% else %}Registration is not open yet. Join the mailing list to hear when it opens.{% endif %}</p>
             </div>
           </div>
 
           <div class="embed-notice">
             <p class="eyebrow">Free · Online · All levels</p>
-{% if event.registration_url %}            <h3>Registration is open.</h3>
+{% if registration_url != "" %}            <h3>Registration is open.</h3>
             <p>Save your place at {{ event.name }}.</p>
             <a class="button button-solid" href="{{ event.registration_url }}" target="_blank" rel="noopener">Register ↗</a>
 {% else %}            <h3>Be the first to know.</h3>
