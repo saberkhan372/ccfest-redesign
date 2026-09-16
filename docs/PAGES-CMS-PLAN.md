@@ -1,6 +1,6 @@
 # Plan: edit the site without touching code (Jekyll + Pages CMS)
 
-Status: **proposed, not started.** Nothing here is built yet.
+Status: **phases 0–3 built on branch `pages-cms`, 2026-09-15.** Step 11 (connecting the repository at app.pagescms.org) and phase 4 (your decision) are the only things left; both need Saber. See [CMS.md](CMS.md) for how the result works.
 
 Goal: let Saber — and later Francisca, Shristi, or a co-organizer — change event dates, speakers, sessions and past events through a web form, without opening HTML and without the live site breaking.
 

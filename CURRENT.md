@@ -56,5 +56,25 @@
 ## Stale docs
 - README and DESIGN-INTEGRATION.md updated. Parent PROJECTS.md lineage now records Mixed; remote Notion metadata was not changed.
 
+## Jekyll + Pages CMS — 2026-09-15 (branch `pages-cms`, not merged, not pushed)
+- Followed `docs/PAGES-CMS-PLAN.md` phases 0–3. Three commits on `pages-cms`; `main` and the live site are untouched.
+- Phase 1: `.nojekyll` deleted, minimal plugin-free `_config.yml`, shared `<head>`/header/nav/footer in `_layouts/base.html` and `_includes/`; each page is now front matter plus its own `<main>`. Header and footer logos moved to `_includes/logo-*.html`, and `scripts/sync-typography.cjs` points there.
+- Phase 2: event details, keynotes, sessions, the 16-row archive, the homepage badges, the Visible Java camp, and the site email/tagline/credits moved into `_data/*.yml`, rendered through `_includes/`. Announcement states are structural: an empty date, keynote list, session list or registration URL renders the honest layouts by itself.
+- Phase 3: `.pages.yml` defines one form per data file. Lettering, layout and colour are not exposed to it.
+- New doc `docs/CMS.md`; `docs/UPDATING.md` amended for the Jekyll build and the data files.
+
+## Verified on that branch
+- All six built pages **byte-identical** to the pre-change HTML at every phase, including after a simulated Pages CMS save (comments stripped, cleared fields written as `''` and null).
+- Twelve screenshots (six pages at 1440 and 520) pixel-identical against a `git archive` of `main`; the capture is deterministic across runs.
+- `scripts/verify.cjs` passes in full — four widths, ten monogram modes, canvas pause/resume, reduced motion, offscreen suspension, no-JS fallback, no browser errors.
+- `sync-typography.cjs` a no-op on a second run; bracketed font filenames survive the build; `git diff --check` clean.
+- Smoke-tested in a throwaway build that a date, a keynote and a registration URL propagate to all three pages and flip the announcement states — then reverted.
+
+## Untested on that branch
+- The GitHub Pages build itself: nothing has been pushed, so Jekyll 3.10 has only run locally.
+- The admin UI at app.pagescms.org: the repository is not connected. That needs Saber's GitHub account.
+- A real keynote card and a real session row have never been seen by Francisca — they only appear once those lists are filled.
+- The "Registration is open." copy in the registration band is mine; there was no designed open state.
+
 ## Next task
 Review http://127.0.0.1:8876/ and /register/ with Saber; when Shristi’s PR arrives, compare its animation files and stage markup against the preserved source folder before integrating the remaining modes. Obtain explicit deployment instructions before publishing.
