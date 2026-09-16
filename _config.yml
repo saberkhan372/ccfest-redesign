@@ -1,0 +1,31 @@
+# Jekyll configuration. GitHub Pages builds this site from `main` with Jekyll
+# 3.10, so keep this file to what Pages supports: no plugins, no theme, no
+# permalink rewriting. Every URL must stay exactly where it is today.
+#
+# Jekyll only renders files that start with front matter. CSS, JS, fonts and
+# images have none, so they are copied through byte for byte.
+title: CC Fest
+description: Creative coding for connection, expression, and learning.
+
+# No theme. Without this line GitHub Pages falls back to jekyll-theme-primer and
+# deploys 130KB of its CSS that no page ever links to.
+theme:
+
+# Repository folders that are not part of the published site: the designers'
+# untouched source exports, the docs, the build scripts, and the Figma data.
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - CURRENT.md
+  - DECISIONS.md
+  - DESIGN-INTEGRATION.md
+  - GOTCHAS.md
+  - README.md
+  - docs/
+  - scripts/
+  - design/
+  - .claude/
+  - "Shristi-ccfest-redesign-10-years-origin/"
+  - "figma-to-html/"
+  - "figma-to-html (1)/"
+  - "figma-to-html-registration (2)/"

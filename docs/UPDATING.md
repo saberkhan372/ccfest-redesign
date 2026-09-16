@@ -2,15 +2,19 @@
 
 Step-by-step for the updates that actually come up: new design work from Francisca, Shristi's interactive, and confirmed event details.
 
-Related: [TEMPLATE.md](TEMPLATE.md) (how the site is built) · [TYPOGRAPHY.md](TYPOGRAPHY.md) (the lettering pipeline) · [../AGENTS.md](../AGENTS.md) (rules for AI agents).
+Related: [CMS.md](CMS.md) (editing content without code) · [MAILING-LIST.md](MAILING-LIST.md) (sign-ups and sending) · [TEMPLATE.md](TEMPLATE.md) (how the site is built) · [TYPOGRAPHY.md](TYPOGRAPHY.md) (the lettering pipeline) · [../AGENTS.md](../AGENTS.md) (rules for AI agents).
 
 **Before any update**
 
+The pages are built by Jekyll now, so serve the build, not the source:
+
 ```bash
-python3 -m http.server 8876 --bind 127.0.0.1
+jekyll build --destination /tmp/ccfest-site && npx http-server /tmp/ccfest-site -p 8881 -c-1
 ```
 
-Then open http://127.0.0.1:8876/. Nothing is published until someone pushes `main`, so work freely and check it locally.
+Then open http://127.0.0.1:8881/. Nothing is published until someone pushes `main`, so work freely and check it locally. (`python3 -m http.server` drops requests under a headless browser and will show you an unstyled page — use `http-server`.)
+
+**Most content updates need none of this.** Dates, speakers, sessions, past events, camps and the footer details are form fields now; see [CMS.md](CMS.md).
 
 ---
 
@@ -67,13 +71,15 @@ Only put in what's actually confirmed. Everything below starts as "to be announc
 
 | What | Where |
 |---|---|
-| Event date | `register/index.html` facts strip and hero title; `index.html` upcoming band; `events/index.html` card |
-| Keynote speakers | `register/index.html` `.keynote-card`s |
-| Session schedule | `register/index.html` — copy `.session-row` once per session |
-| Registration widget | `register/index.html` — replace `.embed-notice` with the Eventbrite embed |
-| A past event | `past-events/index.html` — add a `.past-row` at the top |
+| Event date | `_data/event.yml` → `date`. Fills the facts strip, the homepage band and the Events card at once. |
+| Keynote speakers | `_data/keynotes.yml` |
+| Session schedule | `_data/sessions.yml` |
+| Registration link | `_data/event.yml` → `registration_url` |
+| A past event | `_data/past_events.yml` → `events`, newest first |
 
-**The date in the title.** The hero title carries Francisca's blank date as underscores (`________,`), which come from the Figma data. When the date is confirmed, edit that run's text in `design/figma-typography.json`, re-run the sync script, and update the `aria-label` on the `h1`.
+All five are also forms in the CMS, so this is usually a job for the admin UI rather than the editor.
+
+**The date in the title is the one thing a form cannot fix.** The hero title carries Francisca's blank date as underscores (`________,`), drawn from the Figma data. Filling in `date` updates the facts, the cards and the spoken name — but not the lettering. When the date is confirmed, edit that run's text in `design/figma-typography.json` and re-run the sync script.
 
 ---
 
@@ -95,8 +101,9 @@ Copy the closest existing page (usually `events/index.html`), then follow the re
 ## 6. Before publishing
 
 - [ ] Checked at 1440, 768, and 375px
+- [ ] `jekyll build` succeeds, and the built pages differ from the previous build only where you meant them to
 - [ ] `node scripts/sync-typography.cjs` run, and re-running changes nothing
-- [ ] `node scripts/verify.cjs http://127.0.0.1:8876/` passes (or say plainly that Playwright isn't installed)
+- [ ] `node scripts/verify.cjs http://127.0.0.1:8881/` passes (or say plainly that Playwright isn't installed)
 - [ ] No placeholder or invented content
 - [ ] Designer credits still in every footer
 - [ ] Saber has approved publishing

@@ -1,37 +1,13 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community."
-    >
-    <meta name="theme-color" content="#edede9">
-    <title>CC Fest — Creative Coding Festival</title>
-    <link rel="icon" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
-    <!-- Adds .js to <html> before any CSS is applied so animations.css
-         can gate hidden states behind this class. Content stays visible
-         for users with JS disabled. -->
-    <script>document.documentElement.classList.add('js')</script>
-    <link rel="stylesheet" href="redesign.css">
-  </head>
-  <body class="home-page">
-    <a class="skip-link" href="#main-content">Skip to content</a>
-
-    <header class="site-header anim-nav">
-      <a class="logo" href="./" aria-label="CC Fest home" data-figma-node="218:106"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 500; font-weight: 500; font-style: normal; letter-spacing: 0.05em; text-transform: none">CC</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 71, 'wght' 500; font-weight: 500; font-style: normal; letter-spacing: 0.05em; text-transform: none"> FEST</span></a>
-      <nav aria-label="Main navigation">
-        <a href="events/">Events</a>
-        <a href="mailing-list/">Mailing List</a>
-        <a href="past-events/">Past Events</a>
-        <a href="code-of-conduct/">Code of Conduct</a>
-      </nav>
-    </header>
-
-    <main id="main-content">
+---
+layout: base
+title: "CC Fest — Creative Coding Festival"
+description: "CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community."
+body_class: "home-page"
+root: ""
+home_href: "./"
+home: true
+---
+{% assign event = site.data.event %}{% assign event_date = event.date | default: "" | strip %}    <main id="main-content">
 
       <!-- ── Hero ── -->
       <section class="home-hero page-width" aria-label="CC Fest">
@@ -244,19 +220,19 @@
       <section class="upcoming-band" aria-labelledby="upcoming-title">
         <div class="page-width upcoming-inner">
           <div class="upcoming-copy anim-scroll anim-upcoming-copy">
-            <p class="eyebrow upcoming-eyebrow">Upcoming · Virtual · Free</p>
-            <h2 id="upcoming-title" aria-label="Virtual CC Fest 2026" data-figma-node="218:127"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l </span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> F</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wght' 200, 'wdth' 100; font-weight: 200; font-style: italic; letter-spacing: 0em; text-transform: uppercase">2026</span></h2>
+            <p class="eyebrow upcoming-eyebrow">Upcoming · {{ event.format | escape }} · {{ event.cost | escape }}</p>
+            <h2 id="upcoming-title" aria-label="{{ event.name | escape }}" data-figma-node="218:127"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l </span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> F</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wght' 200, 'wdth' 100; font-weight: 200; font-style: italic; letter-spacing: 0em; text-transform: uppercase">2026</span></h2>
             <p>
               Workshops, talks, and community for creative coders of all levels.
-              Date to be announced — join the mailing list for updates.
+              {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }} — join the mailing list for updates.{% else %}Date to be announced — join the mailing list for updates.{% endif %}
             </p>
             <a class="button button-light" href="register/">Explore the event →</a>
           </div>
           <div class="upcoming-facts anim-scroll anim-upcoming-meta">
-            <div><span>Format</span><strong>Virtual</strong></div>
-            <div><span>Date</span><strong>TBC 2026</strong></div>
-            <div><span>Cost</span><strong>Free</strong></div>
-            <div><span>Experience</span><strong>All levels</strong></div>
+            <div><span>Format</span><strong>{{ event.format | escape }}</strong></div>
+            <div><span>Date</span><strong>{% if event_date != "" %}{{ event.date | date: "%b %-d, %Y" }}{% else %}TBC {{ event.year | escape }}{% endif %}</strong></div>
+            <div><span>Cost</span><strong>{{ event.cost | escape }}</strong></div>
+            <div><span>Experience</span><strong>{{ event.level | escape }}</strong></div>
           </div>
         </div>
       </section>
@@ -305,22 +281,13 @@
             </p>
             <p>
               Want to organize a CC Fest in your city?
-              <a href="mailto:mrkhanatndv@gmail.com">Email Saber Khan.</a>
+              <a href="mailto:{{ site.data.site.email | escape }}">Email Saber Khan.</a>
             </p>
             <p><a href="past-events/">See all past events and agendas →</a></p>
           </div>
           <div class="location-chips" aria-label="Past CC Fest locations">
-            <div class="location-chip anim-chip"><strong>NYC</strong><span>Oct 2016 · NYU ITP</span></div>
-            <div class="location-chip anim-chip"><strong>NYC</strong><span>2017 · NYU ITP</span></div>
-            <div class="location-chip anim-chip"><strong>LA</strong><span>2018</span></div>
-            <div class="location-chip anim-chip"><strong>SF</strong><span>2019</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>Jul 2020</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2021</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2022</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2023</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2024</span></div>
-            <div class="location-chip anim-chip"><strong>Virtual</strong><span>2025</span></div>
-          </div>
+{% for chip in site.data.past_events.chips %}            <div class="location-chip anim-chip"><strong>{{ chip.label | escape }}</strong><span>{{ chip.note | escape }}</span></div>
+{% endfor %}          </div>
         </div>
       </section>
 
@@ -335,7 +302,7 @@
         </div>
         <p class="mailing-body anim-scroll">
           To join the CC Fest mailing list, send an email to
-          <a href="mailto:mrkhanatndv@gmail.com?subject=Join mailing list">mrkhanatndv@gmail.com</a>
+          <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.email | escape }}</a>
           with the subject line <em>Join mailing list</em>.
         </p>
       </section>
@@ -362,7 +329,7 @@
             <p>
               If you experience or witness unacceptable behavior, or have any
               other concerns, please contact an organizer at
-              <a href="mailto:mrkhanatndv@gmail.com">mrkhanatndv@gmail.com</a>.
+              <a href="mailto:{{ site.data.site.email | escape }}">{{ site.data.site.email | escape }}</a>.
             </p>
             <p><a href="code-of-conduct/">Read the full code of conduct →</a></p>
           </div>
@@ -370,17 +337,3 @@
       </section>
 
     </main>
-
-    <footer class="site-footer page-width">
-      <strong class="logo" data-figma-node="218:218"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 75, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">C</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">C</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none"> </span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 74, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">F</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.01em; text-transform: none">E</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">S</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 88, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">T</span></strong>
-      <p>Creative coding for connection, expression, and learning.</p>
-      <a href="mailto:mrkhanatndv@gmail.com">mrkhanatndv@gmail.com</a>
-      <p class="design-credits">Design: <a href="https://franciscajose.com/">Francisca José Rodrigues</a> · Interactives: <a href="https://shristi.super.site/">Shristi Singh</a></p>
-    </footer>
-
-    <script src="assets/p5.min.js" defer></script>
-    <script src="animations.js" defer></script>
-    <script src="change-sketch.js" defer></script>
-    <script src="interaction.js" defer></script>
-  </body>
-</html>

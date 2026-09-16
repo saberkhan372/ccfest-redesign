@@ -1,0 +1,13 @@
+<div class="session-row">
+            <p class="session-time">{{ include.session.time | escape }}</p>
+            <div class="session-presenter">
+              <p class="eyebrow">Presenter</p>
+              <strong>{{ include.session.presenter | escape }}</strong>
+{% assign presenter_bio = include.session.presenter_bio | default: "" | strip %}{% if presenter_bio != "" %}              <p>{{ include.session.presenter_bio | escape }}</p>
+{% endif %}            </div>
+            <div class="session-details">
+              <div class="tag-row">{% for tag in include.session.tags %}<span>{{ tag | escape }}</span>{% endfor %}</div>
+              <h3>{{ include.session.title | escape }}</h3>
+              <p>{{ include.session.description | escape }}</p>
+            </div>
+          </div>

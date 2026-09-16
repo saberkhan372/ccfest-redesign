@@ -1,0 +1,6 @@
+<nav aria-label="Main navigation">
+        <a href="{{ include.root }}events/"{% if include.current == "events" %} aria-current="page"{% endif %}>Events</a>
+        <a href="{{ include.root }}mailing-list/"{% if include.current == "mailing-list" %} aria-current="page"{% endif %}>Mailing List</a>
+        <a href="{{ include.root }}past-events/"{% if include.current == "past-events" %} aria-current="page"{% endif %}>Past Events</a>
+        <a href="{{ include.root }}code-of-conduct/"{% if include.current == "code-of-conduct" %} aria-current="page"{% endif %}>Code of Conduct</a>
+      </nav>

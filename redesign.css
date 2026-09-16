@@ -204,12 +204,22 @@ button { font: inherit; }
 .past-place { font-weight: 600; }
 .past-row a,.past-title { font-size: 17px; }
 .past-row a { color: var(--accent); }
-/* mailing-list/: lime panel. No form — this is a static site, so people email to join. */
+/* mailing-list/: lime panel. EmailOctopus's own sign-up form loads into
+ * .signup-embed when _data/site.yml supplies a form id; without JavaScript, and
+ * with nothing configured, the panel asks people to email instead. */
 .signup-panel { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(2rem,6vw,5rem); padding: clamp(2rem,5vw,4rem); background: var(--lime); }
 .signup-panel h2 { margin: .75rem 0 1rem; color: #8f260f; font-size: clamp(1.6rem,3vw,36px); font-weight: 600; line-height: 1.1; }
 .signup-panel p { color: var(--ink); }
 .signup-list { margin: .75rem 0 0; padding-left: 1.25rem; display: grid; gap: .75rem; font-size: 15px; line-height: 1.6; }
 .signup-note { max-width: 640px; margin-top: 1.5rem; color: var(--muted); font-size: 14px; }
+.signup-embed { margin-top: 1.25rem; max-width: 420px; }
+/* EmailOctopus injects its form into our page, so it takes our styling rather
+ * than arriving purple. Their own custom properties are the supported hook; the
+ * .signup-panel prefix is only there to outweigh their stylesheet. Leave the
+ * "Powered by EmailOctopus" line alone: the free plan requires it. */
+.signup-panel .signup-embed .emailoctopus-form { --button-colour: var(--accent); --button-text-colour: #fff; --field-border-colour: var(--ink); --label-colour: var(--ink); --font-family: inherit; }
+.signup-panel .signup-embed .emailoctopus-form .form-control,.signup-panel .signup-embed .emailoctopus-form input[type="submit"].btn { border-radius: 0; padding: .85rem 1rem; font-size: 16px; }
+.signup-panel .signup-embed .emailoctopus-form input[type="submit"].btn { width: auto; padding: .85rem 1.5rem; border: 0; font-weight: 600; cursor: pointer; }
 /* code-of-conduct/: sticky contents list beside long-form text. */
 .coc-layout { display: grid; grid-template-columns: minmax(180px,240px) minmax(0,1fr); gap: clamp(2rem,6vw,6rem); align-items: start; }
 .coc-toc { position: sticky; top: 1.5rem; }

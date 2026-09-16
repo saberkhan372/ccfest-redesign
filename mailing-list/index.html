@@ -1,32 +1,13 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Join the CC Fest mailing list for event dates, workshops, educator camps, and community news."
-    >
-    <meta name="theme-color" content="#edede9">
-    <title>Mailing List — CC Fest</title>
-    <link rel="icon" href="../assets/favicon.png">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../redesign.css">
-  </head>
-  <body class="inner-page mailing-list-page">
-    <a class="skip-link" href="#main-content">Skip to content</a>
-
-    <header class="site-header">
-      <a class="logo" href="../" aria-label="CC Fest home" data-figma-node="218:106"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 500; font-weight: 500; font-style: normal; letter-spacing: 0.05em; text-transform: none">CC</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 71, 'wght' 500; font-weight: 500; font-style: normal; letter-spacing: 0.05em; text-transform: none"> FEST</span></a>
-      <nav aria-label="Main navigation">
-        <a href="../events/">Events</a>
-        <a href="../mailing-list/" aria-current="page">Mailing List</a>
-        <a href="../past-events/">Past Events</a>
-        <a href="../code-of-conduct/">Code of Conduct</a>
-      </nav>
-    </header>
-
-    <main id="main-content">
+---
+layout: base
+title: "Mailing List — CC Fest"
+description: "Join the CC Fest mailing list for event dates, workshops, educator camps, and community news."
+body_class: "inner-page mailing-list-page"
+root: "../"
+home_href: "../"
+nav_current: "mailing-list"
+---
+{% assign list = site.data.site.mailing_list %}{% assign signup_url = list.signup_url | default: "" | strip %}{% assign embed_form_id = list.embed_form_id | default: "" | strip %}{% assign embed_host = list.embed_host | default: "" | strip %}    <main id="main-content">
       <section class="hero page-hero page-width" aria-labelledby="page-title">
         <p class="eyebrow">Stay in touch</p>
         <h1 id="page-title" data-figma-node="218:209"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.025em; text-transform: none">Join the mailing list.</span></h1>
@@ -37,13 +18,23 @@
         <div class="signup-panel">
           <div>
             <p class="eyebrow">How to join</p>
-            <h2 id="join-title">Send one email.</h2>
+{% if embed_form_id != "" %}            <h2 id="join-title">Sign up.</h2>
+            <p>Add your email below and we’ll send a note to confirm. The form is run by EmailOctopus, who send the list for us.</p>
+            <div class="signup-embed"><script async src="https://{{ embed_host | escape }}/form/{{ embed_form_id | escape }}.js" data-form="{{ embed_form_id | escape }}"></script></div>
+            <noscript>
+              <p>The sign-up form needs JavaScript. {% if signup_url != "" %}<a href="{{ signup_url | escape }}">Sign up on EmailOctopus</a>, or email{% else %}Email{% endif %}
+              <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.email | escape }}</a> with the subject line <em>Join mailing list</em>.</p>
+            </noscript>
+{% elsif signup_url != "" %}            <h2 id="join-title">Sign up.</h2>
+            <p>The sign-up form opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.</p>
+            <a class="button button-solid" href="{{ signup_url | escape }}" target="_blank" rel="noopener">Join the mailing list ↗</a>
+{% else %}            <h2 id="join-title">Send one email.</h2>
             <p>
-              Email <a href="mailto:mrkhanatndv@gmail.com?subject=Join%20mailing%20list">mrkhanatndv@gmail.com</a>
+              Email <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.email | escape }}</a>
               with the subject line <em>Join mailing list</em>, and you’ll be added to the list.
             </p>
-            <a class="button button-solid" href="mailto:mrkhanatndv@gmail.com?subject=Join%20mailing%20list">Join the mailing list →</a>
-          </div>
+            <a class="button button-solid" href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">Join the mailing list →</a>
+{% endif %}          </div>
           <div>
             <p class="eyebrow">What you’ll hear about</p>
             <ul class="signup-list">
@@ -53,19 +44,14 @@
             </ul>
           </div>
         </div>
-        <p class="signup-note">
+{% if embed_form_id != "" or signup_url != "" %}        <p class="signup-note">
+          We respect your privacy. Every CC Fest email carries an unsubscribe link, or write to
+          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.email | escape }}</a>
+          and we’ll take you off the list.
+        </p>{% else %}        <p class="signup-note">
           We respect your privacy. Unsubscribe any time by emailing
-          <a href="mailto:mrkhanatndv@gmail.com?subject=Unsubscribe">mrkhanatndv@gmail.com</a>
+          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.email | escape }}</a>
           or replying to any CC Fest email.
-        </p>
+        </p>{% endif %}
       </section>
     </main>
-
-    <footer class="site-footer page-width">
-      <strong class="logo" data-figma-node="218:218"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 75, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">C</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">C</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none"> </span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 74, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">F</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.01em; text-transform: none">E</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">S</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 88, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0.06em; text-transform: none">T</span></strong>
-      <p>Creative coding for connection, expression, and learning.</p>
-      <a href="mailto:mrkhanatndv@gmail.com">mrkhanatndv@gmail.com</a>
-      <p class="design-credits">Design: <a href="https://franciscajose.com/">Francisca José Rodrigues</a> · Interactives: <a href="https://shristi.super.site/">Shristi Singh</a></p>
-    </footer>
-  </body>
-</html>
