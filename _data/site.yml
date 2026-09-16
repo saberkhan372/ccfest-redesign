@@ -1,0 +1,14 @@
+# Site-wide details that appear in the footer and across several pages.
+# Edited through Pages CMS; read by _layouts/base.html and the pages.
+
+email: mrkhanatndv@gmail.com
+tagline: Creative coding for connection, expression, and learning.
+
+# Keep both credits. The designers asked for them on every page.
+credits:
+  - role: Design
+    name: Francisca José Rodrigues
+    url: https://franciscajose.com/
+  - role: Interactives
+    name: Shristi Singh
+    url: https://shristi.super.site/

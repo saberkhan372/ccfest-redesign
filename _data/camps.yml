@@ -1,0 +1,15 @@
+# Educator camps and other standing programmes shown on /events/.
+# Each camp's `facts` are the label/value pairs listed beside the description;
+# add or remove rows freely.
+
+camps:
+  - name: "Visible Java: Processing for AP CS A"
+    eyebrow: Educator camp · Online · Free
+    description: A hands-on camp for educators who want to teach AP Computer Science A through animation, interaction, visual models, and student-made projects.
+    url: https://ccfest.rocks/visible-java
+    link_text: Details &amp; interest list
+    facts:
+      - { label: Format, value: Four live online sessions }
+      - { label: Length, value: 90–120 minutes each }
+      - { label: Timing, value: November–December 2026 }
+      - { label: Cost, value: Free }

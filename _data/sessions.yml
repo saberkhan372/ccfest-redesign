@@ -1,0 +1,13 @@
+# Workshops and talks for the next CC Fest.
+#
+# While this list is empty, /register/ shows the single "to be announced"
+# session row. Fill it in once the schedule is settled.
+#
+# Each session takes:
+#   time         e.g. "10:00–11:00 ET"
+#   presenter    who is running it
+#   presenter_bio  optional, a sentence
+#   title        the session name
+#   description  what people will do
+#   tags         short labels, e.g. [All levels, Workshops]
+sessions: []

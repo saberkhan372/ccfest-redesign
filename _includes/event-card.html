@@ -1,0 +1,11 @@
+<li class="event-card">
+              <div>
+                <p class="eyebrow">{{ include.camp.eyebrow }}</p>
+                <h3>{{ include.camp.name }}</h3>
+                <p>{{ include.camp.description }}</p>
+                <a class="button button-solid" href="{{ include.camp.url }}" target="_blank" rel="noopener">{{ include.camp.link_text }} ↗</a>
+              </div>
+              <dl>
+{% for fact in include.camp.facts %}                <div><dt>{{ fact.label }}</dt><dd>{{ fact.value }}</dd></div>
+{% endfor %}              </dl>
+            </li>

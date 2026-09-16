@@ -31,23 +31,8 @@ nav_current: "past-events"
           </div>
 
           <ol class="past-list" reversed>
-            <li class="past-row"><time datetime="2026-03-21">Mar 21, 2026</time><span class="past-place">Virtual</span><a href="https://ccfest.rocks/march21-2026" target="_blank" rel="noopener">Virtual CC Fest agenda ↗</a></li>
-            <li class="past-row"><time datetime="2025-09-28">Sep 28, 2025</time><span class="past-place">Virtual</span><a href="https://ccfest.rocks/september282025" target="_blank" rel="noopener">Virtual CC Fest agenda ↗</a></li>
-            <li class="past-row"><time datetime="2025-03-15">Mar 15, 2025</time><span class="past-place">Virtual</span><a href="https://ccfest.rocks/virtualccfest-march15-2025" target="_blank" rel="noopener">Virtual CC Fest agenda ↗</a></li>
-            <li class="past-row"><time datetime="2024-07-21">Jul 21, 2024</time><span class="past-place">Virtual</span><a href="https://ccfest.rocks/virtual-july21-2024" target="_blank" rel="noopener">Virtual CC Fest agenda ↗</a></li>
-            <li class="past-row"><time datetime="2024-01-28">Jan 28, 2024</time><span class="past-place">NYC · Dalton School</span><a href="https://ccfest.rocks/ccfestnycjan282024" target="_blank" rel="noopener">CC Fest NYC agenda ↗</a></li>
-            <li class="past-row"><time datetime="2023-03-25">Mar 25, 2023</time><span class="past-place">Virtual</span><a href="https://ccfest.rocks/virtualccfest-march25-2023" target="_blank" rel="noopener">Virtual CC Fest agenda ↗</a></li>
-            <li class="past-row"><time datetime="2023-01-28">Jan 28, 2023</time><span class="past-place">NYC</span><a href="https://ccfest.rocks/ccfestnyc-jan282023" target="_blank" rel="noopener">CC Fest NYC agenda ↗</a></li>
-            <li class="past-row"><time datetime="2022-06-18">Jun 18, 2022</time><span class="past-place">Virtual</span><a href="https://ccfest.rocks/virtual-cc-fest-june-18" target="_blank" rel="noopener">Virtual CC Fest agenda ↗</a></li>
-            <li class="past-row"><time datetime="2022-01-30">Jan 30, 2022</time><span class="past-place">Virtual</span><a href="https://ccfest.rocks/past-events/virtualccfest-january30-2022" target="_blank" rel="noopener">Virtual CC Fest agenda, keynotes by Kate Hollenbach and Qianqian Ye ↗</a></li>
-            <li class="past-row"><time datetime="2021">2021</time><span class="past-place">Virtual</span><span class="past-title">Virtual CC Fest</span></li>
-            <li class="past-row"><time datetime="2020-07-11">Jul 11, 2020</time><span class="past-place">Virtual</span><span class="past-title">First virtual CC Fest</span></li>
-            <li class="past-row"><time datetime="2019-12-08">Dec 8, 2019</time><span class="past-place">NYC</span><a href="https://ccfest.rocks/nyc-dec8-2019" target="_blank" rel="noopener">CC Fest NYC agenda ↗</a></li>
-            <li class="past-row"><time datetime="2019">2019</time><span class="past-place">San Francisco</span><span class="past-title">CC Fest SF</span></li>
-            <li class="past-row"><time datetime="2018">2018</time><span class="past-place">Los Angeles</span><span class="past-title">CC Fest LA</span></li>
-            <li class="past-row"><time datetime="2017">2017</time><span class="past-place">NYC · NYU ITP</span><span class="past-title">CC Fest NYC</span></li>
-            <li class="past-row"><time datetime="2016-10-22">Oct 22, 2016</time><span class="past-place">NYC · NYU ITP</span><a href="https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb" target="_blank" rel="noopener">The first CC Fest ↗</a></li>
-          </ol>
+{% for event in site.data.past_events.events %}            {% include past-row.html event=event %}
+{% endfor %}          </ol>
         </div>
       </section>
 
@@ -60,7 +45,7 @@ nav_current: "past-events"
           </div>
         </div>
         <div class="hero-actions">
-          <a class="button button-solid" href="mailto:mrkhanatndv@gmail.com?subject=Organizing%20a%20CC%20Fest">Email Saber Khan</a>
+          <a class="button button-solid" href="mailto:{{ site.data.site.email }}?subject=Organizing%20a%20CC%20Fest">Email Saber Khan</a>
           <a class="button" href="../events/">Upcoming events →</a>
         </div>
       </section>

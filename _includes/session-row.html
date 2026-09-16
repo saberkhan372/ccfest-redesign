@@ -1,0 +1,13 @@
+<div class="session-row">
+            <p class="session-time">{{ include.session.time }}</p>
+            <div class="session-presenter">
+              <p class="eyebrow">Presenter</p>
+              <strong>{{ include.session.presenter }}</strong>
+{% if include.session.presenter_bio %}              <p>{{ include.session.presenter_bio }}</p>
+{% endif %}            </div>
+            <div class="session-details">
+              <div class="tag-row">{% for tag in include.session.tags %}<span>{{ tag }}</span>{% endfor %}</div>
+              <h3>{{ include.session.title }}</h3>
+              <p>{{ include.session.description }}</p>
+            </div>
+          </div>

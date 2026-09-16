@@ -31,9 +31,9 @@
 {{ content }}
     <footer class="site-footer page-width">
       {% include logo-footer.html %}
-      <p>Creative coding for connection, expression, and learning.</p>
-      <a href="mailto:mrkhanatndv@gmail.com">mrkhanatndv@gmail.com</a>
-      <p class="design-credits">Design: <a href="https://franciscajose.com/">Francisca José Rodrigues</a> · Interactives: <a href="https://shristi.super.site/">Shristi Singh</a></p>
+      <p>{{ site.data.site.tagline }}</p>
+      <a href="mailto:{{ site.data.site.email }}">{{ site.data.site.email }}</a>
+      <p class="design-credits">{% for credit in site.data.site.credits %}{{ credit.role }}: <a href="{{ credit.url }}">{{ credit.name }}</a>{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
     </footer>
 {%- if page.home %}
 
