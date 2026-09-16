@@ -307,7 +307,7 @@
 [data-mode="creativity"] .cc-path {
     fill: none;
     stroke: var(--cc-orange);
-    stroke-width: 3px;
+    stroke-width: 0.6rem;
 }
 
 /* Hand-drawn scribble doodles (creativity-scribble.js computes each
