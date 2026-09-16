@@ -39,9 +39,35 @@ nav: "event"
         </div>
       </section>
 
-      <section class="section page-width" id="keynotes" aria-labelledby="keynotes-title">
+{% assign schedule = site.data.schedule %}{% if schedule.items.size > 0 %}      <section class="section page-width" id="schedule" aria-labelledby="schedule-title">
         <div class="section-heading">
           <p>01</p>
+          <div>
+            <h2 id="schedule-title">Schedule</h2>
+            <p>{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}Session times within each round are announced closer to the day.</p>
+          </div>
+        </div>
+
+        <!-- schedule.js adds a "your time" column and a time zone picker; without it the Pacific and Eastern columns stand alone. -->
+        <div class="schedule"{% if event_date != "" %} data-date="{{ event.date | date: '%Y-%m-%d' }}"{% endif %} data-utc-offset="{{ schedule.zones[0].utc_offset }}">
+          <p class="schedule-zone" hidden><label for="schedule-zone-select">Show times in</label> <select id="schedule-zone-select"></select></p>
+          <table class="schedule-table">
+            <thead>
+              <tr><th scope="col">What’s on</th>{% for zone in schedule.zones %}<th scope="col">{{ zone.label | escape }}</th>{% endfor %}<th scope="col" class="schedule-local" hidden>Your time</th></tr>
+            </thead>
+            <tbody>
+{% for item in schedule.items %}              <tr data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}">
+                <th scope="row">{{ item.title | escape }}</th>{% for zone in schedule.zones %}{% assign shift = zone.utc_offset | minus: schedule.zones[0].utc_offset | times: 60 %}<td data-label="{{ zone.label | escape }}">{% include time-range.html from=item.start to=item.end shift=shift %}</td>{% endfor %}<td class="schedule-local" data-label="Your time" hidden></td>
+              </tr>
+{% endfor %}            </tbody>
+          </table>
+        </div>
+        <script src="{{ page.root }}schedule.js{% assign rev = site.github.build_revision | default: "" %}{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
+      </section>
+
+{% endif %}      <section class="section page-width" id="keynotes" aria-labelledby="keynotes-title">
+        <div class="section-heading">
+          <p>02</p>
           <div>
             <h2 id="keynotes-title" data-figma-node="251:765"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">K</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 129, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">y</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
             <p>Meet the creative coders sharing their ideas.{% if keynote_count == 0 %} Speakers to be announced.{% endif %}</p>
@@ -61,16 +87,21 @@ nav: "event"
             <p>Speaker to be announced. Join the mailing list to hear who’s speaking.</p>
           </article>
 {% else %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}          {% include keynote-card.html keynote=keynote %}
-{% endif %}{% endfor %}{% endif %}        </div>
+{% endif %}{% endfor %}{% if keynote_count == 1 %}          <article class="keynote-card">
+            <p class="eyebrow">Keynote</p>
+            <h3>Shared curiosity.</h3>
+            <p>Speaker to be announced. Join the mailing list to hear who’s speaking.</p>
+          </article>
+{% endif %}{% endif %}        </div>
       </section>
 
       <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>02</p>
+            <p>03</p>
             <div>
               <h2 id="sessions-title" data-figma-node="251:788"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">S</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">i</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 125, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
-              <p>Workshops and talks for creative coders.{% if session_count == 0 %} The schedule will be announced here.{% endif %}</p>
+              <p>Workshops and talks for creative coders.{% if session_count == 0 %} The schedule will be announced here.{% else %} Which round each session is in will be announced closer to the day.{% endif %}</p>
             </div>
           </div>
 
@@ -93,7 +124,7 @@ nav: "event"
       <section class="section registration-band" id="registration" aria-labelledby="registration-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>03</p>
+            <p>04</p>
             <div>
               <h2 id="registration-title" data-figma-node="251:843"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">R</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">gi</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.01em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 60, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">r</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">ati</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 140, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.02em; text-transform: none">o</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span></h2>
               <p>{% if registration_url != "" %}Registration is open. Sign up to save your place.{% else %}Registration is not open yet. Join the mailing list to hear when it opens.{% endif %}</p>
@@ -129,7 +160,7 @@ nav: "event"
         <div class="page-width history-note-inner">
           <p>CC <span class="caps">Fest</span> began on</p>
           <strong>October 22, 2016</strong>
-          <p>at NYU ITP with <b>40</b> participants</p>
+          <p>in New York City with <b>40</b> participants</p>
         </div>
       </aside>
     </main>

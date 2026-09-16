@@ -1,8 +1,5 @@
 sessions:
 - title: Panel discussion
-  time: |-
-    10:30–11:00 am PT
-    1:30–2:00 pm ET
   tags:
   - Panel
   description: ''
@@ -29,7 +26,6 @@ sessions:
     url: https://adriennegifford.com
     bio: Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like p5.js and Wordplay, both with students and in collaboration with other educators and researchers.
 - title: Research-Paper-Monster-Mash
-  time: ''
   tags:
   - Intermediate
   resource_url: ''
@@ -50,7 +46,6 @@ sessions:
     url: https://www.shanecurry.com
     bio: Shane Curry is a professional animator and amateur software enthusiast. He's currently the Timing Supervisor on "American Dad!" (2019-Present) and has worked on shows like Duncanville, She-Ra, and Trolls. He is a self-taught artist and musician.
 - title: 'Access Is the Interface: Coding in the Age of AI'
-  time: ''
   tags:
   - Intermediate
   resource_url: https://ukadike.github.io/accessible-by-design-prototyping/access-agent-consent.html
@@ -62,7 +57,6 @@ sessions:
     url: https://github.com/ukadike
     bio: Kemi Sijuwade-Ukadike is an artist, journalist, and creative-technology leader working at the intersection of accessibility, civic systems, and AI governance. She is founder of Small Systems Lab and previously led Artist Initiatives & Inclusion at Eyebeam. Her work asks how creative code can expand participation while keeping human intention, consent, and accountability at the center.
 - title: Understanding Machine Learning Models through Sports Performance
-  time: ''
   tags:
   - Intermediate
   resource_url: ''
@@ -74,7 +68,6 @@ sessions:
     url: ''
     bio: ''
 - title: Making a portfolio on Neocities
-  time: ''
   tags:
   - Beginner
   resource_url: ''

@@ -145,6 +145,21 @@ const WIDTHS = [320, 390, 768, 1440];
       console.log('SKIP event reminder: no registration link in _data/event.yml');
     }
 
+    /* Schedule time zone helper on the event page. */
+    const sched = await browser.newPage({ viewport: { width: 1440, height: 900 }, timezoneId: 'Asia/Tokyo' });
+    await sched.goto(new URL('register/', base).href);
+    if (await sched.locator('#schedule').count()) {
+      const firstLocal = sched.locator('#schedule tbody tr').first().locator('td.schedule-local');
+      assert.equal(await sched.locator('#schedule-zone-select').inputValue(), 'Asia/Tokyo', 'defaults to the visitor time zone');
+      assert.equal((await firstLocal.textContent()).trim(), 'Sun, Oct 18, 1:00–1:30 am', '9:00 am PDT is 1:00 am next day in Tokyo');
+      await sched.locator('#schedule-zone-select').selectOption('America/Los_Angeles');
+      assert.equal((await firstLocal.textContent()).trim(), '9:00–9:30 am', 'Los Angeles matches the Pacific column');
+      console.log('PASS schedule shows each visitor their own time, and the picker switches zones');
+    } else {
+      console.log('SKIP schedule: _data/schedule.yml has no items');
+    }
+    await sched.close();
+
     /* Registration dialog. It only exists once _data/event.yml has registration_url and luma_event_id. */
     const register = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await register.goto(new URL('register/', base).href);
@@ -169,6 +184,10 @@ const WIDTHS = [320, 390, 768, 1440];
     assert.equal(await noJS.locator('.modes-list').isVisible(), false);
     assert.equal(await noJS.locator('.upcoming-copy').evaluate(e => getComputedStyle(e).opacity), '1');
     await noJS.goto(new URL('register/', base).href);
+    if (await noJS.locator('#schedule').count()) {
+      assert.equal(await noJS.locator('.schedule-zone').isVisible(), false, 'no picker without JavaScript');
+      assert.match(await noJS.locator('#schedule tbody td').first().textContent(), /9:00/, 'Pacific times still show');
+    }
     if (await noJS.locator('[data-luma-event]').count()) {
       assert.match(await noJS.locator('[data-luma-event]').getAttribute('href'), /^https:/, 'Register should still link to Luma');
     }

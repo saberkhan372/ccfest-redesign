@@ -77,7 +77,8 @@ Only put in what's actually confirmed. Everything below starts as "to be announc
 |---|---|
 | Event date | `_data/event.yml` → `date`. Fills the facts strip, the homepage band and the Events card at once. |
 | Keynote speakers | `_data/keynotes.yml` |
-| Session schedule | `_data/sessions.yml` |
+| Running order (Schedule section) | `_data/schedule.yml` — times in the first zone; the other columns and the visitor's own time are worked out |
+| Sessions and presenters | `_data/sessions.yml` — no times; the Schedule section carries them |
 | Registration link | `_data/event.yml` → `registration_url`, plus `luma_event_id` for the on-page form. Setup: [REGISTRATION.md](REGISTRATION.md) |
 | Donation note | `_data/event.yml` → `donation_note` (only if the Luma ticket takes donations) |
 | A past event | `_data/past_events.yml` → `events`, newest first |

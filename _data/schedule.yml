@@ -1,0 +1,24 @@
+# The day's running order, from the Drive doc "Virtual CC Fest - October 17, 2026".
+# Times are in the first zone (Pacific); the other columns are worked out from utc_offset.
+# October 17 is still daylight time: PDT is UTC-7, EDT is UTC-4.
+zones:
+  - label: Pacific (PT)
+    utc_offset: -7
+  - label: Eastern (ET)
+    utc_offset: -4
+items:
+  - title: Welcome + Opening Keynote
+    start: "09:00"
+    end: "09:30"
+  - title: 1st Round of Sessions
+    start: "09:30"
+    end: "10:30"
+  - title: Panel Discussion
+    start: "10:30"
+    end: "11:00"
+  - title: 2nd Round of Sessions
+    start: "11:00"
+    end: "12:00"
+  - title: Closing Keynote + Closing
+    start: "12:00"
+    end: "12:30"

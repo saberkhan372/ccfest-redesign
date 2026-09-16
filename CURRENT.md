@@ -195,5 +195,12 @@ Send Shristi the review notes above (confetti listeners first). Check the live h
 - Photos: `assets/people/*.jpg`, 400px squares with metadata stripped (Daniel's source is only 128px). Jessica sent no photo, so her initial is shown. Descriptions and bios are as submitted, including emoji and markdown-style asterisks.
 - Open: which round (9:30 or 11:00) each session is in; a panel title/description; keynotes still empty.
 
+## Schedule, keynote, history note — 2026-09-16 (Saber's answers)
+- Kemi's newer session confirmed. Panel description is coming from Saber; no push yet.
+- Session times removed (data, template, CMS form). New **01 Schedule** section on /register/ from the Drive doc: Pacific and Eastern columns rendered at build time (`_includes/time-range.html`), plus `schedule.js` adding a "your time" column and time zone picker (defaults to the visitor's zone, remembers the choice, names the date when it isn't Oct 17 there). The plain h2 "Schedule" has no Figma lettering — flag for Francisca. Sections renumbered 01–04.
+- Keynote: Lauren McCarthy (https://get-lauren.net/), bio taken word for word from sentences of her official bio at get-lauren.net/Info. A second "to be announced" keynote card stays, since the schedule has opening and closing keynotes.
+- History note: "at NYU ITP" → "in New York City" on /register/ and the matching sentence on /past-events/.
+- Verified: build; all five rows match the doc (PT and ET); verify.cjs passes including new schedule checks (Tokyo default, zone switch, no-JS); spot checks for Kolkata/Chicago/Auckland/Kyiv; screenshots at 1440 and 390.
+
 ## Next task
 Add the Zoom Events link in Luma when Saber sends it. Before the event, import mailing-list opt-ins from Luma into EmailOctopus. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.

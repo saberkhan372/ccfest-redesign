@@ -66,7 +66,6 @@ content:
         description: "Leave empty until the schedule is settled; the page shows its announcement row by itself."
         fields:
           - { name: title, label: Session title, type: string, description: "A session only appears once it has a title." }
-          - { name: time, label: Time, type: text, required: false, description: "e.g. 10:30–11:00 am PT on one line, 1:30–2:00 pm ET on the next. Leave empty for 'Time TBA'." }
           - { name: tags, label: Tags, type: string, list: true, description: "Short labels, e.g. Beginner, Panel" }
           - { name: description, label: Description, type: text, required: false, description: "Blank lines become line breaks." }
           - { name: resource_url, label: Resources link, type: string, required: false }
@@ -81,6 +80,30 @@ content:
               - { name: photo, label: Photo, type: image, required: false, description: "Square, about 400px. Without one, the first letter of the name is shown." }
               - { name: url, label: Website, type: string, required: false }
               - { name: bio, label: Bio, type: text, required: false }
+
+  - name: schedule
+    label: Schedule
+    type: file
+    path: _data/schedule.yml
+    icon: clock
+    fields:
+      - name: zones
+        label: Time zone columns
+        type: object
+        list: true
+        description: "The first zone is the one the times below are written in. October 17 is daylight time: Pacific -7, Eastern -4."
+        fields:
+          - { name: label, label: Column heading, type: string, description: "e.g. Pacific (PT)" }
+          - { name: utc_offset, label: UTC offset in hours, type: number }
+      - name: items
+        label: Running order
+        type: object
+        list: true
+        description: "Leave empty to hide the Schedule section."
+        fields:
+          - { name: title, label: What's on, type: string }
+          - { name: start, label: Starts (HH:MM, 24-hour, first zone), type: string, pattern: "^[0-2][0-9]:[0-5][0-9]$" }
+          - { name: end, label: Ends (HH:MM, 24-hour, first zone), type: string, pattern: "^[0-2][0-9]:[0-5][0-9]$" }
 
   - name: past_events
     label: Past events

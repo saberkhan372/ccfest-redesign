@@ -1,0 +1,10 @@
+{%- comment -%} Prints "9:00–9:30 am" or "11:30 am–12:00 pm" from "HH:MM" start/end strings, shifted by include.shift minutes. {%- endcomment -%}
+{%- assign parts = include.from | split: ":" -%}{%- assign a = parts[0] | times: 60 | plus: parts[1] | plus: include.shift -%}
+{%- assign parts = include.to | split: ":" -%}{%- assign b = parts[0] | times: 60 | plus: parts[1] | plus: include.shift -%}
+{%- assign ah = a | divided_by: 60 | modulo: 24 -%}{%- assign am = a | modulo: 60 -%}{%- assign bh = b | divided_by: 60 | modulo: 24 -%}{%- assign bm = b | modulo: 60 -%}
+{%- if ah < 12 %}{% assign asuf = "am" %}{% else %}{% assign asuf = "pm" %}{% endif -%}
+{%- if bh < 12 %}{% assign bsuf = "am" %}{% else %}{% assign bsuf = "pm" %}{% endif -%}
+{%- assign a12 = ah | modulo: 12 -%}{%- if a12 == 0 %}{% assign a12 = 12 %}{% endif -%}
+{%- assign b12 = bh | modulo: 12 -%}{%- if b12 == 0 %}{% assign b12 = 12 %}{% endif -%}
+{%- if am < 10 %}{% assign am = am | prepend: "0" %}{% endif -%}{%- if bm < 10 %}{% assign bm = bm | prepend: "0" %}{% endif -%}
+{{ a12 }}:{{ am }}{% if asuf != bsuf %} {{ asuf }}{% endif %}–{{ b12 }}:{{ bm }} {{ bsuf }}

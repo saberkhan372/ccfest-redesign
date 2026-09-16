@@ -164,6 +164,17 @@ button { font: inherit; }
 .session-row .tag-row span { padding: 5px 10px; color: var(--accent); background: #dadad7; border: 0; border-radius: 3px; font-size: 12px; letter-spacing: 0; text-transform: none; }
 .session-row h3 { margin: 0 0 10px; font-size: 18px; font-weight: 700; }
 .session-row p { margin: 0; color: #787873; font-size: 14px; }
+.session-row-people { grid-template-columns: 220px minmax(0,560px); }  /* no time column: the day's timings live in the Schedule section */
+/* Schedule: the day's running order with Pacific, Eastern, and (schedule.js) the visitor's own time. */
+.schedule-zone { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 1rem; font-size: 14px; }
+.schedule-zone[hidden] { display: none; }
+.schedule-zone select { padding: .45rem .6rem; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 0; }
+.schedule-table { width: 100%; max-width: 1000px; border-collapse: collapse; font-size: 15px; }
+.schedule-table th,.schedule-table td { padding: 14px 16px 14px 0; text-align: left; vertical-align: top; border-top: 1px solid #dadad7; }
+.schedule-table thead th { padding-block: 0 10px; border-top: 0; color: #787873; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: .07em; text-transform: uppercase; }
+.schedule-table tbody th { font-weight: 700; }
+.schedule-table td { color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.schedule-table .schedule-local { color: var(--accent); }
 /* Presenters: photo and name in the middle column; bios fold away under the description. */
 .presenter-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 12px; }
 .presenter-list li { display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 10px; align-items: center; }
@@ -320,6 +331,7 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
  .session-row { grid-template-columns: 125px minmax(0,1fr); }
  .session-row .session-time { grid-column: auto; }  /* cancels a wider rule in styles.css */
  .session-row .session-details { grid-column: 1 / -1; }
+ .session-row-people { grid-template-columns: minmax(0,1fr); }
  /* Inner pages */
  .event-card,.signup-panel,.coc-layout,.do-dont { grid-template-columns: 1fr; }
  .coc-toc { position: static; }
@@ -340,6 +352,12 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
  .facts-grid { gap: 1rem; }
  .facts-grid strong { font-size: 17px; }
  .registration-dialog { width: 100%; height: 100dvh; border: 0; }  /* the whole screen on phones */
+ /* Schedule rows stack: the title, then one labelled line per time zone. */
+ .schedule-table thead { display: none; }
+ .schedule-table tr { display: block; padding: 12px 0; border-top: 1px solid #dadad7; }
+ .schedule-table th,.schedule-table td { display: block; padding: 2px 0; border: 0; white-space: normal; }
+ .schedule-table td[hidden] { display: none; }
+ .schedule-table td::before { content: attr(data-label) ": "; color: #787873; font-size: 12px; }
  .event-banner { right: .75rem; bottom: calc(.75rem + env(safe-area-inset-bottom)); left: .75rem; max-width: none; justify-content: space-between; }
  .event-banner .eyebrow,.event-banner-date { display: none; }
  /* Inner pages */

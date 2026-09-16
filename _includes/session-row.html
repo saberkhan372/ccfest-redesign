@@ -1,5 +1,4 @@
-<div class="session-row">
-            <p class="session-time">{% assign time = include.session.time | default: "" | strip %}{% if time != "" %}{{ time | escape | newline_to_br }}{% else %}Time TBA{% endif %}</p>
+<div class="session-row session-row-people">
             <div class="session-presenter">
               <p class="eyebrow">{% if include.session.presenters.size > 1 %}Panelists{% else %}Presenter{% endif %}</p>
               <ul class="presenter-list">
