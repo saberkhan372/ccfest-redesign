@@ -60,7 +60,7 @@ function draw() {
   if (!monogramWrap || monogramWrap.dataset.mode !== 'change') return;
   background(60, 1 ,96, 15);
   const mx = mouseX;
-  const increment = map(mx, EDGE_SAFE_ZONE, width - EDGE_SAFE_ZONE, PI, 0.01,  true);
+  const increment = map(mx, EDGE_SAFE_ZONE, width - EDGE_SAFE_ZONE, PI, 0.01, true);
   // stroke() is centered on the path, so it bleeds outward by half its
   // own weight beyond whatever radius we draw at
   const strokeW = monoW * STROKE_WEIGHT_FRACTION;

@@ -587,8 +587,43 @@
 }
 
 /* =====================================================================
-   MODE 8 — Community: 
+   MODE 8 — Community: the Cs become horseshoe magnets
    ===================================================================== */
+
+[data-mode="community"] .cc-path {
+    opacity: 0;
+}
+
+.cc-magnet {
+    opacity: 0;
+    display: none;
+}
+
+[data-mode="community"] .cc-magnet {
+    opacity: 1;
+    display: block;
+}
+
+.cc-magnet-prong {
+    fill: #f8f8f8;
+    stroke: #000;
+    stroke-width: 3px;
+    vector-effect: non-scaling-stroke;
+}
+
+.cc-magnet-red {
+    fill: #f44c2d;
+    stroke: #000;
+    stroke-width: 3px;
+    vector-effect: non-scaling-stroke;
+}
+
+.cc-magnet-blue {
+    fill: #2f35e2;
+    stroke: #000;
+    stroke-width: 3px;
+    vector-effect: non-scaling-stroke;
+}
 
 
 /* =====================================================================
@@ -664,7 +699,7 @@
 
 .cc-power-spin {
     transform-box: fill-box;
-    transform-origin: 50% 58.09%;
+    transform-origin: 50% 50%;
     transform: rotate(90deg);
 }
 
