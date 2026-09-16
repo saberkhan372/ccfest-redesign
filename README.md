@@ -41,14 +41,14 @@ python3 -m http.server 8876 --bind 127.0.0.1
 | `register/index.html` | Saber | Event page markup and content |
 | `styles.css` | Saber | All layout, typography, and base styles |
 | `animations.css` | **Shristi** | All motion — keyframes, transitions, scroll-reveal states |
-| `animations.js` | **Shristi** | IntersectionObserver that triggers scroll animations |
+| `animations.js` | **Shristi** | Scroll reveals and the monogram mode switcher |
+| `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, `coding-power.js` | **Shristi** | The interactive modes (p5 canvas, confetti, scribble draw-in, power icons) |
 | `redesign.css` | Saber + Francisca | Integrated visual design, variable type, responsive adaptations |
-| `interaction.js` | Saber | Motion pause and reduced-motion integration |
-| `change-sketch.js` | Shristi + Saber | Polygon interactive and canvas lifecycle |
+| `interaction.js` | Saber | Motion pause, reduced motion, and the p5 canvas lifecycle |
 | `assets/` | Saber | Local fonts/licenses, original design SVGs, p5, and images |
 | Figma: CC Fest — Redesign | **Francesca** | Visual design, spacing, colour, and component specs |
 
-**Coordination:** discuss cross-file changes with the owner. This provisional integration follows Saber’s request to combine the designs; preserve the supplied designer folders for comparison with Shristi’s forthcoming PR.
+**Coordination:** discuss cross-file changes with the owner. Shristi's files stay identical to her branch; host-side needs go in `redesign.css` and `interaction.js`. See [docs/UPDATING.md](docs/UPDATING.md) §2 for merging her pull requests.
 
 ---
 

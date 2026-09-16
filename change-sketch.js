@@ -5,7 +5,7 @@
 const CC_LEFT_X = 0.2882;
 const CC_RIGHT_X = 0.7974;
 const CC_CENTER_Y = 0.5;
-const CC_RADIUS = 0.2789;
+const CC_RADIUS = 0.242522;
 const GAP_ANGLE = Math.PI / 2;
 const STROKE_WEIGHT_FRACTION = 60 / 600;
 const EDGE_SAFE_ZONE = 80;
@@ -14,6 +14,13 @@ let stageEl;
 let monogramWrap;
 let changeHost;
 
+// Starts each entry into "change" mode showing the complete (finest
+// resolution) shape, same as if the mouse sat at the right-hand edge.
+// Real mouse tracking only kicks in on the first actual mousemove that
+// happens after the mode was selected — mirroring how celebration-confetti.js
+// and creativity-scribble.js wait for a real gesture before reacting to
+// the cursor, instead of reacting to wherever it happened to already be.
+let trackingMouse = false;
 
 // Monogram's box translated into stage-local (= canvas-local) pixels.
 let stageW = 1;
@@ -32,24 +39,10 @@ function setup() {
   measure();
   const canvas = createCanvas(stageW, stageH);
   canvas.parent(changeHost);
-  document.querySelector('.anim-stage').classList.add('canvas-ready');
   colorMode(HSB, 360, 100, 100, 100);
   noFill();
-  // Draw only while the Change mode is visible and motion is enabled.
-  const stage = document.querySelector('.anim-stage');
-  let visible = true;
-  function syncMotion() {
-    if (visible && !document.hidden && monogramWrap.dataset.mode === 'change' && !stage.classList.contains('is-paused')) loop();
-    else noLoop();
-  }
-  new MutationObserver(syncMotion).observe(stage, { attributes: true, attributeFilter: ['data-mode', 'class'] });
-  if ('IntersectionObserver' in window) new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting;
-    syncMotion();
-  }).observe(stage);
-  document.addEventListener('visibilitychange', syncMotion);
-  window.addEventListener('ccfest:motion', syncMotion);
-  syncMotion();
+
+  watchMode();
 }
 
 // Reads .anim-stage's own size and #monogramWrap's position/size
@@ -72,11 +65,27 @@ function windowResized() {
   resizeCanvas(stageW, stageH);
 }
 
+// p5 calls this automatically on any real mouse movement. Only once this
+// has fired do we start reading the live mouseX in draw().
+function mouseMoved() {
+  trackingMouse = true;
+}
+
+function watchMode() {
+  let wasChange = monogramWrap.dataset.mode === 'change';
+  const observer = new MutationObserver(function () {
+    const nowChange = monogramWrap.dataset.mode === 'change';
+    if (nowChange && !wasChange) trackingMouse = false;
+    wasChange = nowChange;
+  });
+  observer.observe(monogramWrap, { attributes: true, attributeFilter: ['data-mode'] });
+}
+
 function draw() {
   if (!monogramWrap || monogramWrap.dataset.mode !== 'change') return;
-  background(60, 2, 93, 15);
-  const mx = mouseX;
-  const increment = map(mx, EDGE_SAFE_ZONE, width - EDGE_SAFE_ZONE, PI, 0.01,  true);
+  background(60, 1 ,96, 15);
+  const mx = trackingMouse ? mouseX : width - EDGE_SAFE_ZONE;
+  const increment = map(mx, EDGE_SAFE_ZONE, width - EDGE_SAFE_ZONE, PI, 0.01, true);
   // stroke() is centered on the path, so it bleeds outward by half its
   // own weight beyond whatever radius we draw at
   const strokeW = monoW * STROKE_WEIGHT_FRACTION;
@@ -104,4 +113,3 @@ function draw() {
   }
   endShape();
 }
-

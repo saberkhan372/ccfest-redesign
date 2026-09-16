@@ -487,20 +487,8 @@ a {
 
 /* ── Animation placeholder (Shristi) ── */
 
-.anim-stage {
-  position: relative;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--paper);
-  border-top: 1px dashed var(--line);
-  border-bottom: 1px dashed var(--line);
-  overflow: hidden;
-}
 
-/* Crosshatch grid background — shows this is an empty canvas */
-.anim-stage::before {
+/* .anim-stage::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -509,19 +497,8 @@ a {
     linear-gradient(to bottom, var(--soft-line) 1px, transparent 1px);
   background-size: 48px 48px;
   opacity: 0.5;
-}
+} */
 
-.anim-stage-inner {
-  position: relative;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 2rem;
-  background: var(--paper);
-  border: 1px dashed var(--line);
-}
 
 .anim-stage-label {
   color: var(--accent, #2952e8);

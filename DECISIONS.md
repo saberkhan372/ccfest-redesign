@@ -23,3 +23,15 @@
 ## 2026-09-15 — Announcement states are structural, not copy
 **Why:** An empty date, keynote list, session list or registration link renders the honest "to be announced" layouts by itself. An editor cannot produce a half-finished page by clearing a field, and never needs a placeholder to make one look complete.
 **Rejected:** Free-text date and status fields, which would let a typo or an optimistic guess reach the live site.
+
+## 2026-09-16 — Merge Shristi's pull request instead of reverting `main`
+**Why:** Her PR (#1) branches from before Jekyll and the CMS and suggests reverting `main` to merge cleanly; that would discard the site. A real merge, resolved by taking her files whole and porting her stage markup into the Jekyll homepage, keeps her twelve commits and authorship and closes the PR on GitHub when it reaches `main`.
+**Rejected:** Reverting `main`; copying her files in without her history; a squash that drops her authorship.
+
+## 2026-09-16 — Shristi's files stay byte-identical; host needs live outside them
+**Why:** The provisional integration patched `animations.js` and `change-sketch.js`, which made every later update a hand merge. Now the p5 lifecycle and SVG animation pausing are in `interaction.js`, and colour blending, sizing and paused states are in `redesign.css`, so her next PR can be taken whole with `git checkout --theirs`.
+**Rejected:** Patching her scripts for the pause, offscreen and reduced-motion needs, or fixing her confetti listeners on her behalf.
+
+## 2026-09-16 — Her full-height stage on desktop
+**Why:** Her PR asks that the 95dvh stage not be shortened, since each mode draws across all of it; the earlier `clamp(560px,80vh,850px)` override and the smaller monogram size were removed. Phones keep 540px pending her view.
+**Rejected:** Keeping the shorter desktop stage for page rhythm.

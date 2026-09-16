@@ -48,7 +48,7 @@
 - Untested: Safari/Firefox, real mobile/touch devices, production hosting, checkout (not configured), exact designer approval of manual kerning.
 
 ## Open risks / known breakage
-- Shristi’s latest email requests waiting for her PR; three modes are unfinished. This is a provisional local integration, not a final branch merge. Celebration has an empty confetti host in the supplied source.
+- ~~Shristi’s PR pending; three modes unfinished.~~ Superseded 2026-09-16: PR #1 merged on branch `shristi-pr-1` with all ten modes — see the last section.
 - Event date, confirmed speakers/session details, and registration URL/Eventbrite ID are missing. Event page displays honest announcement states.
 - Launch target in meeting notes is September 17; an email says October 17 and Shristi asks for clarification. Do not treat either as the event date.
 - Installed session-wrap symlinks are stale; used the existing backup skill. No unrelated skill repairs made.
@@ -82,7 +82,7 @@
 - The "Registration is open." copy in the registration band is mine; there was no designed open state.
 
 ## Next task
-Review http://127.0.0.1:8876/ and /register/ with Saber; when Shristi’s PR arrives, compare its animation files and stage markup against the preserved source folder before integrating the remaining modes. Obtain explicit deployment instructions before publishing.
+Superseded — see “Next task” in the last section. Obtain explicit deployment instructions before publishing.
 
 ## Codex review of Pages CMS — 2026-09-15
 - Reviewed `pages-cms` against `main`, including the working-tree configuration change. No implementation changes made during review.
@@ -112,3 +112,30 @@ Review http://127.0.0.1:8876/ and /register/ with Saber; when Shristi’s PR arr
 - `..` placeholders sit in the keynote and session entries on the branch and would go live at merge.
 - Whether October 17 is real. If it is, the hero lettering still shows Francisca's `________,` beside it and needs the `design/figma-typography.json` step.
 - An empty `.pages.yml` was committed to `main` by Pages CMS (`cd84b0e`) when it was first connected there; it will collide with the real one at merge. Trivial to resolve, but resolve it deliberately.
+
+## Shristi’s PR #1 merged on a branch — 2026-09-16 (Claude)
+- Reviewed https://github.com/saberkhan372/ccfest-redesign/pull/1 (12 commits, all ten modes) and her screen recording `Screen Recording 2026-09-16 at 2.01.21 AM.mov` (60s, every mode in turn). The other recording in the folder, from 2026-09-13, is an unrelated Moog synth project.
+- Her branch starts before Jekyll/CMS; her PR suggests reverting `main` first. Not done. Instead a real merge on local branch **`shristi-pr-1`** (not pushed), so her commits and authorship are kept and GitHub closes PR #1 when this reaches `main`.
+- Her six files (`animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, `coding-power.js`) are **byte-identical** to the PR. Every host need moved out of her files, unlike the provisional integration, which had patched `animations.js` and `change-sketch.js`.
+- `index.html`: her stage markup, plus host parts (section label and initial mode, `role="tab"` for her `aria-selected` tabs, `aria-hidden` artwork, starting label “Creativity” not her “Curiosity”, pause button). `_layouts/base.html` loads her three new scripts.
+- `interaction.js`: now owns the p5 lifecycle her new sketch dropped (stops when paused, offscreen, hidden, or another mode; adds `canvas-ready`) and pauses the SVG `<animate>` wobble.
+- `redesign.css` §7: removed the desktop height and monogram-size overrides — her note asks that the 95dvh stage not be clipped. Added: `width:100%` (her `100vw` overflows), `mix-blend-mode: darken` on the Change canvas (her `#f5f5f2` clear colour would show as a pale box on `#edede9`), full-size Connection layer (it sat under the mode buttons on phones), paused confetti hidden, paused scribble shown finished.
+- `scripts/verify.cjs`: tabs, scribble load, canvas mount, confetti and SVG-animation pausing.
+
+## Verified
+- `verify.cjs` passes in full against the Jekyll build (`--safe`, Jekyll 3.10 via ruby@3.4): six pages at 320/390/768/1440, ten modes, arrow keys, pause/resume, reduced motion, offscreen suspension, no-JS, no browser errors or failed requests.
+- The five inner pages build **byte-identical** to `main`.
+- Screenshots of every mode before/after its interaction at 1440, 1280, 768, 390 and 320px compared with her recording; Change-mode stage pixels equal `--paper` exactly; no-JS, reduced-motion and reduced-motion Change states inspected.
+- Confirmed with a test: in Celebration, pressing anywhere on the page (e.g. the event band below the stage) fires confetti and turns the Cs. Her code, not fixed; reported to her.
+
+## Not verified
+- Safari, Firefox, real phones and touch. Hover-only modes (Connection, Community, Curiosity, Coding) have no touch or keyboard trigger.
+- The live GitHub Pages deploy: nothing pushed.
+
+## Open, needing Saber / Shristi / Francisca
+- **Type and colour of the mode buttons and labels.** Her PR and recording use Libre Caslon pills and a grey mode name; the site keeps the earlier host choice of Anybody, square buttons, blue active, ink label (her grey is ~1.8:1 contrast). Undo by deleting the `.mode-btn` / `.cc-text` rules in `redesign.css` §7.
+- **Phone stage height** stays at 540px (§9). Nothing crops at 320/390, but she asked for no clipping; her 95dvh would make it a full phone screen.
+- Review notes for Shristi (not posted anywhere): document-wide confetti listeners; `change-sketch.js` never stops its loop; `#ccCopyright` symbol removed but still referenced; debugging outline and `100vw`; hover-only interactions; unhandled rejection if a scribble fetch fails; unused assets (`CC.png`, `cc-copyright.svg`, `scribble-1/2.svg` ≈ 610KB, 10 of 11 Caslon files).
+
+## Next task
+Saber reviews branch `shristi-pr-1` (preview: build with Jekyll, serve with `npx http-server`). If approved, fast-forward `main` to it and push — that publishes the site and marks PR #1 merged. Decide the button/label typography first. Send Shristi the review notes.

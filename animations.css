@@ -22,6 +22,7 @@
 :root{
   font-size: 16px;
    --cc-orange: #f44c2d;
+   --cc-power-green: #84D136;
    --cc-neutral: #b7b7b7;
    --pill-bg: #1e1f22;
    --pill-fg: #f5f5f5;
@@ -181,6 +182,7 @@
   border-top: 1px dashed var(--line);
   border-bottom: 1px dashed var(--line);
   overflow: hidden;
+
 }
 
 /* ---------- mode buttons ---------- */
@@ -270,13 +272,16 @@
     pointer-events: none;
     z-index: 10;
     font-family: caslon;
+    text-align: left;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .cc-text-left {
     left: calc(50% - 0.14 * var(--mono-w));
     transform: translate(-50%, -50%);
     color: var(--ink);
-
+    
 }
 
 .cc-text-right {
@@ -300,13 +305,35 @@
    ===================================================================== */
 
 [data-mode="creativity"] .cc-path {
-    fill: url(#creativityGradient);
-    animation: creativityHue 5s linear infinite;
+    fill: none;
+    stroke: var(--cc-orange);
+    stroke-width: 0.6rem;
 }
 
-@keyframes creativityHue {
-    from { filter: hue-rotate(0deg); }
-    to { filter: hue-rotate(360deg); }
+/* Hand-drawn scribble doodles (creativity-scribble.js computes each
+   path's real length and drives the stroke-dashoffset reveal through
+   the mask below, so the fill "draws in" instead of popping in). */
+.cc-scribble-group {
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+}
+
+[data-mode="creativity"] .cc-scribble-group {
+    opacity: 1;
+    display: block;
+}
+
+.cc-scribble {
+    fill: var(--cc-orange);
+}
+
+/* Once a side has finished drawing in, creativity-scribble.js adds this
+   class so the ink keeps subtly trembling in place — an SVG turbulence
+   filter continuously displaces the rendered shape by a few units,
+   giving it a hand-held, "alive" wobble instead of going static. */
+.cc-scribble-alive {
+    filter: url(#scribbleWiggle);
 }
 
 /* =====================================================================
@@ -345,7 +372,7 @@
        non-interactive overlay) — this one needs hover, so opt back in,
        only while it's actually the visible layer. */
     pointer-events: auto;
-    margin-top: clamp(2rem, 2vmin, 2vh);
+    /* margin-top: clamp(2rem, 2vmin, 2vh); */
 }
 
 .cc-connection-piece {
@@ -398,41 +425,32 @@
 }
 
 /* =====================================================================
-   MODE 4 — Celebration: confetti burst + bounce
+   MODE 4 — Celebration 
    ===================================================================== */
 
 [data-mode="celebration"] .fx-confetti {
     display: block;
 }
 
-[data-mode="celebration"] .cc-mono {
-    animation: celebrationBounce 0.6s ease;
+.fx-confetti canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
-@keyframes celebrationBounce {
-    0% { transform: scale(1); }
-    35% { transform: scale(1.08); }
-    100% { transform: scale(1); }
-}
 
-.confetti-piece {
-    position: absolute;
-    top: -10px;
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-    animation-name: confettiFall;
-    animation-timing-function: cubic-bezier(0.4, 0.1, 0.6, 1);
-    animation-fill-mode: forwards;
-}
-
-@keyframes confettiFall {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-    100% { transform: translate(var(--drift, 0px), 60vh) rotate(540deg); opacity: 0; }
+/* The Cs are the confetti cannons in this mode: celebration-confetti.js
+   rotates them (around their own center) to track the mouse, and fires
+   confetti from the open counter-space while mousedown is held. */
+[data-mode="celebration"] .cc-path {
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
 }
 
 /* =================================
-   MODE 5 — Collaboration: the two Cs drift apart and re-merge ========*/
+   MODE 5 — Collaboration: the two Cs drift apart and re-merge 
+========*/
 
 .cc-string {
     stroke: var(--ink);
@@ -453,14 +471,14 @@
 [data-mode="collaboration"] .cc-unit-left {
     transform-box: fill-box;
     transform-origin: 50% 0%;
-    translate: 3.92% 0;
+    translate: 12.006% 0;
     animation: firstball 0.9s alternate ease-in infinite;
 }
 
 [data-mode="collaboration"] .cc-unit-right {
     transform-box: fill-box;
     transform-origin: 50% 0%;
-    translate: -3.92% 0;
+    translate: -12.006% 0;
     animation: lastball 0.9s alternate ease-out infinite;
 }
 
@@ -550,11 +568,11 @@
 }
 
 .cc-pacman-left {
-    transform-origin: 210.88px 260.07px;
+    transform-origin: 204.892px 260.069px;
 }
 
 .cc-pacman-right {
-    transform-origin: 756.921px 260.07px;
+    transform-origin: 750.933px 260.069px;
 }
 
 [data-mode="conversations"] .cc-pacman {
@@ -581,17 +599,129 @@
 [data-mode="conversations"] .cc-text-right {color: var(--cc-neutral); mix-blend-mode: difference;}
 
 @keyframes pacmanChompRight {
-    0%, 100% { d: path("M 968.402 48.589 A 299.079 299.079 0 1 0 968.402 471.551 L 756.921 260.07 Z"); }
-    50%      { d: path("M 1056 260.07 A 299.079 299.079 0 1 0 457.842 260.07 A 299.079 299.079 0 1 0 1056 260.07 L 756.921 260.07 Z"); }
+    0%, 100% { d: path("M 934.830 76.173 A 260.069 260.069 0 1 0 934.830 443.966 L 750.933 260.069 Z"); }
+    50%      { d: path("M 1011.002 260.069 A 260.069 260.069 0 1 0 490.864 260.069 A 260.069 260.069 0 1 0 1011.002 260.069 L 750.933 260.069 Z"); }
 }
 
 /* =====================================================================
-   MODE 8 — Community: halftone dot-pattern fill
+   MODE 8 — Community: the Cs become horseshoe magnets
    ===================================================================== */
 
 [data-mode="community"] .cc-path {
-    fill: url(#dotPattern);
+    opacity: 0;
 }
+
+.cc-magnet {
+    opacity: 0;
+    display: none;
+}
+
+[data-mode="community"] .cc-magnet {
+    opacity: 1;
+    display: block;
+    z-index: 1;
+}
+
+.cc-magnet-prong {
+    fill: #f8f8f8;
+    stroke: #000;
+    stroke-width: 3px;
+
+    vector-effect: non-scaling-stroke;
+}
+
+.cc-magnet-red {
+    fill: #f44c2d;
+    stroke: #000;
+    stroke-width: 3px;
+    vector-effect: non-scaling-stroke;
+   
+}
+
+.cc-magnet-blue {
+    fill: #2f35e2;
+    stroke: #000;
+    stroke-width: 3px;
+    vector-effect: non-scaling-stroke;
+}
+
+.cc-magnet-move {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hovering anywhere on the monogram sends both magnets flying apart
+   toward the edges of the stage, then snaps them back together. The
+   right one comes back rotated 180° so its poles land inverted against
+   the left one — red meets blue instead of red meeting red. */
+#monogramWrap[data-mode="community"]:hover .cc-magnet-move-left {
+    animation: magnetRepel 1.4s forwards;
+}
+
+#monogramWrap[data-mode="community"]:hover .cc-magnet-move-right {
+    animation: magnetRepelFlip 1.4s forwards;
+}
+
+@keyframes magnetRepel {
+    0%   { transform: translateX(0); animation-timing-function: ease-in-out; }
+    65%  { transform: translateX(calc(-42vw / min(1200px, 80vmin, 90vw) * 1072.4px)); animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes magnetRepelFlip {
+    0%   { transform: translateX(0) rotate(0deg); animation-timing-function: ease-in-out; }
+    65%  { transform: translateX(calc(42vw / min(1200px, 80vmin, 90vw) * 1072.4px)) rotate(0deg); animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+    100% { transform: translateX(0) rotate(180deg); }
+}
+
+/* Sparks flash in right as the magnets land back on each other (the
+   1.4s repel/snap above completes at the same moment), then hold
+   steady while still hovering and fade if you leave early. Each spark
+   is a clipped window over two stacked copies of the bolt art (see
+   .cc-magnet-spark-flow) so the chevrons can scroll infinitely without
+   ever showing a seam. */
+.cc-magnet-spark {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0.4);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+#monogramWrap[data-mode="community"]:hover .cc-magnet-spark {
+    animation: magnetSparkIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 1.3s forwards;
+}
+
+@keyframes magnetSparkIn {
+    0%   { opacity: 0; transform: scale(0.4); }
+    60%  { opacity: 1; }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* The top spark flows down toward the seam, the bottom one flows up
+   toward it — opposite directions, so the field appears to circulate
+   in one continuous loop through both poles rather than two mirrored
+   copies of the same motion. */
+.cc-magnet-spark-flow-top {
+    animation: magnetSparkFlowDown 1.1s linear infinite;
+}
+
+.cc-magnet-spark-flow-bottom {
+    animation: magnetSparkFlowUp 1.1s linear infinite;
+}
+
+@keyframes magnetSparkFlowDown {
+    from { transform: translateY(0); }
+    to   { transform: translateY(163.782px); }
+}
+
+@keyframes magnetSparkFlowUp {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-163.782px); }
+}
+
 
 /* =====================================================================
    MODE 9 — Curiosity: hover to curl the Cs into a question mark (default)
@@ -604,22 +734,21 @@
 }
 
 #monogramWrap[data-mode="curiosity"]:hover .cc-path-left {
-    transform: translateX(-16%) rotate(135deg);
+    transform: translateX(-16%) translateY(-16%) rotate(135deg);
 }
 
 #monogramWrap[data-mode="curiosity"]:hover .cc-path-right {
-    transform: translateX(16%) rotate(135deg);
+    transform: translateX(16%) translateY(-16%) rotate(135deg);
 }
 
 .curiosity-dot {
     position: absolute;
-    top: 103.6%;
+    top: 100%;
     /* 20.12% = the cc-path's inner (hole) circle diameter as a % of the
        monogram's width — matches the C's own inner radius exactly, so
        the dot scales with the glyph instead of the viewport. */
-    width: 20.12%;
+    width: 17.4957%;
     aspect-ratio: 1;
-    margin-top: 2%;
     border-radius: 50%;
     background: var(--ink);
     transform: translate(-50%, -15%) scale(0.3);
@@ -637,39 +766,75 @@
 .curiosity-dot-right { left: 80.51%; }
 
 #monogramWrap[data-mode="curiosity"]:hover .curiosity-dot {
-    transform: translate(-50%, 0) scale(1);
+    transform: translate(-50%, -32%) scale(1);
     opacity: 1;
 }
 
 /* =====================================================================
-   MODE 10 — Coding: terminal glitch + scanlines
+   MODE 10 — Coding: power on or off
    ===================================================================== */
 
 [data-mode="coding"] .cc-path {
-    fill: #16c92e;
-    animation: codingGlitch 2.4s steps(1) infinite;
+    opacity: 0;
 }
 
-@keyframes codingGlitch {
-    0%, 89%, 100% { transform: translate(0, 0); filter: none; }
-    90% { transform: translate(-3px, 1px); filter: hue-rotate(40deg); }
-    92% { transform: translate(3px, -1px); filter: hue-rotate(-30deg); }
-    94% { transform: translate(0, 0); filter: none; }
+.cc-power-ring,
+.cc-power-line {
+    /* coding-power.js alternates this custom property between
+       var(--cc-orange) and var(--cc-power-green) to suggest an on/off
+       signal, and overrides it immediately on click. */
+    fill: var(--cc-power-color, var(--cc-orange));
+    opacity: 0;
+    display: none;
 }
 
-[data-mode="coding"] .fx-scanlines {
+[data-mode="coding"] .cc-power-ring,
+[data-mode="coding"] .cc-power-line {
     display: block;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(22, 201, 46, 0.08) 0px,
-        rgba(22, 201, 46, 0.08) 1px,
-        transparent 2px,
-        transparent 4px
-    );
-    mix-blend-mode: multiply;
 }
 
-[data-mode="coding"] .cc-text-right,
-[data-mode="coding"] .cc-text-left {
-    font-family: 'Courier New', monospace;
+[data-mode="coding"] .cc-power-ring {
+    opacity: 1;
+}
+
+.cc-power-spin {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    transform: rotate(90deg);
+}
+
+[data-mode="coding"] .cc-power-spin {
+    transition: transform 0.6s cubic-bezier(0.32, 1, 0.4, 1);
+}
+
+[data-mode="coding"] .cc-power-line {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0.3);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s, opacity 0.3s ease 0.15s;
+}
+
+#monogramWrap[data-mode="coding"]:hover .cc-power-spin {
+    transform: rotate(0deg);
+}
+
+#monogramWrap[data-mode="coding"]:hover .cc-power-line {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Click feedback: coding-power.js toggles .is-pressed on mousedown and
+   clears it on release, giving the icon a quick "press" before its
+   signal color flips. */
+[data-mode="coding"] .cc-power-left,
+[data-mode="coding"] .cc-power-right {
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.15s ease;
+}
+
+[data-mode="coding"] .cc-power-left.is-pressed,
+[data-mode="coding"] .cc-power-right.is-pressed {
+    transform: scale(0.88);
 }

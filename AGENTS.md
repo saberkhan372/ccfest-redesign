@@ -25,9 +25,9 @@ python3 -m http.server 8876 --bind 127.0.0.1
 - **Never edit the Figma file.** Read-only calls.
 - **Don't invent content.** No made-up dates, speakers, times, prices, or registration links, and never ship Figma's bracketed placeholders (`[Keynote name]`). Use the honest "to be announced" copy already in the layouts.
 - **Don't hand-edit `data-figma-run` spans.** Change `design/figma-typography.json`, then run `node scripts/sync-typography.cjs`.
-- **Don't merge Shristi's branch before her pull request.** She asked for this directly.
+- **Shristi's work arrives by pull request.** Merge it on a branch as in [docs/UPDATING.md](docs/UPDATING.md) §2 — never straight onto `main`, and never revert `main` to make a merge easier.
 - **Keep the designer credits** (`.design-credits`) in every footer.
-- **Respect ownership.** `animations.css` and the mode logic in `animations.js` are Shristi's; Figma is Francisca's. Host-side changes go in `redesign.css` or `interaction.js` — and say so in your summary.
+- **Respect ownership.** `animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, and `coding-power.js` are Shristi's and stay identical to her branch; Figma is Francisca's. Host-side changes go in `redesign.css` or `interaction.js` — and say so in your summary.
 
 ## Where changes go
 
@@ -81,5 +81,5 @@ End a session by updating `CURRENT.md` (state, verified vs. untested, next task)
 ## Key references
 
 - Figma file `jMiMzds3qYD2mO5w2Dsg4P` — Homepage `218:104`, Register `251:732`
-- Shristi's branch: https://github.com/saberkhan372/ccfest-redesign/tree/10-years-origin
+- Shristi's branch: https://github.com/saberkhan372/ccfest-redesign/tree/10-years-origin (PR #1: https://github.com/saberkhan372/ccfest-redesign/pull/1)
 - Credits: Design by Francisca José Rodrigues, Interactives by Shristi Singh

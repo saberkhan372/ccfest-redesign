@@ -29,8 +29,8 @@ Use port 8876 — see [../GOTCHAS.md](../GOTCHAS.md).
 | `animations.css` | Motion: load and scroll reveals, the ten-mode interactive | **Shristi** |
 | `redesign.css` | The current look, layered on the base. Sectioned and commented. | Saber + Francisca |
 | `animations.js` | Scroll reveals and the mode switcher | **Shristi** |
-| `change-sketch.js` | p5.js "Change" mode canvas | Shristi + Saber |
-| `interaction.js` | Pause button and reduced-motion handling | Saber |
+| `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, `coding-power.js` | Change, Celebration, Creativity, and Coding modes | **Shristi** |
+| `interaction.js` | Pause button, reduced motion, p5 canvas lifecycle | Saber |
 | `assets/fonts/` | Anybody (variable, upright + italic), Overpass Mono, with licences | — |
 | `assets/design/` | SVG shapes exported from Figma | — |
 | `design/figma-typography.json` | Letter-level type data read from Figma | generated |
@@ -158,11 +158,12 @@ Keep: `lang`, the skip link, one `<h1>`, `aria-labelledby` on each section, `ari
 
 `<section class="anim-stage" data-mode="creativity">` holds Shristi's ten-mode monogram.
 
-- Buttons `.mode-btn[data-mode]`: creativity, change, connection, celebration, collaboration, creative-commons, conversations, community, curiosity, coding.
+- Tabs `.mode-btn[role="tab"][data-mode]`: creativity, change, connection, celebration, collaboration, creative-commons, conversations, community, curiosity, coding.
 - `animations.js` copies the chosen mode onto `#monogramWrap`, `.anim-stage-main`, and `.anim-stage`; CSS styles each mode via `[data-mode="…"]`.
-- "Change" draws on a p5.js canvas (`change-sketch.js`) and runs only while visible, selected, and not paused.
+- "Change" draws on a p5.js canvas (`change-sketch.js`); `interaction.js` runs it only while visible, selected, and not paused.
+- Celebration, Creativity, and Coding have their own scripts; Creativity fetches its scribbles from `assets/animation/` at runtime.
 - `.motion-toggle` pauses everything; `prefers-reduced-motion` pauses automatically.
-- Three modes are unfinished until Shristi's pull request lands — see [UPDATING.md](UPDATING.md#2-shristis-interactive-her-pull-request).
+- Updating it from her pull requests: [UPDATING.md](UPDATING.md#2-shristis-interactive-her-pull-requests).
 
 ## Animation hooks
 

@@ -15,19 +15,17 @@ Update (September 15, later): letter-spacing, weight, style, and case were re-re
 ## Integration boundary
 
 - `redesign.css`: Francisca palette/type/layout plus responsive and accessibility adjustments. Small text on orange/lime uses darker colors for legibility.
-- `animations.css`: Shristi’s supplied file, trailing whitespace cleaned. Host overrides are in redesign.css.
-- `animations.js`: supplied mode/scroll logic, plus IntersectionObserver fallback and aria-pressed state for the button group.
-- `change-sketch.js`: supplied polygon drawing plus loop suspension while inactive, paused, offscreen, or document-hidden. Background follows the paper color; a readiness class preserves static Cs if p5 cannot load.
-- `interaction.js`: pause/resume and reduced-motion preference handling.
+- `animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, `coding-power.js`: Shristi’s files from PR #1 (September 16), byte-identical to her branch. Host overrides are in redesign.css section 7.
+- `interaction.js`: pause/resume, reduced motion, SVG animation pausing, and p5 loop suspension while inactive, paused, offscreen, or document-hidden; adds the readiness class that preserves static Cs if p5 cannot load.
 - Root homepage: supplied stage markup, initial Creativity mode, decorative SVG semantics, pause button, variable-font title spans, credits.
 - Event page: Figma structure with announcement states instead of fictitious people, schedule, or checkout.
 
 ## Designer review
 
-Review the two local pages, color/type pairing, title kerning, interactive scale on phones, and designer credits. Shristi’s three unfinished modes need her forthcoming PR; mode-selection tests do not certify each intended effect as complete. No confirmation of event date, schedule, or registration details has been inferred from the launch deadline.
+Review the two local pages, color/type pairing, title kerning, interactive scale on phones, and designer credits. Shristi’s ten modes arrived complete in PR #1; mode-selection tests do not certify each intended effect, so compare against her screen recording. No confirmation of event date, schedule, or registration details has been inferred from the launch deadline.
 
 ## Verification
 
 Start `python3 -m http.server 8876 --bind 127.0.0.1` from this folder. With Playwright and Chrome available, run `node scripts/verify.cjs http://127.0.0.1:8876/` (or set NODE_PATH to the installed Playwright package directory). The script checks both pages at four widths, assets/fonts/anchors, scroll reveals, mode state, keyboard navigation, motion preferences, offscreen suspension, and no-JS fallback. It writes desktop/mobile screenshots to `/tmp/ccfest-*.png`.
 
-Before staging: incorporate Shristi’s completed PR, review typography with Francisca, obtain confirmed event content, and identify/authorize the staging destination. The existing README says pushing main deploys GitHub Pages, so no push was performed.
+Before staging: review typography with Francisca, obtain confirmed event content, and identify/authorize the staging destination. The existing README says pushing main deploys GitHub Pages, so no push was performed.

@@ -17,3 +17,13 @@
 - **Liquid does not escape `{{ }}`, so every editor-supplied value carries `| escape`.** Without it, an ampersand or an angle bracket typed into a CMS field lands raw in the HTML — a name like "Ada & Grace" produces invalid markup, and a `<script>` tag would be live. Because the values are escaped on the way out, they are stored unescaped in `_data`: `camps.yml` holds `Details & interest list`, not `&amp;`. Do not re-add entity escapes to the data files.
 
 - **A half-filled CMS row used to hide the honest fallback.** A keynote with a label but no name, or a session with a time but no title, counted towards the list and so replaced the "to be announced" layout with a blank card. Entries now only count once they carry the field the card is built around (`name` for a keynote, `title` for a session), and incomplete rows are skipped when rendering.
+
+- **An absolutely positioned `<svg>` with only `height` set takes its width from the viewBox ratio, not from `left`/`right`.** Shristi's Connection layer at `height: 100%` came out 1585px wide on a 1440px stage and shifted right. Set `width` and `height` both, and let `preserveAspectRatio` centre the art.
+
+- **The in-app browser reports `document.hidden === true` while its pane is hidden,** so the p5 canvas correctly refuses to loop there and the Change mode looks broken. Test motion with Playwright (headless Chrome is "visible") or with the pane open.
+
+- **Playwright is installed globally, not in the repo.** Run scripts with `NODE_PATH=/opt/homebrew/lib/node_modules node scripts/verify.cjs <url>`.
+
+- **Old `http-server` processes linger on ports 8880–8888** from earlier sessions. Pick a free port (8895 was used on 2026-09-16) rather than assuming 8881 serves the current build.
+
+- **Jekyll copies every untracked file in the repo root into the build,** including the ~500MB screen recordings. Build from a copy that excludes `*.mov`, or move the recordings out.

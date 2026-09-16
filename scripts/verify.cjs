@@ -72,12 +72,25 @@ const WIDTHS = [320, 390, 768, 1440];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base);
 
-    // Every mode button selects exactly one mode and drives the monogram.
+    // Every mode tab selects exactly one mode and drives the monogram.
     for (const button of await page.locator('.mode-btn').all()) {
       await button.click();
-      assert.equal(await page.locator('.mode-btn[aria-pressed="true"]').count(), 1);
+      assert.equal(await page.locator('.mode-btn[role="tab"][aria-selected="true"]').count(), 1);
       assert.equal(await page.locator('#monogramWrap').getAttribute('data-mode'), await button.getAttribute('data-mode'));
     }
+
+    // "Creativity" fetches its scribble artwork, and the p5 canvas has mounted.
+    assert.equal(await page.locator('#scribbleLeftPath, #scribbleRightPath').count(), 2, 'scribble paths should load');
+    assert.equal(await page.locator('.anim-stage.canvas-ready').count(), 1, 'p5 canvas should mount');
+
+    // Pausing hides the confetti and stops the scribble wobble (an SVG animation CSS cannot reach).
+    await page.locator('.mode-btn[data-mode="celebration"]').click();
+    await page.locator('.motion-toggle').click();
+    assert.equal(await page.locator('#confettiLayer').isVisible(), false, 'paused confetti should hide');
+    assert.equal(await page.evaluate(() => document.querySelector('.cc-mono').animationsPaused()), true);
+    await page.locator('.motion-toggle').click();
+    assert.equal(await page.locator('#confettiLayer').isVisible(), true);
+    assert.equal(await page.evaluate(() => document.querySelector('.cc-mono').animationsPaused()), false);
 
     // Arrow keys move selection along the button group.
     await page.locator('.mode-btn').first().focus();
@@ -104,7 +117,7 @@ const WIDTHS = [320, 390, 768, 1440];
     await page.locator('footer').scrollIntoViewIfNeeded();
     await page.waitForTimeout(150);
     assert.equal(await page.evaluate(() => isLooping()), false, 'offscreen canvas should suspend');
-    console.log('PASS ten mode selections, keyboard selection, canvas pause/resume, reduced motion, offscreen suspension');
+    console.log('PASS ten mode selections, keyboard selection, scribble and canvas load, confetti and canvas pause/resume, reduced motion, offscreen suspension');
 
     /* Without JavaScript the controls hide, but the content still shows. */
     const noJS = await browser.newPage({ javaScriptEnabled: false });

@@ -44,24 +44,28 @@ She usually emails a prototype link. What matters is the **file key** and the **
 
 ---
 
-## 2. Shristi's interactive (her pull request)
+## 2. Shristi's interactive (her pull requests)
 
-Her files are `animations.css`, `animations.js`, and the drawing half of `change-sketch.js`. She works on the `10-years-origin` branch and asked that it not be merged until she opens a pull request. Three of the ten monogram modes were still unfinished at last word.
+Her files are `animations.css`, `animations.js`, `change-sketch.js`, `celebration-confetti.js`, `creativity-scribble.js`, `coding-power.js`, and `assets/animation/`. They stay **byte-identical** to her branch; everything the host needs lives outside them. Her first pull request, [saberkhan372/ccfest-redesign#1](https://github.com/saberkhan372/ccfest-redesign/pull/1) (all ten modes), was merged on the `shristi-pr-1` branch on September 16, 2026.
 
-1. **Fetch her branch**, don't merge yet:
+Her branch started before Jekyll and the CMS, so a plain merge conflicts. Her PR suggests reverting `main` first — don't; that would undo the site. Merge on a branch and resolve instead:
+
+1. **Fetch the pull request and merge it on a branch**, never on `main`:
 
    ```bash
-   git fetch origin 10-years-origin
-   git diff main origin/10-years-origin -- animations.css animations.js change-sketch.js
+   git fetch origin pull/<number>/head:shristi-pr-<number>
+   git switch -c shristi-merge main
+   git merge --no-commit shristi-pr-<number>
    ```
-2. **Compare with the preserved copy** in `Shristi-ccfest-redesign-10-years-origin/`, which is her earlier snapshot. Never edit that folder.
-3. **Take her versions of her files whole.** Don't hand-patch her keyframes or canvas code.
-4. **Re-apply host-side needs** if her update drops them. These live outside her files on purpose:
-   - `redesign.css` section 7 (stage sizing, mode buttons, pause button, no-JS and paused states)
-   - `interaction.js` (pause button, `prefers-reduced-motion`)
-   - `change-sketch.js` lifecycle: the canvas must stop when paused, offscreen, hidden, or in another mode
-5. **Check the whole interactive**: all ten modes, arrow-key navigation, the pause button, reduced motion, scrolling it out of view, and the page with JavaScript disabled. `scripts/verify.cjs` covers all of this.
-6. **Keep her credit** in the footer (`.design-credits`).
+2. **Take her files whole**: `git checkout --theirs <file>` for any of her files that conflict. Don't hand-patch her keyframes or scripts. Her earlier snapshot in `Shristi-ccfest-redesign-10-years-origin/` is still there for comparison; never edit it.
+3. **Keep our `index.html`** (`git checkout --ours index.html`; it is a Jekyll page) and copy her `<section class="anim-stage">` into it. Re-add the host parts: `aria-label` and `data-mode="creativity"` on the section, `role="tab"` on each button (her script sets `aria-selected`), `aria-hidden="true"` on the artwork SVG, the starting label text, and the `.motion-toggle` button.
+4. **New scripts** go in the `page.home` block at the end of `_layouts/base.html`, before `interaction.js`.
+5. **Host-side needs** live here, never in her files:
+   - `redesign.css` section 7: stage width, button and label type, pause button, no-JS and paused states, Change-canvas blending, Connection layer sizing
+   - `interaction.js`: pause button, `prefers-reduced-motion`, SVG animation pausing, and the p5 lifecycle (the canvas stops when paused, offscreen, in a hidden tab, or in another mode)
+6. **Don't shorten the stage on desktop.** Each mode uses her full `95dvh` stage, and she asked that it not be clipped. Phones use 540px (section 9); check nothing crops there.
+7. **Check it**: `scripts/verify.cjs` (ten modes, arrow keys, pause, reduced motion, offscreen, no JavaScript), then look at every mode at 1440 and 390px against her recording or description. The other pages should build byte-identical to `main`.
+8. **Keep her credit** in the footer (`.design-credits`).
 
 ---
 
