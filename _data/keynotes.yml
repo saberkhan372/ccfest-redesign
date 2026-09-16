@@ -1,15 +1,5 @@
-# Keynote speakers for the next CC Fest.
-#
-# While this list is empty, /register/ shows the two "to be announced" cards
-# that Francisca designed for exactly this state — that is the honest default,
-# so there is no reason to invent a speaker.
-#
-# Each keynote takes:
-#   label   the small line above the name, e.g. "Keynote 01"
-#   name    the speaker, or the talk title
-#   bio     a sentence or two
-#   url     optional link to their site
-#
-# There is no photo field: nothing in the CSS styles a keynote portrait yet, so
-# adding one would ship an unstyled image. Ask Francisca first.
-keynotes: []
+keynotes:
+  - label: Opening Keynote
+    name: Lauren Lee Mccarthy
+    bio: ..
+    url: ..
