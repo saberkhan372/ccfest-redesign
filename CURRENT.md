@@ -38,7 +38,7 @@
 ## Open questions for Saber (new pages)
 - Virtual CC Fest date: Aug 26 list email says Saturday, Oct 17 (backup Oct 24); pages still say "To be confirmed".
 - Mailing list: the ccfest.rocks Squarespace form keeps failing ("Form submission error" emails Jun–Sep 2026). New page uses email signup; choose a real form service if wanted.
-- Code of conduct contacts are copied from ccfest.rocks (ccfest@processing.org, saber@processing.org, Marie Flanagan). Confirm they're current; the homepage summary uses mrkhanatndv@gmail.com.
+- ~~Code of conduct contacts copied from ccfest.rocks.~~ Resolved 2026-09-16: Saber says Marie is no longer involved and reports come to him. The page now uses `site.email` / `organizer.name` and drops the processing.org addresses. Open: no second contact for a report about the organizer himself.
 - Past events: ccfest.rocks labels its Dec 8 NYC agenda "2022" but the URL and weekday point to 2019; new page says Dec 8, 2019. 2017/2018/2019 SF/2021 rows have no dates or agendas. Agenda links point to ccfest.rocks Squarespace pages, which break if that site is retired.
 
 ## Verified vs. untested
