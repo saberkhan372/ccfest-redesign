@@ -70,9 +70,14 @@
 - `sync-typography.cjs` a no-op on a second run; bracketed font filenames survive the build; `git diff --check` clean.
 - Smoke-tested in a throwaway build that a date, a keynote and a registration URL propagate to all three pages and flip the announcement states — then reverted.
 
+## Pushed, and checked against GitHub's own toolchain
+- `pages-cms` pushed to origin on Saber's explicit approval. **This publishes nothing:** GitHub Pages is configured to build from `main` (`build_type: legacy`, source `main`), so a branch push triggers no deployment, and `main` is untouched.
+- Built with the `github-pages` gem (v232 — the same dependency set GitHub runs, pinning Jekyll 3.10.0) in `--safe` mode: all six pages byte-identical, and the output file list matches the plain build exactly.
+- That build exposed the default-theme fallback; `_config.yml` now has an empty `theme:` line. Both that and the UTF-8 locale requirement are in GOTCHAS.md.
+
 ## Untested on that branch
-- The GitHub Pages build itself: nothing has been pushed, so Jekyll 3.10 has only run locally.
-- The admin UI at app.pagescms.org: the repository is not connected. That needs Saber's GitHub account.
+- The GitHub Pages deployment itself. It cannot run for this branch — Pages builds `main` only — so the first real deployment happens at merge.
+- The admin UI at app.pagescms.org: the repository is not connected yet. That needs Saber's GitHub account.
 - A real keynote card and a real session row have never been seen by Francisca — they only appear once those lists are filled.
 - The "Registration is open." copy in the registration band is mine; there was no designed open state.
 

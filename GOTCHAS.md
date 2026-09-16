@@ -9,3 +9,7 @@
 - **`python3 -m http.server` is not reliable enough to test against.** It is single-threaded and drops parallel requests from a headless browser, which shows up as a page that renders unstyled and a screenshot comparison that "fails" for no reason. It cost one false result during the CMS work. Use `npx http-server <dir> -p 8881 -c-1` instead.
 
 - **Native Ruby gems will not compile on this Mac as shipped.** The Command Line Tools are clang 15, which predates `<stdckdint.h>`, but Homebrew's Ruby headers include it, so every gem with a C extension fails. The workaround used here: install `ruby@3.4` and drop a three-macro `stdckdint.h` shim (built on `__builtin_*_overflow`) into `/opt/homebrew/Cellar/ruby@3.4/*/include/ruby-3.4.0/`. Updating the Command Line Tools is the real fix.
+
+- **GitHub Pages adds a theme unless you say no.** With no `theme` key in `_config.yml`, the Pages build falls back to `jekyll-theme-primer` and deploys ~130KB of CSS that no page links to. `_config.yml` now carries an empty `theme:` line to stop that. Verified by building with the `github-pages` gem (v232, which pins Jekyll 3.10.0) in `--safe` mode.
+
+- **Build Jekyll with a UTF-8 locale.** Without `LANG`/`LC_ALL` set, Ruby reads files as US-ASCII and the build dies on the first em dash ("Invalid US-ASCII character \xE2"). GitHub's builders set UTF-8; a local shell may not.

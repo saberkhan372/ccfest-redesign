@@ -7,6 +7,10 @@
 title: CC Fest
 description: Creative coding for connection, expression, and learning.
 
+# No theme. Without this line GitHub Pages falls back to jekyll-theme-primer and
+# deploys 130KB of its CSS that no page ever links to.
+theme:
+
 # Repository folders that are not part of the published site: the designers'
 # untouched source exports, the docs, the build scripts, and the Figma data.
 exclude:
