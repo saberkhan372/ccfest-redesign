@@ -176,5 +176,7 @@ Send Shristi the review notes above (confetti listeners first). Check the live h
 - Pushed as `0c0d03b`; GitHub Pages built it ~2 min later. On the live site, /register/ Register opens the dialog with the real event ("Suggested Donation $10.00 · Pay what you want").
 - Luma registration now has an optional, unrequired checkbox question: "Add me to the CC Fest mailing list for news about future events (optional; unsubscribe anytime)". Luma doesn't sync to EmailOctopus: export guests from Luma, import only those who ticked it.
 
+- Saber saw the live dialog unstyled and tiny. Cause: a stylesheet cached from before the deploy (the live CSS was correct). Fix: `?v=<build revision>` on local CSS/JS in `_layouts/base.html` and on `registration.js`. Dialog widened to 1000×900 max. `verify.cjs` passes on a build with a simulated revision; local builds are byte-identical except `redesign.css`. Dialog screenshots at 1440 and 1024 checked.
+
 ## Next task
 Add the Zoom Events link in Luma when Saber sends it. Before the event, import mailing-list opt-ins from Luma into EmailOctopus. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.

@@ -120,7 +120,7 @@ nav: "event"
             <iframe title="Registration form for {{ event.name | escape }}, provided by Luma" allow="payment; fullscreen"></iframe>
             <p class="registration-dialog-note">Form not loading? <a href="{{ registration_url | escape }}" target="_blank" rel="noopener">Register on Luma instead ↗</a></p>
           </dialog>
-          <script src="{{ page.root }}registration.js" defer></script>
+          {% assign rev = site.github.build_revision | default: "" %}<script src="{{ page.root }}registration.js{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
 {% endif %}        </div>
       </section>
 

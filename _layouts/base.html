@@ -10,15 +10,17 @@
     <meta name="theme-color" content="#edede9">
     <title>{{ page.title | escape }}</title>
     <link rel="icon" href="{{ page.root }}assets/favicon.png">
-    <link rel="stylesheet" href="{{ page.root }}styles.css">
+{% comment %} On GitHub Pages, site.github.build_revision is the commit being built. Adding it to local CSS and JS URLs
+   stops a browser pairing a new page with a stylesheet cached from the previous deploy. Local builds have no
+   revision, so they print plain URLs. {% endcomment %}{% assign rev = site.github.build_revision | default: "" %}{% if rev != "" %}{% assign v = "?v=" | append: rev %}{% else %}{% assign v = "" %}{% endif %}    <link rel="stylesheet" href="{{ page.root }}styles.css{{ v }}">
 {%- if page.home %}
-    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="animations.css{{ v }}">
     <!-- Adds .js to <html> before any CSS is applied so animations.css
          can gate hidden states behind this class. Content stays visible
          for users with JS disabled. -->
     <script>document.documentElement.classList.add('js')</script>
 {%- endif %}
-    <link rel="stylesheet" href="{{ page.root }}redesign.css">
+    <link rel="stylesheet" href="{{ page.root }}redesign.css{{ v }}">
   </head>
   <body class="{{ page.body_class | escape }}">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -38,12 +40,12 @@
 {%- if page.home %}
 
     <script src="assets/p5.min.js" defer></script>
-    <script src="animations.js" defer></script>
-    <script src="change-sketch.js" defer></script>
-    <script src="celebration-confetti.js" defer></script>
-    <script src="creativity-scribble.js" defer></script>
-    <script src="coding-power.js" defer></script>
-    <script src="interaction.js" defer></script>
+    <script src="animations.js{{ v }}" defer></script>
+    <script src="change-sketch.js{{ v }}" defer></script>
+    <script src="celebration-confetti.js{{ v }}" defer></script>
+    <script src="creativity-scribble.js{{ v }}" defer></script>
+    <script src="coding-power.js{{ v }}" defer></script>
+    <script src="interaction.js{{ v }}" defer></script>
 {%- endif %}
   </body>
 </html>
