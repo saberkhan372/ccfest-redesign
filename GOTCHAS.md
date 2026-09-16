@@ -13,3 +13,7 @@
 - **GitHub Pages adds a theme unless you say no.** With no `theme` key in `_config.yml`, the Pages build falls back to `jekyll-theme-primer` and deploys ~130KB of CSS that no page links to. `_config.yml` now carries an empty `theme:` line to stop that. Verified by building with the `github-pages` gem (v232, which pins Jekyll 3.10.0) in `--safe` mode.
 
 - **Build Jekyll with a UTF-8 locale.** Without `LANG`/`LC_ALL` set, Ruby reads files as US-ASCII and the build dies on the first em dash ("Invalid US-ASCII character \xE2"). GitHub's builders set UTF-8; a local shell may not.
+
+- **Liquid does not escape `{{ }}`, so every editor-supplied value carries `| escape`.** Without it, an ampersand or an angle bracket typed into a CMS field lands raw in the HTML — a name like "Ada & Grace" produces invalid markup, and a `<script>` tag would be live. Because the values are escaped on the way out, they are stored unescaped in `_data`: `camps.yml` holds `Details & interest list`, not `&amp;`. Do not re-add entity escapes to the data files.
+
+- **A half-filled CMS row used to hide the honest fallback.** A keynote with a label but no name, or a session with a time but no title, counted towards the list and so replaced the "to be announced" layout with a blank card. Entries now only count once they carry the field the card is built around (`name` for a keynote, `title` for a session), and incomplete rows are skipped when rendering.

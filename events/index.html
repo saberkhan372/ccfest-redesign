@@ -27,16 +27,16 @@ nav_current: "events"
           <ul class="event-list">
             <li class="event-card event-card-orange">
               <div>
-                <p class="eyebrow">10th anniversary · {{ event.format }} · {{ event.cost }}</p>
-                <h3>{{ event.name }}</h3>
+                <p class="eyebrow">10th anniversary · {{ event.format | escape }} · {{ event.cost | escape }}</p>
+                <h3>{{ event.name | escape }}</h3>
                 <p>Workshops, talks, and community for creative coders of all levels. {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }} — join the mailing list for updates.{% else %}Date to be announced — join the mailing list for updates.{% endif %}</p>
                 <a class="button button-solid" href="../register/">Event details →</a>
               </div>
               <dl>
-                <div><dt>Format</dt><dd>{{ event.format }}</dd></div>
+                <div><dt>Format</dt><dd>{{ event.format | escape }}</dd></div>
                 <div><dt>Date</dt><dd>{% if event_date != "" %}{{ event.date | date: "%B %-d, %Y" }}{% else %}To be confirmed{% endif %}</dd></div>
-                <div><dt>Cost</dt><dd>{{ event.cost }}</dd></div>
-                <div><dt>Experience</dt><dd>{{ event.level }}</dd></div>
+                <div><dt>Cost</dt><dd>{{ event.cost | escape }}</dd></div>
+                <div><dt>Experience</dt><dd>{{ event.level | escape }}</dd></div>
               </dl>
             </li>
 {% for camp in site.data.camps.camps %}            {% include event-card.html camp=camp %}
@@ -54,7 +54,7 @@ nav_current: "events"
         </div>
         <div class="hero-actions">
           <a class="button button-solid" href="../past-events/">See past events →</a>
-          <a class="button" href="mailto:{{ site.data.site.email }}?subject=Organizing%20a%20CC%20Fest">Organize a CC Fest</a>
+          <a class="button" href="mailto:{{ site.data.site.email | escape }}?subject=Organizing%20a%20CC%20Fest">Organize a CC Fest</a>
         </div>
       </section>
     </main>

@@ -1,6 +1,6 @@
 <article class="keynote-card">
-            <p class="eyebrow">{{ include.keynote.label }}</p>
-            <h3>{{ include.keynote.name }}</h3>
-            <p>{{ include.keynote.bio }}</p>
-{% assign url = include.keynote.url | default: "" | strip %}{% if url != "" %}            <a class="button" href="{{ include.keynote.url }}" target="_blank" rel="noopener">More about {{ include.keynote.name }} ↗</a>
+            <p class="eyebrow">{{ include.keynote.label | escape }}</p>
+            <h3>{{ include.keynote.name | escape }}</h3>
+            <p>{{ include.keynote.bio | escape }}</p>
+{% assign url = include.keynote.url | default: "" | strip %}{% if url != "" %}            <a class="button" href="{{ include.keynote.url | escape }}" target="_blank" rel="noopener">More about {{ include.keynote.name | escape }} ↗</a>
 {% endif %}          </article>

@@ -7,11 +7,11 @@ root: "../"
 home_href: "../"
 nav: "event"
 ---
-{% assign event = site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}{% assign keynote_count = keynotes | size %}{% assign session_count = sessions | size %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
+{% assign event = site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}{% assign keynote_count = 0 %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}{% assign keynote_count = keynote_count | plus: 1 %}{% endif %}{% endfor %}{% assign session_count = 0 %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}{% assign session_count = session_count | plus: 1 %}{% endif %}{% endfor %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
       <section class="hero page-width" id="top" aria-labelledby="event-title">
-        <p class="eyebrow">{{ event.eyebrow }}</p>
-        <h1 id="event-title" aria-label="{{ event.name }}" data-figma-node="251:741"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">F</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="10" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none"> ________, </span><span data-figma-run="11" style="font-family: 'Anybody'; font-variation-settings: 'wght' 100, 'wdth' 100; font-weight: 100; font-style: italic; letter-spacing: 0em; text-transform: none">2026</span></h1>
-        <p class="hero-summary">{{ event.summary }}</p>
+        <p class="eyebrow">{{ event.eyebrow | escape }}</p>
+        <h1 id="event-title" aria-label="{{ event.name | escape }}" data-figma-node="251:741"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">F</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="10" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none"> ________, </span><span data-figma-run="11" style="font-family: 'Anybody'; font-variation-settings: 'wght' 100, 'wdth' 100; font-weight: 100; font-style: italic; letter-spacing: 0em; text-transform: none">2026</span></h1>
+        <p class="hero-summary">{{ event.summary | escape }}</p>
         <div class="hero-actions">
           <a class="button button-solid" href="#registration">Register</a>
           <a class="button" href="#sessions">View sessions</a>
@@ -22,7 +22,7 @@ nav: "event"
         <div class="page-width facts-grid">
           <div>
             <span>Format</span>
-            <strong>{{ event.format }}</strong>
+            <strong>{{ event.format | escape }}</strong>
           </div>
           <div>
             <span>Date</span>
@@ -30,11 +30,11 @@ nav: "event"
           </div>
           <div>
             <span>Cost</span>
-            <strong>{{ event.cost }}</strong>
+            <strong>{{ event.cost | escape }}</strong>
           </div>
           <div>
             <span>Experience</span>
-            <strong>{{ event.level }}</strong>
+            <strong>{{ event.level | escape }}</strong>
           </div>
         </div>
       </section>
@@ -60,8 +60,8 @@ nav: "event"
             <h3>Shared curiosity.</h3>
             <p>Speaker to be announced. Join the mailing list to hear who’s speaking.</p>
           </article>
-{% else %}{% for keynote in keynotes %}          {% include keynote-card.html keynote=keynote %}
-{% endfor %}{% endif %}        </div>
+{% else %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}          {% include keynote-card.html keynote=keynote %}
+{% endif %}{% endfor %}{% endif %}        </div>
       </section>
 
       <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
@@ -86,8 +86,8 @@ nav: "event"
               <p>Explore creative tools, make something new, and learn alongside the community. Session times, presenters, and workshop details will appear here once confirmed.</p>
             </div>
           </div>
-{% else %}{% for session in sessions %}          {% include session-row.html session=session %}
-{% endfor %}{% endif %}        </div>
+{% else %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}          {% include session-row.html session=session %}
+{% endif %}{% endfor %}{% endif %}        </div>
       </section>
 
       <section class="section registration-band" id="registration" aria-labelledby="registration-title">
@@ -101,10 +101,10 @@ nav: "event"
           </div>
 
           <div class="embed-notice">
-            <p class="eyebrow">Free · Online · All levels</p>
+            <p class="eyebrow">{{ event.cost | escape }} · Online · {{ event.level | escape }}</p>
 {% if registration_url != "" %}            <h3>Registration is open.</h3>
-            <p>Save your place at {{ event.name }}.</p>
-            <a class="button button-solid" href="{{ event.registration_url }}" target="_blank" rel="noopener">Register ↗</a>
+            <p>Save your place at {{ event.name | escape }}.</p>
+            <a class="button button-solid" href="{{ event.registration_url | escape }}" target="_blank" rel="noopener">Register ↗</a>
 {% else %}            <h3>Be the first to know.</h3>
             <p>We’re getting ready for the next CC Fest. Get an email when the date and registration are announced.</p>
             <a class="button button-solid" href="../mailing-list/">Join the mailing list →</a>

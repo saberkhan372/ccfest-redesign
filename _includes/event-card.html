@@ -1,11 +1,11 @@
 <li class="event-card">
               <div>
-                <p class="eyebrow">{{ include.camp.eyebrow }}</p>
-                <h3>{{ include.camp.name }}</h3>
-                <p>{{ include.camp.description }}</p>
-                <a class="button button-solid" href="{{ include.camp.url }}" target="_blank" rel="noopener">{{ include.camp.link_text }} ↗</a>
+                <p class="eyebrow">{{ include.camp.eyebrow | escape }}</p>
+                <h3>{{ include.camp.name | escape }}</h3>
+                <p>{{ include.camp.description | escape }}</p>
+                <a class="button button-solid" href="{{ include.camp.url | escape }}" target="_blank" rel="noopener">{{ include.camp.link_text | escape }} ↗</a>
               </div>
               <dl>
-{% for fact in include.camp.facts %}                <div><dt>{{ fact.label }}</dt><dd>{{ fact.value }}</dd></div>
+{% for fact in include.camp.facts %}                <div><dt>{{ fact.label | escape }}</dt><dd>{{ fact.value | escape }}</dd></div>
 {% endfor %}              </dl>
             </li>
