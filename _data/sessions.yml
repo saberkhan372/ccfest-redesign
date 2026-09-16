@@ -1,1 +1,87 @@
-sessions: []
+sessions:
+- title: Panel discussion
+  time: |-
+    10:30–11:00 am PT
+    1:30–2:00 pm ET
+  tags:
+  - Panel
+  description: ''
+  resource_url: ''
+  presenters:
+  - name: Amy B. Woodman
+    pronouns: she/they
+    photo: assets/people/amy-woodman.jpg
+    url: https://www.amybwoodman.com
+    bio: Amy Woodman is a Senior Program Manager at the Processing Foundation, where she supports open-source contributors, creative coding education, and programs that expand access to technology as a medium for expression. An educator, curriculum designer, and ceramic artist, she is especially interested in how creative coding can build agency and creative confidence and how we can protect the messy, exploratory process of making and learning in an AI-rich world.
+  - name: Daniel Schneider
+    pronouns: he/him
+    photo: assets/people/daniel-schneider.jpg
+    url: ''
+    bio: Dan taught high school math and computer science for several years, and now writes curriculum for Code.org and Hello World CS. He learned Processing in college, taught p5js in summer camps (where you can be *really* creative), wrote lessons for Code.org's Game Lab built on top of p5 play, and sometimes tinkers with ml5js.
+  - name: David DeLiema
+    pronouns: he/him
+    photo: assets/people/david-deliema.jpg
+    url: https://www.david-deliema.com/
+    bio: David DeLiema is an educational researcher who studies the conversations, designs, and processes that shape how learning emerges from moments of impasse. In research-practice partnerships that foreground the knowledge and voices of teachers, students, and parents, his research examines cognitive and psychological processes in the context of social interaction, technology-rich settings, play-based activities, and embodied movement. In studies of children pretend-playing as bees trying to find nectar, middle schoolers debugging broken code, and youth working on challenging puzzle-based video games, his work provokes reflection on the open-ended, power-laden, and everyday nature of turning impasses into learning.
+  - name: Adrienne Gifford
+    pronouns: she/her
+    photo: assets/people/adrienne-gifford.jpg
+    url: https://adriennegifford.com
+    bio: Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like p5.js and Wordplay, both with students and in collaboration with other educators and researchers.
+- title: Research-Paper-Monster-Mash
+  time: ''
+  tags:
+  - Intermediate
+  resource_url: ''
+  description: |-
+    A series of interconnected experiments that build on and combine the methods of various research papers to create things like:
+
+    A 700,000 parameter singing voice (with adjustable diphthongs, stresses, lyrics and melody/bar placement) distilled from a 15M parameter text-to-speech model.
+
+    An animated codec that carries data on colored cells which can be used to make cartoons. Borrowing the animation industry concept of a “traceback tremble”, it duplicates full header records for every unique frame, in a pleasing-looking way.
+
+    A tiny register machine (based on the 16 glyphs of the aforementioned codec) that slowly computes bits of a halting probability. Bound by the rules of a Storytelling Engine, the “Omega Numbers” computed are being tested as the seed for a 3D world that plays out the stories its own seed is built on, running in an original game engine.
+
+    All these things (and more!) have been designed to run on microcontrollers with 512KB of internal ram (2-8MB external). Firmware feels like the future, which is why these experiments are not designed for the internet.
+  presenters:
+  - name: Shane Curry
+    pronouns: he/him
+    photo: assets/people/shane-curry.jpg
+    url: https://www.shanecurry.com
+    bio: Shane Curry is a professional animator and amateur software enthusiast. He's currently the Timing Supervisor on "American Dad!" (2019-Present) and has worked on shows like Duncanville, She-Ra, and Trolls. He is a self-taught artist and musician.
+- title: 'Access Is the Interface: Coding in the Age of AI'
+  time: ''
+  tags:
+  - Intermediate
+  resource_url: https://ukadike.github.io/accessible-by-design-prototyping/access-agent-consent.html
+  description: Access Is the Interface is a creative-coding session on the convergence of accessibility, AI, and governance. Through a live p5.js demonstration, participants will see how voice, speech, APIs, and agentic systems can transform intention into action—while keeping people able to review, direct, authorize, and stop what happens. The session invites artists and coders to treat access not as a feature added afterward, but as a design practice for accountable creative systems.
+  presenters:
+  - name: Kemi Ukadike
+    pronouns: she/her/hers
+    photo: assets/people/kemi-ukadike.jpg
+    url: https://github.com/ukadike
+    bio: Kemi Sijuwade-Ukadike is an artist, journalist, and creative-technology leader working at the intersection of accessibility, civic systems, and AI governance. She is founder of Small Systems Lab and previously led Artist Initiatives & Inclusion at Eyebeam. Her work asks how creative code can expand participation while keeping human intention, consent, and accountability at the center.
+- title: Understanding Machine Learning Models through Sports Performance
+  time: ''
+  tags:
+  - Intermediate
+  resource_url: ''
+  description: What are the machine learning models we can use to support athletes, from their performance to injury prevention? How do they work? This session takes a deep dive into how models work, how they support professional athletes, and how they can help bridge the resource & research gap between men's and women's sports.
+  presenters:
+  - name: Jessica Valarezo
+    pronouns: she/her/hers
+    photo: ''
+    url: ''
+    bio: ''
+- title: Making a portfolio on Neocities
+  time: ''
+  tags:
+  - Beginner
+  resource_url: ''
+  description: "In this introductory workshop, you will be guided step by step how to make a portfolio website on Neocities (it's free!) \U0001F310 This will be a great opportunity to showcase your cat photos, music review or even interactive p5.js sketches \U0001F63C\U0001F916✨"
+  presenters:
+  - name: Naoto Hieda
+    pronouns: they
+    photo: assets/people/naoto-hieda.jpg
+    url: https://naotohieda.com/
+    bio: Naoto Hieda is a researcher and an artist from Japan based in Estonia enrolled in the PhD programme at the School of Digital Technologies Tallinn University. With a background in engineering, Naoto completed Diplom II (master's equivalent) with distinction from the Academy of Media Arts in Cologne, Germany and works internationally for theater productions and in the visual arts.

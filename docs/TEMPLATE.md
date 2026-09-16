@@ -146,7 +146,7 @@ Keep: `lang`, the skip link, one `<h1>`, `aria-labelledby` on each section, `ari
 |---|---|---|
 | Facts strip | event | `.event-facts` > `.page-width.facts-grid` > `div` with `span` + `strong` |
 | Keynotes | event | `.keynote-layout`: shape `img` then one `.keynote-card` per speaker |
-| Sessions | event | one `.session-row` per session: `.session-time`, `.session-presenter`, `.session-details` with `.tag-row` |
+| Sessions | event | one `.session-row` per session (`_includes/session-row.html`): `.session-time`, `.session-presenter` with `.presenter-list` (photo, name, pronouns), `.session-details` with `.tag-row`, description, resources link, and a folding `.presenter-bio` per presenter |
 | Registration | event | `.registration-band` (lime) with `.embed-notice` |
 | Event cards | events/ | `ul.event-list` > `li.event-card` (`.event-card-orange` features one); copy in a `div`, facts in a `dl` |
 | Archive rows | past-events/ | `ol.past-list` > `li.past-row` with `time`, `.past-place`, link or `.past-title` |

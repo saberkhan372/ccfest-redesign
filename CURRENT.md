@@ -189,5 +189,11 @@ Send Shristi the review notes above (confetti listeners first). Check the live h
 - **Mouse scoping:** not changed. No performance case. Doing it means editing Shristi's files (confetti listens on `document`; change-sketch reads p5's window-wide `mouseX`), so it's hers to decide in her new branch.
 - Not done by agent: Saber's editorial paragraphs per mode, Shristi's new branch, post-fest redesign.
 
+## Sessions and panel filled in — 2026-09-16
+- From the session-proposal sheet rows Saber pasted (the Drive export of that tab was truncated): a Panel discussion (Amy B. Woodman, Daniel Schneider, David DeLiema, Adrienne Gifford) at 10:30–11:00 am PT / 1:30–2:00 pm ET, from the Drive schedule doc, and four sessions with no time yet ("Time TBA"): Shane Curry, Kemi Ukadike, Jessica Valarezo, Naoto Hieda. Kemi's is her 9/11 submission, "Access Is the Interface"; an older sheet row has a different session.
+- `_data/sessions.yml` schema changed: `presenters` list (name, pronouns, photo, url, bio) plus `resource_url`; `presenter`/`presenter_bio` are gone. `.pages.yml` form updated to match. Bios fold under the description.
+- Photos: `assets/people/*.jpg`, 400px squares with metadata stripped (Daniel's source is only 128px). Jessica sent no photo, so her initial is shown. Descriptions and bios are as submitted, including emoji and markdown-style asterisks.
+- Open: which round (9:30 or 11:00) each session is in; a panel title/description; keynotes still empty.
+
 ## Next task
 Add the Zoom Events link in Luma when Saber sends it. Before the event, import mailing-list opt-ins from Luma into EmailOctopus. Register once through the live popup (Saber, with his own details) and confirm the email arrives. Send Shristi the earlier review notes.

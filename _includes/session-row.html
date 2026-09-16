@@ -1,13 +1,22 @@
 <div class="session-row">
-            <p class="session-time">{{ include.session.time | escape }}</p>
+            <p class="session-time">{% assign time = include.session.time | default: "" | strip %}{% if time != "" %}{{ time | escape | newline_to_br }}{% else %}Time TBA{% endif %}</p>
             <div class="session-presenter">
-              <p class="eyebrow">Presenter</p>
-              <strong>{{ include.session.presenter | escape }}</strong>
-{% assign presenter_bio = include.session.presenter_bio | default: "" | strip %}{% if presenter_bio != "" %}              <p>{{ include.session.presenter_bio | escape }}</p>
-{% endif %}            </div>
+              <p class="eyebrow">{% if include.session.presenters.size > 1 %}Panelists{% else %}Presenter{% endif %}</p>
+              <ul class="presenter-list">
+{% for person in include.session.presenters %}{% assign name = person.name | default: "" | strip %}{% if name != "" %}{% assign photo = person.photo | default: "" | strip %}{% assign lead = photo | slice: 0 %}{% if lead == "/" %}{% assign photo = photo | remove_first: "/" %}{% endif %}{% assign url = person.url | default: "" | strip %}{% assign pronouns = person.pronouns | default: "" | strip %}                <li>
+                  {% if photo != "" %}<img src="{{ include.root }}{{ photo | escape }}" alt="" width="56" height="56" loading="lazy">{% else %}<span class="presenter-initial" aria-hidden="true">{{ name | slice: 0 | escape }}</span>{% endif %}
+                  <span><strong>{% if url != "" %}<a href="{{ url | escape }}" target="_blank" rel="noopener">{{ name | escape }}</a>{% else %}{{ name | escape }}{% endif %}</strong>{% if pronouns != "" %}<small>{{ pronouns | escape }}</small>{% endif %}</span>
+                </li>
+{% endif %}{% endfor %}              </ul>
+            </div>
             <div class="session-details">
               <div class="tag-row">{% for tag in include.session.tags %}<span>{{ tag | escape }}</span>{% endfor %}</div>
               <h3>{{ include.session.title | escape }}</h3>
-              <p>{{ include.session.description | escape }}</p>
-            </div>
+{% assign description = include.session.description | default: "" | strip %}{% if description != "" %}              <p>{{ description | escape | newline_to_br }}</p>
+{% endif %}{% assign resources = include.session.resource_url | default: "" | strip %}{% if resources != "" %}              <p><a href="{{ resources | escape }}" target="_blank" rel="noopener">Session resources ↗</a></p>
+{% endif %}{% for person in include.session.presenters %}{% assign name = person.name | default: "" | strip %}{% assign bio = person.bio | default: "" | strip %}{% if name != "" and bio != "" %}              <details class="presenter-bio">
+                <summary>About {{ name | escape }}</summary>
+                <p>{{ bio | escape | newline_to_br }}</p>
+              </details>
+{% endif %}{% endfor %}            </div>
           </div>

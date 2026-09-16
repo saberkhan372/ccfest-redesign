@@ -65,12 +65,22 @@ content:
         list: true
         description: "Leave empty until the schedule is settled; the page shows its announcement row by itself."
         fields:
-          - { name: time, label: Time, type: string, description: "e.g. 10:00–11:00 ET" }
-          - { name: presenter, label: Presenter, type: string }
-          - { name: presenter_bio, label: Presenter bio, type: text, required: false }
-          - { name: title, label: Session title, type: string }
-          - { name: description, label: Description, type: text }
-          - { name: tags, label: Tags, type: string, list: true, description: "Short labels, e.g. All levels, Workshops" }
+          - { name: title, label: Session title, type: string, description: "A session only appears once it has a title." }
+          - { name: time, label: Time, type: text, required: false, description: "e.g. 10:30–11:00 am PT on one line, 1:30–2:00 pm ET on the next. Leave empty for 'Time TBA'." }
+          - { name: tags, label: Tags, type: string, list: true, description: "Short labels, e.g. Beginner, Panel" }
+          - { name: description, label: Description, type: text, required: false, description: "Blank lines become line breaks." }
+          - { name: resource_url, label: Resources link, type: string, required: false }
+          - name: presenters
+            label: Presenters
+            type: object
+            list: true
+            description: "One for a session; several for a panel (they are then labelled Panelists)."
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: pronouns, label: Pronouns, type: string, required: false }
+              - { name: photo, label: Photo, type: image, required: false, description: "Square, about 400px. Without one, the first letter of the name is shown." }
+              - { name: url, label: Website, type: string, required: false }
+              - { name: bio, label: Bio, type: text, required: false }
 
   - name: past_events
     label: Past events

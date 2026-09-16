@@ -86,7 +86,7 @@ nav: "event"
               <p>Explore creative tools, make something new, and learn alongside the community. Session times, presenters, and workshop details will appear here once confirmed.</p>
             </div>
           </div>
-{% else %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}          {% include session-row.html session=session %}
+{% else %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}          {% include session-row.html session=session root=page.root %}
 {% endif %}{% endfor %}{% endif %}        </div>
       </section>
 
