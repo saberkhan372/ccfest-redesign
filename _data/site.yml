@@ -12,3 +12,25 @@ credits:
   - role: Interactives
     name: Shristi Singh
     url: https://shristi.super.site/
+
+# Mailing list.
+#
+# Leave all of this empty and the site keeps the "email us to join" flow it uses
+# today — which is what it should keep doing until a real form has been tested
+# with a real submission. The Squarespace form failed silently for months; this
+# one does not go live until someone watches a test signup arrive.
+#
+# Fill ONE of these two:
+#   signup_url   the EmailOctopus hosted landing page. Safest: the buttons just
+#                link to it, and there is no markup of ours to get wrong.
+#   form_action  the action URL from the EmailOctopus embed code, to put the form
+#                on the page itself, styled to match the site.
+#
+# If you use form_action, copy email_field and honeypot_field out of that same
+# embed code. EmailOctopus generates those names per form, and a wrong name means
+# signups vanish without an error.
+mailing_list:
+  signup_url:
+  form_action:
+  email_field: field_0
+  honeypot_field:

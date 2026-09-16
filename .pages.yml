@@ -128,6 +128,15 @@ content:
     fields:
       - { name: email, label: Contact email, type: string, description: "Appears in every footer and in the mailing-list links." }
       - { name: tagline, label: Footer tagline, type: text }
+      - name: mailing_list
+        label: Mailing list
+        type: object
+        description: "Leave every field empty and the site keeps the 'email us to join' flow. Fill ONE of the first two."
+        fields:
+          - { name: signup_url, label: "EmailOctopus hosted sign-up page", type: string, required: false, description: "The safest option: the buttons link straight to it." }
+          - { name: form_action, label: "Or: the form's action URL", type: string, required: false, description: "From the EmailOctopus embed code, to put the form on the page itself." }
+          - { name: email_field, label: "Email field name", type: string, required: false, description: "From the same embed code, usually field_0. A wrong name means signups vanish without an error." }
+          - { name: honeypot_field, label: "Spam-trap field name", type: string, required: false, description: "From the same embed code, the hidden field whose name starts with hp." }
       - name: credits
         label: Designer credits
         type: object

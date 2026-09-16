@@ -204,12 +204,21 @@ button { font: inherit; }
 .past-place { font-weight: 600; }
 .past-row a,.past-title { font-size: 17px; }
 .past-row a { color: var(--accent); }
-/* mailing-list/: lime panel. No form — this is a static site, so people email to join. */
+/* mailing-list/: lime panel. The sign-up form is a plain POST to EmailOctopus
+ * when _data/site.yml supplies one — no JavaScript, no third-party iframe. With
+ * nothing configured the panel asks people to email instead. */
 .signup-panel { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(2rem,6vw,5rem); padding: clamp(2rem,5vw,4rem); background: var(--lime); }
 .signup-panel h2 { margin: .75rem 0 1rem; color: #8f260f; font-size: clamp(1.6rem,3vw,36px); font-weight: 600; line-height: 1.1; }
 .signup-panel p { color: var(--ink); }
 .signup-list { margin: .75rem 0 0; padding-left: 1.25rem; display: grid; gap: .75rem; font-size: 15px; line-height: 1.6; }
 .signup-note { max-width: 640px; margin-top: 1.5rem; color: var(--muted); font-size: 14px; }
+.signup-form { display: grid; gap: .5rem; margin-top: 1.25rem; max-width: 420px; }
+.signup-form label { font-family: 'Overpass Mono', monospace; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink); }
+.signup-form input { padding: .85rem 1rem; border: 1px solid var(--ink); background: #fff; color: var(--ink); font: inherit; font-size: 16px; }
+.signup-form input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.signup-form button { margin-top: .25rem; justify-self: start; border: 0; cursor: pointer; font: inherit; }
+/* The honeypot: bots fill it in, people never see it. */
+.signup-trap { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; }
 /* code-of-conduct/: sticky contents list beside long-form text. */
 .coc-layout { display: grid; grid-template-columns: minmax(180px,240px) minmax(0,1fr); gap: clamp(2rem,6vw,6rem); align-items: start; }
 .coc-toc { position: sticky; top: 1.5rem; }

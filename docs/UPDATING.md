@@ -2,7 +2,7 @@
 
 Step-by-step for the updates that actually come up: new design work from Francisca, Shristi's interactive, and confirmed event details.
 
-Related: [CMS.md](CMS.md) (editing content without code) · [TEMPLATE.md](TEMPLATE.md) (how the site is built) · [TYPOGRAPHY.md](TYPOGRAPHY.md) (the lettering pipeline) · [../AGENTS.md](../AGENTS.md) (rules for AI agents).
+Related: [CMS.md](CMS.md) (editing content without code) · [MAILING-LIST.md](MAILING-LIST.md) (sign-ups and sending) · [TEMPLATE.md](TEMPLATE.md) (how the site is built) · [TYPOGRAPHY.md](TYPOGRAPHY.md) (the lettering pipeline) · [../AGENTS.md](../AGENTS.md) (rules for AI agents).
 
 **Before any update**
 
