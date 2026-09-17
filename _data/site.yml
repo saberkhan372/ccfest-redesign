@@ -12,6 +12,12 @@ organizer:
   name: Saber Khan
   linkedin: https://www.linkedin.com/in/edsaber/
 
+# Preview image for links shared on LinkedIn, Bluesky, Slack, etc. 1200×630, key
+# content centred. The current one is a screenshot of the homepage lettering;
+# replace it with a designed image when there is one. Empty removes the image tags.
+share_image: assets/ccfest-share.png
+share_image_alt: "CC Fest lettering with a blue half-circle: a free and friendly gathering for creative coding."
+
 # Announcement bar across the top of every page. Leave `url` empty to remove it.
 # `url` without "https://" is a page on this site, relative to the site root.
 announcement:

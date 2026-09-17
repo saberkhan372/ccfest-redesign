@@ -183,6 +183,8 @@ content:
         fields:
           - { name: name, label: Name, type: string }
           - { name: linkedin, label: LinkedIn URL, type: string, required: false, description: "Leave empty and the LinkedIn icon is not shown at all." }
+      - { name: share_image, label: Link preview image, type: image, required: false, description: "Shown when someone shares a ccfest.rocks link on LinkedIn, Bluesky, Slack, etc. 1200×630 pixels, important content in the middle. After changing it, refresh LinkedIn's copy at linkedin.com/post-inspector." }
+      - { name: share_image_alt, label: Link preview image description, type: string, required: false }
       - name: announcement
         label: Announcement bar
         type: object
