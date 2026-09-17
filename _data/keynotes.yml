@@ -7,4 +7,5 @@ keynotes:
   - label: Keynote
     name: Daniel Shiffman
     bio: Daniel Shiffman is on a mission to share code with the world in an approachable, engaging way. He runs [The Coding Train](https://thecodingtrain.com/), a community for learning creative coding through beginner-friendly tutorials and coding challenges on YouTube. He is an Associate Arts Professor at [ITP, NYU Tisch School of the Arts](https://tisch.nyu.edu/itp), a co-founder of the [Processing Foundation](https://processingfoundation.org), and the author of *Learning Processing* and [*The Nature of Code*](https://natureofcode.com), an open-source book on simulating natural systems with code.
+    photo: assets/people/dan-shiffman.jpg
     url: https://thecodingtrain.com/
