@@ -213,3 +213,8 @@ Add the Zoom Events link in Luma when Saber sends it. Before the event, import m
 - Verified: `jekyll build --safe`; only the nav, the Events card, Past Events, `redesign.css` and the new page differ from the baseline. In the in-app browser, all 7 pages at 320/390/768/1440 have no overflow, one h1, no duplicate IDs or broken in-page anchors, and no console errors. Screenshots at 1440 and 390 checked.
 - Not verified: `verify.cjs` (Playwright not installed here), Safari/Firefox.
 - Open: the Spring 2026 class links to a `notion.so` page, which may need a Notion login (the others are public `notion.site` pages). The Spring 2025 camp's name isn't on ccfest.rocks, so it's listed as "CC Fest camp, Spring 2025". The new page has no Figma lettering for Francisca to review.
+
+## Keynote photo — 2026-09-16
+- Pushed earlier today: `5d35d86` (Register in the main nav, Visible Java page, Camps and classes) together with the unpushed register commits `60ad477` and `f5a8477`.
+- Keynote renamed "Lauren Lee McCarthy" (Saber). The "Shared curiosity" to-be-announced card is gone; her portrait takes that spot. Saber supplied the file `assets/people/lauren-lee-mccarthy.jpg`; it matches the portrait on get-lauren.net/Info (its file name there suggests the photographer is Barak Shrama; no credit shown yet). New optional `photo` field on keynotes (data, `_includes/keynote-card.html`, `.pages.yml`); CSS crops the landscape image to 4:5.
+- Verified in the in-app browser: photo loads, no overflow at 320/390/768/1024/1440, screenshots at 800 and 390. Not committed.

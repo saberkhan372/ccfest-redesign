@@ -155,6 +155,9 @@ button { font: inherit; }
 .keynote-card .eyebrow { font-size: 11px; }
 .keynote-card h3 { margin: .6rem 0; font-size: 24px; font-weight: 700; line-height: 1.2; }
 .keynote-card p { max-width: 500px; margin: 0; color: #787873; font-size: 15px; }
+.keynote-card .button { margin-top: 1.25rem; }
+/* A keynote's photo takes the next column beside its bio. The source is landscape, so crop to a tall frame on the person. */
+.keynote-layout > .keynote-photo { display: block; width: 100%; max-width: 420px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 43% 30%; transform: none; }
 /* Sessions: one .session-row per session (time / presenter / details). */
 .session-row { display: grid; grid-template-columns: 125px 220px minmax(0,500px); gap: 28px; padding-block: 28px; border-top: 1px solid #dadad7; }
 .session-row .session-time { margin: 0; color: var(--accent); font-size: 12px; letter-spacing: 0; text-transform: none; }
@@ -352,7 +355,7 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
  .hero-shape { --shape-w: clamp(65px, min(20vw, 50vw - 240px - 1rem), 285px); }
  /* Event page */
  .keynote-layout { grid-template-columns: 1fr 1fr; }
- .keynote-layout > img { grid-column: 1 / -1; width: 140px; height: 140px; }
+ .keynote-layout > img:not(.keynote-photo) { grid-column: 1 / -1; width: 140px; height: 140px; }
  .session-row { grid-template-columns: 125px minmax(0,1fr); }
  .session-row .session-time { grid-column: auto; }  /* cancels a wider rule in styles.css */
  .session-row .session-details { grid-column: 1 / -1; }
@@ -370,7 +373,8 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
  #past-events .section-heading { flex-direction: column; gap: .5rem; }
  /* Event page */
  .keynote-layout { grid-template-columns: 1fr; }
- .keynote-layout > img { width: 110px; height: 110px; }
+ .keynote-layout > img:not(.keynote-photo) { width: 110px; height: 110px; }
+ .keynote-layout > .keynote-photo { max-width: 320px; }
  .session-row { display: flex; flex-direction: column; gap: .75rem; }  /* flex avoids stray grid columns */
  .event-page .section-heading { column-gap: 1rem; }
  .history-shape img { width: 120px; }

@@ -51,6 +51,7 @@ content:
           - { name: label, label: Label, type: string, description: "e.g. Keynote 01" }
           - { name: name, label: Name or talk title, type: string }
           - { name: bio, label: Bio, type: text }
+          - { name: photo, label: Photo, type: image, required: false, description: "Shown beside the bio, cropped to a tall frame centred on the person." }
           - { name: url, label: Website, type: string, required: false }
 
   - name: sessions

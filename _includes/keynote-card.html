@@ -4,3 +4,5 @@
             <p>{{ include.keynote.bio | escape }}</p>
 {% assign url = include.keynote.url | default: "" | strip %}{% if url != "" %}            <a class="button" href="{{ include.keynote.url | escape }}" target="_blank" rel="noopener">More about {{ include.keynote.name | escape }} ↗</a>
 {% endif %}          </article>
+{% assign photo = include.keynote.photo | default: "" | strip %}{% assign lead = photo | slice: 0 %}{% if lead == "/" %}{% assign photo = photo | remove_first: "/" %}{% endif %}{% if photo != "" %}          <img class="keynote-photo" src="../{{ photo | escape }}" alt="Portrait of {{ include.keynote.name | escape }}" width="1500" height="1000" loading="lazy">
+{% endif %}

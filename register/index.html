@@ -87,12 +87,7 @@ nav: "event"
             <p>Speaker to be announced. Join the mailing list to hear who’s speaking.</p>
           </article>
 {% else %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}          {% include keynote-card.html keynote=keynote %}
-{% endif %}{% endfor %}{% if keynote_count == 1 %}          <article class="keynote-card">
-            <p class="eyebrow">Keynote</p>
-            <h3>Shared curiosity.</h3>
-            <p>Speaker to be announced. Join the mailing list to hear who’s speaking.</p>
-          </article>
-{% endif %}{% endif %}        </div>
+{% endif %}{% endfor %}{% endif %}        </div>
       </section>
 
       <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
