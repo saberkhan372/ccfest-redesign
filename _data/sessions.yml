@@ -14,7 +14,7 @@ sessions:
     pronouns: he/him
     photo: assets/people/daniel-schneider.jpg
     url: ''
-    bio: Dan taught high school math and computer science for several years, and now writes curriculum for [Code.org](https://code.org) and [Hello World CS](https://helloworldcs.org). He learned [Processing](https://processing.org) in college, taught [p5js](https://p5js.org) in summer camps (where you can be *really* creative), wrote lessons for Code.org's [Game Lab](https://code.org/educate/gamelab) built on top of [p5 play](https://p5play.org), and sometimes tinkers with [ml5js](https://ml5js.org).
+    bio: Dan taught high school math and computer science for several years, and now writes curriculum for [Code.org](https://code.org) and [Hello World CS](https://helloworldcs.org). He learned [Processing](https://processing.org) in college, taught p5js in summer camps (where you can be *really* creative), wrote lessons for Code.org's [Game Lab](https://code.org/educate/gamelab) built on top of [p5 play](https://p5play.org), and sometimes tinkers with [ml5js](https://ml5js.org).
   - name: David DeLiema
     pronouns: he/him
     photo: assets/people/david-deliema.jpg
@@ -24,7 +24,7 @@ sessions:
     pronouns: she/her
     photo: assets/people/adrienne-gifford.jpg
     url: https://adriennegifford.com
-    bio: Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like [p5.js](https://p5js.org) and [Wordplay](https://wordplay.dev), both with students and in collaboration with other educators and researchers.
+    bio: Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like p5.js and [Wordplay](https://wordplay.dev), both with students and in collaboration with other educators and researchers.
 - title: Research-Paper-Monster-Mash
   tags:
   - Intermediate
