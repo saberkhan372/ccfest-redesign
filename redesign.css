@@ -143,7 +143,7 @@ button { font: inherit; }
 .hero { padding-block: clamp(3.5rem,6.1vw,88px) clamp(3rem,5.6vw,80px); }
 .hero > .eyebrow { color: #b12b14; letter-spacing: .08em; }  /* darker than Figma's orange for legibility on paper */
 .hero h1 { margin: 1.5rem 0; font-size: clamp(2.6rem,5vw,72px); font-weight: 300; text-transform: uppercase; max-width: 8.7em; letter-spacing: 0; line-height: 1.08; }
-.hero-summary { margin-bottom: 1.5rem; color: #787873; font-size: 18px; font-weight: 300; }
+.hero-summary { margin-bottom: 1.5rem; color: var(--muted); font-size: 18px; font-weight: 300; }
 /* Facts strip (orange). NOTE: white on orange is ~3.3:1 — below WCAG AA. As designed; flagged with Francisca. */
 .event-facts { background: var(--orange); border: 0; }
 .facts-grid > div,.facts-grid > div:first-child { border: 0; padding-inline: 0; }
@@ -151,8 +151,8 @@ button { font: inherit; }
 .facts-grid strong { color: #fff; font-size: 20px; font-weight: 500; }
 /* Numbered section headings: "01" beside the title. */
 .event-page .section-heading { grid-template-columns: auto minmax(0,1fr); column-gap: clamp(1rem,3.2vw,46px); margin-bottom: clamp(2rem,3.9vw,56px); padding-bottom: 0; border: 0; }
-.event-page .section-heading > p { padding-top: .9rem; color: #787873; font-size: 13px; white-space: nowrap; }
-.event-page .section-heading div > p { margin-top: .6rem; color: #787873; font-size: 16px; }
+.event-page .section-heading > p { padding-top: .9rem; color: var(--muted); font-size: 13px; white-space: nowrap; }
+.event-page .section-heading div > p { margin-top: .6rem; color: var(--muted); font-size: 16px; }
 .event-page .section-heading h2 { font-weight: 700; font-size: clamp(1.75rem,4.5vw,36px); letter-spacing: 0; }
 /* Keynotes: lime shape, then one card per speaker. */
 .keynote-layout { display: grid; grid-template-columns: minmax(120px,210px) repeat(2,minmax(0,1fr)); gap: clamp(1.5rem,2.6vw,37px); align-items: start; }
@@ -160,7 +160,7 @@ button { font: inherit; }
 .keynote-layout .keynote-card { display: block; padding: 0; background: none; border: 0; }  /* resets the older card styling in styles.css */
 .keynote-card .eyebrow { font-size: 11px; }
 .keynote-card h3 { margin: .6rem 0; font-size: 24px; font-weight: 700; line-height: 1.2; }
-.keynote-card p { max-width: 500px; margin: 0; color: #787873; font-size: 15px; }
+.keynote-card p { max-width: 500px; margin: 0; color: var(--muted); font-size: 15px; }
 .keynote-card .button { margin-top: 1.25rem; }
 /* Links inside bios ([name](url) in the CMS): ink on the grey text so they read as links. */
 .keynote-card p a,.presenter-bio p a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
@@ -178,7 +178,7 @@ button { font: inherit; }
 .session-row .tag-row { margin-bottom: 10px; }
 .session-row .tag-row span { padding: 5px 10px; color: var(--accent); background: #dadad7; border: 0; border-radius: 3px; font-size: 12px; letter-spacing: 0; text-transform: none; }
 .session-row h3 { margin: 0 0 10px; font-size: 18px; font-weight: 700; }
-.session-row p { margin: 0; color: #787873; font-size: 14px; }
+.session-row p { margin: 0; color: var(--muted); font-size: 14px; }
 .session-row-people { grid-template-columns: 220px minmax(0,560px); }  /* no time column: the day's timings live in the Schedule section */
 /* Schedule: the day's running order with Pacific, Eastern, and (schedule.js) the visitor's own time. */
 .schedule-zone { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 1rem; font-size: 14px; }
@@ -186,7 +186,7 @@ button { font: inherit; }
 .schedule-zone select { padding: .45rem .6rem; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 0; }
 .schedule-table { width: 100%; max-width: 1000px; border-collapse: collapse; font-size: 15px; }
 .schedule-table th,.schedule-table td { padding: 14px 16px 14px 0; text-align: left; vertical-align: top; border-top: 1px solid #dadad7; }
-.schedule-table thead th { padding-block: 0 10px; border-top: 0; color: #787873; font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: .07em; text-transform: uppercase; }
+.schedule-table thead th { padding-block: 0 10px; border-top: 0; color: var(--muted); font-family: 'Overpass Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: .07em; text-transform: uppercase; }
 .schedule-table tbody th { font-weight: 700; }
 .schedule-table td { color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .schedule-table .schedule-local { color: var(--accent); }
@@ -197,7 +197,7 @@ button { font: inherit; }
 .presenter-initial { display: grid; place-items: center; font-size: 20px; font-weight: 700; color: var(--accent); }
 .presenter-list strong { display: block; margin: 0; font-size: 15px; font-weight: 500; }
 .presenter-list strong a { color: inherit; }
-.presenter-list small { display: block; color: #787873; font-size: 12px; }
+.presenter-list small { display: block; color: var(--muted); font-size: 12px; }
 .session-details > p + p { margin-top: 10px; }
 .presenter-bio { margin-top: 10px; font-size: 14px; }
 .presenter-bio summary { color: var(--accent); cursor: pointer; }
@@ -380,7 +380,8 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
 }
 @media (max-width: 650px) {
  /* Homepage */
- .site-header nav { gap: .35rem 1rem; font-size: 11px; justify-content: flex-start; }
+ .site-header nav { gap: 0 1rem; font-size: 11px; justify-content: flex-start; }
+ .site-header nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; }  /* comfortable touch targets */
  .home-hero-title { font-size: 24vw; }
  .home-hero-sub { max-width: 280px; }
  .home-hero { padding-bottom: 5.5rem; }  /* room for the half-circle under the tagline */
@@ -401,7 +402,7 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
  .schedule-table tr { display: block; padding: 12px 0; border-top: 1px solid #dadad7; }
  .schedule-table th,.schedule-table td { display: block; padding: 2px 0; border: 0; white-space: normal; }
  .schedule-table td[hidden] { display: none; }
- .schedule-table td::before { content: attr(data-label) ": "; color: #787873; font-size: 12px; }
+ .schedule-table td::before { content: attr(data-label) ": "; color: var(--muted); font-size: 12px; }
  .event-banner { right: .75rem; bottom: calc(.75rem + env(safe-area-inset-bottom)); left: .75rem; max-width: none; justify-content: space-between; }
  .event-banner .eyebrow,.event-banner-date { display: none; }
  /* Inner pages */

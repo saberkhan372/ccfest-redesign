@@ -7,7 +7,7 @@ root: "../"
 home_href: "../"
 nav_current: "events"
 ---
-{% assign event = site.data.event %}{% assign event_date = event.date | default: "" | strip %}    <main id="main-content">
+{% assign event = site.data.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
       <section class="hero page-hero page-width" aria-labelledby="page-title">
         <p class="eyebrow">What’s next</p>
         <h1 id="page-title">Events</h1>
@@ -29,7 +29,7 @@ nav_current: "events"
               <div>
                 <p class="eyebrow">10th anniversary · {{ event.format | escape }} · {{ event.cost | escape }}</p>
                 <h3>{{ event.name | escape }}</h3>
-                <p>Workshops, talks, and community for creative coders of all levels. {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }} — join the mailing list for updates.{% else %}Date to be announced — join the mailing list for updates.{% endif %}</p>
+                <p>Workshops, talks, and community for creative coders of all levels. {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}Date to be announced{% endif %} — {% if registration_url != "" %}registration is open.{% else %}join the mailing list for updates.{% endif %}</p>
                 <a class="button button-solid" href="../register/">Event details →</a>
               </div>
               <dl>

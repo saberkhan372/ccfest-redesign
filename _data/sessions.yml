@@ -23,7 +23,7 @@ sessions:
   - name: Adrienne Gifford
     pronouns: she/her
     photo: assets/people/adrienne-gifford.jpg
-    url: https://adriennegifford.com
+    url: ''
     bio: Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like p5.js and [Wordplay](https://wordplay.dev), both with students and in collaboration with other educators and researchers.
 - title: Research-Paper-Monster-Mash
   tags:

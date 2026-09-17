@@ -6,6 +6,8 @@
 # images have none, so they are copied through byte for byte.
 title: CC Fest
 description: Creative coding for connection, expression, and learning.
+# The live address. Canonical and social-preview URLs in _layouts/base.html are built from it.
+url: https://ccfest.rocks
 
 # No theme. Without this line GitHub Pages falls back to jekyll-theme-primer and
 # deploys 130KB of its CSS that no page ever links to.

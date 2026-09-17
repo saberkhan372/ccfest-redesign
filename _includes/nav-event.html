@@ -1,5 +1,6 @@
 <nav aria-label="Main navigation">
-        <a href="#keynotes">Keynotes</a>
+        {% if site.data.schedule.items.size > 0 %}<a href="#schedule">Schedule</a>
+        {% endif %}        <a href="#keynotes">Keynotes</a>
         <a href="#sessions">Sessions</a>
         <a href="#registration">Registration</a>
       </nav>

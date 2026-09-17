@@ -10,6 +10,35 @@
     <meta name="theme-color" content="#edede9">
     <title>{{ page.title | escape }}</title>
     <link rel="icon" href="{{ page.root }}assets/favicon.png">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:title" content="{{ page.title | escape }}">
+    <meta property="og:description" content="{{ page.description | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ page.title | escape }}">
+    <meta name="twitter:description" content="{{ page.description | escape }}">
+{%- assign ld_event = site.data.event %}{% assign ld_date = ld_event.date | default: "" | strip %}
+{%- if page.nav == "event" and ld_date != "" %}{% assign ld_day = ld_event.date | date: "%Y-%m-%d" %}{% assign ld_items = site.data.schedule.items %}{% assign ld_offset = site.data.schedule.zones[0].utc_offset %}{% if ld_offset < 0 %}{% assign ld_sign = "-" %}{% assign ld_hours = ld_offset | times: -1 %}{% else %}{% assign ld_sign = "+" %}{% assign ld_hours = ld_offset %}{% endif %}{% assign ld_tz = ld_hours | prepend: "0" | slice: -2, 2 | prepend: ld_sign | append: ":00" %}{% assign ld_reg = ld_event.registration_url | default: "" | strip %}
+    <!-- Event details for search engines, built from _data/event.yml and _data/schedule.yml. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": {{ ld_event.name | jsonify }},
+      "description": {{ ld_event.summary | jsonify }},
+      "startDate": {% if ld_items.size > 0 %}{{ ld_day | append: "T" | append: ld_items.first.start | append: ":00" | append: ld_tz | jsonify }}{% else %}{{ ld_day | jsonify }}{% endif %},
+{% if ld_items.size > 0 %}      "endDate": {{ ld_day | append: "T" | append: ld_items.last.end | append: ":00" | append: ld_tz | jsonify }},
+{% endif %}      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "isAccessibleForFree": true,
+      "location": { "@type": "VirtualLocation", "url": {{ page.url | absolute_url | jsonify }} },
+      "organizer": { "@type": "Person", "name": {{ site.data.site.organizer.name | jsonify }}, "url": {{ "/" | absolute_url | jsonify }} }{% if ld_reg != "" %},
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": {{ ld_reg | jsonify }} }{% endif %}
+    }
+    </script>
+{%- endif %}
 {% comment %} On GitHub Pages, site.github.build_revision is the commit being built. Adding it to local CSS and JS URLs
    stops a browser pairing a new page with a stylesheet cached from the previous deploy. Local builds have no
    revision, so they print plain URLs. {% endcomment %}{% assign rev = site.github.build_revision | default: "" %}{% if rev != "" %}{% assign v = "?v=" | append: rev %}{% else %}{% assign v = "" %}{% endif %}    <link rel="stylesheet" href="{{ page.root }}styles.css{{ v }}">
