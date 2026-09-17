@@ -117,7 +117,7 @@ content:
         type: object
         list: true
         fields:
-          - { name: datetime, label: Machine-readable date, type: string, description: "YYYY-MM-DD, or just the year when only the year is known." }
+          - { name: datetime, label: Machine-readable date, type: string, description: "YYYY-MM-DD, YYYY-MM, or just the year when that is all that is known." }
           - { name: date_label, label: Date as shown, type: string, description: "e.g. Mar 21, 2026, or 2019" }
           - { name: place, label: Place, type: string, description: "e.g. Virtual, or NYC · NYU ITP" }
           - { name: url, label: Agenda link, type: string, required: false, description: "Leave empty when there is no agenda to link to, and fill in the title below instead." }
@@ -183,6 +183,15 @@ content:
         fields:
           - { name: name, label: Name, type: string }
           - { name: linkedin, label: LinkedIn URL, type: string, required: false, description: "Leave empty and the LinkedIn icon is not shown at all." }
+      - name: announcement
+        label: Announcement bar
+        type: object
+        description: "The strip across the top of every page. Leave the link empty to remove it."
+        fields:
+          - { name: eyebrow, label: Small label, type: string, required: false, description: "e.g. New" }
+          - { name: text, label: Text, type: string, required: false }
+          - { name: link_text, label: Link text, type: string, required: false, description: "e.g. Learn more" }
+          - { name: url, label: Link, type: string, required: false, description: "A page on this site without a leading slash, e.g. events/visible-java/, or a full https:// link. Empty removes the bar." }
       - name: mailing_list
         label: Mailing list
         type: object

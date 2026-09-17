@@ -12,6 +12,14 @@ organizer:
   name: Saber Khan
   linkedin: https://www.linkedin.com/in/edsaber/
 
+# Announcement bar across the top of every page. Leave `url` empty to remove it.
+# `url` without "https://" is a page on this site, relative to the site root.
+announcement:
+  eyebrow: New
+  text: "Visible Java: a free online camp for AP CS A teachers, November–December 2026."
+  link_text: Learn more
+  url: events/visible-java/
+
 # Keep both credits. The designers asked for them on every page.
 credits:
   - role: Design

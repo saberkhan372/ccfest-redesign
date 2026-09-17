@@ -24,6 +24,13 @@
   </head>
   <body class="{{ page.body_class | escape }}">
     <a class="skip-link" href="#main-content">Skip to content</a>
+{%- assign note = site.data.site.announcement %}{% assign note_url = note.url | default: "" | strip %}
+{%- if note_url != "" %}{% assign note_external = note_url | slice: 0, 4 %}{% if note_external == "http" %}{% assign note_href = note_url %}{% else %}{% assign note_href = page.root | append: note_url %}{% assign note_here = page.url | remove_first: "/" | remove: "index.html" %}{% endif %}
+{%- unless note_here == note_url %}
+    <!-- Announcement bar: _data/site.yml → announcement. An empty link removes it. -->
+    <p class="announcement-bar">{% if note.eyebrow %}<span class="eyebrow">{{ note.eyebrow | escape }}</span> {% endif %}<span>{{ note.text | escape }}</span> <a href="{{ note_href | escape }}"{% if note_external == "http" %} target="_blank" rel="noopener"{% endif %}>{{ note.link_text | default: "Learn more" | escape }}{% if note_external == "http" %} ↗{% else %} →{% endif %}</a></p>
+{%- endunless %}
+{%- endif %}
 
     <header class="site-header{% if page.home %} anim-nav{% endif %}">
       {% if page.nav == "event" %}{% include logo-header-event.html href=page.home_href %}{% else %}{% include logo-header.html href=page.home_href %}{% endif %}

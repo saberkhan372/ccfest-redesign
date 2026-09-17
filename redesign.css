@@ -60,6 +60,12 @@
 body { font-family: Anybody, Arial, sans-serif; font-weight: 300; font-kerning: normal; }
 h1,h2,h3,p { overflow-wrap: break-word; }
 button { font: inherit; }
+/* Announcement bar above the header on every page (_data/site.yml → announcement). */
+.announcement-bar { margin: 0; padding: .55rem var(--page-pad); color: var(--ink); background: var(--lime); border-bottom: 1px solid var(--ink); font-size: 13px; line-height: 1.4; text-align: center; }
+.announcement-bar .eyebrow { display: inline; margin: 0 .5rem 0 0; color: var(--ink); }
+.announcement-bar a { margin-left: .35rem; font-weight: 500; color: var(--ink); text-underline-offset: .2em; white-space: nowrap; }
+.announcement-bar a:hover { color: var(--accent); }
+.announcement-bar a:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 .site-header { min-height: 56px; background: var(--surface); }
 .site-header nav { font-size: 13px; color: var(--muted); flex-wrap: wrap; }
 .site-header nav a { text-decoration: none; padding-block: .5rem; }

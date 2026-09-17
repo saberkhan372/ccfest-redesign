@@ -218,3 +218,10 @@ Add the Zoom Events link in Luma when Saber sends it. Before the event, import m
 - Pushed earlier today: `5d35d86` (Register in the main nav, Visible Java page, Camps and classes) together with the unpushed register commits `60ad477` and `f5a8477`.
 - Keynote renamed "Lauren Lee McCarthy" (Saber). The "Shared curiosity" to-be-announced card is gone; her portrait takes that spot. Saber supplied the file `assets/people/lauren-lee-mccarthy.jpg`; it matches the portrait on get-lauren.net/Info (its file name there suggests the photographer is Barak Shrama; no credit shown yet). New optional `photo` field on keynotes (data, `_includes/keynote-card.html`, `.pages.yml`); CSS crops the landscape image to 4:5.
 - Verified in the in-app browser: photo loads, no overflow at 320/390/768/1024/1440, screenshots at 800 and 390. Not committed.
+
+## ccfest.rocks cutover — 2026-09-17 (Claude)
+- ccfest.rocks now serves this repo: `CNAME` file pushed; Namecheap A records → GitHub Pages (185.199.108–111.153), `www` CNAME → saberkhan372.github.io. MX/SPF email forwarding untouched. `verify.squarespace.com` CNAME left in place (harmless; delete once the domain is removed in Squarespace).
+- HTTPS certificate was pending at handoff; "Enforce HTTPS" still to be switched on once GitHub issues it.
+- Old Squarespace site stays reachable at https://saber-khan-hp7r.squarespace.com — agenda and photo links in `_data/past_events.yml` and `past-events/index.html` point there. Raw HTML snapshots of those pages: `../ccfest-squarespace-archive/`. Cancelling the Squarespace plan breaks those links.
+- Past events: added eight in-person rows taken from the old Pictures page (LA Sep 2017, NYC Nov 2017, NYC May 2018, LA Sep 2018, SF Oct 2018, NYC Nov 2018, NYC Jun 2019, SF Oct 2019); replaced the year-only 2017/2018/2019 rows. Homepage chips not changed.
+- Announcement bar: `_data/site.yml` → `announcement` (CMS form "Site details") prints a lime strip above the header on every page except its own target; now links to Visible Java. Styles in `redesign.css` §3. Checked in a `jekyll build --safe` at desktop and 320px (no overflow).
