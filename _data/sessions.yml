@@ -9,12 +9,12 @@ sessions:
     pronouns: she/they
     photo: assets/people/amy-woodman.jpg
     url: https://www.amybwoodman.com
-    bio: Amy Woodman is a Senior Program Manager at the Processing Foundation, where she supports open-source contributors, creative coding education, and programs that expand access to technology as a medium for expression. An educator, curriculum designer, and ceramic artist, she is especially interested in how creative coding can build agency and creative confidence and how we can protect the messy, exploratory process of making and learning in an AI-rich world.
+    bio: Amy Woodman is a Senior Program Manager at the [Processing Foundation](https://processingfoundation.org), where she supports open-source contributors, creative coding education, and programs that expand access to technology as a medium for expression. An educator, curriculum designer, and ceramic artist, she is especially interested in how creative coding can build agency and creative confidence and how we can protect the messy, exploratory process of making and learning in an AI-rich world.
   - name: Daniel Schneider
     pronouns: he/him
     photo: assets/people/daniel-schneider.jpg
     url: ''
-    bio: Dan taught high school math and computer science for several years, and now writes curriculum for Code.org and Hello World CS. He learned Processing in college, taught p5js in summer camps (where you can be *really* creative), wrote lessons for Code.org's Game Lab built on top of p5 play, and sometimes tinkers with ml5js.
+    bio: Dan taught high school math and computer science for several years, and now writes curriculum for [Code.org](https://code.org) and [Hello World CS](https://helloworldcs.org). He learned [Processing](https://processing.org) in college, taught [p5js](https://p5js.org) in summer camps (where you can be *really* creative), wrote lessons for Code.org's [Game Lab](https://code.org/educate/gamelab) built on top of [p5 play](https://p5play.org), and sometimes tinkers with [ml5js](https://ml5js.org).
   - name: David DeLiema
     pronouns: he/him
     photo: assets/people/david-deliema.jpg
@@ -24,7 +24,7 @@ sessions:
     pronouns: she/her
     photo: assets/people/adrienne-gifford.jpg
     url: https://adriennegifford.com
-    bio: Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like p5.js and Wordplay, both with students and in collaboration with other educators and researchers.
+    bio: Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like [p5.js](https://p5js.org) and [Wordplay](https://wordplay.dev), both with students and in collaboration with other educators and researchers.
 - title: Research-Paper-Monster-Mash
   tags:
   - Intermediate
@@ -55,7 +55,7 @@ sessions:
     pronouns: she/her/hers
     photo: assets/people/kemi-ukadike.jpg
     url: https://github.com/ukadike
-    bio: Kemi Sijuwade-Ukadike is an artist, journalist, and creative-technology leader working at the intersection of accessibility, civic systems, and AI governance. She is founder of Small Systems Lab and previously led Artist Initiatives & Inclusion at Eyebeam. Her work asks how creative code can expand participation while keeping human intention, consent, and accountability at the center.
+    bio: Kemi Sijuwade-Ukadike is an artist, journalist, and creative-technology leader working at the intersection of accessibility, civic systems, and AI governance. She is founder of Small Systems Lab and previously led Artist Initiatives & Inclusion at [Eyebeam](https://eyebeam.org). Her work asks how creative code can expand participation while keeping human intention, consent, and accountability at the center.
 - title: Understanding Machine Learning Models through Sports Performance
   tags:
   - Intermediate
@@ -77,4 +77,4 @@ sessions:
     pronouns: they
     photo: assets/people/naoto-hieda.jpg
     url: https://naotohieda.com/
-    bio: Naoto Hieda is a researcher and an artist from Japan based in Estonia enrolled in the PhD programme at the School of Digital Technologies Tallinn University. With a background in engineering, Naoto completed Diplom II (master's equivalent) with distinction from the Academy of Media Arts in Cologne, Germany and works internationally for theater productions and in the visual arts.
+    bio: Naoto Hieda is a researcher and an artist from Japan based in Estonia enrolled in the PhD programme at the [School of Digital Technologies, Tallinn University](https://www.tlu.ee/en/dt). With a background in engineering, Naoto completed Diplom II (master's equivalent) with distinction from the [Academy of Media Arts Cologne](https://www.khm.de/en/), Germany and works internationally for theater productions and in the visual arts.

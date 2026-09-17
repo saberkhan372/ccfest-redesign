@@ -15,7 +15,7 @@
 {% endif %}{% assign resources = include.session.resource_url | default: "" | strip %}{% if resources != "" %}              <p><a href="{{ resources | escape }}" target="_blank" rel="noopener">Session resources ↗</a></p>
 {% endif %}{% for person in include.session.presenters %}{% assign name = person.name | default: "" | strip %}{% assign bio = person.bio | default: "" | strip %}{% if name != "" and bio != "" %}              <details class="presenter-bio">
                 <summary>About {{ name | escape }}</summary>
-                <p>{{ bio | escape | newline_to_br }}</p>
+                {% include bio.html text=bio %}
               </details>
 {% endif %}{% endfor %}            </div>
           </div>

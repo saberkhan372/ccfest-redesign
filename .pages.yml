@@ -50,7 +50,7 @@ content:
         fields:
           - { name: label, label: Label, type: string, description: "e.g. Keynote 01" }
           - { name: name, label: Name or talk title, type: string }
-          - { name: bio, label: Bio, type: text }
+          - { name: bio, label: Bio, type: text, description: "To link a name or organisation, write [Social Software Lab](https://sosoft.arts.ucla.edu/). Links open in a new tab." }
           - { name: photo, label: Photo, type: image, required: false, description: "Shown beside the bio, cropped to a tall frame centred on the person." }
           - { name: url, label: Website, type: string, required: false }
 
@@ -80,7 +80,7 @@ content:
               - { name: pronouns, label: Pronouns, type: string, required: false }
               - { name: photo, label: Photo, type: image, required: false, description: "Square, about 400px. Without one, the first letter of the name is shown." }
               - { name: url, label: Website, type: string, required: false }
-              - { name: bio, label: Bio, type: text, required: false }
+              - { name: bio, label: Bio, type: text, required: false, description: "To link a name or organisation, write [Processing Foundation](https://processingfoundation.org). Links open in a new tab." }
 
   - name: schedule
     label: Schedule

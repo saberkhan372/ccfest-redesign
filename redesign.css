@@ -156,6 +156,9 @@ button { font: inherit; }
 .keynote-card h3 { margin: .6rem 0; font-size: 24px; font-weight: 700; line-height: 1.2; }
 .keynote-card p { max-width: 500px; margin: 0; color: #787873; font-size: 15px; }
 .keynote-card .button { margin-top: 1.25rem; }
+/* Links inside bios ([name](url) in the CMS): ink on the grey text so they read as links. */
+.keynote-card p a,.presenter-bio p a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+.keynote-card p a:hover,.presenter-bio p a:hover { color: var(--accent); }
 /* A keynote's photo takes the next column beside its bio. The source is landscape, so crop to a tall frame on the person. */
 .keynote-layout > .keynote-photo { display: block; width: 100%; max-width: 420px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 43% 30%; transform: none; }
 /* Sessions: one .session-row per session (time / presenter / details). */
