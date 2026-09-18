@@ -37,3 +37,5 @@
 - **A component with its own `display` ignores the `hidden` attribute.** The browser's `[hidden] { display: none }` has the lowest specificity, so `.event-banner { display: flex }` kept the reminder on screen after Hide was pressed. Every such component needs its own `[hidden] { display: none }`.
 
 - **Scroll with `behavior: 'instant'` in browser checks.** The site scrolls smoothly, so a check that calls `scrollTo()` and then measures reads positions mid-scroll. It made the footer-overlap check fail at random.
+
+- **`.signup-embed` is capped at 420px in section 6, so a later, narrower class of equal weight loses.** The homepage's smaller copy of the form first came out full-width because `.signup-embed-compact` sat earlier in `redesign.css` than `.signup-embed`. The compact rules are prefixed `.mailing-section` instead, which is also what outweighs EmailOctopus's own injected stylesheet.

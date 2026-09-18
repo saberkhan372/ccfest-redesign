@@ -557,7 +557,10 @@ home: true
       </section>
 
       <!-- ── Mailing list ── -->
-      <section class="section mailing-section" id="mailing-list" aria-labelledby="mailing-title">
+      <!-- Same three states as mailing-list/ (docs/MAILING-LIST.md), in a smaller
+           panel: EmailOctopus's form when one is configured, a hosted link if only
+           that is set, and the "email us" copy when neither is. -->
+{% assign list = site.data.site.mailing_list %}{% assign list_form_id = list.embed_form_id | default: "" | strip %}{% assign list_form_host = list.embed_host | default: "" | strip %}{% assign list_signup_url = list.signup_url | default: "" | strip %}      <section class="section mailing-section" id="mailing-list" aria-labelledby="mailing-title">
         <div class="section-heading">
           <p>Stay in touch</p>
           <div>
@@ -565,11 +568,22 @@ home: true
             <p>Get notified about upcoming events and CC Fest news.</p>
           </div>
         </div>
-        <p class="mailing-body anim-scroll">
-          To join the CC Fest mailing list, send an email to
-          <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.organizer.name | escape }}</a>
-          with the subject line <em>Join mailing list</em>.
-        </p>
+        <div class="mailing-body anim-scroll">
+{% if list_form_id != "" %}          <p>Add your email and we’ll send a note to confirm.</p>
+          <div class="signup-embed"><script async src="https://{{ list_form_host | escape }}/form/{{ list_form_id | escape }}.js" data-form="{{ list_form_id | escape }}"></script></div>
+          <noscript>
+            <p>The sign-up form needs JavaScript. {% if list_signup_url != "" %}<a href="{{ list_signup_url | escape }}">Sign up on EmailOctopus</a>, or email{% else %}Email{% endif %}
+            <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.organizer.name | escape }}</a> with the subject line <em>Join mailing list</em>.</p>
+          </noscript>
+          <p class="mailing-more"><a href="mailing-list/">What you’ll hear about →</a></p>
+{% elsif list_signup_url != "" %}          <p>Sign-up opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.</p>
+          <p class="mailing-more"><a href="{{ list_signup_url | escape }}" target="_blank" rel="noopener">Join the mailing list ↗</a></p>
+{% else %}          <p>
+            To join the CC Fest mailing list, send an email to
+            <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.organizer.name | escape }}</a>
+            with the subject line <em>Join mailing list</em>.
+          </p>
+{% endif %}        </div>
       </section>
 
       <!-- ── Code of conduct ── -->

@@ -123,6 +123,13 @@ button { font: inherit; }
 .mailing-section h2 { color: #8f260f; font-size: clamp(1.75rem,3vw,36px); font-weight: 600; }
 .mailing-section .section-heading div > p { display: none; }
 .mailing-body { margin: 0; align-self: center; color: var(--ink); font-size: 15px; }
+.mailing-body > p { margin: 0; }
+/* A smaller copy of the mailing-list/ sign-up form. The .mailing-section prefix
+ * beats the wider .signup-embed in section 6, where the shared EmailOctopus
+ * overrides live too. */
+.mailing-section .signup-embed { margin-top: .875rem; max-width: 340px; }
+.mailing-more { margin-top: .75rem; font-size: 14px; }
+.mailing-body noscript p { margin: 0; }
 /* Code of conduct summary (full text lives on code-of-conduct/) */
 #code-of-conduct { background: var(--surface); border: 0; }
 #code-of-conduct > .page-width { display: grid; grid-template-columns: minmax(190px,.5fr) minmax(0,1fr); gap: 5rem; }
@@ -280,11 +287,19 @@ body:has(> .event-banner:not([hidden])) .site-footer { padding-bottom: 5.5rem; }
 .signup-embed { margin-top: 1.25rem; max-width: 420px; }
 /* EmailOctopus injects its form into our page, so it takes our styling rather
  * than arriving purple. Their own custom properties are the supported hook; the
- * .signup-panel prefix is only there to outweigh their stylesheet. Leave the
- * "Powered by EmailOctopus" line alone: the free plan requires it. */
-.signup-panel .signup-embed .emailoctopus-form { --button-colour: var(--accent); --button-text-colour: #fff; --field-border-colour: var(--ink); --label-colour: var(--ink); --font-family: inherit; }
-.signup-panel .signup-embed .emailoctopus-form .form-control,.signup-panel .signup-embed .emailoctopus-form input[type="submit"].btn { border-radius: 0; padding: .85rem 1rem; font-size: 16px; }
-.signup-panel .signup-embed .emailoctopus-form input[type="submit"].btn { width: auto; padding: .85rem 1.5rem; border: 0; font-weight: 600; cursor: pointer; }
+ * .signup-panel / .mailing-section prefix is only there to outweigh their
+ * stylesheet, which they inject after ours. These rules cover both the panel
+ * here and the homepage's smaller copy (section 4). Leave the "Powered by
+ * EmailOctopus" line alone: the free plan requires it. */
+.signup-panel .signup-embed .emailoctopus-form,.mailing-section .signup-embed .emailoctopus-form { --button-colour: var(--accent); --button-text-colour: #fff; --field-border-colour: var(--ink); --label-colour: var(--ink); --font-family: inherit; }
+.signup-panel .signup-embed .emailoctopus-form .form-control,.signup-panel .signup-embed .emailoctopus-form input[type="submit"].btn,.mailing-section .signup-embed .emailoctopus-form .form-control,.mailing-section .signup-embed .emailoctopus-form input[type="submit"].btn { border-radius: 0; padding: .85rem 1rem; font-size: 16px; }
+.signup-panel .signup-embed .emailoctopus-form input[type="submit"].btn,.mailing-section .signup-embed .emailoctopus-form input[type="submit"].btn { width: auto; padding: .85rem 1.5rem; border: 0; font-weight: 600; cursor: pointer; }
+/* The homepage copy is the same form at a smaller size. */
+.mailing-section .signup-embed .emailoctopus-form .form-control,.mailing-section .signup-embed .emailoctopus-form input[type="submit"].btn { padding: .6rem .75rem; font-size: 14px; }
+.mailing-section .signup-embed .emailoctopus-form input[type="submit"].btn { padding: .6rem 1.1rem; }
+.mailing-section .signup-embed .mastfoot { font-size: 11px; }
+/* Their footer line centres itself; left-align it so the strip has one left edge. */
+.mailing-section .signup-embed .text-center,.mailing-section .signup-embed .mastfoot,.mailing-section .signup-embed .mastfoot .inner { text-align: left; }
 /* code-of-conduct/: sticky contents list beside long-form text. */
 .coc-layout { display: grid; grid-template-columns: minmax(180px,240px) minmax(0,1fr); gap: clamp(2rem,6vw,6rem); align-items: start; }
 .coc-toc { position: sticky; top: 1.5rem; }
