@@ -302,3 +302,9 @@ Add the Zoom Events link in Luma when Saber sends it. Before the event, import m
 - Move/resize: every block except the footer can be dragged, corner-resized, or moved with the keyboard; kept per size, saved in drafts and presets (preset version 3; older presets are refused with a message). Layout problems (crowding, a block off the poster) turn export off with a message instead of blocking the preview.
 - Verified in headless Chrome on a local Jekyll build: `verify-poster.cjs` passes, including every keynote/session/panel at every size with and without bios (none crowded), drag, resize, keyboard, text edits across reload. `verify.cjs` checks pass on every page except the pre-existing Past Events lazy-image failure at 768px. Also fixed: literal NUL bytes in `poster-art.js`'s copy check (from the earlier `\u0000` escape).
 - Needs: Saber to fill in `short_bio` / `short_description` where the opening sentence doesn't work; Francisca and Shristi to review the label chips and the panel layout.
+
+## Poster maker: Francisca's lettering — 2026-09-19 (Claude, branch `poster-lettering`)
+- PR #2 merged and live (unlisted) at ccfest.rocks/poster-maker/; checked headlessly on the live site.
+- Posters now use her Figma lettering: date line from the event title node 251:741 (Bold date, Thin Italic year), "Keynote"/"Session" headings from 251:765/251:788, "Creative coding / for everyone." from 218:150. `sync-typography.cjs` writes them to `assets/poster-maker/lettering.json`; re-running changes nothing. Per-width font faces reproduce her widths in canvas (589.8px vs 589.8px HTML for "Keynotes").
+- Landscape spotlights drop the small tags line to make room; announcement/community may use the smaller wordmark when her two-line heading needs space.
+- `verify-poster.cjs` passes, nothing crowded. Names, session titles, and bios have no Figma lettering; they stay plain Anybody.

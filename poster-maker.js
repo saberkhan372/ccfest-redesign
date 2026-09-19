@@ -115,6 +115,25 @@
     };
   }
 
+  // Francisca's lettering (written by scripts/sync-typography.cjs). Canvas can't set the width
+  // axis, so each width she uses gets its own font face pinned to it (the browser clamps the
+  // width to the face's single-value range). Without it posters fall back to plain Anybody.
+  async function loadLettering(home) {
+    try {
+      const response = await fetch(new URL('assets/poster-maker/lettering.json', home));
+      if (!response.ok) return null;
+      const lettering = await response.json();
+      const runs = Object.values(lettering).filter(Array.isArray).flat();
+      const faces = new Map(runs.map(run => [`CCF Anybody ${run.wdth}${run.italic ? ' Italic' : ''}`, run]));
+      await Promise.all([...faces].map(async ([family, run]) => {
+        const file = run.italic ? 'Anybody-Italic[wdth,wght].ttf' : 'Anybody[wdth,wght].ttf';
+        const face = new FontFace(family, `url("${new URL(`assets/fonts/${file}`, home).href}")`, { stretch: `${run.wdth}%`, weight: '100 900', style: run.italic ? 'italic' : 'normal' });
+        document.fonts.add(await face.load());
+      }));
+      return lettering;
+    } catch (_) { return null; }
+  }
+
   // Which keynotes or sessions each spotlight template can feature, as indexes into the data.
   function choices(template) {
     if (template === 'keynote') return content.keynotes.map((k, i) => [i, k.name]);
@@ -397,6 +416,7 @@
     await Promise.all([document.fonts.load('400 24px Anybody'), document.fonts.load('600 56px Anybody'), document.fonts.load('400 19px "Overpass Mono"')]);
     if (!document.fonts.check('400 24px Anybody') || !document.fonts.check('400 19px "Overpass Mono"')) throw new Error('The poster fonts did not load. Please reload before exporting.');
     content = await eventContent();
+    content.lettering = await loadLettering(content.home);
     const [logo, qr] = await Promise.all(['wordmark.svg', 'register-qr.svg'].map(file => image(new URL(`assets/poster-maker/${file}`, content.home).href)));
     assets = { logo, qr, logoRatio: logo.naturalHeight / logo.naturalWidth };
     let restored = { ...A.DEFAULTS };

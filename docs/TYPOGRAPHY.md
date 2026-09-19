@@ -51,6 +51,10 @@ Nodes currently synced:
 
 Figma file key `jMiMzds3qYD2mO5w2Dsg4P`; frames Homepage `218:104`, Register `251:732`.
 
+## Posters
+
+The poster maker draws on a canvas, so it can't use the spans. `sync-typography.cjs` also writes `assets/poster-maker/lettering.json` with four nodes: the event title 251:741 (its date run and Thin Italic year style the poster's date line), Keynotes 251:765 and Sessions 251:788 (spotlight headings, with the final "s" dropped for "Keynote" / "Session"), and 218:150 "Creative coding for everyone." Canvas can't set the width axis either, so `poster-maker.js` registers one font face per width with a single-value `stretch` descriptor; the browser clamps to it, which pins the axis. Measured against the HTML spans, "Keynotes" at 100px is 589.8px in both (flat Anybody: 505px).
+
 ## Reading the data out of Figma
 
 Read-only, through the Figma Plugin API (the Figma MCP `use_figma` tool):
