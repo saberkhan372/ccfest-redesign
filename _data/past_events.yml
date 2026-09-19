@@ -157,6 +157,8 @@ events:
     date_label: "May 5, 2018"
     place: "Brooklyn · NYU MAGNET"
     title: "CC Fest NYC"
+    poster: "assets/posters/2018-05-05-nyc.webp"
+    poster_alt: "Poster for CC Fest at NYU MAGNET in Brooklyn on Saturday, May 5, 2018, with keynotes by Ari Melenciano and Jenn Schiffer"
   - datetime: "2017-11-12"
     date_label: "Nov 12, 2017"
     place: "NYC · NYU ITP"
