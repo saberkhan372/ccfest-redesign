@@ -1,0 +1,272 @@
+{
+  "source": "design/figma-typography.json via scripts/sync-typography.cjs; do not edit by hand",
+  "eventTitle": [
+    {
+      "text": "Virt",
+      "italic": false,
+      "wdth": 100,
+      "wght": 300,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": "u",
+      "italic": false,
+      "wdth": 150,
+      "wght": 300,
+      "spacing": -0.07,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": "a",
+      "italic": false,
+      "wdth": 85,
+      "wght": 300,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": "l",
+      "italic": false,
+      "wdth": 100,
+      "wght": 300,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": " ",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": "CC",
+      "italic": false,
+      "wdth": 150,
+      "wght": 432,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": " ",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": "F",
+      "italic": false,
+      "wdth": 100,
+      "wght": 472,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": "e",
+      "italic": false,
+      "wdth": 65,
+      "wght": 472,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": "st",
+      "italic": false,
+      "wdth": 100,
+      "wght": 472,
+      "spacing": 0,
+      "upper": true,
+      "lineHeight": 1
+    },
+    {
+      "text": " October 17, ",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": 1
+    },
+    {
+      "text": "2026",
+      "italic": true,
+      "wdth": 100,
+      "wght": 100,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": 1
+    }
+  ],
+  "keynotes": [
+    {
+      "text": "K",
+      "italic": false,
+      "wdth": 150,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "e",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "y",
+      "italic": false,
+      "wdth": 129,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "n",
+      "italic": false,
+      "wdth": 120,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "o",
+      "italic": false,
+      "wdth": 90,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "t",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "e",
+      "italic": false,
+      "wdth": 130,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "s",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    }
+  ],
+  "sessions": [
+    {
+      "text": "S",
+      "italic": false,
+      "wdth": 150,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "e",
+      "italic": false,
+      "wdth": 120,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "s",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "s",
+      "italic": false,
+      "wdth": 130,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "i",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "o",
+      "italic": false,
+      "wdth": 110,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "n",
+      "italic": false,
+      "wdth": 90,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    },
+    {
+      "text": "s",
+      "italic": false,
+      "wdth": 125,
+      "wght": 700,
+      "spacing": 0,
+      "upper": false,
+      "lineHeight": null
+    }
+  ],
+  "community": [
+    {
+      "text": "Creative coding\nfor everyone.",
+      "italic": false,
+      "wdth": 100,
+      "wght": 700,
+      "spacing": -0.03,
+      "upper": false,
+      "lineHeight": 1.100000023841858
+    }
+  ]
+}

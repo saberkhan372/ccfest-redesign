@@ -119,3 +119,27 @@ for (const [file, elements] of Object.entries(pages)) {
 
   fs.writeFileSync(path.join(root, file), html);
 }
+
+/*
+ * The poster maker draws on a canvas, which can't read these spans, and design/
+ * is not published. So the lettering the posters reuse is also written to
+ * assets/poster-maker/lettering.json: her event title (whose date and year runs
+ * style the poster's date line), the Keynotes and Sessions headings, and
+ * "Creative coding for everyone." Spacing is in em, as above.
+ */
+const posterNodes = { eventTitle: '251:741', keynotes: '251:765', sessions: '251:788', community: '218:150' };
+const lettering = { source: 'design/figma-typography.json via scripts/sync-typography.cjs; do not edit by hand' };
+for (const [name, id] of Object.entries(posterNodes)) {
+  const node = nodes.find(n => n.id === id);
+  if (!node) throw new Error(`No Figma data for node ${id} in design/figma-typography.json`);
+  lettering[name] = node.runs.map(run => ({
+    text: run.text,
+    italic: /italic/i.test(run.font.style),
+    wdth: (run.font.variationSettings || {}).wdth || 100,
+    wght: run.weight,
+    spacing: run.spacing.unit === 'PERCENT' ? run.spacing.value / 100 : run.spacing.value / run.size,
+    upper: run.case === 'UPPER',
+    lineHeight: run.line && run.line.unit === 'PERCENT' ? run.line.value / 100 : null,
+  }));
+}
+fs.writeFileSync(path.join(root, 'assets/poster-maker/lettering.json'), `${JSON.stringify(lettering, null, 2)}\n`);
