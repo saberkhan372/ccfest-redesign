@@ -195,7 +195,11 @@
     return framePromise;
   }
 
+  // How long each mode's entrance takes after its word is picked, and how long the "in play"
+  // look takes to finish once the pointer arrives. A recording spans both.
   const SETTLE = { creativity: 5200, 'creative-commons': 1800 };
+  const PLAY = { celebration: 1900 };
+  const FRAMES = 12;
   const rng = seed => { let s = seed % 2147483646 + 1; return () => (s = s * 16807 % 2147483647) / 2147483647; };
 
   // Poses the mode the way it looks while someone plays with it on the homepage.
@@ -219,9 +223,7 @@
       await wait(300 + rand() * 400);
       win.dispatchEvent(new win.MouseEvent('mouseup', target));
       doc.dispatchEvent(new win.MouseEvent('mouseup', target));
-      await wait(200);
-    } else if (hover) await wait(1100);
-    else await wait(300);
+    }
   }
 
   function reset(doc, win) {
@@ -249,21 +251,9 @@
     return job;
   }
 
-  // Returns layers in stage pixels: { layers: [{ image, x, y, w, h }], labels, background, width, height, focus }.
-  async function captureNow({ url, mode, seed = 1, hover = true }) {
-    if (!MODES.includes(mode)) throw new Error('Choose one of the homepage animations.');
-    const { doc, win } = await loadFrame(url);
-    const button = doc.querySelector(`.mode-btn[data-mode="${mode}"]`);
-    if (!button) throw new Error('That homepage animation is missing.');
-    reset(doc, win);
-    // Re-enter the mode so each capture replays the same entrance.
-    const other = doc.querySelector(`.mode-btn:not([data-mode="${mode}"])`);
-    if (other) { other.click(); await frames(win, 2); }
-    doc.querySelector('.anim-stage').scrollIntoView({ block: 'start' });
-    button.click();
-    await wait(SETTLE[mode] || 1400);
-    await pose(doc, win, mode, seed, hover);
-    await frames(win, 2);
+  // One still of whatever her code has drawn right now, in stage pixels.
+  const backgrounds = new Map();
+  async function snapshot(doc, win) {
     const outer = doc.querySelector('.anim-stage');
     const stage = doc.querySelector('.anim-stage-main');
     const origin = stage.getBoundingClientRect();
@@ -283,10 +273,45 @@
       const style = win.getComputedStyle(el);
       return { text: el.textContent.trim(), ...place(el), color: style.color, weight: style.fontWeight, size: parseFloat(style.fontSize) };
     });
-    const background = await stageBackground(stage, win);
-    const result = { mode, name: button.textContent.trim(), layers, labels, background, width: origin.width, height: origin.height, focus: focusBox(doc, win, origin) };
+    const key = win.getComputedStyle(stage).backgroundImage;
+    if (!backgrounds.has(key)) backgrounds.set(key, await stageBackground(stage, win));
+    return { layers, labels, background: backgrounds.get(key), width: origin.width, height: origin.height, focus: focusBox(doc, win, origin) };
+  }
+
+  // Records FRAMES stills spread over the mode's timeline: from the moment its word is picked,
+  // through the entrance, to the finished "in play" look (or the resting look without hover).
+  // Returns { mode, name, frames }; the last frame is the settled one.
+  async function captureNow({ url, mode, seed = 1, hover = true, onProgress = () => {} }) {
+    if (!MODES.includes(mode)) throw new Error('Choose one of the homepage animations.');
+    const { doc, win } = await loadFrame(url);
+    const button = doc.querySelector(`.mode-btn[data-mode="${mode}"]`);
+    if (!button) throw new Error('That homepage animation is missing.');
     reset(doc, win);
-    return result;
+    // Re-enter the mode so each recording replays the same entrance.
+    const other = doc.querySelector(`.mode-btn:not([data-mode="${mode}"])`);
+    if (other) { other.click(); await frames(win, 2); }
+    doc.querySelector('.anim-stage').scrollIntoView({ block: 'start' });
+    const settle = SETTLE[mode] || 1400;
+    const total = settle + (hover ? PLAY[mode] || 1100 : 300);
+    const times = Array.from({ length: FRAMES }, (_, i) => 120 + (total - 120) * i / (FRAMES - 1));
+    button.click();
+    const start = performance.now();
+    let posing = null;
+    const shots = [];
+    for (const t of times) {
+      if (!posing && t >= settle) { await wait(start + settle - performance.now()); posing = pose(doc, win, mode, seed, hover); }
+      await wait(start + t - performance.now());
+      await frames(win, 1);
+      shots.push(await snapshot(doc, win));
+      onProgress(shots.length, FRAMES);
+    }
+    await posing;
+    reset(doc, win);
+    // One framing for the whole recording, so the artwork doesn't jump while scrubbing.
+    const l = Math.min(...shots.map(f => f.focus.x)), t = Math.min(...shots.map(f => f.focus.y));
+    const r = Math.max(...shots.map(f => f.focus.x + f.focus.w)), b = Math.max(...shots.map(f => f.focus.y + f.focus.h));
+    shots.forEach(f => { f.focus = { x: l, y: t, w: r - l, h: b - t }; });
+    return { mode, name: button.textContent.trim(), frames: shots };
   }
 
   root.CCStageCapture = { MODES, capture };

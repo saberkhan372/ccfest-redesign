@@ -23,7 +23,7 @@
   };
   const TEMPLATES = ['announcement', 'keynote', 'session', 'panel', 'community'];
   const BLOCKS = { logo: 'Wordmark', art: 'Artwork', info: 'Event details', people: 'People', copy: 'Supporting text', qr: 'QR code' };
-  const DEFAULTS = { version: VERSION, template: 'announcement', format: 'portrait', mode: 'creativity', hover: true, labels: true, background: 'paper', feature: 0, bios: true, times: true, qr: true, copy: 'Workshops, talks, and community for creative coders.', texts: {}, layout: {} };
+  const DEFAULTS = { version: VERSION, template: 'announcement', format: 'portrait', mode: 'creativity', hover: true, moment: 11, labels: true, background: 'paper', feature: 0, bios: true, times: true, qr: true, copy: 'Workshops, talks, and community for creative coders.', texts: {}, layout: {} };
 
   const plainText = (value, max) => typeof value === 'string' && value.length <= max && !/[<>]/.test(value) && ![...value].some(c => c.charCodeAt(0) < 32 && c !== '\n');
   function validate(value) {
@@ -35,6 +35,10 @@
     }
     if (!Number.isInteger(value.feature) || value.feature < 0 || value.feature > 99) throw new Error('Choose a speaker or session from the list.');
     result.feature = value.feature;
+    // Which recorded frame of the animation (0 = just picked, 11 = settled). Older drafts lack it.
+    const moment = value.moment ?? DEFAULTS.moment;
+    if (!Number.isInteger(moment) || moment < 0 || moment > 11) throw new Error('Choose a moment from the slider.');
+    result.moment = moment;
     for (const key of ['hover', 'labels', 'bios', 'times', 'qr']) {
       if (typeof value[key] !== 'boolean') throw new Error(`Invalid ${key} setting.`);
       result[key] = value[key];

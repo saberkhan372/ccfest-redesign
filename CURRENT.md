@@ -308,3 +308,9 @@ Add the Zoom Events link in Luma when Saber sends it. Before the event, import m
 - Posters now use her Figma lettering: date line from the event title node 251:741 (Bold date, Thin Italic year), "Keynote"/"Session" headings from 251:765/251:788, "Creative coding / for everyone." from 218:150. `sync-typography.cjs` writes them to `assets/poster-maker/lettering.json`; re-running changes nothing. Per-width font faces reproduce her widths in canvas (589.8px vs 589.8px HTML for "Keynotes").
 - Landscape spotlights drop the small tags line to make room; announcement/community may use the smaller wordmark when her two-line heading needs space.
 - `verify-poster.cjs` passes, nothing crowded. Names, session titles, and bios have no Figma lettering; they stay plain Anybody.
+
+## Poster maker: moment scrubber and new heading — 2026-09-19 (Claude, branch `poster-scrubber`)
+- PR #3 (Francisca's lettering) merged and checked live.
+- Heading copy now "Make a CC Fest Poster" / "Adjust, Download, and Share." (Saber's wording).
+- Moment slider: `poster-stage.js` records 12 stills per animation (from the word being picked to the settled "in play" look) instead of one; the slider scrubs them instantly; one framing per recording so the art doesn't jump. "Catch another moment" is now "Record it again". `moment` (0–11, default 11) is saved in drafts and presets; older drafts without it still open.
+- Verified headlessly: Celebration's confetti burst, Curiosity's curl, Creativity's draw-in and Collaboration's swing all scrub; `verify-poster.cjs` passes with a new scrubbing check.

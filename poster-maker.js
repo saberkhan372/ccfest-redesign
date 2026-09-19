@@ -13,12 +13,14 @@
   const overlay = $('maker-overlay');
   const buttons = [$('maker-download'), $('maker-print')];
   const FORM_KEYS = Object.keys(A.DEFAULTS).filter(key => !['version', 'texts', 'layout'].includes(key));
-  const art = new Map(); // `${mode}|${hover}` → captured frame
+  const art = new Map(); // `${mode}|${hover}` → recording: { frames: [12 stills] }
   const pending = new Set();
   let state, content, assets, busy = false, capturing = 0, timer, seed = 1, problems = [], selected = null;
   let edits = { texts: {}, layout: {} };
   const setStatus = message => { status.textContent = message; };
   const artKey = value => `${value.mode}|${value.hover}`;
+  // The still the Moment slider points at.
+  const frameOf = value => { const frames = art.get(artKey(value)).frames; return frames[Math.min(value.moment, frames.length - 1)]; };
   const canExport = () => !busy && !capturing && $('maker-error').hidden && !problems.length && state && art.has(artKey(state));
   const syncButtons = () => {
     buttons.forEach(button => { button.disabled = !canExport(); });
@@ -34,7 +36,7 @@
     const value = { version: A.VERSION, texts: edits.texts, layout: edits.layout };
     for (const key of FORM_KEYS) {
       const input = form.elements.namedItem(key);
-      value[key] = input.type === 'checkbox' ? input.checked : key === 'feature' ? Number(input.value) : input.value;
+      value[key] = input.type === 'checkbox' ? input.checked : key === 'feature' || key === 'moment' ? Number(input.value) : input.value;
     }
     return A.validate(value);
   }
@@ -224,16 +226,17 @@
     const key = artKey(value);
     if ((art.has(key) && !fresh) || pending.has(key)) return;
     pending.add(key); capturing++; syncButtons();
-    setStatus(`Drawing the ${A.MODES[value.mode]} animation from the homepage…`);
+    const name = A.MODES[value.mode];
+    setStatus(`Recording the ${name} animation from the homepage…`);
     try {
-      art.set(key, await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++ }));
+      art.set(key, await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++, onProgress: (done, total) => setStatus(`Recording the ${name} animation from the homepage… ${done} of ${total}`) }));
     } finally { pending.delete(key); capturing--; }
     update();
   }
 
   // Draws the preview and refreshes the move/resize handles. Returns the render result.
   function drawPreview(value) {
-    const frame = art.get(artKey(value));
+    const frame = frameOf(value);
     const format = A.FORMATS[value.format];
     const scale = Math.min(2, window.devicePixelRatio || 1);
     const width = Math.round(760 * scale), height = Math.round(width * format.height / format.width);
@@ -252,6 +255,7 @@
       state = next;
       const format = A.FORMATS[next.format];
       $('maker-dimensions').textContent = `${format.width} × ${format.height} px`;
+      $('maker-moment-value').value = `${next.moment + 1} / 12`;
       $('maker-export-note').textContent = format.paper ? '300 ppi PNG. Print at actual size with browser headers and footers off. PDF contains raster artwork.' : 'Full-resolution PNG. Choose Letter or A4 for print / PDF.';
       $('maker-print').textContent = format.paper ? 'Print / save PDF ↗' : 'Choose a print size ↗';
       if (!art.get(artKey(next))) { ensureArt(next).catch(error => { showError(error.message); setStatus('The homepage animation could not be drawn.'); }); return; }
@@ -366,7 +370,7 @@
     const format = A.FORMATS[state.format];
     const canvas = document.createElement('canvas');
     canvas.width = format.width; canvas.height = format.height;
-    A.render(canvas.getContext('2d'), state, art.get(artKey(state)), { ...content, feature: featured(state) }, assets, format.width, format.height);
+    A.render(canvas.getContext('2d'), state, frameOf(state), { ...content, feature: featured(state) }, assets, format.width, format.height);
     return canvas;
   }
   async function exportPoster(print) {
@@ -432,6 +436,8 @@
     form.addEventListener('submit', event => event.preventDefault());
     form.addEventListener('input', event => {
       if (event.target.dataset.text) readTexts();
+      // Scrubbing redraws straight away; the frames are already recorded.
+      if (event.target.name === 'moment') { clearTimeout(timer); update(); return; }
       buttons.forEach(button => { button.disabled = true; });
       clearTimeout(timer); timer = setTimeout(update, 120);
     });
