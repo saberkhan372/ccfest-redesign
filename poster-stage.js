@@ -210,7 +210,8 @@
     const box = stage.getBoundingClientRect();
     const rand = rng(seed);
     const at = (fx, fy) => ({ clientX: box.left + box.width * fx, clientY: box.top + box.height * fy, bubbles: true, cancelable: true, view: win });
-    const target = at(0.15 + rand() * 0.7, 0.05 + rand() * 0.35);
+    // Change morphs by pointer x; far left collapses the Cs into bars, so aim at the middle-right.
+    const target = mode === 'change' ? at(0.5 + rand() * 0.35, 0.1 + rand() * 0.3) : at(0.15 + rand() * 0.7, 0.05 + rand() * 0.35);
     doc.dispatchEvent(new win.MouseEvent('mousemove', target));
     if (hover) {
       [wrap, connection].forEach(el => el && el.classList.add(HOVER));
@@ -251,6 +252,27 @@
     return job;
   }
 
+  // Change's canvas is drawn with mix-blend-mode: darken, which hides its pale trails; keep that.
+  const BLENDS = { darken: 'darken', multiply: 'multiply', lighten: 'lighten', screen: 'screen', difference: 'difference' };
+  function blendOf(el, win) {
+    for (let node = el; node && node.nodeType === 1; node = node.parentElement) {
+      const mode = BLENDS[win.getComputedStyle(node).mixBlendMode];
+      if (mode) return mode;
+      if (node.classList.contains('anim-stage')) break;
+    }
+    return 'source-over';
+  }
+  // The stage's clip-path as a rectangle in stage pixels, or null.
+  function insetClip(stage, win) {
+    const match = win.getComputedStyle(stage).clipPath.match(/^inset\(([^)]*)\)/);
+    if (!match) return null;
+    const box = stage.getBoundingClientRect();
+    const parts = match[1].split(/\s+/).slice(0, 4);
+    const [top, right = top, bottom = top, left = right] = parts;
+    const px = (value, size) => (value.endsWith('%') ? parseFloat(value) / 100 * size : parseFloat(value) || 0);
+    return { x: px(left, box.width), y: px(top, box.height), w: box.width - px(left, box.width) - px(right, box.width), h: box.height - px(top, box.height) - px(bottom, box.height) };
+  }
+
   // One still of whatever her code has drawn right now, in stage pixels.
   const backgrounds = new Map();
   async function snapshot(doc, win) {
@@ -266,8 +288,8 @@
       if (tag === 'div' && win.getComputedStyle(el).backgroundColor === 'rgba(0, 0, 0, 0)') continue;
       if (tag === 'svg') {
         const { markup, box } = inlineSvg(el, win);
-        layers.push({ image: await svgImage(markup), x: box.left - origin.left, y: box.top - origin.top, w: box.width, h: box.height });
-      } else layers.push({ image: tag === 'canvas' ? copyCanvas(el) : boxImage(el, win), ...place(el) });
+        layers.push({ image: await svgImage(markup), x: box.left - origin.left, y: box.top - origin.top, w: box.width, h: box.height, blend: blendOf(el, win) });
+      } else layers.push({ image: tag === 'canvas' ? copyCanvas(el) : boxImage(el, win), ...place(el), blend: blendOf(el, win) });
     }
     const labels = [...outer.querySelectorAll('.cc-text')].filter(el => shown(el, win)).map(el => {
       const style = win.getComputedStyle(el);
@@ -275,7 +297,9 @@
     });
     const key = win.getComputedStyle(stage).backgroundImage;
     if (!backgrounds.has(key)) backgrounds.set(key, await stageBackground(stage, win));
-    return { layers, labels, background: backgrounds.get(key), width: origin.width, height: origin.height, focus: focusBox(doc, win, origin) };
+    // Creative Commons reveals its wallpaper column by column with an animated clip-path.
+    const background = backgrounds.get(key) && { ...backgrounds.get(key), clip: insetClip(stage, win) };
+    return { layers, labels, background, width: origin.width, height: origin.height, focus: focusBox(doc, win, origin) };
   }
 
   // Records FRAMES stills spread over the mode's timeline: from the moment its word is picked,
@@ -293,7 +317,8 @@
     doc.querySelector('.anim-stage').scrollIntoView({ block: 'start' });
     const settle = SETTLE[mode] || 1400;
     const total = settle + (hover ? PLAY[mode] || 1100 : 300);
-    const times = Array.from({ length: FRAMES }, (_, i) => 120 + (total - 120) * i / (FRAMES - 1));
+    // Start after the previous mode has faded out (Creative Commons' Cs fade over ~200ms).
+    const times = Array.from({ length: FRAMES }, (_, i) => 250 + (total - 250) * i / (FRAMES - 1));
     button.click();
     const start = performance.now();
     let posing = null;

@@ -155,9 +155,16 @@
       const startY = oy + percent(b.posY, art.height - b.tileH) * s;
       const firstX = startX - Math.ceil((startX - x) / tileW) * tileW;
       const firstY = startY - Math.ceil((startY - y) / tileH) * tileH;
+      ctx.save();
+      if (b.clip) { ctx.beginPath(); ctx.rect(ox + b.clip.x * s, oy + b.clip.y * s, b.clip.w * s, b.clip.h * s); ctx.clip(); }
       for (let ty = firstY; ty < y + h; ty += tileH) for (let tx = firstX; tx < x + w; tx += tileW) ctx.drawImage(b.image, tx, ty, tileW, tileH);
+      ctx.restore();
     }
-    for (const layer of art.layers) ctx.drawImage(layer.image, ox + layer.x * s, oy + layer.y * s, layer.w * s, layer.h * s);
+    for (const layer of art.layers) {
+      ctx.globalCompositeOperation = layer.blend || 'source-over';
+      ctx.drawImage(layer.image, ox + layer.x * s, oy + layer.y * s, layer.w * s, layer.h * s);
+    }
+    ctx.globalCompositeOperation = 'source-over';
     // "10 years of …": on the homepage these sit on shapes, confetti and tiles, which is fine at
     // screen size and hard to read on a poster. Keep her placement, but set them in ink on a
     // small backing, at a readable size. In a small artwork band they would cover the Cs, so skip them.
@@ -410,7 +417,13 @@
     return { boxes: frame.boxes, problems: frame.problems, H };
   }
 
-  const API = { VERSION, FORMATS, BACKGROUNDS, MODES, TEMPLATES, BLOCKS, DEFAULTS, validate, render };
+  // A thumbnail of one recorded frame, for the Moment filmstrip.
+  function thumbnail(ctx, state, art, width, height) {
+    ctx.fillStyle = BACKGROUNDS[state.background]; ctx.fillRect(0, 0, width, height);
+    artwork(ctx, { ...state, labels: false }, art, [0, 0, width, height]);
+  }
+
+  const API = { VERSION, FORMATS, BACKGROUNDS, MODES, TEMPLATES, BLOCKS, DEFAULTS, validate, render, thumbnail };
   if (typeof module === 'object' && module.exports) module.exports = API;
   else root.CCPosterArt = API;
 })(typeof window === 'object' ? window : globalThis);

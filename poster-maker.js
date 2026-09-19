@@ -15,6 +15,7 @@
   const FORM_KEYS = Object.keys(A.DEFAULTS).filter(key => !['version', 'texts', 'layout'].includes(key));
   const art = new Map(); // `${mode}|${hover}` → recording: { frames: [12 stills] }
   const pending = new Set();
+  let recordings = 0;
   let state, content, assets, busy = false, capturing = 0, timer, seed = 1, problems = [], selected = null;
   let edits = { texts: {}, layout: {} };
   const setStatus = message => { status.textContent = message; };
@@ -229,7 +230,8 @@
     const name = A.MODES[value.mode];
     setStatus(`Recording the ${name} animation from the homepage…`);
     try {
-      art.set(key, await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++, onProgress: (done, total) => setStatus(`Recording the ${name} animation from the homepage… ${done} of ${total}`) }));
+      recordings++;
+      art.set(key, { id: recordings, ...await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++, onProgress: (done, total) => setStatus(`Recording the ${name} animation from the homepage… ${done} of ${total}`) }) });
     } finally { pending.delete(key); capturing--; }
     update();
   }
@@ -256,6 +258,7 @@
       const format = A.FORMATS[next.format];
       $('maker-dimensions').textContent = `${format.width} × ${format.height} px`;
       $('maker-moment-value').value = `${next.moment + 1} / 12`;
+      drawFilmstrip(next);
       $('maker-export-note').textContent = format.paper ? '300 ppi PNG. Print at actual size with browser headers and footers off. PDF contains raster artwork.' : 'Full-resolution PNG. Choose Letter or A4 for print / PDF.';
       $('maker-print').textContent = format.paper ? 'Print / save PDF ↗' : 'Choose a print size ↗';
       if (!art.get(artKey(next))) { ensureArt(next).catch(error => { showError(error.message); setStatus('The homepage animation could not be drawn.'); }); return; }
@@ -267,6 +270,27 @@
       try { localStorage.setItem(storageKey, JSON.stringify({ ...state, source: content.stamp })); } catch (_) { /* private mode */ }
       setStatus(problems.length ? 'Fix the layout before exporting.' : 'Ready. Draft saved in this browser.');
     } catch (error) { problems = []; showError(error.message); setStatus('Change the settings above before exporting.'); }
+  }
+
+  // Twelve small frames under the Moment slider; clicking one picks that moment. The slider
+  // stays the accessible control, so the strip is hidden from assistive technology.
+  let stripKey = '';
+  function drawFilmstrip(value) {
+    const strip = $('maker-filmstrip');
+    const recording = art.get(artKey(value));
+    if (!recording) { strip.replaceChildren(); stripKey = ''; return; }
+    const key = `${recording.id}|${value.background}`;
+    if (stripKey !== key) {
+      stripKey = key;
+      strip.replaceChildren(...recording.frames.map((frame, i) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 120; canvas.height = 80;
+        A.thumbnail(canvas.getContext('2d'), value, frame, 120, 80);
+        canvas.dataset.moment = String(i);
+        return canvas;
+      }));
+    }
+    strip.querySelectorAll('canvas').forEach(canvas => canvas.classList.toggle('is-current', Number(canvas.dataset.moment) === value.moment));
   }
 
   /* ── Move and resize ─────────────────────────────────────────────── */
@@ -440,6 +464,12 @@
       if (event.target.name === 'moment') { clearTimeout(timer); update(); return; }
       buttons.forEach(button => { button.disabled = true; });
       clearTimeout(timer); timer = setTimeout(update, 120);
+    });
+    $('maker-filmstrip').addEventListener('click', event => {
+      const moment = event.target.dataset && event.target.dataset.moment;
+      if (moment === undefined) return;
+      form.elements.moment.value = moment;
+      update();
     });
     $('maker-recapture').onclick = () => { if (state) ensureArt(state, true).catch(error => showError(error.message)); };
     $('maker-text-reset').onclick = () => { if (!state) return; delete edits.texts[textKey(state)]; $('maker-texts').dataset.key = ''; syncTextFields(state); update(); };

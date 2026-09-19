@@ -488,6 +488,9 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
 .maker-optional { display: block; font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 4px; }
 .maker-help { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 10px 0; }
 .maker-help a { color: var(--accent); }
+.maker-filmstrip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin-top: 8px; }
+.maker-filmstrip canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); cursor: pointer; }
+.maker-filmstrip canvas.is-current { outline: 2px solid var(--accent); outline-offset: 1px; }
 .maker-recapture { width: 100%; margin-top: 12px; font-size: 12px; padding: 13px 6px; cursor: pointer; }
 .maker-recapture:disabled { opacity: .5; cursor: wait; }
 .maker-preset-actions button,.maker-import { padding: 8px 6px; min-height: 36px; background: transparent; border: 1px solid var(--line); font: 11px 'Overpass Mono', monospace; color: var(--ink); cursor: pointer; }
