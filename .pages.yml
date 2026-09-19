@@ -123,6 +123,9 @@ content:
           - { name: url, label: Agenda link, type: string, required: false, description: "Leave empty when there is no agenda to link to, and fill in the title below instead." }
           - { name: link_text, label: Agenda link text, type: string, required: false, description: "The arrow is added for you." }
           - { name: title, label: Title (when there is no link), type: string, required: false }
+          - { name: poster, label: Poster, type: image, required: false, description: "Shown in the Posters grid on Past Events. About 720px wide." }
+          - { name: poster_alt, label: Poster description, type: string, required: false, description: "For screen readers: what the poster shows, including the date and any keynote names on it." }
+          - { name: poster_credit, label: Poster designer, type: string, required: false, description: "Shown as 'Design by …'. Leave empty when not known." }
       - name: classes
         label: Camps and classes (newest first)
         type: object

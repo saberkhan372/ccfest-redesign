@@ -251,6 +251,13 @@ body:has(> .event-banner:not([hidden])) .site-footer { padding-bottom: 5.5rem; }
 .event-page .history-note-inner b { font-weight: 400; }
 .event-page .site-footer strong.logo { font-size: 16px; }
 
+/* How to join (Zoom Events), under Registration. */
+.join-steps { max-width: 760px; margin: 0; padding-left: 1.4rem; border-top: 1px solid var(--line); }
+.join-steps li { padding: 1rem 0 1rem .4rem; border-bottom: 1px solid var(--line); font-size: 17px; }
+.join-steps li::marker { font-family: 'Overpass Mono', monospace; font-size: 13px; color: var(--muted); }
+.join-steps a,.join-help a { color: var(--accent); }
+.join-help { margin: 1.5rem 0 0; color: var(--muted); }
+
 /* --- 6. Inner pages ------------------------------------------------------ */
 /* events/, past-events/, mailing-list/, code-of-conduct/ — all <body class="inner-page …">. */
 .inner-page { background: var(--surface); }
@@ -276,6 +283,13 @@ body:has(> .event-banner:not([hidden])) .site-footer { padding-bottom: 5.5rem; }
 .past-place { font-weight: 600; }
 .past-row a,.past-title { font-size: 17px; }
 .past-row a { color: var(--accent); }
+/* Past Events posters: a uniform frame so posters of any shape line up; the whole poster always shows. */
+.poster-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(min(100%,220px),1fr)); gap: 2rem 1.5rem; margin: 0; padding: 0; list-style: none; }
+.poster-grid figure { margin: 0; }
+.poster-grid img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: contain; background: #e2e2dd; }
+.poster-grid figcaption { margin-top: .6rem; font-size: 14px; color: var(--muted); }
+.poster-grid figcaption time { font-family: 'Overpass Mono', monospace; font-size: 13px; color: var(--ink); }
+.poster-credit { display: block; }
 /* mailing-list/: lime panel. EmailOctopus's own sign-up form loads into
  * .signup-embed when _data/site.yml supplies a form id; without JavaScript, and
  * with nothing configured, the panel asks people to email instead. */
@@ -426,6 +440,8 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
  .event-banner .eyebrow,.event-banner-date { display: none; }
  /* Inner pages */
  .past-row { grid-template-columns: 1fr; }
+ .poster-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.5rem 1rem; }
+ .poster-grid figcaption { font-size: 13px; }
  /* Interactive */
  .anim-stage { min-height: 540px; height: 540px; }
  .modes-list { gap: .35rem; }
