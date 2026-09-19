@@ -9,6 +9,9 @@
     >
     <meta name="theme-color" content="#edede9">
     <title>{{ page.title | escape }}</title>
+{%- if page.noindex %}
+    <meta name="robots" content="noindex, nofollow">
+{%- endif %}
     <link rel="icon" href="{{ page.root }}assets/favicon.png">
     <link rel="canonical" href="{{ page.url | absolute_url }}">
     <meta property="og:type" content="website">
@@ -85,7 +88,7 @@
       <p class="design-credits">{% for credit in site.data.site.credits %}{{ credit.role | escape }}: <a href="{{ credit.url | escape }}">{{ credit.name | escape }}</a>{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
     </footer>
 {%- assign banner_event = site.data.event %}{% assign banner_url = banner_event.registration_url | default: "" | strip %}{% assign banner_date = banner_event.date | default: "" | strip %}
-{%- if banner_url != "" %}
+{%- if banner_url != "" and page.hide_event_banner != true %}
 
     <!-- Floating reminder while registration is open (event-banner.js). Clearing the registration link in the CMS removes it. -->
     <aside class="event-banner" aria-label="Upcoming event"{% if banner_date != "" %} data-event-date="{{ banner_event.date | date: '%Y-%m-%d' }}"{% endif %}>
@@ -104,6 +107,11 @@
     <script src="creativity-scribble.js{{ v }}" defer></script>
     <script src="coding-power.js{{ v }}" defer></script>
     <script src="interaction.js{{ v }}" defer></script>
+{%- endif %}
+{%- if page.poster_maker %}
+    <script src="{{ page.root }}poster-stage.js{{ v }}" defer></script>
+    <script src="{{ page.root }}poster-art.js{{ v }}" defer></script>
+    <script src="{{ page.root }}poster-maker.js{{ v }}" defer></script>
 {%- endif %}
   </body>
 </html>

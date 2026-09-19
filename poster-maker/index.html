@@ -1,0 +1,71 @@
+---
+layout: base
+title: "Poster maker — CC Fest"
+description: "Make a CC Fest poster with the homepage's ten animations. Choose a speaker or session and download a social graphic or printable flier."
+body_class: "inner-page poster-maker-page"
+root: "../"
+home_href: "../"
+nav_current: "poster-maker"
+poster_maker: true
+noindex: true
+hide_event_banner: true
+---
+<main id="main-content">
+  <section class="maker-heading page-width" aria-labelledby="page-title">
+    <p class="eyebrow">CC Fest creative tools / 01</p>
+    <h1 id="page-title">Make some noise.</h1>
+    <p>A little code. A lot of possibilities. Make a poster for Virtual CC Fest.</p>
+  </section>
+  <noscript><p class="page-width">The poster maker needs JavaScript to draw and download artwork. <a href="../register/">Read the event details and register.</a></p></noscript>
+  <div id="maker-data" hidden data-home="{{ page.root }}" data-event="{{ site.data.event | jsonify | escape }}" data-schedule="{{ site.data.schedule | jsonify | escape }}" data-keynotes="{{ site.data.keynotes.keynotes | jsonify | escape }}" data-sessions="{{ site.data.sessions.sessions | jsonify | escape }}" data-credits="{{ site.data.site.credits | jsonify | escape }}"></div>
+  <p id="maker-status" class="maker-status page-width" role="status" hidden>Loading the drawing tools…</p>
+  <section id="maker-workspace" class="maker-workspace page-width" aria-label="Poster editor" hidden>
+    <form id="maker-controls" class="maker-controls">
+      <fieldset>
+        <legend><span>01</span> The essentials</legend>
+        <label for="maker-template">Template</label>
+        <select id="maker-template" name="template"><option value="announcement">Main announcement</option><option value="keynote">Keynote spotlight</option><option value="session">Session spotlight</option><option value="panel">Panel spotlight</option><option value="community">Community flier</option></select>
+        <div id="maker-feature-field" hidden>
+          <label for="maker-feature" id="maker-feature-label">Speaker</label>
+          <select id="maker-feature" name="feature"></select>
+          <label class="maker-check"><input name="bios" type="checkbox" checked> Include bios</label>
+          <div id="maker-texts" class="maker-texts"></div>
+          <p class="maker-help">Photos, bios, and descriptions come from the site: its short version if there is one, otherwise the opening sentence. Edits here change this poster only.</p>
+          <button id="maker-text-reset" class="maker-small-button" type="button">Use the site's text</button>
+        </div>
+        <label for="maker-format">Size</label>
+        <select id="maker-format" name="format"><option value="portrait">Social portrait · 1080 × 1350</option><option value="square">Square · 1080 × 1080</option><option value="story">Story · 1080 × 1920</option><option value="landscape">Landscape · 1200 × 630</option><option value="letter">US Letter · 8.5 × 11 in</option><option value="a4">A4 · 210 × 297 mm</option></select>
+        <label for="maker-copy">Supporting line <span class="maker-optional">up to 100 characters</span></label>
+        <textarea id="maker-copy" name="copy" rows="3" maxlength="100" aria-describedby="maker-copy-help"></textarea>
+        <p id="maker-copy-help" class="maker-help">Event date, times, speakers, and sessions come from the site. Your edits stay in this browser.</p>
+      </fieldset>
+      <fieldset>
+        <legend><span>02</span> The artwork</legend>
+        <label for="maker-mode">Homepage animation</label>
+        <select id="maker-mode" name="mode"><option value="creativity">Creativity</option><option value="change">Change</option><option value="connection">Connection</option><option value="celebration">Celebration</option><option value="collaboration">Collaboration</option><option value="creative-commons">Creative Commons</option><option value="conversations">Conversations</option><option value="community">Community</option><option value="curiosity">Curiosity</option><option value="coding">Coding</option></select>
+        <p class="maker-help">The ten animations from the <a href="../">homepage</a>, by Shristi Singh. Each poster takes a still frame.</p>
+        <label class="maker-check"><input name="hover" type="checkbox" checked> Show it in play (as when you point at it)</label>
+        <label class="maker-check"><input name="labels" type="checkbox" checked> Show “10 years of …”</label>
+        <button id="maker-recapture" class="button maker-recapture" type="button">Catch another moment ↻</button>
+        <label for="maker-background">Background</label>
+        <select id="maker-background" name="background"><option value="paper">Paper</option><option value="white">White (for office printers)</option></select>
+      </fieldset>
+      <fieldset>
+        <legend><span>03</span> Finishing touches</legend>
+        <label class="maker-check"><input name="times" type="checkbox" checked> Show Pacific + Eastern times</label>
+        <label class="maker-check"><input name="qr" type="checkbox" checked> Add registration QR code</label>
+        <div class="maker-preset-actions"><button id="maker-save" type="button">Save preset</button><label class="maker-import" for="maker-import">Open preset</label><input id="maker-import" type="file" accept="application/json,.json"><button id="maker-reset" type="button">Reset</button></div>
+      </fieldset>
+    </form>
+    <div class="maker-preview-column">
+      <div class="maker-preview-heading"><p class="eyebrow">Your poster / live preview</p><span id="maker-dimensions"></span></div>
+      <div class="maker-preview-mat"><div class="maker-stage"><div id="maker-canvas" role="img" aria-label="CC Fest poster preview"><canvas></canvas></div><div id="maker-overlay" class="maker-overlay" aria-label="Poster layout: select a block to move or resize it"></div></div></div>
+      <p class="maker-help maker-layout-help">Drag any block on the poster to move it; drag its corner to resize. With the keyboard, Tab to a block, then use the arrow keys, + and −. Layout changes are kept for each size. <button id="maker-layout-reset" class="maker-small-button" type="button">Reset layout for this size</button></p>
+      <p id="maker-error" role="alert" hidden></p>
+      <div class="maker-export-actions"><button id="maker-download" class="button button-solid" type="button">Download PNG ↓</button><button id="maker-print" class="button" type="button">Print / save PDF ↗</button></div>
+      <p id="maker-export-note" class="maker-help">Full-resolution artwork. Nothing is uploaded or published.</p>
+      <details class="maker-sharing"><summary>Caption &amp; image description</summary><label for="maker-caption">Caption</label><textarea id="maker-caption" readonly rows="5"></textarea><label for="maker-alt">Image description</label><textarea id="maker-alt" readonly rows="4"></textarea><p class="maker-help">Select and copy this text when sharing your poster.</p></details>
+    </div>
+  </section>
+  <section class="maker-about page-width" aria-labelledby="maker-about-title"><h2 id="maker-about-title">Made with creative code.</h2><p>The artwork is the homepage interactive, running live: the poster maker picks an animation, lets it play, and keeps one frame.</p><p>Event details: <a href="../register/">Virtual CC Fest 2026</a>. Typography and visual identity by Francisca José Rodrigues. Homepage interactives by Shristi Singh.</p></section>
+</main>
