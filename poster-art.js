@@ -70,7 +70,34 @@
   function font(ctx, size, mono = false, weight = 400) {
     ctx.font = `${weight} ${size}px "${mono ? 'Overpass Mono' : 'Anybody'}"`;
     ctx.textBaseline = 'top';
+    ctx.letterSpacing = '0px';
   }
+
+  // Francisca's lettering: runs of letters, each with its own width axis, weight, italic and
+  // spacing, from assets/poster-maker/lettering.json. Canvas can't set the width axis, so
+  // poster-maker.js registers one font face per width (LETTER_FAMILY) that pins it.
+  const LETTER_FAMILY = run => `CCF Anybody ${run.wdth}${run.italic ? ' Italic' : ''}`;
+  function setRun(ctx, run, size) {
+    ctx.font = `${run.italic ? 'italic ' : ''}${run.wght} ${size}px "${LETTER_FAMILY(run)}"`;
+    ctx.letterSpacing = `${run.spacing * size}px`;
+    ctx.textBaseline = 'top';
+  }
+  // One line of runs. Shrinks to fit maxWidth rather than failing. Returns the height used.
+  function lettered(ctx, runs, x, y, size, maxWidth, draw) {
+    const text = run => (run.upper ? run.text.toUpperCase() : run.text);
+    const measure = at => runs.reduce((width, run) => { setRun(ctx, run, at); return width + ctx.measureText(text(run)).width; }, 0);
+    const natural = measure(size);
+    const fitted = natural > maxWidth ? size * maxWidth / natural : size;
+    if (draw) {
+      let cx = x;
+      ctx.fillStyle = INK;
+      for (const run of runs) { setRun(ctx, run, fitted); ctx.fillText(text(run), cx, y); cx += ctx.measureText(text(run)).width; }
+    }
+    ctx.letterSpacing = '0px';
+    return fitted * 1.2;
+  }
+  // "Keynotes" → "Keynote": her letters, minus the final run when it is just the s.
+  const singular = runs => (runs[runs.length - 1].text === 's' ? runs.slice(0, -1) : runs);
   // Every text helper can measure without drawing (draw = false) so layouts can be sized first.
   function line(ctx, text, x, y, size, maxWidth, draw, mono = false, weight = 400) {
     font(ctx, size, mono, weight);
@@ -130,9 +157,9 @@
     // "10 years of …": on the homepage these sit on shapes, confetti and tiles, which is fine at
     // screen size and hard to read on a poster. Keep her placement, but set them in ink on a
     // small backing, at a readable size. In a small artwork band they would cover the Cs, so skip them.
-    if (state.labels && h >= 170) {
+    if (state.labels && h >= 120) {
       for (const label of art.labels) {
-        const size = Math.max(label.size * s, 15);
+        const size = Math.max(label.size * s, Math.min(15, h * 0.055));
         ctx.font = `600 ${size}px "Anybody"`;
         ctx.textBaseline = 'middle';
         const width = ctx.measureText(label.text).width;
@@ -219,23 +246,42 @@
     const describe = state.format !== 'square' && state.format !== 'landscape';
     const start = y;
     const feature = content.feature;
-    y += line(ctx, content.date, x, y, big ? 56 : 30, width, draw, false, 600) - (big ? 6 : 2);
+    const letters = content.lettering;
+    if (letters) {
+      // Her event title sets the date in Bold and the year in Thin Italic; the poster uses those two runs.
+      const [dateRun, yearRun] = letters.eventTitle.slice(-2);
+      y += lettered(ctx, [{ ...dateRun, text: `${content.date}, ` }, { ...yearRun, text: content.year }], x, y, big ? 56 : 30, width, draw) - (big ? 4 : 2);
+    } else y += line(ctx, content.date, x, y, big ? 56 : 30, width, draw, false, 600) - (big ? 6 : 2);
     y += line(ctx, content.facts, x, y + 4, big ? 21 : 15, width, draw, true) + 4;
     if (state.times && content.times.length) {
       for (const time of content.times) y += line(ctx, time, x, y, big ? 19 : 14, width, draw, true);
       y += 3;
     }
     if (feature) {
-      if (feature.kicker) y += line(ctx, feature.kicker, x, y + 10, big ? 15 : 11, width, draw, true) + 8;
+      if (letters) {
+        const heading = singular(feature.kind === 'keynote' ? letters.keynotes : letters.sessions);
+        y += lettered(ctx, heading, x, y + (big ? 12 : 8), big ? 40 : 17, width, draw) + (big ? 6 : 2);
+        // Landscape keeps her heading and drops the tags line for room.
+        if (feature.kicker && feature.kind !== 'keynote' && big) y += line(ctx, feature.kicker, x, y + 4, big ? 15 : 11, width, draw, true) + 6;
+      } else if (feature.kicker) y += line(ctx, feature.kicker, x, y + 10, big ? 15 : 11, width, draw, true) + 8;
       if (feature.title) y += wrap(ctx, feature.title, x, y + 4, big ? 34 : 19, width, 3, draw, { weight: 600, leading: 1.15 }) + 6;
       if (feature.description && describe) y += wrap(ctx, feature.description, x, y + 6, big ? 19 : 12, width, big ? 4 : 3, draw, { clip: true, leading: 1.35 }) + 8;
     }
     return y - start;
   }
 
-  function copy(ctx, state, x, y, width, big, draw) {
+  function copy(ctx, state, content, x, y, width, big, draw) {
     let h = 0;
-    if (state.template === 'community') h += wrap(ctx, 'Creative coding for everyone.', x, y, big ? 26 : 16, width, 2, draw, { weight: 600 }) + 6;
+    if (state.template === 'community') {
+      const letters = content.lettering;
+      if (letters) {
+        // Her two-line "Creative coding / for everyone." at her 110% line height.
+        const run = letters.community[0];
+        const size = big ? 40 : 18;
+        for (const part of run.text.split('\n')) h += lettered(ctx, [{ ...run, text: part }], x, y + h, size, width, draw) / 1.2 * (run.lineHeight || 1.1);
+        h += 8;
+      } else h += wrap(ctx, 'Creative coding for everyone.', x, y, big ? 26 : 16, width, 2, draw, { weight: 600 }) + 6;
+    }
     if (state.copy) h += wrap(ctx, state.copy, x, y + h, big ? 24 : 14, width, 3, draw);
     return h;
   }
@@ -263,7 +309,7 @@
     const textWidth = state.qr ? 720 : 900;
     const infoH = info(ctx, state, content, 50, 0, textWidth, true, false);
     const peopleH = feature ? people(ctx, feature, 50, 0, textWidth, attempt.compact, state.bios, false) : 0;
-    const copyH = copy(ctx, state, 50, 0, textWidth, true, false);
+    const copyH = copy(ctx, state, content, 50, 0, textWidth, true, false);
     const gap = 14;
     const fit = attempt.text || 1;
     const sInfo = scaleOf(frame, 'info') * fit, sPeople = scaleOf(frame, 'people') * fit, sCopy = scaleOf(frame, 'copy') * fit;
@@ -283,7 +329,7 @@
       place(ctx, frame, 'people', [50, py, textWidth, peopleH], () => people(ctx, feature, 50, py, textWidth, attempt.compact, state.bios, true), fit);
       y += peopleH * sPeople + gap;
     }
-    if (copyH) { const cy = y; place(ctx, frame, 'copy', [50, cy, textWidth, copyH], () => copy(ctx, state, 50, cy, textWidth, true, true), fit); }
+    if (copyH) { const cy = y; place(ctx, frame, 'copy', [50, cy, textWidth, copyH], () => copy(ctx, state, content, 50, cy, textWidth, true, true), fit); }
     if (artH < minArt) frame.problems.push('The text is crowding out the artwork. Drag a corner of a text block to make it smaller, turn off bios or times, or choose a taller size.');
     return artH;
   }
@@ -296,14 +342,14 @@
     place(ctx, frame, 'logo', [50, 70, logoW, logoH], () => ctx.drawImage(assets.logo, 50, 70, logoW, logoH));
     let y = 70 + logoH * scaleOf(frame, 'logo') + 22;
     const infoH = info(ctx, state, content, 50, y, 480, false, false);
-    const copyH = copy(ctx, state, 50, y, 480, false, false);
+    const copyH = copy(ctx, state, content, 50, y, 480, false, false);
     // Shrink the left column (down to 70%) before reporting that it runs into the footer.
     const leftH = infoH * scaleOf(frame, 'info') + (copyH ? 8 + copyH * scaleOf(frame, 'copy') : 0);
     const leftFit = Math.min(1, Math.max(0.7, (footer - 12 - y) / leftH));
     const iy = y;
     place(ctx, frame, 'info', [50, iy, 480, infoH], () => info(ctx, state, content, 50, iy, 480, false, true), leftFit);
     y += infoH * scaleOf(frame, 'info') * leftFit + 8;
-    if (copyH) { const cy = y; place(ctx, frame, 'copy', [50, cy, 480, copyH], () => copy(ctx, state, 50, cy, 480, false, true), leftFit); y += copyH * scaleOf(frame, 'copy') * leftFit; }
+    if (copyH) { const cy = y; place(ctx, frame, 'copy', [50, cy, 480, copyH], () => copy(ctx, state, content, 50, cy, 480, false, true), leftFit); y += copyH * scaleOf(frame, 'copy') * leftFit; }
     if (y > footer - 12) frame.problems.push('The details run into the footer. Drag a corner of a text block to make it smaller, hide the times, or choose a taller size.');
     const floor = footer - (state.qr ? 110 : 20);
     const peopleH = feature ? people(ctx, feature, 560, 0, 390, true, state.bios, false) : 0;
@@ -337,7 +383,7 @@
         // full wordmark unless that leaves the artwork too small to be the centrepiece.
         const attempts = content.feature
           ? [{ logo: 900, compact: false }, { logo: 640, compact: false }, { logo: 640, compact: true }, { logo: 640, compact: true, text: 0.85 }]
-          : [{ logo: 900, compact: false }];
+          : [{ logo: 900, compact: false }, { logo: 640, compact: false }];
         const sized = attempts.map(attempt => ({ attempt, art: tallLayout(ctx, state, art, content, assets, frame, attempt, false) })).filter(option => option.art > 0);
         const readable = sized.filter(option => !option.attempt.compact);
         const pick = readable.find(option => option.art >= 280) || [...readable].sort((a, b) => b.art - a.art)[0] || sized[0];

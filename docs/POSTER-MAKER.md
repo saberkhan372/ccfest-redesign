@@ -4,6 +4,8 @@
 
 The artwork is Shristi Singh's homepage interactive: pick one of its ten words and the poster keeps a frame of that animation.
 
+The date line (Bold date, Thin Italic year), the Keynote / Session headings, and the community flier's "Creative coding for everyone." use Francisca's per-letter lettering from Figma, the same data as the site's headings (see [TYPOGRAPHY.md](TYPOGRAPHY.md#posters)). Other poster text (names, titles, bios) has no Figma lettering and is set in plain Anybody.
+
 ## Make a poster
 
 1. **Template.** Main announcement, Keynote spotlight, Session spotlight, Panel spotlight, or Community flier.
