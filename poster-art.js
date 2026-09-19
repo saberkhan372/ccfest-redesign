@@ -23,7 +23,7 @@
   };
   const TEMPLATES = ['announcement', 'keynote', 'session', 'panel', 'community'];
   const BLOCKS = { logo: 'Wordmark', art: 'Artwork', info: 'Event details', people: 'People', copy: 'Supporting text', qr: 'QR code' };
-  const DEFAULTS = { version: VERSION, template: 'announcement', format: 'portrait', mode: 'creativity', hover: true, labels: true, background: 'paper', feature: 0, bios: true, times: true, qr: true, copy: 'Workshops, talks, and community for creative coders.', texts: {}, layout: {} };
+  const DEFAULTS = { version: VERSION, template: 'announcement', format: 'portrait', mode: 'creativity', hover: true, moment: 11, labels: true, background: 'paper', feature: 0, bios: true, times: true, qr: true, copy: 'Workshops, talks, and community for creative coders.', texts: {}, layout: {} };
 
   const plainText = (value, max) => typeof value === 'string' && value.length <= max && !/[<>]/.test(value) && ![...value].some(c => c.charCodeAt(0) < 32 && c !== '\n');
   function validate(value) {
@@ -35,6 +35,10 @@
     }
     if (!Number.isInteger(value.feature) || value.feature < 0 || value.feature > 99) throw new Error('Choose a speaker or session from the list.');
     result.feature = value.feature;
+    // Which recorded frame of the animation (0 = just picked, 11 = settled). Older drafts lack it.
+    const moment = value.moment ?? DEFAULTS.moment;
+    if (!Number.isInteger(moment) || moment < 0 || moment > 11) throw new Error('Choose a moment from the slider.');
+    result.moment = moment;
     for (const key of ['hover', 'labels', 'bios', 'times', 'qr']) {
       if (typeof value[key] !== 'boolean') throw new Error(`Invalid ${key} setting.`);
       result[key] = value[key];
@@ -151,9 +155,16 @@
       const startY = oy + percent(b.posY, art.height - b.tileH) * s;
       const firstX = startX - Math.ceil((startX - x) / tileW) * tileW;
       const firstY = startY - Math.ceil((startY - y) / tileH) * tileH;
+      ctx.save();
+      if (b.clip) { ctx.beginPath(); ctx.rect(ox + b.clip.x * s, oy + b.clip.y * s, b.clip.w * s, b.clip.h * s); ctx.clip(); }
       for (let ty = firstY; ty < y + h; ty += tileH) for (let tx = firstX; tx < x + w; tx += tileW) ctx.drawImage(b.image, tx, ty, tileW, tileH);
+      ctx.restore();
     }
-    for (const layer of art.layers) ctx.drawImage(layer.image, ox + layer.x * s, oy + layer.y * s, layer.w * s, layer.h * s);
+    for (const layer of art.layers) {
+      ctx.globalCompositeOperation = layer.blend || 'source-over';
+      ctx.drawImage(layer.image, ox + layer.x * s, oy + layer.y * s, layer.w * s, layer.h * s);
+    }
+    ctx.globalCompositeOperation = 'source-over';
     // "10 years of …": on the homepage these sit on shapes, confetti and tiles, which is fine at
     // screen size and hard to read on a poster. Keep her placement, but set them in ink on a
     // small backing, at a readable size. In a small artwork band they would cover the Cs, so skip them.
@@ -406,7 +417,13 @@
     return { boxes: frame.boxes, problems: frame.problems, H };
   }
 
-  const API = { VERSION, FORMATS, BACKGROUNDS, MODES, TEMPLATES, BLOCKS, DEFAULTS, validate, render };
+  // A thumbnail of one recorded frame, for the Moment filmstrip.
+  function thumbnail(ctx, state, art, width, height) {
+    ctx.fillStyle = BACKGROUNDS[state.background]; ctx.fillRect(0, 0, width, height);
+    artwork(ctx, { ...state, labels: false }, art, [0, 0, width, height]);
+  }
+
+  const API = { VERSION, FORMATS, BACKGROUNDS, MODES, TEMPLATES, BLOCKS, DEFAULTS, validate, render, thumbnail };
   if (typeof module === 'object' && module.exports) module.exports = API;
   else root.CCPosterArt = API;
 })(typeof window === 'object' ? window : globalThis);

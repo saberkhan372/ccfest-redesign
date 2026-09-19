@@ -13,8 +13,8 @@ hide_event_banner: true
 <main id="main-content">
   <section class="maker-heading page-width" aria-labelledby="page-title">
     <p class="eyebrow">CC Fest creative tools / 01</p>
-    <h1 id="page-title">Make some noise.</h1>
-    <p>A little code. A lot of possibilities. Make a poster for Virtual CC Fest.</p>
+    <h1 id="page-title">Make a CC Fest Poster</h1>
+    <p>Adjust, Download, and Share.</p>
   </section>
   <noscript><p class="page-width">The poster maker needs JavaScript to draw and download artwork. <a href="../register/">Read the event details and register.</a></p></noscript>
   <div id="maker-data" hidden data-home="{{ page.root }}" data-event="{{ site.data.event | jsonify | escape }}" data-schedule="{{ site.data.schedule | jsonify | escape }}" data-keynotes="{{ site.data.keynotes.keynotes | jsonify | escape }}" data-sessions="{{ site.data.sessions.sessions | jsonify | escape }}" data-credits="{{ site.data.site.credits | jsonify | escape }}"></div>
@@ -45,8 +45,12 @@ hide_event_banner: true
         <select id="maker-mode" name="mode"><option value="creativity">Creativity</option><option value="change">Change</option><option value="connection">Connection</option><option value="celebration">Celebration</option><option value="collaboration">Collaboration</option><option value="creative-commons">Creative Commons</option><option value="conversations">Conversations</option><option value="community">Community</option><option value="curiosity">Curiosity</option><option value="coding">Coding</option></select>
         <p class="maker-help">The ten animations from the <a href="../">homepage</a>, by Shristi Singh. Each poster takes a still frame.</p>
         <label class="maker-check"><input name="hover" type="checkbox" checked> Show it in play (as when you point at it)</label>
+        <label for="maker-moment">Moment <output id="maker-moment-value" for="maker-moment">12 / 12</output></label>
+        <input id="maker-moment" name="moment" type="range" min="0" max="11" step="1" value="11" aria-describedby="maker-moment-help">
+        <div id="maker-filmstrip" class="maker-filmstrip" aria-hidden="true"></div>
+        <p id="maker-moment-help" class="maker-help">Scrub through the animation, from the moment its word is picked to when it's in play.</p>
         <label class="maker-check"><input name="labels" type="checkbox" checked> Show “10 years of …”</label>
-        <button id="maker-recapture" class="button maker-recapture" type="button">Catch another moment ↻</button>
+        <button id="maker-recapture" class="button maker-recapture" type="button">Record it again ↻</button>
         <label for="maker-background">Background</label>
         <select id="maker-background" name="background"><option value="paper">Paper</option><option value="white">White (for office printers)</option></select>
       </fieldset>

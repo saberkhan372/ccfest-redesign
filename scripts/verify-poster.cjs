@@ -68,6 +68,18 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
     }
     console.log('Crowded (export off until a block is resized):', crowded.join(', ') || 'none');
 
+    // The Moment slider scrubs recorded frames: the preview changes at once, and the first frame exports.
+    await set({ format: 'portrait', template: 'announcement', mode: 'curiosity' });
+    const pixels = () => page.evaluate(() => document.querySelector('#maker-canvas canvas').toDataURL());
+    const settled = await pixels();
+    await page.fill('#maker-moment', '0'); await page.waitForTimeout(150);
+    assert.notEqual(await pixels(), settled, 'Scrubbing to the first moment should change the artwork');
+    assert.equal(await page.textContent('#maker-moment-value'), '1 / 12');
+    await page.fill('#maker-moment', '11'); await page.waitForTimeout(150);
+    assert.equal(await pixels(), settled, 'Scrubbing back should restore the settled frame');
+    await page.fill('#maker-moment', '0'); await settle();
+    assert.equal(await error(), '');
+
     // Internal tool: not indexed, not in the navigation.
     assert.equal(await page.locator('meta[name=robots]').getAttribute('content'), 'noindex, nofollow');
     assert.equal(await page.locator('nav a[href*="poster-maker"]').count(), 0);
@@ -147,6 +159,6 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(new URL('poster-maker/', base).href);
     assert(await noJS.locator('#maker-workspace').isHidden());
-    console.log('PASS: 10 homepage animations, all templates/sizes/speakers/sessions/panels, noindex, move/resize/keyboard, text edits, responsive editor, PNG sizes, presets, print view, no-JS fallback.');
+    console.log('PASS: 10 homepage animations, all templates/sizes/speakers/sessions/panels, moment scrubbing, noindex, move/resize/keyboard, text edits, responsive editor, PNG sizes, presets, print view, no-JS fallback.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -195,7 +195,11 @@
     return framePromise;
   }
 
+  // How long each mode's entrance takes after its word is picked, and how long the "in play"
+  // look takes to finish once the pointer arrives. A recording spans both.
   const SETTLE = { creativity: 5200, 'creative-commons': 1800 };
+  const PLAY = { celebration: 1900 };
+  const FRAMES = 12;
   const rng = seed => { let s = seed % 2147483646 + 1; return () => (s = s * 16807 % 2147483647) / 2147483647; };
 
   // Poses the mode the way it looks while someone plays with it on the homepage.
@@ -206,7 +210,8 @@
     const box = stage.getBoundingClientRect();
     const rand = rng(seed);
     const at = (fx, fy) => ({ clientX: box.left + box.width * fx, clientY: box.top + box.height * fy, bubbles: true, cancelable: true, view: win });
-    const target = at(0.15 + rand() * 0.7, 0.05 + rand() * 0.35);
+    // Change morphs by pointer x; far left collapses the Cs into bars, so aim at the middle-right.
+    const target = mode === 'change' ? at(0.5 + rand() * 0.35, 0.1 + rand() * 0.3) : at(0.15 + rand() * 0.7, 0.05 + rand() * 0.35);
     doc.dispatchEvent(new win.MouseEvent('mousemove', target));
     if (hover) {
       [wrap, connection].forEach(el => el && el.classList.add(HOVER));
@@ -219,9 +224,7 @@
       await wait(300 + rand() * 400);
       win.dispatchEvent(new win.MouseEvent('mouseup', target));
       doc.dispatchEvent(new win.MouseEvent('mouseup', target));
-      await wait(200);
-    } else if (hover) await wait(1100);
-    else await wait(300);
+    }
   }
 
   function reset(doc, win) {
@@ -249,21 +252,30 @@
     return job;
   }
 
-  // Returns layers in stage pixels: { layers: [{ image, x, y, w, h }], labels, background, width, height, focus }.
-  async function captureNow({ url, mode, seed = 1, hover = true }) {
-    if (!MODES.includes(mode)) throw new Error('Choose one of the homepage animations.');
-    const { doc, win } = await loadFrame(url);
-    const button = doc.querySelector(`.mode-btn[data-mode="${mode}"]`);
-    if (!button) throw new Error('That homepage animation is missing.');
-    reset(doc, win);
-    // Re-enter the mode so each capture replays the same entrance.
-    const other = doc.querySelector(`.mode-btn:not([data-mode="${mode}"])`);
-    if (other) { other.click(); await frames(win, 2); }
-    doc.querySelector('.anim-stage').scrollIntoView({ block: 'start' });
-    button.click();
-    await wait(SETTLE[mode] || 1400);
-    await pose(doc, win, mode, seed, hover);
-    await frames(win, 2);
+  // Change's canvas is drawn with mix-blend-mode: darken, which hides its pale trails; keep that.
+  const BLENDS = { darken: 'darken', multiply: 'multiply', lighten: 'lighten', screen: 'screen', difference: 'difference' };
+  function blendOf(el, win) {
+    for (let node = el; node && node.nodeType === 1; node = node.parentElement) {
+      const mode = BLENDS[win.getComputedStyle(node).mixBlendMode];
+      if (mode) return mode;
+      if (node.classList.contains('anim-stage')) break;
+    }
+    return 'source-over';
+  }
+  // The stage's clip-path as a rectangle in stage pixels, or null.
+  function insetClip(stage, win) {
+    const match = win.getComputedStyle(stage).clipPath.match(/^inset\(([^)]*)\)/);
+    if (!match) return null;
+    const box = stage.getBoundingClientRect();
+    const parts = match[1].split(/\s+/).slice(0, 4);
+    const [top, right = top, bottom = top, left = right] = parts;
+    const px = (value, size) => (value.endsWith('%') ? parseFloat(value) / 100 * size : parseFloat(value) || 0);
+    return { x: px(left, box.width), y: px(top, box.height), w: box.width - px(left, box.width) - px(right, box.width), h: box.height - px(top, box.height) - px(bottom, box.height) };
+  }
+
+  // One still of whatever her code has drawn right now, in stage pixels.
+  const backgrounds = new Map();
+  async function snapshot(doc, win) {
     const outer = doc.querySelector('.anim-stage');
     const stage = doc.querySelector('.anim-stage-main');
     const origin = stage.getBoundingClientRect();
@@ -276,17 +288,55 @@
       if (tag === 'div' && win.getComputedStyle(el).backgroundColor === 'rgba(0, 0, 0, 0)') continue;
       if (tag === 'svg') {
         const { markup, box } = inlineSvg(el, win);
-        layers.push({ image: await svgImage(markup), x: box.left - origin.left, y: box.top - origin.top, w: box.width, h: box.height });
-      } else layers.push({ image: tag === 'canvas' ? copyCanvas(el) : boxImage(el, win), ...place(el) });
+        layers.push({ image: await svgImage(markup), x: box.left - origin.left, y: box.top - origin.top, w: box.width, h: box.height, blend: blendOf(el, win) });
+      } else layers.push({ image: tag === 'canvas' ? copyCanvas(el) : boxImage(el, win), ...place(el), blend: blendOf(el, win) });
     }
     const labels = [...outer.querySelectorAll('.cc-text')].filter(el => shown(el, win)).map(el => {
       const style = win.getComputedStyle(el);
       return { text: el.textContent.trim(), ...place(el), color: style.color, weight: style.fontWeight, size: parseFloat(style.fontSize) };
     });
-    const background = await stageBackground(stage, win);
-    const result = { mode, name: button.textContent.trim(), layers, labels, background, width: origin.width, height: origin.height, focus: focusBox(doc, win, origin) };
+    const key = win.getComputedStyle(stage).backgroundImage;
+    if (!backgrounds.has(key)) backgrounds.set(key, await stageBackground(stage, win));
+    // Creative Commons reveals its wallpaper column by column with an animated clip-path.
+    const background = backgrounds.get(key) && { ...backgrounds.get(key), clip: insetClip(stage, win) };
+    return { layers, labels, background, width: origin.width, height: origin.height, focus: focusBox(doc, win, origin) };
+  }
+
+  // Records FRAMES stills spread over the mode's timeline: from the moment its word is picked,
+  // through the entrance, to the finished "in play" look (or the resting look without hover).
+  // Returns { mode, name, frames }; the last frame is the settled one.
+  async function captureNow({ url, mode, seed = 1, hover = true, onProgress = () => {} }) {
+    if (!MODES.includes(mode)) throw new Error('Choose one of the homepage animations.');
+    const { doc, win } = await loadFrame(url);
+    const button = doc.querySelector(`.mode-btn[data-mode="${mode}"]`);
+    if (!button) throw new Error('That homepage animation is missing.');
     reset(doc, win);
-    return result;
+    // Re-enter the mode so each recording replays the same entrance.
+    const other = doc.querySelector(`.mode-btn:not([data-mode="${mode}"])`);
+    if (other) { other.click(); await frames(win, 2); }
+    doc.querySelector('.anim-stage').scrollIntoView({ block: 'start' });
+    const settle = SETTLE[mode] || 1400;
+    const total = settle + (hover ? PLAY[mode] || 1100 : 300);
+    // Start after the previous mode has faded out (Creative Commons' Cs fade over ~200ms).
+    const times = Array.from({ length: FRAMES }, (_, i) => 250 + (total - 250) * i / (FRAMES - 1));
+    button.click();
+    const start = performance.now();
+    let posing = null;
+    const shots = [];
+    for (const t of times) {
+      if (!posing && t >= settle) { await wait(start + settle - performance.now()); posing = pose(doc, win, mode, seed, hover); }
+      await wait(start + t - performance.now());
+      await frames(win, 1);
+      shots.push(await snapshot(doc, win));
+      onProgress(shots.length, FRAMES);
+    }
+    await posing;
+    reset(doc, win);
+    // One framing for the whole recording, so the artwork doesn't jump while scrubbing.
+    const l = Math.min(...shots.map(f => f.focus.x)), t = Math.min(...shots.map(f => f.focus.y));
+    const r = Math.max(...shots.map(f => f.focus.x + f.focus.w)), b = Math.max(...shots.map(f => f.focus.y + f.focus.h));
+    shots.forEach(f => { f.focus = { x: l, y: t, w: r - l, h: b - t }; });
+    return { mode, name: button.textContent.trim(), frames: shots };
   }
 
   root.CCStageCapture = { MODES, capture };

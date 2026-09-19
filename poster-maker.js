@@ -13,12 +13,15 @@
   const overlay = $('maker-overlay');
   const buttons = [$('maker-download'), $('maker-print')];
   const FORM_KEYS = Object.keys(A.DEFAULTS).filter(key => !['version', 'texts', 'layout'].includes(key));
-  const art = new Map(); // `${mode}|${hover}` → captured frame
+  const art = new Map(); // `${mode}|${hover}` → recording: { frames: [12 stills] }
   const pending = new Set();
+  let recordings = 0;
   let state, content, assets, busy = false, capturing = 0, timer, seed = 1, problems = [], selected = null;
   let edits = { texts: {}, layout: {} };
   const setStatus = message => { status.textContent = message; };
   const artKey = value => `${value.mode}|${value.hover}`;
+  // The still the Moment slider points at.
+  const frameOf = value => { const frames = art.get(artKey(value)).frames; return frames[Math.min(value.moment, frames.length - 1)]; };
   const canExport = () => !busy && !capturing && $('maker-error').hidden && !problems.length && state && art.has(artKey(state));
   const syncButtons = () => {
     buttons.forEach(button => { button.disabled = !canExport(); });
@@ -34,7 +37,7 @@
     const value = { version: A.VERSION, texts: edits.texts, layout: edits.layout };
     for (const key of FORM_KEYS) {
       const input = form.elements.namedItem(key);
-      value[key] = input.type === 'checkbox' ? input.checked : key === 'feature' ? Number(input.value) : input.value;
+      value[key] = input.type === 'checkbox' ? input.checked : key === 'feature' || key === 'moment' ? Number(input.value) : input.value;
     }
     return A.validate(value);
   }
@@ -224,16 +227,18 @@
     const key = artKey(value);
     if ((art.has(key) && !fresh) || pending.has(key)) return;
     pending.add(key); capturing++; syncButtons();
-    setStatus(`Drawing the ${A.MODES[value.mode]} animation from the homepage…`);
+    const name = A.MODES[value.mode];
+    setStatus(`Recording the ${name} animation from the homepage…`);
     try {
-      art.set(key, await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++ }));
+      recordings++;
+      art.set(key, { id: recordings, ...await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++, onProgress: (done, total) => setStatus(`Recording the ${name} animation from the homepage… ${done} of ${total}`) }) });
     } finally { pending.delete(key); capturing--; }
     update();
   }
 
   // Draws the preview and refreshes the move/resize handles. Returns the render result.
   function drawPreview(value) {
-    const frame = art.get(artKey(value));
+    const frame = frameOf(value);
     const format = A.FORMATS[value.format];
     const scale = Math.min(2, window.devicePixelRatio || 1);
     const width = Math.round(760 * scale), height = Math.round(width * format.height / format.width);
@@ -252,6 +257,8 @@
       state = next;
       const format = A.FORMATS[next.format];
       $('maker-dimensions').textContent = `${format.width} × ${format.height} px`;
+      $('maker-moment-value').value = `${next.moment + 1} / 12`;
+      drawFilmstrip(next);
       $('maker-export-note').textContent = format.paper ? '300 ppi PNG. Print at actual size with browser headers and footers off. PDF contains raster artwork.' : 'Full-resolution PNG. Choose Letter or A4 for print / PDF.';
       $('maker-print').textContent = format.paper ? 'Print / save PDF ↗' : 'Choose a print size ↗';
       if (!art.get(artKey(next))) { ensureArt(next).catch(error => { showError(error.message); setStatus('The homepage animation could not be drawn.'); }); return; }
@@ -263,6 +270,27 @@
       try { localStorage.setItem(storageKey, JSON.stringify({ ...state, source: content.stamp })); } catch (_) { /* private mode */ }
       setStatus(problems.length ? 'Fix the layout before exporting.' : 'Ready. Draft saved in this browser.');
     } catch (error) { problems = []; showError(error.message); setStatus('Change the settings above before exporting.'); }
+  }
+
+  // Twelve small frames under the Moment slider; clicking one picks that moment. The slider
+  // stays the accessible control, so the strip is hidden from assistive technology.
+  let stripKey = '';
+  function drawFilmstrip(value) {
+    const strip = $('maker-filmstrip');
+    const recording = art.get(artKey(value));
+    if (!recording) { strip.replaceChildren(); stripKey = ''; return; }
+    const key = `${recording.id}|${value.background}`;
+    if (stripKey !== key) {
+      stripKey = key;
+      strip.replaceChildren(...recording.frames.map((frame, i) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 120; canvas.height = 80;
+        A.thumbnail(canvas.getContext('2d'), value, frame, 120, 80);
+        canvas.dataset.moment = String(i);
+        return canvas;
+      }));
+    }
+    strip.querySelectorAll('canvas').forEach(canvas => canvas.classList.toggle('is-current', Number(canvas.dataset.moment) === value.moment));
   }
 
   /* ── Move and resize ─────────────────────────────────────────────── */
@@ -366,7 +394,7 @@
     const format = A.FORMATS[state.format];
     const canvas = document.createElement('canvas');
     canvas.width = format.width; canvas.height = format.height;
-    A.render(canvas.getContext('2d'), state, art.get(artKey(state)), { ...content, feature: featured(state) }, assets, format.width, format.height);
+    A.render(canvas.getContext('2d'), state, frameOf(state), { ...content, feature: featured(state) }, assets, format.width, format.height);
     return canvas;
   }
   async function exportPoster(print) {
@@ -432,8 +460,16 @@
     form.addEventListener('submit', event => event.preventDefault());
     form.addEventListener('input', event => {
       if (event.target.dataset.text) readTexts();
+      // Scrubbing redraws straight away; the frames are already recorded.
+      if (event.target.name === 'moment') { clearTimeout(timer); update(); return; }
       buttons.forEach(button => { button.disabled = true; });
       clearTimeout(timer); timer = setTimeout(update, 120);
+    });
+    $('maker-filmstrip').addEventListener('click', event => {
+      const moment = event.target.dataset && event.target.dataset.moment;
+      if (moment === undefined) return;
+      form.elements.moment.value = moment;
+      update();
     });
     $('maker-recapture').onclick = () => { if (state) ensureArt(state, true).catch(error => showError(error.message)); };
     $('maker-text-reset').onclick = () => { if (!state) return; delete edits.texts[textKey(state)]; $('maker-texts').dataset.key = ''; syncTextFields(state); update(); };
