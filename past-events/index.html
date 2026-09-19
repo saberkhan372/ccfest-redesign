@@ -36,38 +36,38 @@ nav_current: "past-events"
         </div>
       </section>
 
-      <section class="section page-width" id="posters" aria-labelledby="posters-title">
+      <section class="section page-width" id="classes" aria-labelledby="classes-title">
         <div class="section-heading">
           <p>02</p>
           <div>
-            <h2 id="posters-title">Posters</h2>
-            <p>Posters and fliers from past events, newest first.</p>
+            <h2 id="classes-title">Camps and classes</h2>
+            <p>Multi-week online camps for educators and curious learners, newest first.</p>
           </div>
         </div>
 
-        <ul class="poster-grid">
-{% for event in site.data.past_events.events %}{% assign poster = event.poster | default: "" | strip %}{% assign lead = poster | slice: 0 %}{% if lead == "/" %}{% assign poster = poster | remove_first: "/" %}{% endif %}{% if poster != "" %}{% assign credit = event.poster_credit | default: "" | strip %}          <li>
-            <figure>
-              <img src="{{ page.root }}{{ poster | escape }}" alt="{{ event.poster_alt | default: "" | escape }}" loading="lazy">
-              <figcaption><time datetime="{{ event.datetime | escape }}">{{ event.date_label | escape }}</time> · {{ event.place | escape }}{% if credit != "" %}<span class="poster-credit">Design by {{ credit | escape }}</span>{% endif %}</figcaption>
-            </figure>
-          </li>
-{% endif %}{% endfor %}        </ul>
+        <ol class="past-list" reversed>
+{% for event in site.data.past_events.classes %}          {% include past-row.html event=event %}
+{% endfor %}        </ol>
       </section>
 
-      <section class="section section-tinted" id="classes" aria-labelledby="classes-title">
+      <section class="section section-tinted" id="posters" aria-labelledby="posters-title">
         <div class="page-width">
           <div class="section-heading">
             <p>03</p>
             <div>
-              <h2 id="classes-title">Camps and classes</h2>
-              <p>Multi-week online camps for educators and curious learners, newest first.</p>
+              <h2 id="posters-title">Posters</h2>
+              <p>Posters and fliers from past events, newest first.</p>
             </div>
           </div>
 
-          <ol class="past-list" reversed>
-{% for event in site.data.past_events.classes %}            {% include past-row.html event=event %}
-{% endfor %}          </ol>
+          <ul class="poster-grid">
+{% for event in site.data.past_events.events %}{% assign poster = event.poster | default: "" | strip %}{% assign lead = poster | slice: 0 %}{% if lead == "/" %}{% assign poster = poster | remove_first: "/" %}{% endif %}{% if poster != "" %}{% assign credit = event.poster_credit | default: "" | strip %}            <li>
+              <figure>
+                <img src="{{ page.root }}{{ poster | escape }}" alt="{{ event.poster_alt | default: "" | escape }}" loading="lazy">
+                <figcaption><time datetime="{{ event.datetime | escape }}">{{ event.date_label | escape }}</time> · {{ event.place | escape }}{% if credit != "" %}<span class="poster-credit">Design by {{ credit | escape }}</span>{% endif %}</figcaption>
+              </figure>
+            </li>
+{% endif %}{% endfor %}          </ul>
         </div>
       </section>
 
