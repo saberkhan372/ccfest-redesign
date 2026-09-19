@@ -20,6 +20,7 @@
  *   8. Figma lettering hooks
  *   9. Responsive
  *  10. Reduced motion
+ *  11. Poster maker
  *
  * NOTES
  *   - Rules are one per line to keep this file short and scannable.
@@ -466,3 +467,52 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
  .fx-change,.fx-confetti { display: none !important; }
  .anim-stage .cc-scribble { mask: none; }
 }
+
+/* --- 11. Poster maker (host-owned; artwork is a still frame of the homepage interactive) --- */
+.maker-heading { padding-top: 48px; padding-bottom: 24px; }
+.maker-heading h1 { font-size: clamp(42px, 6vw, 86px); font-weight: 500; line-height: 1; letter-spacing: -.055em; margin: 18px 0; }
+.maker-heading > p:last-child { font-size: 18px; max-width: 650px; }
+.maker-status { font-family: 'Overpass Mono', monospace; font-size: 12px; min-height: 3em; color: var(--muted); padding-bottom: 18px; }
+.maker-workspace { display: grid; grid-template-columns: 310px minmax(0, 1fr); gap: 40px; align-items: start; padding-bottom: 50px; }
+.maker-workspace[hidden],.poster-maker-page [hidden] { display: none; }
+.maker-controls { border: 1px solid var(--line); background: var(--surface); padding: 24px; }
+.maker-controls fieldset { border: 0; padding: 0 0 24px; margin: 0 0 24px; min-width: 0; border-bottom: 1px solid var(--line); }
+.maker-controls fieldset:last-child { border: 0; margin: 0; padding: 0; }
+.maker-controls legend { font-size: 17px; font-weight: 500; padding: 0 0 20px; }
+.maker-controls legend span { font: 11px 'Overpass Mono', monospace; color: var(--muted); margin-right: 10px; }
+.maker-controls label,.maker-sharing label { display: block; font-size: 13px; font-weight: 500; margin: 14px 0 8px; }
+.maker-controls select,.maker-controls input[type=number],.maker-controls textarea,.maker-sharing textarea { display: block; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; padding: 11px 10px; border: 1px solid var(--line); border-radius: 0; background: #fff; color: var(--ink); font: 14px Anybody, sans-serif; line-height: 1.5; }
+.maker-controls textarea,.maker-sharing textarea { resize: vertical; }
+.maker-controls input[type=range] { width: 100%; accent-color: var(--accent); min-height: 28px; margin: 0; }
+.maker-controls output { float: right; font-family: 'Overpass Mono', monospace; }
+.maker-optional { display: block; font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 4px; }
+.maker-help { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 10px 0; }
+.maker-help a { color: var(--accent); }
+.maker-recapture { width: 100%; margin-top: 12px; font-size: 12px; padding: 13px 6px; cursor: pointer; }
+.maker-recapture:disabled { opacity: .5; cursor: wait; }
+.maker-preset-actions button,.maker-import { padding: 8px 6px; min-height: 36px; background: transparent; border: 1px solid var(--line); font: 11px 'Overpass Mono', monospace; color: var(--ink); cursor: pointer; }
+.maker-controls .maker-check { display: flex; align-items: center; gap: 8px; font-weight: 400; line-height: 1.4; min-height: 32px; }
+.maker-check input { width: 17px; height: 17px; accent-color: var(--accent); flex-shrink: 0; }
+.maker-preset-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 18px; }
+.maker-controls .maker-import { margin: 0; display: flex; align-items: center; box-sizing: border-box; }
+#maker-import { width: 100%; font-size: 11px; margin-top: 8px; }
+.maker-preview-column { min-width: 0; }
+.maker-preview-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.maker-preview-heading p { margin: 0; }
+#maker-dimensions { font: 10px 'Overpass Mono', monospace; color: var(--muted); }
+.maker-preview-mat { display: flex; justify-content: center; background: #dcdcd7; padding: 28px; border: 1px solid var(--line); }
+#maker-canvas { width: 100%; max-width: 700px; line-height: 0; box-shadow: 0 8px 24px #18181a20; }
+#maker-canvas canvas { display: block; width: 100% !important; height: auto !important; }
+.maker-export-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.maker-export-actions .button { cursor: pointer; }
+.maker-export-actions button:disabled { opacity: .5; cursor: wait; }
+#maker-error { background: #fff1ed; border-left: 3px solid var(--orange); color: #72200e; padding: 16px; font-size: 14px; line-height: 1.5; }
+.maker-sharing { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 18px; }
+.maker-sharing summary { cursor: pointer; font-size: 14px; padding: 8px 0; }
+.maker-about { border-top: 1px solid var(--line); padding-top: 28px; padding-bottom: 60px; }
+.maker-about h2 { font-size: 26px; font-weight: 500; }
+.maker-about p { max-width: 720px; font-size: 14px; line-height: 1.7; }
+.poster-maker-page :is(input,select,textarea,button,summary,.maker-import):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@media (max-width: 900px) { .maker-workspace { grid-template-columns: 260px minmax(0,1fr); gap: 20px; } .maker-controls { padding: 16px; } .maker-preview-mat { padding: 16px; } }
+@media (max-width: 650px) { .maker-workspace { display: flex; flex-direction: column; } .maker-controls,.maker-preview-column { width: 100%; box-sizing: border-box; } .maker-preview-column { order: -1; } .maker-heading { padding-top: 30px; } .maker-preview-mat { padding: 12px; } .maker-export-actions .button { flex: 1; padding: 13px 10px; font-size: 12px; } .maker-preview-heading { flex-wrap: wrap; } }
+@media print { .poster-maker-page .maker-controls,.poster-maker-page .maker-export-actions { display: none; } }
