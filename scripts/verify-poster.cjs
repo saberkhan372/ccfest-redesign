@@ -19,7 +19,7 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
     await page.locator('#maker-workspace').waitFor({ state: 'visible' });
     const settle = async () => {
       await page.waitForTimeout(250);
-      await page.waitForFunction(() => /^(Ready|Change the settings)/.test(document.getElementById('maker-status').textContent), null, { timeout: 30000 });
+      await page.waitForFunction(() => /^(Ready|Change the settings|Fix the layout)/.test(document.getElementById('maker-status').textContent), null, { timeout: 30000 });
     };
     const error = () => page.evaluate(() => (document.getElementById('maker-error').hidden ? '' : document.getElementById('maker-error').textContent));
     const set = async values => {
@@ -48,24 +48,60 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
       assert(inked > 0.02, `${mode} artwork is missing (${inked})`);
     }
 
-    // Every template and size, including spotlights for every keynote and session.
-    const counts = await page.evaluate(() => ({ keynote: JSON.parse(document.getElementById('maker-data').dataset.keynotes).length, session: JSON.parse(document.getElementById('maker-data').dataset.sessions).length }));
-    const tooFull = [];
+    // Every template and size, including every keynote, session and panel, with and without bios.
+    // Tight combinations may report a layout problem (export off, with a message); nothing may throw.
+    const crowded = [];
     for (const format of ['portrait', 'square', 'story', 'landscape', 'letter', 'a4']) {
-      for (const template of ['announcement', 'community', 'keynote', 'session']) {
-        const features = template in counts ? counts[template] : 1;
-        for (let feature = 0; feature < features; feature++) {
-          for (const bios of template in counts ? [true, false] : [true]) {
-            await set({ format, template, bios, times: true });
-            await set({ feature });
+      for (const template of ['announcement', 'community', 'keynote', 'session', 'panel']) {
+        await set({ format, template, times: true });
+        const features = await page.locator('#maker-feature option').evaluateAll(options => options.map(o => o.value));
+        for (const feature of template === 'announcement' || template === 'community' ? [null] : features) {
+          for (const bios of feature === null ? [true] : [true, false]) {
+            await set(feature === null ? { bios } : { feature, bios });
             const message = await error();
-            if (message) tooFull.push(`${format}/${template}${feature}/${bios ? 'bios' : 'no bios'}`);
-            if (!bios || template === 'announcement' || template === 'community') assert(!/too full/.test(message) || format === 'square' || format === 'landscape', `${format}/${template}${feature}: ${message}`);
+            if (message) crowded.push(`${format}/${template}${feature ?? ''}/${bios ? 'bios' : 'no bios'}`);
+            if (feature === null) assert.equal(message, '', `${format}/${template}`);
+            assert(!message || /crowd|run into|runs off/.test(message), `${format}/${template}${feature}: ${message}`);
           }
         }
       }
     }
-    console.log('Too full (export blocked with a message):', tooFull.join(', ') || 'none');
+    console.log('Crowded (export off until a block is resized):', crowded.join(', ') || 'none');
+
+    // Internal tool: not indexed, not in the navigation.
+    assert.equal(await page.locator('meta[name=robots]').getAttribute('content'), 'noindex, nofollow');
+    assert.equal(await page.locator('nav a[href*="poster-maker"]').count(), 0);
+
+    // Move, resize and keyboard edits, kept per size.
+    await page.click('#maker-reset'); await settle();
+    const layout = () => page.evaluate(() => JSON.parse(localStorage.getItem('ccfest-poster-v3')).layout);
+    await page.locator('.maker-stage').scrollIntoViewIfNeeded();
+    const art = await page.locator('.maker-block[data-block="art"]').boundingBox();
+    await page.mouse.move(art.x + art.width / 2, art.y + art.height / 2); await page.mouse.down();
+    await page.mouse.move(art.x + art.width / 2 + 60, art.y + art.height / 2 + 40, { steps: 8 }); await page.mouse.up(); await settle();
+    assert((await layout()).portrait.art.x > 50);
+    await page.locator('.maker-block[data-block="logo"]').click();
+    const logo = await page.locator('.maker-block[data-block="logo"]').boundingBox();
+    const handle = await page.locator('.maker-block[data-block="logo"] .maker-block-handle').boundingBox();
+    await page.mouse.move(handle.x + handle.width / 2, handle.y + handle.height / 2); await page.mouse.down();
+    await page.mouse.move(logo.x + logo.width * 0.6, logo.y + logo.height * 0.6, { steps: 8 }); await page.mouse.up(); await settle();
+    assert((await layout()).portrait.logo.s < 0.75);
+    await page.locator('.maker-block[data-block="qr"]').focus();
+    await page.keyboard.press('ArrowLeft'); await page.keyboard.press('-'); await settle();
+    assert.equal((await layout()).portrait.qr.x, -4);
+    await set({ format: 'square' });
+    assert.equal((await layout()).square, undefined);
+    await set({ format: 'portrait' });
+    await page.click('#maker-layout-reset'); await settle();
+    assert.equal((await layout()).portrait, undefined);
+
+    // Poster-only text edits persist and reset.
+    await set({ template: 'session' });
+    await page.fill('#maker-text-description', 'A test description.'); await settle();
+    await page.reload(); await page.locator('#maker-workspace').waitFor(); await settle();
+    assert.equal(await page.inputValue('#maker-text-description'), 'A test description.');
+    await page.click('#maker-text-reset'); await settle();
+    assert.notEqual(await page.inputValue('#maker-text-description'), 'A test description.');
 
     // Responsive editor.
     for (const width of [320, 390, 768, 1440]) {
@@ -89,7 +125,7 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
 
     // Presets: save, change, reopen; bad files are refused.
     await set({ format: 'portrait', template: 'keynote', mode: 'coding' });
-    await set({ feature: 1 });
+    await set({ feature: '1' });
     const presetPending = page.waitForEvent('download'); await page.click('#maker-save');
     const preset = await fs.readFile(await (await presetPending).path());
     await set({ template: 'announcement', mode: 'curiosity' });
@@ -111,6 +147,6 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
     const noJS = await browser.newPage({ javaScriptEnabled: false });
     await noJS.goto(new URL('poster-maker/', base).href);
     assert(await noJS.locator('#maker-workspace').isHidden());
-    console.log('PASS: 10 homepage animations, all templates/sizes/speakers/sessions, responsive editor, PNG sizes, presets, print view, no-JS fallback.');
+    console.log('PASS: 10 homepage animations, all templates/sizes/speakers/sessions/panels, noindex, move/resize/keyboard, text edits, responsive editor, PNG sizes, presets, print view, no-JS fallback.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

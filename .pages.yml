@@ -51,6 +51,7 @@ content:
           - { name: label, label: Label, type: string, description: "e.g. Keynote 01" }
           - { name: name, label: Name or talk title, type: string }
           - { name: bio, label: Bio, type: text, description: "To link a name or organisation, write [Social Software Lab](https://sosoft.arts.ucla.edu/). Links open in a new tab." }
+          - { name: short_bio, label: Short bio (posters), type: text, required: false, description: "Optional. One sentence for posters. Left empty, posters use the first sentence of the bio." }
           - { name: photo, label: Photo, type: image, required: false, description: "Shown beside the bio, cropped to a tall frame centred on the person." }
           - { name: url, label: Website, type: string, required: false }
 
@@ -69,6 +70,7 @@ content:
           - { name: title, label: Session title, type: string, description: "A session only appears once it has a title." }
           - { name: tags, label: Tags, type: string, list: true, description: "Short labels, e.g. Beginner, Panel" }
           - { name: description, label: Description, type: text, required: false, description: "Blank lines become line breaks." }
+          - { name: short_description, label: Short description (posters), type: text, required: false, description: "Optional. One or two sentences for posters. Left empty, posters use the first sentence of the description." }
           - { name: resource_url, label: Resources link, type: string, required: false }
           - name: presenters
             label: Presenters
@@ -81,6 +83,7 @@ content:
               - { name: photo, label: Photo, type: image, required: false, description: "Square, about 400px. Without one, the first letter of the name is shown." }
               - { name: url, label: Website, type: string, required: false }
               - { name: bio, label: Bio, type: text, required: false, description: "To link a name or organisation, write [Processing Foundation](https://processingfoundation.org). Links open in a new tab." }
+              - { name: short_bio, label: Short bio (posters), type: text, required: false, description: "Optional. One sentence for posters. Left empty, posters use the first sentence of the bio." }
 
   - name: schedule
     label: Schedule

@@ -7,6 +7,8 @@ root: "../"
 home_href: "../"
 nav_current: "poster-maker"
 poster_maker: true
+noindex: true
+hide_event_banner: true
 ---
 <main id="main-content">
   <section class="maker-heading page-width" aria-labelledby="page-title">
@@ -22,12 +24,14 @@ poster_maker: true
       <fieldset>
         <legend><span>01</span> The essentials</legend>
         <label for="maker-template">Template</label>
-        <select id="maker-template" name="template"><option value="announcement">Main announcement</option><option value="keynote">Keynote spotlight</option><option value="session">Session spotlight</option><option value="community">Community flier</option></select>
+        <select id="maker-template" name="template"><option value="announcement">Main announcement</option><option value="keynote">Keynote spotlight</option><option value="session">Session spotlight</option><option value="panel">Panel spotlight</option><option value="community">Community flier</option></select>
         <div id="maker-feature-field" hidden>
           <label for="maker-feature" id="maker-feature-label">Speaker</label>
           <select id="maker-feature" name="feature"></select>
           <label class="maker-check"><input name="bios" type="checkbox" checked> Include bios</label>
-          <p class="maker-help">Photos and bios come from the site. Long bios are shortened to fit.</p>
+          <div id="maker-texts" class="maker-texts"></div>
+          <p class="maker-help">Photos, bios, and descriptions come from the site: its short version if there is one, otherwise the opening sentence. Edits here change this poster only.</p>
+          <button id="maker-text-reset" class="maker-small-button" type="button">Use the site's text</button>
         </div>
         <label for="maker-format">Size</label>
         <select id="maker-format" name="format"><option value="portrait">Social portrait · 1080 × 1350</option><option value="square">Square · 1080 × 1080</option><option value="story">Story · 1080 × 1920</option><option value="landscape">Landscape · 1200 × 630</option><option value="letter">US Letter · 8.5 × 11 in</option><option value="a4">A4 · 210 × 297 mm</option></select>
@@ -55,7 +59,8 @@ poster_maker: true
     </form>
     <div class="maker-preview-column">
       <div class="maker-preview-heading"><p class="eyebrow">Your poster / live preview</p><span id="maker-dimensions"></span></div>
-      <div class="maker-preview-mat"><div id="maker-canvas" role="img" aria-label="CC Fest poster preview"><canvas></canvas></div></div>
+      <div class="maker-preview-mat"><div class="maker-stage"><div id="maker-canvas" role="img" aria-label="CC Fest poster preview"><canvas></canvas></div><div id="maker-overlay" class="maker-overlay" aria-label="Poster layout: select a block to move or resize it"></div></div></div>
+      <p class="maker-help maker-layout-help">Drag any block on the poster to move it; drag its corner to resize. With the keyboard, Tab to a block, then use the arrow keys, + and −. Layout changes are kept for each size. <button id="maker-layout-reset" class="maker-small-button" type="button">Reset layout for this size</button></p>
       <p id="maker-error" role="alert" hidden></p>
       <div class="maker-export-actions"><button id="maker-download" class="button button-solid" type="button">Download PNG ↓</button><button id="maker-print" class="button" type="button">Print / save PDF ↗</button></div>
       <p id="maker-export-note" class="maker-help">Full-resolution artwork. Nothing is uploaded or published.</p>

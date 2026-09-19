@@ -501,7 +501,16 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
 .maker-preview-heading p { margin: 0; }
 #maker-dimensions { font: 10px 'Overpass Mono', monospace; color: var(--muted); }
 .maker-preview-mat { display: flex; justify-content: center; background: #dcdcd7; padding: 28px; border: 1px solid var(--line); }
-#maker-canvas { width: 100%; max-width: 700px; line-height: 0; box-shadow: 0 8px 24px #18181a20; }
+#maker-canvas { width: 100%; line-height: 0; box-shadow: 0 8px 24px #18181a20; }
+.maker-stage { position: relative; width: 100%; max-width: 700px; }
+.maker-overlay { position: absolute; inset: 0; }
+.maker-block { position: absolute; padding: 0; margin: 0; border: 0; background: transparent; cursor: move; touch-action: none; }
+.maker-block:hover { outline: 1px dashed var(--accent); outline-offset: 2px; }
+.maker-block[aria-pressed=true],.maker-block:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.maker-block-handle { position: absolute; right: -9px; bottom: -9px; width: 16px; height: 16px; background: var(--accent); border: 2px solid #fff; display: none; cursor: nwse-resize; touch-action: none; }
+.maker-block[aria-pressed=true] .maker-block-handle,.maker-block:focus-visible .maker-block-handle { display: block; }
+.maker-small-button { padding: 8px 10px; min-height: 36px; background: transparent; border: 1px solid var(--line); font: 11px 'Overpass Mono', monospace; color: var(--ink); cursor: pointer; }
+.maker-layout-help .maker-small-button { margin-left: 6px; }
 #maker-canvas canvas { display: block; width: 100% !important; height: auto !important; }
 .maker-export-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 .maker-export-actions .button { cursor: pointer; }
