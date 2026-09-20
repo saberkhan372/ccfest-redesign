@@ -32,6 +32,23 @@ const base = process.argv[2] || 'http://127.0.0.1:8876/';
 const PAGES = ['', 'register/', 'events/', 'events/visible-java/', 'past-events/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'];
 const WIDTHS = [320, 390, 768, 1440];
 
+/*
+ * Wait for every image to finish, however it finishes. The posters are `loading="lazy"`, so
+ * scrolling past a section only starts them; at some widths they are still in flight when the
+ * checks run and look broken. Switching them to eager makes the browser commit to loading them
+ * now, and then we wait for each one's load or error. Either outcome settles the image: a real
+ * 404 or a real zero-width image still ends up `naturalWidth === 0` and still fails below. The
+ * per-image cap keeps a hung request from stalling the whole run.
+ */
+const settleImages = page => page.evaluate(cap => Promise.all(
+  [...document.images].filter(image => !image.complete).map(image => new Promise(done => {
+    image.loading = 'eager';
+    image.addEventListener('load', done, { once: true });
+    image.addEventListener('error', done, { once: true });
+    setTimeout(done, cap);
+  })),
+), 5000);
+
 (async () => {
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
   const errors = [];
@@ -50,6 +67,7 @@ const WIDTHS = [320, 390, 768, 1440];
           await section.scrollIntoViewIfNeeded();
         }
         await page.waitForTimeout(900);
+        await settleImages(page);
 
         const state = await page.evaluate(() => ({
           overflow: document.documentElement.scrollWidth > innerWidth,
