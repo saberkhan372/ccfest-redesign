@@ -53,8 +53,14 @@
  --lime: #c8ff32;       /* mailing list, registration band */
  --cc-orange: var(--orange);  /* kept: older names used by styles.css */
  --accent-ink: var(--ink);
- --page-width: 1440px;  /* Figma frame width */
- --page-pad: clamp(1.25rem, 4.45vw, 4rem);
+ /* Figma drew the site on a 1440 frame, so 1440 is the measure everything is tuned to and
+    nothing below that width changes. Past it the frame used to simply stop, leaving the
+    header, the hero and every band stranded in the middle of a wide window; now it keeps
+    growing at 90% of the window up to 2000px, so the whole page widens in step and the
+    columns stay aligned with each other. */
+ --page-width: clamp(1440px, 90vw, 2000px);
+ /* Gutter grows with the frame: 4.45% of it, the Figma ratio, still 64px at 1440. */
+ --page-pad: clamp(1.25rem, 4.45vw, calc(var(--page-width) * .0445));
 }
 
 /* --- 3. Shared ----------------------------------------------------------- */
@@ -89,11 +95,12 @@ button { font: inherit; }
 
 /* --- 4. Homepage --------------------------------------------------------- */
 .home-hero { overflow: hidden; position: relative; padding-top: clamp(3rem,6.7vw,6rem); padding-bottom: clamp(3rem,6.7vw,6rem); }
-/* Giant italic "CC FEST". Size is 400/1440 of the viewport, matching the Figma frame. */
-.home-hero-title { position: relative; z-index: 1; font-family: Anybody, sans-serif; font-style: italic; font-weight: 400; font-variation-settings: 'wdth' 71; font-size: clamp(5rem,27.7778vw,25rem); letter-spacing: 0; line-height: .8; white-space: nowrap; margin: 0 0 2.5rem; }
+/* Giant italic "CC FEST". 400/1440 of the frame — the Figma ratio, so it holds as the
+   frame grows past 1440 (see §2): 400px at the design width, 500px at a 2000px window. */
+.home-hero-title { position: relative; z-index: 1; font-family: Anybody, sans-serif; font-style: italic; font-weight: 400; font-variation-settings: 'wdth' 71; font-size: clamp(5rem,27.7778vw,calc(var(--page-width) * .2778)); letter-spacing: 0; line-height: .8; white-space: nowrap; margin: 0 0 2.5rem; }
 .hero-rule { position: relative; z-index: 1; margin-bottom: 2.5rem; }
 .home-hero-sub { font-size: clamp(.9rem,1.25vw,18px); line-height: 1.7; max-width: 480px; }
-.hero-shape { --shape-w: clamp(65px,20vw,285px); position: absolute; bottom: calc(var(--shape-w) * -1.169); left: 0; width: var(--shape-w); height: auto; object-fit: contain; pointer-events: none; }
+.hero-shape { --shape-w: clamp(65px,20vw,calc(var(--page-width) * .198)); position: absolute; bottom: calc(var(--shape-w) * -1.169); left: 0; width: var(--shape-w); height: auto; object-fit: contain; pointer-events: none; }
 /* Upcoming event band (orange) */
 .upcoming-band { background: var(--orange); color: var(--ink); }
 .upcoming-copy > p { color: var(--ink); }
@@ -106,6 +113,10 @@ button { font: inherit; }
 .home-about { grid-template-columns: minmax(220px,340px) minmax(0,1fr); gap: clamp(2rem,6.7vw,6rem); }
 .about-lead h2 { color: var(--accent); font-weight: 700; font-size: clamp(2rem,3.1vw,44px); max-width: 300px; }
 .about-body > p,.welcome-list { font-size: 15px; line-height: 1.75; }
+/* The frame keeps growing past 1440 (see §2) but a line of reading text should not: this
+   column is already 876px there, so hold it at that measure instead of letting it run to
+   nearly 200 characters on a wide monitor. No effect at or below the 1440 design width. */
+.about-body > p { max-width: 55rem; }
 .welcome-block .eyebrow { color: var(--accent); }
 .welcome-list { list-style: none; padding: 0; }
 .welcome-list li { position: relative; padding-left: 1.5rem; }

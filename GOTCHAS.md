@@ -6,6 +6,8 @@
 
 - **Pages CMS strips the comments out of a data file the first time it saves it.** The explanatory comments in `_data/*.yml` are for whoever opens the repo; the guidance an editor actually sees lives in the `description:` lines in `.pages.yml`. Keep it there, and expect the YAML comments to disappear.
 
+- **`styles.css` sets `scroll-behavior: smooth` on `<html>`, which quietly breaks hand-written scroll animations.** Every `scrollTo(0, y)` then starts the browser's own easing, so a per-frame tween has each frame fighting a second animation: the page sits still for most of a second and then lurches. The symptom looks like a slow script, not a CSS conflict. Pass `behavior: 'instant'` on every step of a scroll you are animating yourself — `interaction.js` does this where picking a word glides the stage into view.
+
 - **`python3 -m http.server` is not reliable enough to test against.** It is single-threaded and drops parallel requests from a headless browser, which shows up as a page that renders unstyled and a screenshot comparison that "fails" for no reason. It cost one false result during the CMS work. Use `npx http-server <dir> -p 8881 -c-1` instead.
 
 - **Native Ruby gems will not compile on this Mac as shipped.** The Command Line Tools are clang 15, which predates `<stdckdint.h>`, but Homebrew's Ruby headers include it, so every gem with a C extension fails. The workaround used here: install `ruby@3.4` and drop a three-macro `stdckdint.h` shim (built on `__builtin_*_overflow`) into `/opt/homebrew/Cellar/ruby@3.4/*/include/ruby-3.4.0/`. Updating the Command Line Tools is the real fix.

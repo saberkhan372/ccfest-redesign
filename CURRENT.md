@@ -31,6 +31,17 @@
 - Not reproducible in Figma: per-letter `wdth` values (API can't set variable font axes — nearest named styles used instead; per-letter spacing does carry over) and Shristi's ten-mode monogram (live p5.js/CSS; marked with a dashed slot).
 - Unconfirmed content stays "to be announced" in the export, same as the site.
 
+## Wide screens and scroll-to-the-animation — 2026-09-19 (Claude)
+- Picking a word on the homepage now glides the animation band into view. The mode buttons sit *over* the artwork, so on a phone and on any short window the stage was half below the fold and the change you just asked for happened where you could not see it. Host-side, in `interaction.js` — Shristi's `animations.js` is untouched; the new block only listens for the same clicks.
+  - Rests with the band centred, or its top at the top of the window when the band is taller than the window, so the words stay on screen either way. Does nothing when the band is already within 24px of that spot, so repeat clicks never nudge the page.
+  - A wheel, swipe or key press cancels the glide at once. Arrow keys inside the tablist deliberately do **not** scroll: moving the page under a roving tablist is disorienting.
+  - Under `prefers-reduced-motion` it jumps instead of gliding (verified in Playwright: settled within the first 120ms, versus a ~900ms ease normally).
+- The page frame no longer stops dead at 1440. `--page-width` is now `clamp(1440px, 90vw, 2000px)` and `--page-pad` is 4.45% of it, so past the Figma frame the header, hero and every band widen together and stay aligned instead of stranding a 1440 column in the middle of a wide window. **Nothing at or below 1440 changes** — the clamp's minimum is the design width.
+  - The hero wordmark and the blue half-circle are now sized from `--page-width` rather than a fixed ceiling (`.2778` and `.198` of it — the Figma ratios), so they keep their proportions as the frame grows: 400px type at 1440, 500px at 2000.
+  - Guard: `.about-body > p` is capped at `55rem`. That column is already 876px (124 characters) at 1440, and without the cap the widened frame ran it to 196 characters at 2560. No effect at or below the design width.
+- Verified with `scripts/verify.cjs` at 320/390/768/1440 (all ten modes, keyboard selection, reduced motion, offscreen suspension, the registration dialog, the no-JS fallback, no console errors), plus all eight pages at 1441/1680/1920/2560/3440: no horizontal overflow anywhere, and the header logo stays exactly one gutter inside each section's frame edge. `sync-typography.cjs` is a no-op. `git diff --check` clean.
+- **Pre-existing, not from this change, and since fixed:** `verify.cjs` reported ten broken images on `past-events/` at 768px only. They are lazy-loaded posters that were merely `complete: false` when the check ran — they serve 200, no 404 reaches the response listener, and the same failure reproduced on unmodified `main`. The runs above used a patched copy that waits for lazy images; `05e1c50` has since fixed the script itself (see the entry at the end of this file).
+
 ## Open questions for Saber / Francisca (registration)
 - White 20px fact values on orange (#ff4d2e) are about 3.3:1 contrast, below WCAG AA for text that size. Implemented as designed; consider ink text or larger/bolder values.
 - History note lettering (251:850–852) has per-letter tweaks, but its variable-width values aren't exposed by Figma's API, so it uses plain CSS case/weight only.
