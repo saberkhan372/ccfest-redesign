@@ -118,17 +118,30 @@ sessions:
           led Artist Initiatives & Inclusion at [Eyebeam](https://eyebeam.org).
           Her work asks how creative code can expand participation while keeping
           human intention, consent, and accountability at the center.
-  - title: Understanding Machine Learning Models through Sports Performance
+  - title: "Machine Learning in Motion: Designing Better Technology for Athletes"
     tags:
       - Intermediate
-    description: What are the machine learning models we can use to support
-      athletes, from their performance to injury prevention? How do they work?
-      This session takes a deep dive into how models work, how they support
-      professional athletes, and how they can help bridge the resource &
-      research gap between men's and women's sports.
+    description: >-
+      How can machine learning help athletes reduce injury risk, improve
+      training, and perform at their best? Using real-world examples from
+      professional sports, we’ll explore how these models work, including the
+      data they use, the predictions they make, and their possibilities and
+      limitations.
+
+
+      Together, we’ll examine how intentionally designed models could play a
+      role in narrowing critical gaps in resources and research between women’s
+      and men’s sports. We’ll also imagine new technologies that could better
+      support athletes.
     presenters:
       - name: Jessica Valarezo
         pronouns: she/her/hers
+        photo: /assets/IMG_9674.jpeg
+        bio: Jessica Valarezo is a software engineer and educator who builds and
+          evaluates machine-learning systems. She is currently working in the
+          early literacy space. She is interested in making machine learning fun
+          and accessible, designing systems deliberately and thoughtfully, and
+          finding cool, creative applications for it across fields!
   - title: Making a portfolio on Neocities
     tags:
       - Beginner
