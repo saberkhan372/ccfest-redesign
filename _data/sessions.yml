@@ -148,3 +148,33 @@ sessions:
           distinction from the [Academy of Media Arts
           Cologne](https://www.khm.de/en/), Germany and works internationally
           for theater productions and in the visual arts.
+  - title: Collage Machine, an Algorithmic Approach to Play
+    tags:
+      - Beginner
+    description: Join designer and educator Matthew Raupp for a hands-on exploration
+      of Collage Machine, a Processing tool for digital collaging that strikes a
+      balance between artist control and chance. Matthew will share the
+      evolution of the tool and how he integrates it into both his studio
+      practice and classroom. Attendees will make a series of compositions using
+      interactive controls to manually position, resize, and rotate elements,
+      paired with randomizers that continuously generate playful, unexpected
+      results.
+    resource_url: https://www.instagram.com/p/DU3F776gNeA/?img_index=1
+    presenters:
+      - name: Matthew Raupp
+        pronouns: He/Him/His
+        photo: /assets/Matthew-Raupp-CCS-Associate-Professor-College-for-Creative-Studies
+          - Matthew Raupp.jpeg
+        url: https://www.instagram.com/raupp2112/
+        bio: Matthew Raupp is a Communication Design educator with over 25 years of
+          teaching experience and a former partner of Defrost Design. His
+          practice centers on "serious play," using code not just as a technical
+          skill or means of production, but as a sandbox for experimentation. In
+          an evolving technological landscape, Matthew views coding as a way to
+          transition from a being a tool user to a tool maker, a philosophy that
+          comes to life in his latest creative coding endeavor, Collage Machine,
+          an algorithmic tool that strikes a balance between artist control and
+          chance. By bringing these generative systems into both studio practice
+          and the classroom, he helps designers shift beyond closed software
+          constraints, using code to sketch, generate unexpected outcomes, and
+          invent their own ways of making.
