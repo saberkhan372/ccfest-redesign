@@ -191,3 +191,29 @@ sessions:
           and the classroom, he helps designers shift beyond closed software
           constraints, using code to sketch, generate unexpected outcomes, and
           invent their own ways of making.
+  - title: Making Sense of Data with Live Visualization
+    tags:
+      - Beginner
+    description: "Let's get to grips with inputs, outputs, and variables in Scratch,
+      Snap! and p5.js by creating time-series visualizations of changing values!
+      Explore the programming structures involved in giving real-time user
+      feedback: loops, variables, and mapping.  This lesson cluster is
+      extendable for learners in grades 2-10."
+    resource_url: https://docs.google.com/document/d/1IGF2V5PgZHwNOK4Bl_s5iEOtYTvHl5YR3d9j9gcYUpY/
+    presenters:
+      - name: Emily Thomforde
+        pronouns: she/her
+        photo: /assets/em_headshot_2023 - Emily Thomforde.jpg
+        url: thegrene.github.io
+        bio: Dr. Emily Thomforde is the Computer Science Department Chair at Reach
+          University. She focuses on culturally sustaining pedagogy and making
+          connections between computing and other disciplinary areas. Emily
+          previously served as Computer Science Coordinator at the California
+          Department of Education and San Mateo County Office of Education. She
+          is a BAFTA-winning video game developer, and has ten years of
+          experience teaching computer programming, software development and
+          computing pedagogy at libraries, prisons, museums, and public schools
+          locally and abroad. Her curriculum development credits include
+          Vidcode, Hopscotch, Code.org, STEM from Dance, Code Combat, and
+          BrainPOP. Emily holds a PhD in Artificial Intelligence from the
+          University of Edinburgh in Scotland, UK.
