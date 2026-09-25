@@ -233,3 +233,23 @@ sessions:
         bio: "Blair is a human-computer interaction researcher interested in how to use
           machines that manipulate the physical world for insight and
           expression. "
+  - title: Delightful motion loops
+    tags:
+      - Beginner
+    description: In this workshop, we'll graph looping trigonometric easing
+      functions in Desmos and bring them over to p5.js to let them drive the
+      movement of simple shapes. We'll then see how to record these as perfectly
+      looping animations to share over the interwebs!
+    resource_url: https://itp-tracker.notion.site/Delightful-Motion-Loops-1a9d7eb4971b8087abc4f4dbe1f84304
+    presenters:
+      - name: Sai Ram Ved Vijapurapu
+        pronouns: he/him
+        photo: /assets/Portrait-square - Sai Ram Ved V.jpg
+        url: https://motion.sairamved.com
+        bio: Sai is an information designer crafting delightful experiences with data &
+          technology who draws inspiration from natural phenomena, often using
+          code as a means to that end. In the past, his work has been recognised
+          and celebrated by CultureHub, Metropolitan Transportation Authority,
+          Bangalore International Center and Information is Beautiful, among
+          others. Sai is currently at SOOT where he continues to imbue
+          interactivity in his work.
