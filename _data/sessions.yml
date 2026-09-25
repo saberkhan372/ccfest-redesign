@@ -217,3 +217,19 @@ sessions:
           Vidcode, Hopscotch, Code.org, STEM from Dance, Code Combat, and
           BrainPOP. Emily holds a PhD in Artificial Intelligence from the
           University of Edinburgh in Scotland, UK.
+  - title: 3D printing with p5.fab!
+    tags:
+      - Beginner
+    description: p5.fab is a Javascript library to control digital fabrication
+      machines using creative code. In this workshop, we’ll introduce p5.fab and
+      work through 3D printing examples to make physical things with creative
+      code!
+    resource_url: https://docs.copypastes.xyz/resources/guides/p5fab-primer/
+    presenters:
+      - name: Blair Subbaraman
+        pronouns: he/him
+        photo: /assets/blair - Blair Subbaraman.jpg
+        url: https://blairsubbaraman.com/
+        bio: "Blair is a human-computer interaction researcher interested in how to use
+          machines that manipulate the physical world for insight and
+          expression. "
