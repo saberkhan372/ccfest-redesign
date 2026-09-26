@@ -287,3 +287,36 @@ sessions:
           software engineering through the lens of creative coding … has
           collaborated with Teenage Engineering, The GIANT Room, NEST+m, NYU …
           loves learning and listening.
+  - title: "Recoding : Tracing the origins of generative art"
+    tags:
+      - Beginner
+    description: >-
+      "“Recoding” is a short workshop exploring the logic of early generative
+      art through the reinterpretation of a single historical artwork: Segrid
+      (1973) by John Roy.
+
+
+      The workshop will focus on how the image is constructed through rules,
+      repetition, variation, and algorithmic constraints, following approaches
+      developed by pioneers of computer art in the 1960s and 70s.
+
+
+      It builds on the recent relaunch of recodeproject.com, a platform
+      dedicated to preserving and revisiting historical generative artworks."
+    resource_url: https://github.com/v3ga/CCFest26/blob/main/README.md#ccfest26--recoding--tracing-the-origins-of-generative-art
+    presenters:
+      - name: Julien Gachadoat
+        pronouns: He/Him
+        photo: /assets/Julien_Gachadoat_02-1920w - Julien Gachadoat.jpg
+        url: www.v3ga.net
+        bio: >-
+          "Julien Gachadoat (aka v3ga) has been exploring generative drawing for
+          many years. He grew up in the 90s amid the avant-garde demo scene,
+          making visuals with code. Ever since, programming languages have been
+          his creative tool.
+
+
+          Creating unique art with algorithms, he works with the emergence of
+          abstract form. Combining monochrome, geometric shapes, he plays with
+          repetition, using random operations to generate an element of
+          surprise."
