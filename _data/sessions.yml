@@ -272,3 +272,18 @@ sessions:
           the author of "Learn Python Visually: Creative Coding with
           Processing.py" and a long-time open source contributor and advocate
           for Python-related Processing projects.'
+  - title: Livecoding with Scratch
+    tags:
+      - Beginner
+    description: "Scratch is a great live coding tool: in this class we will ideate
+      and rapid prototype fun drawing and music applications that translate into
+      performance pieces."
+    presenters:
+      - name: M DeNardo
+        pronouns: they/them/we
+        photo: /assets/MDN-bio-pic.png
+        url: https://markdenardo.github.io/mdn/main.html
+        bio: M DeNardo (they/them) composer/designer/educator … believes in learning
+          software engineering through the lens of creative coding … has
+          collaborated with Teenage Engineering, The GIANT Room, NEST+m, NYU …
+          loves learning and listening.
