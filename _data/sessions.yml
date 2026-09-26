@@ -253,3 +253,22 @@ sessions:
           Bangalore International Center and Information is Beautiful, among
           others. Sai is currently at SOOT where he continues to imbue
           interactivity in his work.
+  - title: The Nature of Code, but Python
+    tags:
+      - Intermediate
+    description: A session exploring how The Nature of Code (p5.js) translates into
+      Python using py5. We'll look at which techniques translate directly, which
+      require rethinking (particularly where substituting libraries is
+      unavoidable), and where Python offers opportunities to simplify the
+      original JavaScript implementation.
+    resource_url: https://github.com/tabreturn/py5-nature-of-code
+    presenters:
+      - name: Tristan Bunn
+        pronouns: he
+        photo: /assets/tabreturn - tristan b.png
+        url: tabreturn.com
+        bio: 'Tristan is a creative coder, educator, and researcher working at the
+          intersection of technology, interaction design, and creativity. He is
+          the author of "Learn Python Visually: Creative Coding with
+          Processing.py" and a long-time open source contributor and advocate
+          for Python-related Processing projects.'
