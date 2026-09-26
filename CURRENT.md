@@ -339,3 +339,8 @@ Add the Zoom Events link in Luma when Saber sends it. Before the event, import m
 - Verified: Jekyll build from tracked files plus the favicon changes; all eight built pages reference the SVG and it serves HTTP 200; Chrome renders at 16/32/64px on light/dark surrounds; full `scripts/verify.cjs` passes at 320/390/768/1440 with interaction, reduced-motion, registration and no-JS checks; `git diff --check` clean.
 - Initial sandbox restrictions were resolved after Saber restored access. Fast-forwarded main to current origin/main, preserving recent CMS updates and unrelated untracked files. Saber explicitly requested commit and push.
 - Session-wrap skill was not found in available skill/plugin locations; handoff recorded here. Next: confirm Pages deployment after push. Safari/Firefox and designer review remain unverified.
+
+## Minimal PCD link — 2026-09-26 (Codex)
+- Added “Part of Processing Community Day 2026.” beneath the event description on the homepage and registration page, linking to https://day.processing.org/. Existing styles; host-owned HTML only. Saber has filed the PCD directory date-correction issue separately.
+- Verified: diff contains one added paragraph per page; `git diff --check` passes. Jekyll execution is denied by session permissions; `verify.cjs` was attempted but Chrome aborts at startup. Rendered layout remains unverified.
+- Saber approved committing and pushing this change after local review. Next: confirm publication and visually review both pages; rendered layout remains unverified locally. Session-wrap was not found in installed skill/plugin locations; handoff recorded here.
