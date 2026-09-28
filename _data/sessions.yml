@@ -320,11 +320,17 @@ sessions:
           abstract form. Combining monochrome, geometric shapes, he plays with
           repetition, using random operations to generate an element of
           surprise."
+  - title: Improv Digitally, Sensorial and with Self Awareness
+    tags:
+      - Advanced
+    description: Coming soon
+    presenters:
       - name: Kofi Oduro (Illestpreacha)
         pronouns: He/Him
-        url: https://blog.illestpreacha.com/
+        photo: /assets/ProfileImage - Illest Preacha-1.jpg
+        url: https://blog.illestpreacha.com/ , https://www.instagram.com/illestpreacha
         bio: >-
-          "Kofi Oduro (Illestpreacha)  is an award winning Experiential
+          Kofi Oduro (Illestpreacha)  is an award winning Experiential
           Storyteller, Creative Coder & Data Practitioner  that transforms
           sounds, images, data, words & code into experiences that nurtures
           discussion, reflection & interaction. He creates, designs and research
@@ -341,6 +347,3 @@ sessions:
           highlight the realms of human performance and the human mind in
           different scenarios. These situations can be described as social,
           internal, or even biological, which we face in our everyday lives.
-
-          "
-  - {}
