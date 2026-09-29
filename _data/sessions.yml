@@ -347,3 +347,31 @@ sessions:
           highlight the realms of human performance and the human mind in
           different scenarios. These situations can be described as social,
           internal, or even biological, which we face in our everyday lives.
+  - title: "La tecnología como lenguaje creativo: de la IA al código, del código al
+      mundo físico."
+    tags:
+      - Beginner, Spanish
+    description: ¿Qué sucede cuando la IA se integra en nuestro repertorio de
+      herramientas creativas? En esta sesión práctica, exploraremos la
+      tecnología como lenguaje creativo, pasando del código generado por IA a
+      p5.js, del código a la creación física y de la pantalla al mundo real
+      mediante micro:bit.
+    resource_url: https://docs.google.com/document/d/1qJbGSXv_FrKMISCzob-2_aSragx4vd0_wa1O27J208I/edit?usp=sharing
+    presenters:
+      - name: Sandra Soto
+        pronouns: She
+        photo: /assets/Sandra Soto - sandra soto.png
+        url: https://www.instagram.com/san8252000/
+        bio: >
+          Sandra Soto, I’m an artist/educator and creative technologist from
+          Buenos Aires, Argentina. I’ve been teaching programming and creative
+          technologies since 2012, combining code, electronics, robotics, art,
+          and education. I see technology as a creative palette and explore how
+          AI can help students move from ideas to code, from code to making, and
+          from making to new questions. (spanish version) Soy Sandra Soto,
+          artista, educadora y tecnóloga creativa de Buenos Aires, Argentina.
+          Imparto clases de programación y tecnologías creativas desde 2012,
+          combinando código, electrónica, robótica, arte y educación. Concibo la
+          tecnología como una paleta creativa y exploro cómo la IA puede ayudar
+          a los estudiantes a pasar de las ideas al código, del código a la
+          creación, y de la creación a nuevos interrogantes.
