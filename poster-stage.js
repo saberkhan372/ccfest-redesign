@@ -288,7 +288,8 @@
       if (tag === 'div' && win.getComputedStyle(el).backgroundColor === 'rgba(0, 0, 0, 0)') continue;
       if (tag === 'svg') {
         const { markup, box } = inlineSvg(el, win);
-        layers.push({ image: await svgImage(markup), x: box.left - origin.left, y: box.top - origin.top, w: box.width, h: box.height, blend: blendOf(el, win) });
+        // The markup stays with the layer: it is what a saved poster stores to draw this exact frame again.
+        layers.push({ image: await svgImage(markup), markup, x: box.left - origin.left, y: box.top - origin.top, w: box.width, h: box.height, blend: blendOf(el, win) });
       } else layers.push({ image: tag === 'canvas' ? copyCanvas(el) : boxImage(el, win), ...place(el), blend: blendOf(el, win) });
     }
     const labels = [...outer.querySelectorAll('.cc-text')].filter(el => shown(el, win)).map(el => {
@@ -339,5 +340,49 @@
     return { mode, name: button.textContent.trim(), frames: shots };
   }
 
-  root.CCStageCapture = { MODES, capture };
+  // Prototype for animated posters (docs/poster-maker-v2/ANIMATION.md). Where capture() keeps 12 stills
+  // spread over the entrance, this keeps sampling for `duration` ms, as fast as the page allows, and hands
+  // each snapshot to onFrame with the time it was taken (`t`, ms after the word was picked) and what taking
+  // it cost, so the caller can compose and encode it at once and nothing piles up in memory. `from` skips the
+  // first moments, while the previous mode fades; `poseAt` is when the pointer arrives; `focus` is one framing
+  // for every frame (take it from a capture() recording, which unifies it); `interval` paces sampling to
+  // display frames, about that many ms apart (0 samples as fast as it can).
+  function captureClip(options) {
+    const job = queue.then(() => clipNow(options));
+    queue = job.catch(() => {});
+    return job;
+  }
+  async function clipNow({ url, mode, seed = 1, hover = true, duration = 4000, from = 250, interval = 0, poseAt, focus, onFrame }) {
+    if (!MODES.includes(mode)) throw new Error('Choose one of the homepage animations.');
+    const { doc, win } = await loadFrame(url);
+    const button = doc.querySelector(`.mode-btn[data-mode="${mode}"]`);
+    if (!button) throw new Error('That homepage animation is missing.');
+    reset(doc, win);
+    const other = doc.querySelector(`.mode-btn:not([data-mode="${mode}"])`);
+    if (other) { other.click(); await frames(win, 2); }
+    doc.querySelector('.anim-stage').scrollIntoView({ block: 'start' });
+    const pointerAt = poseAt === undefined ? SETTLE[mode] || 1400 : poseAt;
+    button.click();
+    const start = performance.now();
+    let posing = null, index = 0, due = from;
+    const costs = [];
+    for (;;) {
+      const t = performance.now() - start;
+      if (t >= from + duration) break;
+      if (!posing && hover && t >= pointerAt) posing = pose(doc, win, mode, seed, hover);
+      if (t < due) { await frames(win, 1); continue; }
+      due = Math.max(due + interval, t);
+      const began = performance.now();
+      const shot = await snapshot(doc, win);
+      shot.t = t; shot.cost = performance.now() - began;
+      if (focus) shot.focus = focus;
+      costs.push(shot.cost);
+      await onFrame(shot, index++);
+    }
+    await posing;
+    reset(doc, win);
+    return { mode, frames: index, costs };
+  }
+
+  root.CCStageCapture = { MODES, capture, captureClip };
 })(window);

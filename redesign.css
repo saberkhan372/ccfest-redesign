@@ -538,4 +538,23 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
 .poster-maker-page :is(input,select,textarea,button,summary,.maker-import):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 @media (max-width: 900px) { .maker-workspace { grid-template-columns: 260px minmax(0,1fr); gap: 20px; } .maker-controls { padding: 16px; } .maker-preview-mat { padding: 16px; } }
 @media (max-width: 650px) { .maker-workspace { display: flex; flex-direction: column; } .maker-controls,.maker-preview-column { width: 100%; box-sizing: border-box; } .maker-preview-column { order: -1; } .maker-heading { padding-top: 30px; } .maker-preview-mat { padding: 12px; } .maker-export-actions .button { flex: 1; padding: 13px 10px; font-size: 12px; } .maker-preview-heading { flex-wrap: wrap; } }
+/* Internal design-proof sheet (/poster-maker/?proofs) */
+.proof-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-bottom: 24px; font-size: 14px; }
+.proof-bar select { padding: 9px 10px; border: 1px solid var(--line); background: #fff; font: 14px Anybody, sans-serif; }
+.proofs h2 { font-size: 26px; font-weight: 500; margin: 8px 0 20px; }
+.proof-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 28px; margin-bottom: 48px; align-items: start; }
+.proof { margin: 0; }
+.proof canvas { display: block; width: 100%; height: auto; box-shadow: 0 8px 24px #18181a28; background: #fff; }
+.proof figcaption { padding-top: 14px; font-size: 13px; line-height: 1.55; }
+.proof figcaption strong { font-size: 17px; font-weight: 500; display: block; }
+.proof figcaption p { margin: 6px 0; }
+.proof-use { font: 11px 'Overpass Mono', monospace; text-transform: uppercase; color: var(--muted); }
+.proof-limits,.proof-note { color: var(--muted); }
+.proof-report { list-style: none; margin: 8px 0 0; padding: 0; font: 11px/1.7 'Overpass Mono', monospace; }
+.proof-report .ok::before { content: "✓ "; color: #1c7a3f; }
+.proof-report .low { color: #a02a10; }
+.proof-report .low::before { content: "✗ "; }
+.proofs-phone .proof-grid { grid-template-columns: repeat(auto-fill, 375px); justify-content: start; }
+@media (max-width: 1000px) { .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .proof-grid { grid-template-columns: minmax(0, 1fr); } }
 @media print { .poster-maker-page .maker-controls,.poster-maker-page .maker-export-actions { display: none; } }

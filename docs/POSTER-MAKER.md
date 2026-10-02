@@ -67,6 +67,10 @@ git diff --check
 
 ## Files
 
-- Host-owned: `poster-stage.js`, `poster-art.js`, `poster-maker.js`, `poster-maker/index.html`, `assets/poster-maker/`, `redesign.css` §11, and in `_layouts/base.html` the poster scripts plus the `noindex` and `hide_event_banner` page flags.
+- Host-owned: `poster-stage.js`, `poster-art.js`, `poster-designs.js`, `poster-proofs.js`, `poster-maker.js`, `poster-maker/index.html`, `assets/poster-maker/`, `redesign.css` §11, and in `_layouts/base.html` the poster scripts plus the `noindex` and `hide_event_banner` page flags.
 - The optional `short_bio` / `short_description` fields are declared in `.pages.yml`.
 - `assets/poster-maker/README.md` explains the wordmark outline and the QR code's destination.
+
+## Design proofs (in progress)
+
+The editor above still draws one layout. Work toward several designs (a bold-date poster, keynote and session posters, a print poster) is under way: `poster-designs.js` registers six proof designs, and `/poster-maker/?proofs` lays them side by side with the real event content. They are not in the editor yet. See [poster-maker-v2/](poster-maker-v2/README.md) and the plan, [poster-maker.md](../poster-maker.md).
