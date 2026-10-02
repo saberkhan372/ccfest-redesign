@@ -1,6 +1,6 @@
 # Poster maker v2: first milestone
 
-Branch `poster-maker-v2`, pushed but not merged to `main`, so nothing is published (GitHub Pages builds `main`). The review media (`proofs/` and `clips/` images and video, 8.9 MB) is in its own commit so it can be dropped before a merge. The plan is [poster-maker.md](../../poster-maker.md) at the repo root; this folder is the review material for its first milestone, tightened to: baseline results, six portrait proofs, a saved-poster schema proposal, and two real animation proofs. The next step is choosing three directions, which needs Saber, Francisca and Shristi, before the broader editor is built.
+Merged to `main` on 2026-10-01 from branch `poster-maker-v2`, so the review sheet is live at `/poster-maker/?proofs` (unlisted, `noindex`); this folder itself is excluded from the published site. The review media (`proofs/` and `clips/` images and video, 8.9 MB) is in its own commit. The plan is [poster-maker.md](../../poster-maker.md) at the repo root; this folder is the review material for its first milestone, tightened to: baseline results, six portrait proofs, a saved-poster schema proposal, and two real animation proofs. The next step is choosing three directions, which needs Saber, Francisca and Shristi, before the broader editor is built.
 
 | What | Where | State |
 |---|---|---|
