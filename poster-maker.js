@@ -447,6 +447,14 @@
     content.lettering = await loadLettering(content.home);
     const [logo, qr] = await Promise.all(['wordmark.svg', 'register-qr.svg'].map(file => image(new URL(`assets/poster-maker/${file}`, content.home).href)));
     assets = { logo, qr, logoRatio: logo.naturalHeight / logo.naturalWidth };
+    // Internal: /poster-maker/?proofs lays the design directions side by side instead of opening
+    // the editor. poster-proofs.js is loaded only then, and gets the event content and images.
+    if (new URLSearchParams(location.search).has('proofs')) {
+      window.CCPosterContext = { content, assets };
+      status.hidden = true;
+      document.body.appendChild(Object.assign(document.createElement('script'), { src: new URL('poster-proofs.js', content.home).href }));
+      return;
+    }
     let restored = { ...A.DEFAULTS };
     let restoreMessage = '';
     try {

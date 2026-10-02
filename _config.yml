@@ -23,6 +23,7 @@ exclude:
   - DESIGN-INTEGRATION.md
   - GOTCHAS.md
   - README.md
+  - poster-maker.md
   - docs/
   - scripts/
   - design/

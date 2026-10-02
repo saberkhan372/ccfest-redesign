@@ -1,0 +1,188 @@
+[
+  {
+    "id": "signature",
+    "label": "1 · Signature",
+    "design": "signature",
+    "problems": [],
+    "notes": [],
+    "pairs": [
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "bold-date",
+    "label": "2 · Bold date",
+    "design": "bold-date",
+    "problems": [],
+    "notes": [],
+    "pairs": [
+      {
+        "pair": "ink/lime",
+        "ratio": 15.03
+      },
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      },
+      {
+        "pair": "white/blue",
+        "ratio": 5.18
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "art-led",
+    "label": "3 · Art-led",
+    "design": "art-led",
+    "problems": [],
+    "notes": [],
+    "pairs": [
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      },
+      {
+        "pair": "ink/orange",
+        "ratio": 5.36
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "speaker-led",
+    "label": "4 · Speaker-led",
+    "design": "speaker-led",
+    "problems": [],
+    "notes": [],
+    "pairs": [
+      {
+        "pair": "white/blue",
+        "ratio": 5.18
+      },
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      },
+      {
+        "pair": "ink/lime",
+        "ratio": 15.03
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "program-led",
+    "label": "5 · Program-led",
+    "design": "program-led",
+    "problems": [],
+    "notes": [
+      "Title set at 120px over 3 lines.",
+      "Bio for Naoto Hieda is clipped.",
+      "Description is clipped."
+    ],
+    "pairs": [
+      {
+        "pair": "ink/orange",
+        "ratio": 5.36
+      },
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "minimal-print",
+    "label": "6 · Minimal print",
+    "design": "minimal-print",
+    "problems": [],
+    "notes": [],
+    "pairs": [
+      {
+        "pair": "ink/white",
+        "ratio": 17.73
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "speaker-single",
+    "label": "Speaker-led · one keynote",
+    "design": "speaker-led",
+    "problems": [],
+    "notes": [],
+    "pairs": [
+      {
+        "pair": "white/blue",
+        "ratio": 5.18
+      },
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      },
+      {
+        "pair": "ink/lime",
+        "ratio": 15.03
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "program-longest",
+    "label": "Program-led · longest title",
+    "design": "program-led",
+    "problems": [],
+    "notes": [
+      "Title set at 84px over 4 lines.",
+      "Bio for Jessica Valarezo is clipped."
+    ],
+    "pairs": [
+      {
+        "pair": "ink/orange",
+        "ratio": 5.36
+      },
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "program-panel",
+    "label": "Program-led · panel of four",
+    "design": "program-led",
+    "problems": [],
+    "notes": [
+      "Title set at 96px over 2 lines.",
+      "Bio for Amy B. Woodman is clipped.",
+      "Bio for Daniel Schneider is clipped."
+    ],
+    "pairs": [
+      {
+        "pair": "ink/orange",
+        "ratio": 5.36
+      },
+      {
+        "pair": "ink/paper",
+        "ratio": 15.11
+      }
+    ],
+    "error": ""
+  },
+  {
+    "id": "current",
+    "label": "Current layout (reference)",
+    "design": "classic",
+    "problems": [],
+    "notes": [],
+    "pairs": [],
+    "error": ""
+  }
+]

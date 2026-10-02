@@ -1,0 +1,158 @@
+{
+  "programTitle": {
+    "max": 182,
+    "failsAt": 184,
+    "error": ""
+  },
+  "programTitlePanel": {
+    "max": 182,
+    "failsAt": 184,
+    "error": ""
+  },
+  "titleSizes": [
+    {
+      "chars": 24,
+      "size": 120,
+      "lines": 2,
+      "ok": true
+    },
+    {
+      "chars": 31,
+      "size": 120,
+      "lines": 3,
+      "ok": true
+    },
+    {
+      "chars": 48,
+      "size": 96,
+      "lines": 4,
+      "ok": true
+    },
+    {
+      "chars": 68,
+      "size": 84,
+      "lines": 4,
+      "ok": true
+    },
+    {
+      "chars": 90,
+      "size": 76,
+      "lines": 5,
+      "ok": true
+    },
+    {
+      "chars": 120,
+      "size": 60,
+      "lines": 5,
+      "ok": true
+    },
+    {
+      "chars": 150,
+      "size": 48,
+      "lines": 5,
+      "ok": true
+    },
+    {
+      "chars": 180,
+      "size": 44,
+      "lines": 5,
+      "ok": true
+    }
+  ],
+  "programName": {
+    "max": 54,
+    "failsAt": 56,
+    "error": ""
+  },
+  "speakerNamePair": {
+    "max": 56,
+    "failsAt": 58,
+    "error": ""
+  },
+  "speakerNameSingle": {
+    "max": 52,
+    "failsAt": 54,
+    "error": ""
+  },
+  "supportingLine": [
+    [
+      "signature",
+      true
+    ],
+    [
+      "minimal-print",
+      true
+    ]
+  ],
+  "noPhotosPair": true,
+  "refusesOtherSizes": [
+    [
+      "signature",
+      true
+    ],
+    [
+      "bold-date",
+      true
+    ],
+    [
+      "art-led",
+      true
+    ],
+    [
+      "speaker-led",
+      true
+    ],
+    [
+      "program-led",
+      true
+    ],
+    [
+      "minimal-print",
+      true
+    ]
+  ],
+  "whiteBackground": [
+    [
+      "signature",
+      true
+    ],
+    [
+      "bold-date",
+      true
+    ],
+    [
+      "art-led",
+      true
+    ],
+    [
+      "speaker-led",
+      true
+    ],
+    [
+      "program-led",
+      true
+    ],
+    [
+      "minimal-print",
+      true
+    ]
+  ],
+  "noTimesNoQr": [
+    [
+      "signature",
+      true
+    ],
+    [
+      "bold-date",
+      true
+    ],
+    [
+      "art-led",
+      true
+    ],
+    [
+      "minimal-print",
+      true
+    ]
+  ]
+}
