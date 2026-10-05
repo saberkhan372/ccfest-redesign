@@ -425,3 +425,29 @@ sessions:
           survival coexist. Across her art and teaching, she is interested in
           how close observation, experimentation, and getting stuck help people
           develop their own ways of making.
+  - title: Declare Independence (from LLMs)
+    tags:
+      - Beginner
+    description: "Educators commonly teach creative coding using the imperative
+      paradigm: working out the steps to achieve the desired result, like a
+      recipe. This workshop introduces resources and techniques to instead use
+      the declarative paradigm: describing the desired result itself, rather
+      than the steps to achieve it. Like writing a prompt for an AI service,
+      this focuses on effectively articulating what the creator wants, rather
+      than translating that want into instructions."
+    presenters:
+      - name: Caleb Foss
+        pronouns: they/them
+        photo: /assets/PXL_20260519_162417545.MP~2 - Caleb Foss.jpg
+        url: https://github.com/calebfoss
+        bio: Caleb Foss (they/them) is an artist and educator who develops mess-making
+          systems using media technologies. They make software, games, videos,
+          digitally-fabricated objects, and multimedia performances. Foss'
+          methods draw from amusement parks and magic tricks, and their work
+          seeks opportunities for amorphousness in the future of human media
+          interactions. Their work has been showcased in film festivals
+          including Chicago Underground, Imagine Science (Brooklyn), and FRACTO
+          (Berlin) as well as Hand Eye Society's WordPlay Festival for writing
+          in games (Toronto) and BitBash at the Chicago Humanities Festival.
+          They are an Assistant Professor of Web Development, Design, and Social
+          Media at Joliet Junior College.
