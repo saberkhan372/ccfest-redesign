@@ -400,3 +400,28 @@ sessions:
           and optical illusions, as well as explorations of accepted concepts of
           truth and reality. As an associate professor, she teaches at the New
           media department at the Faculty of Fine Arts in Belgrade.
+  - title: A Painting, a Circuit, a Story
+    tags:
+      - Beginner
+    description: How can a painted mark become an invitation to touch, notice, and
+      discover a story? Through a brief demonstration using conductive paint,
+      Arduino, and p5.js, artist and educator Missy Cooper explores how physical
+      interaction can reveal layers of poetry and meaning, then invites
+      participants to sketch their own story-responsive artwork. Together, we’ll
+      consider what we gain from experimenting, getting stuck, and debugging,
+      and what may be lost when AI removes that friction.
+    presenters:
+      - name: Melissa Cooper
+        pronouns: she/her
+        photo: /assets/MissyCooper26 - Melissa Cooper.jpg
+        url: https://quietlegacycollective.com/missy-cooper
+        bio: Melissa “Missy” Cooper is an artist, educator, and creative technologist
+          based in Port Orange, Florida. A former K–12 Art & CS teacher and
+          former curriculum developer for Girls Who Code, she holds a master’s
+          degree in Educational Media and Design. Her practice combines
+          painting, poetry, p5.js, and physical computing to explore identity,
+          vulnerability, and the ordinary moments we overlook. Her developing
+          body of work, Duality, considers how softness, grief, humor, and
+          survival coexist. Across her art and teaching, she is interested in
+          how close observation, experimentation, and getting stuck help people
+          develop their own ways of making.
