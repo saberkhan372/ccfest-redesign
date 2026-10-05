@@ -375,3 +375,28 @@ sessions:
           tecnología como una paleta creativa y exploro cómo la IA puede ayudar
           a los estudiantes a pasar de las ideas al código, del código a la
           creación, y de la creación a nuevos interrogantes.
+  - title: Take a spline for a walk
+    tags:
+      - Intermediate
+    description: >-
+      Let’s take a spline for a walk, from the screen to the paper, across pages
+      and over the edges.
+
+      In this session, we’ll explore the new spline functions in p5.js 2.x and
+      experiment with unfolding various paper structures (from one-page zines to
+      simple 3D forms) to create line drawings that continue seamlessly from one
+      face to the next. Once printed, the code outputs will be folded into small
+      paper objects.
+    presenters:
+      - name: Aleksandra Jovanić
+        pronouns: she/her
+        photo: /assets/IMG_5213_smsq - Aleksandra Jovanic.jpg
+        url: aleksandrajovanic.com
+        bio: Aleksandra Jovanić is an artist and programmer from Belgrade, Serbia. She
+          holds a doctorate in Digital Arts and a BSc in Computer Science. In
+          her research and artistic practice she combines various media, mainly
+          in the field of interactive art, art games, and generative art.
+          Jovanić’s recent works focus on the aesthetic of data visualization
+          and optical illusions, as well as explorations of accepted concepts of
+          truth and reality. As an associate professor, she teaches at the New
+          media department at the Faculty of Fine Arts in Belgrade.
