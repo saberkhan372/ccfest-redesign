@@ -77,8 +77,8 @@ Only put in what's actually confirmed. Everything below starts as "to be announc
 |---|---|
 | Event date | `_data/event.yml` → `date`. Fills the facts strip, the homepage band and the Events card at once. |
 | Keynote speakers | `_data/keynotes.yml` |
-| Running order (Schedule section) | `_data/schedule.yml` — times in the first zone; the other columns and the visitor's own time are worked out |
-| Sessions and presenters | `_data/sessions.yml` — no times; the Schedule section carries them |
+| Running order (Sessions section) | `_data/schedule.yml` — each block has an `id` (`opening`, `round-1`, `panel`, `round-2`, `closing`) and a `kind`; times in the first zone, the other zones and the visitor's own time are worked out |
+| Sessions and presenters | `_data/sessions.yml` — permanent `id`, `format`, `level`, `language`, and `schedule_id` (`round-1`, `round-2`, `panel`); the time comes from that block. A workshop with no `schedule_id` shows under "Round to be announced" and is left out of calendar files. Keynotes point at `opening` or `closing` with `schedule_id` in `_data/keynotes.yml`. Never change a session `id` once the page is live: visitors' saved choices use it. |
 | Registration link | `_data/event.yml` → `registration_url`, plus `luma_event_id` for the on-page form. Setup: [REGISTRATION.md](REGISTRATION.md) |
 | Donation note | `_data/event.yml` → `donation_note` (only if the Luma ticket takes donations) |
 | A past event | `_data/past_events.yml` → `events`, newest first |

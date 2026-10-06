@@ -1,0 +1,21 @@
+{%- comment -%} One session in the schedule. data-* attributes feed schedule-explorer.js (filters, sort, My choices, calendar). Everything stays readable without JavaScript. {%- endcomment -%}
+{%- assign s = include.session -%}{%- capture names -%}{%- for person in s.presenters -%}{{ person.name | strip }}{%- unless forloop.last -%}, {% endunless -%}{%- endfor -%}{%- endcapture -%}
+<article class="session-card{% if s.format == 'Panel' %} session-card-panel{% endif %}" data-id="{{ s.id | escape }}" data-format="{{ s.format | escape }}" data-block="{{ s.schedule_id | escape }}" data-level="{{ s.level | escape }}" data-language="{{ s.language | default: 'English' | escape }}" data-order="{{ include.order }}" data-title="{{ s.title | escape }}" data-presenters="{{ names | escape }}">
+              <div class="tag-row">{% unless s.level == blank %}<span>{{ s.level | escape }}</span>{% endunless %}{% if s.language == 'Spanish' %}<span lang="es">Español</span>{% endif %}{% if s.format == 'Panel' %}<span>Panel</span>{% endif %}</div>
+              <h4>{{ s.title | escape }}</h4>
+              <ul class="presenter-list">
+{% for person in s.presenters %}{% assign name = person.name | default: "" | strip %}{% if name != "" %}{% assign photo = person.photo | default: "" | strip %}{% assign lead = photo | slice: 0 %}{% if lead == "/" %}{% assign photo = photo | remove_first: "/" %}{% endif %}{% assign url = person.url | default: "" | strip %}{% assign pronouns = person.pronouns | default: "" | strip %}                <li>
+                  {% if photo != "" %}<img src="{{ include.root }}{{ photo | escape }}" alt="" width="56" height="56" loading="lazy">{% else %}<span class="presenter-initial" aria-hidden="true">{{ name | slice: 0 | escape }}</span>{% endif %}
+                  <span><strong>{% if url != "" %}<a href="{{ url | escape }}" target="_blank" rel="noopener">{{ name | escape }}</a>{% else %}{{ name | escape }}{% endif %}</strong>{% if pronouns != "" %}<small>{{ pronouns | escape }}</small>{% endif %}</span>
+                </li>
+{% endif %}{% endfor %}              </ul>
+              <details class="session-more">
+                <summary>{% if s.format == 'Panel' %}About the panel and panelists{% else %}Description and bio{% endif %}</summary>
+{% assign description = s.description | default: "" | strip %}{% if description != "" %}                <p>{{ description | escape | newline_to_br }}</p>
+{% endif %}{% assign resources = s.resource_url | default: "" | strip %}{% if resources != "" %}                <p><a href="{{ resources | escape }}" target="_blank" rel="noopener">Session resources ↗</a></p>
+{% endif %}{% for person in s.presenters %}{% assign name = person.name | default: "" | strip %}{% assign bio = person.bio | default: "" | strip %}{% if name != "" and bio != "" %}                <details class="presenter-bio">
+                  <summary>About {{ name | escape }}</summary>
+                  {% include bio.html text=bio %}
+                </details>
+{% endif %}{% endfor %}              </details>
+            </article>

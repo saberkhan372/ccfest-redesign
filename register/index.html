@@ -40,35 +40,9 @@ nav: "event"
         </div>
       </section>
 
-{% assign schedule = site.data.schedule %}{% if schedule.items.size > 0 %}      <section class="section page-width" id="schedule" aria-labelledby="schedule-title">
+      <section class="section page-width" id="keynotes" aria-labelledby="keynotes-title">
         <div class="section-heading">
           <p>01</p>
-          <div>
-            <h2 id="schedule-title">Schedule</h2>
-            <p>{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}Session times within each round are announced closer to the day.</p>
-          </div>
-        </div>
-
-        <!-- schedule.js adds a "your time" column and a time zone picker; without it the Pacific and Eastern columns stand alone. -->
-        <div class="schedule"{% if event_date != "" %} data-date="{{ event.date | date: '%Y-%m-%d' }}"{% endif %} data-utc-offset="{{ schedule.zones[0].utc_offset }}">
-          <p class="schedule-zone" hidden><label for="schedule-zone-select">Show times in</label> <select id="schedule-zone-select"></select></p>
-          <table class="schedule-table">
-            <thead>
-              <tr><th scope="col">What’s on</th>{% for zone in schedule.zones %}<th scope="col">{{ zone.label | escape }}</th>{% endfor %}<th scope="col" class="schedule-local" hidden>Your time</th></tr>
-            </thead>
-            <tbody>
-{% for item in schedule.items %}              <tr data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}">
-                <th scope="row">{{ item.title | escape }}</th>{% for zone in schedule.zones %}{% assign shift = zone.utc_offset | minus: schedule.zones[0].utc_offset | times: 60 %}<td data-label="{{ zone.label | escape }}">{% include time-range.html from=item.start to=item.end shift=shift %}</td>{% endfor %}<td class="schedule-local" data-label="Your time" hidden></td>
-              </tr>
-{% endfor %}            </tbody>
-          </table>
-        </div>
-        <script src="{{ page.root }}schedule.js{% assign rev = site.github.build_revision | default: "" %}{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
-      </section>
-
-{% endif %}      <section class="section page-width" id="keynotes" aria-labelledby="keynotes-title">
-        <div class="section-heading">
-          <p>02</p>
           <div>
             <h2 id="keynotes-title" data-figma-node="251:765"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">K</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 129, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">y</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
 {% if keynote_count == 0 %}            <p>Speakers to be announced.</p>
@@ -92,17 +66,17 @@ nav: "event"
 {% endif %}{% endfor %}{% endif %}        </div>
       </section>
 
-      <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
+{% assign schedule = site.data.schedule %}      <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>03</p>
+            <p>02</p>
             <div>
               <h2 id="sessions-title" data-figma-node="251:788"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">S</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">i</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 125, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
-              <p>Workshops and talks for creative coders.{% if session_count == 0 %} The schedule will be announced here.{% else %} Which round each session is in will be announced closer to the day.{% endif %}</p>
+              <p>{% if schedule.items.size > 0 %}{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}The whole day in order. With JavaScript you can filter and sort the workshops, and mark which workshops you want in each round.{% else %}Workshops and talks for creative coders. The schedule will be announced here.{% endif %}</p>
             </div>
           </div>
 
-{% if session_count == 0 %}          <div class="session-row">
+{% if schedule.items.size == 0 %}          <div class="session-row">
             <p class="session-time">Times TBA</p>
             <div class="session-presenter">
               <p class="eyebrow">Presenters</p>
@@ -114,14 +88,57 @@ nav: "event"
               <p>Explore creative tools, make something new, and learn alongside the community. Session times, presenters, and workshop details will appear here once confirmed.</p>
             </div>
           </div>
-{% else %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}          {% include session-row.html session=session root=page.root %}
-{% endif %}{% endfor %}{% endif %}        </div>
+{% else %}          <div id="schedule" class="schedule" tabindex="-1"{% if event_date != "" %} data-date="{{ event.date | date: '%Y-%m-%d' }}"{% endif %} data-utc-offset="{{ schedule.zones[0].utc_offset }}" data-event-name="{{ event.name | escape }}" data-page-url="https://ccfest.rocks/register/">
+            <!-- schedule.js adds the time zone picker and a "your time" line; schedule-explorer.js adds filters, sorting, My choices and calendar export. Without them every block shows the Pacific and Eastern times and every session in full. -->
+            <div class="schedule-tools" hidden>
+              <p class="schedule-zone" hidden><label for="schedule-zone-select">Show times in</label> <select id="schedule-zone-select"></select></p>
+              <div class="schedule-filters" role="group" aria-label="Find workshops">
+                <label>Level<select class="schedule-level"><option value="">All levels</option></select></label>
+                <label>Language<select class="schedule-language"><option value="">All languages</option></select></label>
+                <label>Sort within a round<select class="schedule-sort"><option value="order">Programme order</option><option value="title">Title A–Z</option><option value="presenter">Presenter A–Z</option><option value="level">Level</option></select></label>
+                <button type="button" class="button schedule-clear">Clear filters</button>
+              </div>
+              <button type="button" class="button schedule-mine-toggle" aria-pressed="false">Show only my choices</button>
+            </div>
+            <p class="schedule-status" role="status" aria-live="polite"></p>
+            <div class="schedule-mine" hidden>
+              <h3>My choices</h3>
+              <p class="schedule-mine-hint">Workshops in a round run at the same time. On each one, mark a first choice, a second choice (one of each per round) and any number of maybes. Your choices stay in this browser.</p>
+              <ul class="schedule-mine-list"></ul>
+              <p class="schedule-mine-actions"><button type="button" class="button button-solid schedule-ics" disabled>Download calendar file (.ics)</button></p>
+              <p class="schedule-note">The file works with Apple Calendar, Outlook and Google Calendar (Settings → Import). It includes the keynotes, the panel and your first choice in each round (second choices and maybes are not added), and is a snapshot: if the schedule changes later, download it again.</p>
+            </div>
+            <ol class="schedule-blocks">
+{% for item in schedule.items %}{% assign in_block = sessions | where: "schedule_id", item.id %}{% capture who %}{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}{{ keynote.name | strip }}{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{{ session.title | strip }}{% endfor %}{% endif %}{% endcapture %}              <li class="schedule-block schedule-block-{{ item.kind | default: 'other' }}" id="{{ item.id | default: forloop.index | escape }}" data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}" data-kind="{{ item.kind | escape }}" data-summary="{{ item.title | escape }}{% if who != "" %} — {{ who | escape }}{% endif %}">
+                <div class="schedule-block-head">
+                  <h3>{{ item.title | escape }}</h3>
+                  <p class="schedule-times">{% for zone in schedule.zones %}{% assign shift = zone.utc_offset | minus: schedule.zones[0].utc_offset | times: 60 %}<span data-label="{{ zone.label | escape }}">{% include time-range.html from=item.start to=item.end shift=shift %} <small>{{ zone.label | escape }}</small></span>{% endfor %}<span class="schedule-local" hidden></span></p>
+                </div>
+{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}                <p class="schedule-people"><a href="#keynotes">{{ keynote.name | escape }}</a> <small>keynote</small></p>
+{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}                {% include session-card.html session=session root=page.root order=forloop.index %}
+{% endfor %}{% elsif item.kind == "workshops" %}                <div class="session-grid">
+{% for session in in_block %}                {% include session-card.html session=session root=page.root order=forloop.index %}
+{% endfor %}                  <p class="schedule-empty" hidden></p>
+                </div>
+{% endif %}              </li>
+{% endfor %}            </ol>
+{% assign pending = 0 %}{% for session in sessions %}{% if session.title != blank and session.format == "Workshop" and session.schedule_id == blank %}{% assign pending = pending | plus: 1 %}{% endif %}{% endfor %}{% if pending > 0 %}            <section class="schedule-pending" aria-labelledby="pending-title">
+              <h3 id="pending-title">Round to be announced</h3>
+              <p>These workshops are confirmed; their round will be added here soon.</p>
+              <div class="session-grid">
+{% assign n = 0 %}{% for session in sessions %}{% if session.title != blank and session.format == "Workshop" and session.schedule_id == blank %}{% assign n = n | plus: 1 %}                {% include session-card.html session=session root=page.root order=n %}
+{% endif %}{% endfor %}              </div>
+            </section>
+{% endif %}          </div>
+          <script src="{{ page.root }}schedule.js{% assign rev = site.github.build_revision | default: "" %}{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
+          <script src="{{ page.root }}schedule-explorer.js{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
+{% endif %}        </div>
       </section>
 
       <section class="section registration-band" id="registration" aria-labelledby="registration-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>04</p>
+            <p>03</p>
             <div>
               <h2 id="registration-title" data-figma-node="251:843"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">R</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">gi</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.01em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 60, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">r</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">ati</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 140, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.02em; text-transform: none">o</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span></h2>
               <p>{% if registration_url != "" %}Registration is open. Sign up to save your place.{% else %}Registration is not open yet. Join the mailing list to hear when it opens.{% endif %}</p>
@@ -154,18 +171,18 @@ nav: "event"
 
       <section class="section page-width" id="how-to-join" aria-labelledby="how-to-join-title">
         <div class="section-heading">
-          <p>05</p>
+          <p>04</p>
           <div>
             <h2 id="how-to-join-title">How to join on the day</h2>
-            <p>Virtual CC Fest runs on Zoom Events: one lobby, with several workshops happening at once.</p>
+            <p>Virtual CC Fest runs on Zoom Events: one lobby, with several workshops happening at once in each round.</p>
           </div>
         </div>
 
         <ol class="join-steps">
-          <li><strong>Register here first.</strong> Your confirmation email from Luma links to CC Fest on Zoom Events.</li>
-          <li><strong>Register on Zoom Events.</strong> Open that link, click Register, and confirm. It’s free, but you need a Zoom account; <a href="https://zoom.us/signup" target="_blank" rel="noopener">make one free ↗</a> if you don’t have one.</li>
-          <li><strong>Join the lobby.</strong> On the day, open the event and click Join Lobby.</li>
-          <li><strong>Pick a session.</strong> Workshops run at the same time, so drop in and out as you like. Questions go in the chat.</li>
+          <li><strong>Register via Luma.</strong> <a href="#registration">Sign up above</a> to save your place.</li>
+          <li><strong>Watch for your Zoom invite.</strong> You will receive an invitation to the Zoom event the day before, with reminders in the hours before it starts.</li>
+          <li><strong>Join the lobby.</strong> On the day, open the Zoom event and join the lobby.</li>
+          <li><strong>Pick a session.</strong> There are two rounds of concurrent sessions, so drop in and out as you like. Questions go in the chat.</li>
         </ol>
         <p class="join-help">Stuck? Email <a href="mailto:{{ site.data.site.email | escape }}?subject=Joining%20CC%20Fest">{{ site.data.site.email | escape }}</a> and we’ll help you get in.</p>
       </section>

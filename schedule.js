@@ -1,13 +1,13 @@
-/* Host integration: the "your time" column on the event page schedule.
-   Times in the page are in the event's first zone (data-utc-offset); this adds a column
+/* Host integration: the "your time" line on each block of the event page schedule.
+   Times in the page are in the event's first zone (data-utc-offset); this adds a line
    for any time zone, defaulting to the visitor's own. Without JavaScript the
-   Pacific and Eastern columns stand alone. */
+   Pacific and Eastern times stand alone. */
 (() => {
   const box = document.querySelector('.schedule[data-date]');
   if (!box || typeof Intl === 'undefined') return;
   const [y, mo, d] = box.dataset.date.split('-').map(Number);
   const offset = Number(box.dataset.utcOffset);
-  const select = box.querySelector('select');
+  const select = box.querySelector('#schedule-zone-select');
   const KEY = 'ccfest-schedule-zone';
 
   const zones = ['America/Los_Angeles', 'America/Denver', 'America/Chicago', 'America/New_York', 'America/Mexico_City',
@@ -40,18 +40,18 @@
     const time = new Intl.DateTimeFormat('en-US', { timeZone: zone, hour: 'numeric', minute: '2-digit' });
     const day = new Intl.DateTimeFormat('en-US', { timeZone: zone, weekday: 'short', month: 'short', day: 'numeric' });
     const tzName = new Intl.DateTimeFormat('en-US', { timeZone: zone, timeZoneName: 'short' }).formatToParts(instant('12:00')).find(p => p.type === 'timeZoneName');
-    box.querySelector('th.schedule-local').textContent = `${place(zone)}${tzName ? ` (${tzName.value})` : ''}`;
-    for (const row of box.querySelectorAll('tbody tr')) {
-      const start = instant(row.dataset.start), end = instant(row.dataset.end);
+    for (const block of box.querySelectorAll('.schedule-block[data-start]')) {
+      const start = instant(block.dataset.start), end = instant(block.dataset.end);
       const startDay = day.format(start);
       // Name the date whenever it isn't the event's own calendar day in that zone.
       const prefix = startDay !== new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric' }).format(eventDay) ? `${startDay}, ` : '';
-      const cell = row.querySelector('td.schedule-local');
+      const cell = block.querySelector('.schedule-local');
       const [a, b] = [time.format(start).toLowerCase(), time.format(end).toLowerCase()];
-      // "9:00–9:30 am", but "11:30 am–12:00 pm" when the half of the day changes, as in the table.
+      // "9:00–9:30 am", but "11:30 am–12:00 pm" when the half of the day changes, as in the page.
       const sameHalf = a.slice(-2) === b.slice(-2);
-      cell.textContent = `${prefix}${sameHalf ? a.slice(0, -3) : a}–${b}`;
-      cell.dataset.label = place(zone);
+      const label = document.createElement('small');
+      label.textContent = `${place(zone)}${tzName ? ` (${tzName.value})` : ''}`;
+      cell.replaceChildren(`${prefix}${sameHalf ? a.slice(0, -3) : a}–${b} `, label);
     }
   }
 
@@ -60,5 +60,5 @@
     render();
   });
   render();
-  for (const el of box.querySelectorAll('.schedule-local, .schedule-zone')) el.hidden = false;
+  for (const el of box.querySelectorAll('.schedule-local, .schedule-zone, .schedule-tools')) el.hidden = false;
 })();

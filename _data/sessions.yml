@@ -1,5 +1,9 @@
 sessions:
   - title: Teaching Creativity Today
+    id: teaching-creativity-today
+    format: Panel
+    schedule_id: panel
+    language: English
     tags:
       - Panel
     description: When AI can write the code for us, what parts of creative coding
@@ -59,6 +63,11 @@ sessions:
           like p5.js and [Wordplay](https://wordplay.dev), both with students
           and in collaboration with other educators and researchers.
   - title: Research-Paper-Monster-Mash
+    id: shane-curry
+    format: Workshop
+    schedule_id: round-2
+    level: Intermediate
+    language: English
     tags:
       - Intermediate
     description: >-
@@ -97,6 +106,11 @@ sessions:
           and has worked on shows like Duncanville, She-Ra, and Trolls. He is a
           self-taught artist and musician.
   - title: "Access Is the Interface: Coding in the Age of AI"
+    id: kemi-ukadike
+    format: Workshop
+    schedule_id: round-1
+    level: Intermediate
+    language: English
     tags:
       - Intermediate
     description: Access Is the Interface is a creative-coding session on the
@@ -119,6 +133,11 @@ sessions:
           Her work asks how creative code can expand participation while keeping
           human intention, consent, and accountability at the center.
   - title: "Machine Learning in Motion: Designing Better Technology for Athletes"
+    id: jessica-valarezo
+    format: Workshop
+    schedule_id: round-2
+    level: Intermediate
+    language: English
     tags:
       - Intermediate
     description: >-
@@ -143,6 +162,11 @@ sessions:
           and accessible, designing systems deliberately and thoughtfully, and
           finding cool, creative applications for it across fields!
   - title: Making a portfolio on Neocities
+    id: naoto-hieda
+    format: Workshop
+    schedule_id: round-1
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: In this introductory workshop, you will be guided step by step how
@@ -162,6 +186,11 @@ sessions:
           Cologne](https://www.khm.de/en/), Germany and works internationally
           for theater productions and in the visual arts.
   - title: Collage Machine, an Algorithmic Approach to Play
+    id: matthew-raupp
+    format: Workshop
+    schedule_id: round-2
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: Join designer and educator Matthew Raupp for a hands-on exploration
@@ -192,6 +221,11 @@ sessions:
           constraints, using code to sketch, generate unexpected outcomes, and
           invent their own ways of making.
   - title: Making Sense of Data with Live Visualization
+    id: emily-thomforde
+    format: Workshop
+    schedule_id: round-1
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: "Let's get to grips with inputs, outputs, and variables in Scratch,
@@ -218,6 +252,11 @@ sessions:
           BrainPOP. Emily holds a PhD in Artificial Intelligence from the
           University of Edinburgh in Scotland, UK.
   - title: 3D printing with p5.fab!
+    id: blair-subbaraman
+    format: Workshop
+    schedule_id: round-1
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: p5.fab is a Javascript library to control digital fabrication
@@ -234,6 +273,11 @@ sessions:
           machines that manipulate the physical world for insight and
           expression. "
   - title: Delightful motion loops
+    id: sai-ram-ved-vijapurapu
+    format: Workshop
+    schedule_id: round-2
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: In this workshop, we'll graph looping trigonometric easing
@@ -254,6 +298,11 @@ sessions:
           others. Sai is currently at SOOT where he continues to imbue
           interactivity in his work.
   - title: The Nature of Code, but Python
+    id: tristan-bunn
+    format: Workshop
+    schedule_id: round-1
+    level: Intermediate
+    language: English
     tags:
       - Intermediate
     description: A session exploring how The Nature of Code (p5.js) translates into
@@ -273,6 +322,11 @@ sessions:
           Processing.py" and a long-time open source contributor and advocate
           for Python-related Processing projects.'
   - title: Livecoding with Scratch
+    id: m-denardo
+    format: Workshop
+    schedule_id: round-2
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: "Scratch is a great live coding tool: in this class we will ideate
@@ -288,10 +342,15 @@ sessions:
           collaborated with Teenage Engineering, The GIANT Room, NEST+m, NYU …
           loves learning and listening.
   - title: "Recoding : Tracing the origins of generative art"
+    id: julien-gachadoat
+    format: Workshop
+    schedule_id: round-1
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: >-
-      "“Recoding” is a short workshop exploring the logic of early generative
+      “Recoding” is a short workshop exploring the logic of early generative
       art through the reinterpretation of a single historical artwork: Segrid
       (1973) by John Roy.
 
@@ -302,7 +361,7 @@ sessions:
 
 
       It builds on the recent relaunch of recodeproject.com, a platform
-      dedicated to preserving and revisiting historical generative artworks."
+      dedicated to preserving and revisiting historical generative artworks.
     resource_url: https://github.com/v3ga/CCFest26/blob/main/README.md#ccfest26--recoding--tracing-the-origins-of-generative-art
     presenters:
       - name: Julien Gachadoat
@@ -321,6 +380,11 @@ sessions:
           repetition, using random operations to generate an element of
           surprise."
   - title: Improv Digitally, Sensorial and with Self Awareness
+    id: kofi-oduro-illestpreacha
+    format: Workshop
+    schedule_id: round-2
+    level: Advanced
+    language: English
     tags:
       - Advanced
     description: Coming soon
@@ -349,6 +413,11 @@ sessions:
           internal, or even biological, which we face in our everyday lives.
   - title: "La tecnología como lenguaje creativo: de la IA al código, del código al
       mundo físico."
+    id: sandra-soto
+    format: Workshop
+    schedule_id: round-1
+    level: Beginner
+    language: Spanish
     tags:
       - Beginner, Spanish
     description: ¿Qué sucede cuando la IA se integra en nuestro repertorio de
@@ -376,6 +445,11 @@ sessions:
           a los estudiantes a pasar de las ideas al código, del código a la
           creación, y de la creación a nuevos interrogantes.
   - title: Take a spline for a walk
+    id: aleksandra-jovanic
+    format: Workshop
+    schedule_id: round-2
+    level: Intermediate
+    language: English
     tags:
       - Intermediate
     description: >-
@@ -401,6 +475,11 @@ sessions:
           truth and reality. As an associate professor, she teaches at the New
           media department at the Faculty of Fine Arts in Belgrade.
   - title: A Painting, a Circuit, a Story
+    id: melissa-cooper
+    format: Workshop
+    schedule_id: round-1
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: How can a painted mark become an invitation to touch, notice, and
@@ -410,6 +489,7 @@ sessions:
       participants to sketch their own story-responsive artwork. Together, we’ll
       consider what we gain from experimenting, getting stuck, and debugging,
       and what may be lost when AI removes that friction.
+    resource_url: https://docs.google.com/document/d/1w7Df-bx0ASOUsNBPvcGrvqvcprrkC9U67bdbWkDfoak/edit?usp=sharing
     presenters:
       - name: Melissa Cooper
         pronouns: she/her
@@ -426,6 +506,11 @@ sessions:
           how close observation, experimentation, and getting stuck help people
           develop their own ways of making.
   - title: Declare Independence (from LLMs)
+    id: caleb-foss
+    format: Workshop
+    schedule_id: round-2
+    level: Beginner
+    language: English
     tags:
       - Beginner
     description: "Educators commonly teach creative coding using the imperative

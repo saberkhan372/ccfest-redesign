@@ -167,14 +167,75 @@ const settleImages = page => page.evaluate(cap => Promise.all(
     const sched = await browser.newPage({ viewport: { width: 1440, height: 900 }, timezoneId: 'Asia/Tokyo' });
     await sched.goto(new URL('register/', base).href);
     if (await sched.locator('#schedule').count()) {
-      const firstLocal = sched.locator('#schedule tbody tr').first().locator('td.schedule-local');
+      const firstLocal = sched.locator('#schedule .schedule-block').first().locator('.schedule-local');
       assert.equal(await sched.locator('#schedule-zone-select').inputValue(), 'Asia/Tokyo', 'defaults to the visitor time zone');
-      assert.equal((await firstLocal.textContent()).trim(), 'Sun, Oct 18, 1:00–1:30 am', '9:00 am PDT is 1:00 am next day in Tokyo');
+      assert.match((await firstLocal.textContent()).trim(), /^Sun, Oct 18, 1:00–1:30 am/, '9:00 am PDT is 1:00 am next day in Tokyo');
       await sched.locator('#schedule-zone-select').selectOption('America/Los_Angeles');
-      assert.equal((await firstLocal.textContent()).trim(), '9:00–9:30 am', 'Los Angeles matches the Pacific column');
+      assert.match((await firstLocal.textContent()).trim(), /^9:00–9:30 am/, 'Los Angeles matches the Pacific time');
       console.log('PASS schedule shows each visitor their own time, and the picker switches zones');
     } else {
       console.log('SKIP schedule: _data/schedule.yml has no items');
+    }
+    /* Schedule explorer: search, filters, sort inside a round, one pick per round, calendar file, blocked storage. */
+    if (await sched.locator('#schedule').count()) {
+      await sched.waitForSelector('.schedule[data-ready]');
+      const shown = () => sched.locator('.session-card[data-format="Workshop"]:not([hidden])').count();
+      const total = await shown();
+      assert.ok(total >= 15, 'workshops are listed');
+      const ids = await sched.$$eval('.session-card[data-id]', cards => cards.map(c => c.dataset.id));
+      assert.equal(new Set(ids).size, ids.length, 'session ids are unique');
+      assert.equal(await sched.locator('.session-card[data-format="Workshop"]:not([data-block])').count() > 0 ? 'pending' : 'all', await sched.locator('.schedule-pending').count() ? 'pending' : 'all', 'sessions without a round sit under "Round to be announced"');
+      await sched.selectOption('.schedule-level', 'Advanced');
+      assert.equal(await shown(), 1, 'level filter');
+      assert.ok(await sched.locator('.schedule-empty:not([hidden])').count() >= 1, 'a round with no match says so');
+      await sched.click('.schedule-clear');
+      assert.equal(await shown(), total, 'Clear filters restores every workshop');
+      await sched.selectOption('.schedule-language', 'Spanish');
+      assert.equal(await shown(), 1, 'language filter');
+      await sched.selectOption('.schedule-language', '');
+      await sched.selectOption('.schedule-sort', 'title');
+      const r1 = await sched.$$eval('#round-1 .session-card h4', h => h.map(x => x.textContent.trim()));
+      assert.deepEqual(r1, [...r1].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })), 'title sort holds inside Round 1');
+      assert.ok(await sched.locator('#round-1').evaluate(el => el.nextElementSibling.id === 'panel'), 'sorting never moves a session out of its round or reorders the day');
+      const pref = (id, value) => sched.locator(`.session-card[data-id="${id}"] .session-pref button[data-pref="${value}"]`);
+      const pressed = async (id, value) => (await pref(id, value).getAttribute('aria-pressed')) === 'true';
+      await pref('naoto-hieda', 'first').click();
+      await pref('kemi-ukadike', 'first').click();
+      assert.ok(await pressed('kemi-ukadike', 'first'), 'a new first choice takes the round');
+      assert.ok(await pressed('naoto-hieda', 'maybe'), 'the earlier first choice becomes a maybe');
+      await pref('blair-subbaraman', 'second').click();
+      await pref('tristan-bunn', 'second').click();
+      assert.ok(await pressed('tristan-bunn', 'second') && await pressed('blair-subbaraman', 'maybe'), 'one second choice per round');
+      await pref('emily-thomforde', 'maybe').click();
+      assert.ok(await pressed('emily-thomforde', 'maybe') && await pressed('naoto-hieda', 'maybe'), 'any number of maybes in a round');
+      await pref('emily-thomforde', 'maybe').click();
+      assert.ok(!(await pressed('emily-thomforde', 'maybe')), 'clicking again clears it');
+      await pref('caleb-foss', 'first').click();
+      await sched.reload();
+      await sched.waitForSelector('.schedule[data-ready]');
+      assert.ok(await pressed('kemi-ukadike', 'first') && await pressed('tristan-bunn', 'second'), 'preferences survive a reload');
+      await sched.click('.schedule-mine-toggle');
+      assert.equal(await shown(), 5, 'My choices shows only the workshops with a preference');
+      const [download] = await Promise.all([sched.waitForEvent('download'), sched.click('.schedule-ics')]);
+      const ics = require('fs').readFileSync(await download.path(), 'utf8').replace(/\r\n /g, '');
+      assert.match(ics, /DTSTART:20261017T160000Z/, 'opening keynote at 9:00 PDT in UTC');
+      assert.match(ics, /UID:kemi-ukadike@ccfest.rocks/);
+      assert.match(ics, /UID:caleb-foss@ccfest.rocks/);
+      assert.ok(!/UID:naoto-hieda|UID:tristan-bunn|UID:blair-subbaraman/.test(ics), 'second choices and maybes are not exported');
+      assert.equal((ics.match(/BEGIN:VEVENT/g) || []).length, 5, 'opening, two first choices, panel, closing');
+      console.log('PASS schedule explorer: filters, sort, first and second choice and maybes per round, My choices, .ics');
+      const blocked = await browser.newPage({ viewport: { width: 390, height: 800 } });
+      await blocked.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new Error('blocked'); } }); });
+      await blocked.goto(new URL('register/', base).href);
+      await blocked.waitForSelector('.schedule[data-ready]');
+      await blocked.locator('.session-card[data-id="sandra-soto"] .session-pref button[data-pref="first"]').click();
+      assert.equal(await blocked.locator('.session-card[data-id="sandra-soto"] .session-pref button[data-pref="first"]').getAttribute('aria-pressed'), 'true', 'choosing works when storage is blocked');
+      for (const width of [320, 390, 768, 1440]) {
+        await blocked.setViewportSize({ width, height: 800 });
+        assert.ok(!(await blocked.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `no horizontal scroll at ${width}px`);
+      }
+      await blocked.close();
+      console.log('PASS schedule works with storage blocked, and without horizontal scroll at 320/390/768/1440');
     }
     await sched.close();
 
@@ -204,7 +265,9 @@ const settleImages = page => page.evaluate(cap => Promise.all(
     await noJS.goto(new URL('register/', base).href);
     if (await noJS.locator('#schedule').count()) {
       assert.equal(await noJS.locator('.schedule-zone').isVisible(), false, 'no picker without JavaScript');
-      assert.match(await noJS.locator('#schedule tbody td').first().textContent(), /9:00/, 'Pacific times still show');
+      assert.match(await noJS.locator('#schedule .schedule-times').first().textContent(), /9:00/, 'Pacific times still show');
+      assert.equal(await noJS.locator('#schedule .schedule-tools').isVisible(), false, 'no tools row without JavaScript');
+      assert.ok((await noJS.locator('#schedule .session-card:visible').count()) >= 10, 'every session is readable without JavaScript');
     }
     if (await noJS.locator('[data-luma-event]').count()) {
       assert.match(await noJS.locator('[data-luma-event]').getAttribute('href'), /^https:/, 'Register should still link to Luma');
