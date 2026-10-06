@@ -1,4 +1,4 @@
-<article class="keynote-card">
+<article class="keynote-card"{% if include.keynote.schedule_id != blank %} id="keynote-{{ include.keynote.schedule_id | escape }}"{% endif %}>
             <p class="eyebrow">{{ include.keynote.label | escape }}</p>
             <h3>{{ include.keynote.name | escape }}</h3>
             {% include bio.html text=include.keynote.bio %}

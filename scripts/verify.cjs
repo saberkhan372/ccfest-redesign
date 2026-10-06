@@ -176,7 +176,7 @@ const settleImages = page => page.evaluate(cap => Promise.all(
     } else {
       console.log('SKIP schedule: _data/schedule.yml has no items');
     }
-    /* Schedule explorer: search, filters, sort inside a round, one pick per round, calendar file, blocked storage. */
+    /* Schedule explorer: first/second choice and maybes per round, My choices, calendar file, blocked storage. */
     if (await sched.locator('#schedule').count()) {
       await sched.waitForSelector('.schedule[data-ready]');
       const shown = () => sched.locator('.session-card[data-format="Workshop"]:not([hidden])').count();
@@ -185,18 +185,6 @@ const settleImages = page => page.evaluate(cap => Promise.all(
       const ids = await sched.$$eval('.session-card[data-id]', cards => cards.map(c => c.dataset.id));
       assert.equal(new Set(ids).size, ids.length, 'session ids are unique');
       assert.equal(await sched.locator('.session-card[data-format="Workshop"]:not([data-block])').count() > 0 ? 'pending' : 'all', await sched.locator('.schedule-pending').count() ? 'pending' : 'all', 'sessions without a round sit under "Round to be announced"');
-      await sched.selectOption('.schedule-level', 'Advanced');
-      assert.equal(await shown(), 1, 'level filter');
-      assert.ok(await sched.locator('.schedule-empty:not([hidden])').count() >= 1, 'a round with no match says so');
-      await sched.click('.schedule-clear');
-      assert.equal(await shown(), total, 'Clear filters restores every workshop');
-      await sched.selectOption('.schedule-language', 'Spanish');
-      assert.equal(await shown(), 1, 'language filter');
-      await sched.selectOption('.schedule-language', '');
-      await sched.selectOption('.schedule-sort', 'title');
-      const r1 = await sched.$$eval('#round-1 .session-card h4', h => h.map(x => x.textContent.trim()));
-      assert.deepEqual(r1, [...r1].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })), 'title sort holds inside Round 1');
-      assert.ok(await sched.locator('#round-1').evaluate(el => el.nextElementSibling.id === 'panel'), 'sorting never moves a session out of its round or reorders the day');
       const pref = (id, value) => sched.locator(`.session-card[data-id="${id}"] .session-pref button[data-pref="${value}"]`);
       const pressed = async (id, value) => (await pref(id, value).getAttribute('aria-pressed')) === 'true';
       await pref('naoto-hieda', 'first').click();
@@ -223,13 +211,25 @@ const settleImages = page => page.evaluate(cap => Promise.all(
       assert.match(ics, /UID:caleb-foss@ccfest.rocks/);
       assert.ok(!/UID:naoto-hieda|UID:tristan-bunn|UID:blair-subbaraman/.test(ics), 'second choices and maybes are not exported');
       assert.equal((ics.match(/BEGIN:VEVENT/g) || []).length, 5, 'opening, two first choices, panel, closing');
-      console.log('PASS schedule explorer: filters, sort, first and second choice and maybes per round, My choices, .ics');
+      const [pngDl] = await Promise.all([sched.waitForEvent('download'), sched.click('.schedule-png')]);
+      const pngBytes = require('fs').readFileSync(await pngDl.path());
+      assert.equal(pngBytes.subarray(1, 4).toString(), 'PNG', 'the PNG download is a PNG');
+      assert.equal(pngBytes.readUInt32BE(16), 1224, 'PNG is a Letter page at 2x');
+      const [pdfDl] = await Promise.all([sched.waitForEvent('download'), sched.click('.schedule-pdf')]);
+      const pdf = require('fs').readFileSync(await pdfDl.path(), 'latin1');
+      assert.ok(pdf.startsWith('%PDF-1.4') && pdf.trimEnd().endsWith('%%EOF'), 'the PDF download is a PDF');
+      assert.match(pdf, /First choice: Access Is the Interface/, 'PDF lists the first choice as text');
+      assert.match(pdf, /Second choice: The Nature of Code, but Python/, 'PDF lists the second choice');
+      assert.match(pdf, /Welcome \+ Opening Keynote/, 'PDF keeps the keynotes');
+      console.log('PASS schedule explorer: first and second choice and maybes per round, My choices, .ics');
       const blocked = await browser.newPage({ viewport: { width: 390, height: 800 } });
       await blocked.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new Error('blocked'); } }); });
       await blocked.goto(new URL('register/', base).href);
       await blocked.waitForSelector('.schedule[data-ready]');
       await blocked.locator('.session-card[data-id="sandra-soto"] .session-pref button[data-pref="first"]').click();
       assert.equal(await blocked.locator('.session-card[data-id="sandra-soto"] .session-pref button[data-pref="first"]').getAttribute('aria-pressed'), 'true', 'choosing works when storage is blocked');
+      const [accentDl] = await Promise.all([blocked.waitForEvent('download'), blocked.click('.schedule-pdf')]);
+      assert.match(require('fs').readFileSync(await accentDl.path(), 'latin1'), /La tecnolog\xeda como lenguaje creativo/, 'PDF keeps accents Helvetica has (WinAnsi)');
       for (const width of [320, 390, 768, 1440]) {
         await blocked.setViewportSize({ width, height: 800 });
         assert.ok(!(await blocked.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `no horizontal scroll at ${width}px`);

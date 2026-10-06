@@ -1,7 +1,6 @@
-/* Host integration: filters, sorting, "My schedule" and calendar export for the event page schedule.
+/* Host integration: per-round preferences, "My choices" and calendar export for the event page schedule.
    The page is complete without this: every block and session is in the HTML. This only adds controls.
-   Sorting and filtering work inside a round, so the day stays in order. Preferences are kept in this browser
-   only: per workshop "first choice" and "second choice" (one of each per round) or "maybe" (any number). */
+   Preferences are kept in this browser only: per workshop "first choice" and "second choice" (one of each per round) or "maybe" (any number). */
 (() => {
   const box = document.querySelector('.schedule[data-date]');
   if (!box) return;
@@ -15,31 +14,14 @@
   const blocks = [...box.querySelectorAll('.schedule-block[data-start]')];
   const byId = Object.fromEntries(workshops.map(c => [c.dataset.id, c]));
 
-  const levelSel = $('.schedule-level'), langSel = $('.schedule-language'), sortSel = $('.schedule-sort');
-  const clearBtn = $('.schedule-clear'), mineBtn = $('.schedule-mine-toggle'), status = $('.schedule-status');
-  const minePanel = $('.schedule-mine'), mineList = $('.schedule-mine-list'), mineHint = $('.schedule-mine-hint'), icsBtn = $('.schedule-ics');
+  const mineBtn = $('.schedule-mine-toggle'), status = $('.schedule-status');
+  const minePanel = $('.schedule-mine'), mineList = $('.schedule-mine-list'), mineHint = $('.schedule-mine-hint'), icsBtn = $('.schedule-ics'), pdfBtn = $('.schedule-pdf'), pngBtn = $('.schedule-png');
 
   let mineOnly = false;
   let prefs = {};   // session id -> 'first' | 'second' | 'maybe'
   const pref = c => prefs[c.dataset.id] || '';
   const holder = (blockId, value) => workshops.find(c => c.dataset.block === blockId && pref(c) === value);
   const firstFor = blockId => holder(blockId, 'first');
-
-  const LEVELS = ['Beginner', 'Intermediate', 'Advanced'];
-  const levelRank = c => { const i = LEVELS.indexOf(c.dataset.level); return i < 0 ? LEVELS.length : i; };
-  const lastName = c => (c.dataset.presenters.split(',')[0] || '').trim().split(/\s+/).pop().toLowerCase();
-  const text = (a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' });
-  const sorters = {
-    order: (a, b) => a.dataset.order - b.dataset.order,
-    title: (a, b) => text(a.dataset.title, b.dataset.title) || a.dataset.order - b.dataset.order,
-    presenter: (a, b) => text(lastName(a), lastName(b)) || a.dataset.order - b.dataset.order,
-    level: (a, b) => levelRank(a) - levelRank(b) || text(a.dataset.title, b.dataset.title)
-  };
-
-  // Level and language choices come from what is on the page, so new workshops need no code change.
-  const fill = (select, values) => { for (const v of values) select.add(new Option(v, v)); };
-  fill(levelSel, LEVELS.filter(l => workshops.some(c => c.dataset.level === l)));
-  fill(langSel, [...new Set(workshops.map(c => c.dataset.language).filter(Boolean))].sort(text));
 
   function loadPrefs() {
     let raw = {};
@@ -59,37 +41,22 @@
   const rounds = blocks.filter(b => b.dataset.kind === 'workshops');
   const blockTitle = id => (document.getElementById(id)?.querySelector('h3')?.textContent || id).trim();
 
-  // ---- filtering, sorting, status -------------------------------------------------------------
+  // ---- "My choices" view and status -------------------------------------------------------------
   function apply() {
-    const level = levelSel.value, lang = langSel.value;
     let shown = 0;
     for (const card of workshops) {
-      const liked = Boolean(pref(card));
-      const ok = (!level || card.dataset.level === level) && (!lang || card.dataset.language === lang) && (!mineOnly || liked);
-      card.hidden = !ok;
-      if (ok) shown++;
+      card.hidden = mineOnly && !pref(card);
+      if (!card.hidden) shown++;
     }
     for (const grid of grids) {
       const empty = $('.schedule-empty', grid);
       if (!empty) continue;
-      const any = [...grid.querySelectorAll('.session-card')].some(c => !c.hidden);
-      empty.hidden = any;
-      empty.textContent = mineOnly ? 'Nothing chosen for this round yet.' : 'No workshops match. Try clearing a filter.';
+      empty.hidden = [...grid.querySelectorAll('.session-card')].some(c => !c.hidden);
+      empty.textContent = 'Nothing chosen for this round yet.';
     }
     const pending = $('.schedule-pending');
     if (pending) pending.hidden = ![...pending.querySelectorAll('.session-card')].some(c => !c.hidden);
-    const filtered = level || lang;
-    status.textContent = mineOnly ? `Showing your first choices, second choices and maybes: ${shown} workshops.` : filtered ? `${shown} of ${workshops.length} workshops shown.` : '';
-    clearBtn.hidden = !filtered;
-    box.classList.toggle('is-filtering', Boolean(filtered));
-  }
-
-  function sort() {
-    const cmp = sorters[sortSel.value] || sorters.order;
-    for (const grid of grids) {
-      const empty = $('.schedule-empty', grid);
-      for (const card of [...grid.querySelectorAll('.session-card')].sort(cmp)) grid.insertBefore(card, empty);
-    }
+    status.textContent = mineOnly ? `Showing your first choices, second choices and maybes: ${shown} workshops.` : '';
   }
 
   // ---- preferences ------------------------------------------------------------------------------
@@ -139,6 +106,7 @@
     minePanel.hidden = !any && !mineOnly;
     mineHint.hidden = any;
     icsBtn.disabled = !rounds.some(r => firstFor(r.id));
+    pdfBtn.disabled = pngBtn.disabled = !any;
     mineList.replaceChildren(...rounds.map(round => {
       const li = document.createElement('li');
       const label = document.createElement('strong');
@@ -163,7 +131,6 @@
       }
       return li;
     }));
-    sort();
     apply();
   }
 
@@ -212,19 +179,138 @@
     lines.push('END:VCALENDAR');
     return lines.map(fold).join('\r\n') + '\r\n';
   }
-  icsBtn.addEventListener('click', () => {
-    const url = URL.createObjectURL(new Blob([ics()], { type: 'text/calendar;charset=utf-8' }));
+  function save(blob, name) {
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = 'ccfest-2026-my-schedule.ics';
+    a.href = url; a.download = name;
     document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-  });
+  }
+  icsBtn.addEventListener('click', () => save(new Blob([ics()], { type: 'text/calendar;charset=utf-8' }), 'ccfest-2026-my-schedule.ics'));
+
+  // ---- printable copy: the same layout drawn to a PNG or written as a PDF (Letter, Helvetica text) --------
+  const PAGE = { w: 612, h: 792, m: 54 };
+  const INK = [0.09, 0.09, 0.1], MUTED = [0.38, 0.38, 0.37], ACCENT = [0.176, 0.357, 1], RULE = [0.77, 0.77, 0.75];
+  let measureCtx;
+  const fontOf = (size, bold) => `${bold ? 'bold ' : ''}${size}px Arial, Helvetica, sans-serif`;   // Arial and Helvetica share metrics
+  const measure = (str, size, bold) => { measureCtx ||= document.createElement('canvas').getContext('2d'); measureCtx.font = fontOf(size, bold); return measureCtx.measureText(str).width; };
+  function wrap(str, size, bold, width) {
+    const lines = []; let cur = '';
+    for (const word of str.split(/\s+/)) {
+      const next = cur ? `${cur} ${word}` : word;
+      if (cur && measure(next, size, bold) > width) { lines.push(cur); cur = word; } else cur = next;
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  }
+  const timeOf = block => {
+    const el = [block.querySelector('.schedule-local'), block.querySelector('.schedule-times span')].find(e => e && e.textContent.trim());
+    return { range: el.firstChild.textContent.trim(), zone: (el.querySelector('small') || {}).textContent || '' };
+  };
+  function entries() {
+    const out = [];
+    const add = (text, size, o = {}) => out.push({ text, size, bold: false, color: INK, indent: 0, before: 0, ...o });
+    const day = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(Date.UTC(y, mo - 1, d, 12)));
+    add('My schedule', 26, { bold: true });
+    add(`${eventName} · ${day}`, 12, { before: 4 });
+    add(`Times shown in ${timeOf(blocks[0]).zone}`, 10, { color: MUTED, before: 2 });
+    for (const block of blocks) {
+      const { range } = timeOf(block);
+      out.push({ rule: true, before: 14 });
+      add(range, 10, { bold: true, color: ACCENT, before: 8 });
+      add(block.querySelector('h3').textContent.trim(), 14, { bold: true, before: 2 });
+      if (block.dataset.kind === 'workshops') {
+        let any = false;
+        for (const [value, label] of [['first', 'First choice'], ['second', 'Second choice'], ['maybe', 'Maybe']]) {
+          for (const card of workshops.filter(c => c.dataset.block === block.id && pref(c) === value)) {
+            any = true;
+            add(`${label}: ${card.dataset.title}`, 11, { bold: value === 'first', before: 6 });
+            add([card.dataset.presenters, card.dataset.level].filter(Boolean).join(' · '), 9.5, { color: MUTED, indent: 12 });
+          }
+        }
+        if (!any) add('No choice yet.', 11, { color: MUTED, before: 6 });
+      } else {
+        const people = block.dataset.summary.split(' — ')[1];
+        if (people) add(people, 11, { before: 4 });
+        const card = block.querySelector('.session-card');
+        if (card) add(card.dataset.presenters, 10, { color: MUTED, before: 2 });
+      }
+    }
+    out.push({ rule: true, before: 18 });
+    add(`ccfest.rocks/register/ · saved ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}. The schedule can change: check the page for updates.`, 9, { color: MUTED, before: 8 });
+    return out;
+  }
+  // Positions every line; pageHeight Infinity gives one tall page (for the PNG).
+  function layout(pageHeight) {
+    const width = PAGE.w - PAGE.m * 2;
+    const pages = [{ ops: [] }]; let top = PAGE.m;
+    const room = h => top + h > pageHeight - PAGE.m;
+    const fresh = () => { pages.push({ ops: [] }); top = PAGE.m; };
+    for (const e of entries()) {
+      top += e.before;
+      if (e.rule) { if (room(1)) fresh(); pages.at(-1).ops.push({ rule: true, x: PAGE.m, y: top, w: width }); top += 1; continue; }
+      const lh = e.size * 1.35;
+      for (const line of wrap(e.text, e.size, e.bold, width - e.indent)) {
+        if (room(lh)) fresh();
+        pages.at(-1).ops.push({ text: line, x: PAGE.m + e.indent, y: top + e.size, size: e.size, bold: e.bold, color: e.color });
+        top += lh;
+      }
+    }
+    return { pages, height: top + PAGE.m };
+  }
+  const rgb = c => `rgb(${c.map(v => Math.round(v * 255)).join(',')})`;
+  function png() {
+    const { pages, height } = layout(Infinity);
+    const scale = 2, canvas = document.createElement('canvas');
+    canvas.width = PAGE.w * scale; canvas.height = Math.ceil(height * scale);
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.scale(scale, scale); ctx.textBaseline = 'alphabetic';
+    for (const op of pages[0].ops) {
+      if (op.rule) { ctx.fillStyle = rgb(RULE); ctx.fillRect(op.x, op.y, op.w, 1); continue; }
+      ctx.font = fontOf(op.size, op.bold); ctx.fillStyle = rgb(op.color); ctx.fillText(op.text, op.x, op.y);
+    }
+    return new Promise(done => canvas.toBlob(done, 'image/png'));
+  }
+  const CP1252 = { '–': 0x96, '—': 0x97, '’': 0x92, '‘': 0x91, '“': 0x93, '”': 0x94, '•': 0x95, '…': 0x85 };
+  function winAnsi(str) {   // PDF text uses the standard Helvetica font: keep what it has, drop accents it lacks
+    let out = '';
+    for (const ch of str.normalize('NFC')) {
+      const code = ch.codePointAt(0);
+      if (CP1252[ch]) out += String.fromCharCode(CP1252[ch]);
+      else if (code <= 0x7e || (code >= 0xa0 && code <= 0xff)) out += ch;
+      else { const base = ch.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); out += base.length === 1 && base.charCodeAt(0) <= 0x7e ? base : '?'; }
+    }
+    return out.replace(/[\\()]/g, m => `\\${m}`);
+  }
+  function pdf() {
+    const { pages } = layout(PAGE.h);
+    const n = v => String(Math.round(v * 100) / 100);
+    const objs = [];
+    objs[1] = '<< /Type /Catalog /Pages 2 0 R >>';
+    objs[2] = `<< /Type /Pages /Kids [${pages.map((_, i) => `${5 + i * 2} 0 R`).join(' ')}] /Count ${pages.length} >>`;
+    objs[3] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';
+    objs[4] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
+    pages.forEach((page, i) => {
+      const stream = page.ops.map(op => op.rule
+        ? `${RULE.map(n).join(' ')} rg ${n(op.x)} ${n(PAGE.h - op.y - 1)} ${n(op.w)} 1 re f`
+        : `BT /F${op.bold ? 2 : 1} ${n(op.size)} Tf ${op.color.map(n).join(' ')} rg ${n(op.x)} ${n(PAGE.h - op.y)} Td (${winAnsi(op.text)}) Tj ET`).join('\n');
+      objs[5 + i * 2] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PAGE.w} ${PAGE.h}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${6 + i * 2} 0 R >>`;
+      objs[6 + i * 2] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
+    });
+    const info = objs.length;
+    objs[info] = `<< /Title (${winAnsi(`My schedule - ${eventName}`)}) /Producer (ccfest.rocks) >>`;
+    let out = '%PDF-1.4\n%\xe2\xe3\xcf\xd3\n';
+    const offsets = [];
+    for (let i = 1; i < objs.length; i++) { offsets[i] = out.length; out += `${i} 0 obj\n${objs[i]}\nendobj\n`; }
+    const xref = out.length;
+    out += `xref\n0 ${objs.length}\n0000000000 65535 f \n${offsets.slice(1).map(o => `${String(o).padStart(10, '0')} 00000 n \n`).join('')}trailer\n<< /Size ${objs.length} /Root 1 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+    return new Blob([Uint8Array.from(out, ch => ch.charCodeAt(0))], { type: 'application/pdf' });
+  }
+  pdfBtn.addEventListener('click', () => save(pdf(), 'ccfest-2026-my-schedule.pdf'));
+  pngBtn.addEventListener('click', async () => save(await png(), 'ccfest-2026-my-schedule.png'));
 
   // ---- wiring ---------------------------------------------------------------------------------
-  levelSel.addEventListener('change', apply);
-  langSel.addEventListener('change', apply);
-  sortSel.addEventListener('change', sort);
-  clearBtn.addEventListener('click', () => { levelSel.value = ''; langSel.value = ''; apply(); levelSel.focus(); });
   mineBtn.addEventListener('click', () => { mineOnly = !mineOnly; refreshPrefs(); });
 
   loadPrefs();

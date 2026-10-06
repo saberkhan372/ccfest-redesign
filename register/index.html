@@ -72,7 +72,7 @@ nav: "event"
             <p>02</p>
             <div>
               <h2 id="sessions-title" data-figma-node="251:788"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">S</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">i</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 125, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
-              <p>{% if schedule.items.size > 0 %}{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}The whole day in order. With JavaScript you can filter and sort the workshops, and mark which workshops you want in each round.{% else %}Workshops and talks for creative coders. The schedule will be announced here.{% endif %}</p>
+              <p>{% if schedule.items.size > 0 %}{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}The whole day in order. With JavaScript you can mark which workshops you want in each round.{% else %}Workshops and talks for creative coders. The schedule will be announced here.{% endif %}</p>
             </div>
           </div>
 
@@ -89,15 +89,9 @@ nav: "event"
             </div>
           </div>
 {% else %}          <div id="schedule" class="schedule" tabindex="-1"{% if event_date != "" %} data-date="{{ event.date | date: '%Y-%m-%d' }}"{% endif %} data-utc-offset="{{ schedule.zones[0].utc_offset }}" data-event-name="{{ event.name | escape }}" data-page-url="https://ccfest.rocks/register/">
-            <!-- schedule.js adds the time zone picker and a "your time" line; schedule-explorer.js adds filters, sorting, My choices and calendar export. Without them every block shows the Pacific and Eastern times and every session in full. -->
+            <!-- schedule.js adds the time zone picker and a "your time" line; schedule-explorer.js adds preferences, My choices and calendar export. Without them every block shows the Pacific and Eastern times and every session in full. -->
             <div class="schedule-tools" hidden>
               <p class="schedule-zone" hidden><label for="schedule-zone-select">Show times in</label> <select id="schedule-zone-select"></select></p>
-              <div class="schedule-filters" role="group" aria-label="Find workshops">
-                <label>Level<select class="schedule-level"><option value="">All levels</option></select></label>
-                <label>Language<select class="schedule-language"><option value="">All languages</option></select></label>
-                <label>Sort within a round<select class="schedule-sort"><option value="order">Programme order</option><option value="title">Title A–Z</option><option value="presenter">Presenter A–Z</option><option value="level">Level</option></select></label>
-                <button type="button" class="button schedule-clear">Clear filters</button>
-              </div>
               <button type="button" class="button schedule-mine-toggle" aria-pressed="false">Show only my choices</button>
             </div>
             <p class="schedule-status" role="status" aria-live="polite"></p>
@@ -105,8 +99,8 @@ nav: "event"
               <h3>My choices</h3>
               <p class="schedule-mine-hint">Workshops in a round run at the same time. On each one, mark a first choice, a second choice (one of each per round) and any number of maybes. Your choices stay in this browser.</p>
               <ul class="schedule-mine-list"></ul>
-              <p class="schedule-mine-actions"><button type="button" class="button button-solid schedule-ics" disabled>Download calendar file (.ics)</button></p>
-              <p class="schedule-note">The file works with Apple Calendar, Outlook and Google Calendar (Settings → Import). It includes the keynotes, the panel and your first choice in each round (second choices and maybes are not added), and is a snapshot: if the schedule changes later, download it again.</p>
+              <p class="schedule-mine-actions"><button type="button" class="button button-solid schedule-ics" disabled>Download calendar file (.ics)</button> <button type="button" class="button schedule-pdf" disabled>Download PDF</button> <button type="button" class="button schedule-png" disabled>Download PNG</button></p>
+              <p class="schedule-note">The file works with Apple Calendar, Outlook and Google Calendar (Settings → Import). It includes the keynotes, the panel and your first choice in each round (second choices and maybes are not added), and is a snapshot: if the schedule changes later, download it again. The PDF and PNG are printable copies of your choices, with times in the zone chosen above.</p>
             </div>
             <ol class="schedule-blocks">
 {% for item in schedule.items %}{% assign in_block = sessions | where: "schedule_id", item.id %}{% capture who %}{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}{{ keynote.name | strip }}{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{{ session.title | strip }}{% endfor %}{% endif %}{% endcapture %}              <li class="schedule-block schedule-block-{{ item.kind | default: 'other' }}" id="{{ item.id | default: forloop.index | escape }}" data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}" data-kind="{{ item.kind | escape }}" data-summary="{{ item.title | escape }}{% if who != "" %} — {{ who | escape }}{% endif %}">
@@ -114,7 +108,7 @@ nav: "event"
                   <h3>{{ item.title | escape }}</h3>
                   <p class="schedule-times">{% for zone in schedule.zones %}{% assign shift = zone.utc_offset | minus: schedule.zones[0].utc_offset | times: 60 %}<span data-label="{{ zone.label | escape }}">{% include time-range.html from=item.start to=item.end shift=shift %} <small>{{ zone.label | escape }}</small></span>{% endfor %}<span class="schedule-local" hidden></span></p>
                 </div>
-{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}                <p class="schedule-people"><a href="#keynotes">{{ keynote.name | escape }}</a> <small>keynote</small></p>
+{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}                <p class="schedule-people"><a href="#keynote-{{ item.id | escape }}">{{ keynote.name | escape }}</a> <small>keynote</small></p>
 {% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}                {% include session-card.html session=session root=page.root order=forloop.index %}
 {% endfor %}{% elsif item.kind == "workshops" %}                <div class="session-grid">
 {% for session in in_block %}                {% include session-card.html session=session root=page.root order=forloop.index %}
