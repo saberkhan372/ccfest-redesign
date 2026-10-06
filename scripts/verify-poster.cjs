@@ -31,6 +31,9 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
       await settle();
     };
     await settle();
+    const openTexts = () => page.evaluate(() => { document.getElementById('maker-texts-section').open = true; });
+    const openAll = () => page.evaluate(() => document.querySelectorAll('.maker-section, .maker-subsection').forEach(section => { section.open = true; }));  // Finishing touches and the text editor start folded
+    await openAll();
 
     // Every homepage animation draws into a poster: something other than the background in the artwork band.
     for (const mode of MODES) {
@@ -109,8 +112,9 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
 
     // Poster-only text edits persist and reset.
     await set({ template: 'session' });
+    await openTexts();
     await page.fill('#maker-text-description', 'A test description.'); await settle();
-    await page.reload(); await page.locator('#maker-workspace').waitFor(); await settle();
+    await page.reload(); await page.locator('#maker-workspace').waitFor(); await settle(); await openAll();
     assert.equal(await page.inputValue('#maker-text-description'), 'A test description.');
     await page.click('#maker-text-reset'); await settle();
     assert.notEqual(await page.inputValue('#maker-text-description'), 'A test description.');
@@ -149,6 +153,7 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
       assert.equal(await page.locator(`#maker-design-gallery button[data-design="${design}"]`).getAttribute('aria-pressed'), 'true');
     }
     await set({ template: 'session', design: 'program-led' });
+    await openTexts();
     const originalTitle = await page.inputValue('#maker-text-title');
     await page.fill('#maker-text-title', 'A shorter session title'); await settle();
     await page.click('#maker-undo'); await settle();
@@ -181,6 +186,57 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
     await page.setInputFiles('#maker-import', { name: 'bad.json', mimeType: 'application/json', buffer: Buffer.from('not json') });
     await page.locator('#maker-error').waitFor({ state: 'visible' });
     assert(await page.locator('#maker-download').isDisabled());
+
+
+    // Layout: the poster stays in view while the controls scroll, fits the window, and the preset file input is not a bare control.
+    await page.click('#maker-reset'); await settle();
+    await set({ format: 'portrait', template: 'session', design: 'classic' });
+    assert((await page.locator('#maker-feature optgroup').count()) >= 1, 'sessions are grouped by round');
+    assert.match(await page.locator('#maker-feature optgroup').first().getAttribute('label'), /Round/, 'the first group is a round');
+    const pin = () => page.evaluate(() => { const r = document.querySelector('.maker-preview-mat').getBoundingClientRect(); return { top: Math.round(r.top), bottom: Math.round(r.bottom), height: innerHeight }; });
+    await page.evaluate(() => scrollTo(0, 0));
+    const stage = await page.locator('.maker-stage').boundingBox();
+    assert(stage.height <= 1000 - 24, `the whole poster fits the window (${stage.height}px high in 1000)`);
+    await page.evaluate(() => scrollTo(0, 900));
+    await page.waitForTimeout(200);
+    const stuck = await pin();
+    assert(stuck.top >= 0 && stuck.bottom <= stuck.height, `the preview stays in view while the controls scroll (${JSON.stringify(stuck)})`);
+    assert((await page.locator('#maker-import').boundingBox()).width <= 2, 'the preset file input is hidden behind its Open preset button');
+    await page.evaluate(() => scrollTo(0, 0));
+
+    // Loading is shown over the preview, and the file name carries the session.
+    await page.click('#maker-recapture');
+    await page.locator('#maker-loading').waitFor({ state: 'visible', timeout: 5000 });
+    assert.match(await page.textContent('#maker-loading-text'), /Recording the/);
+    await settle();
+    assert(await page.locator('#maker-loading').isHidden(), 'the loading cover goes away');
+    const namePending = page.waitForEvent('download'); await page.click('#maker-download');
+    const fileName = (await namePending).suggestedFilename();
+    assert.match(fileName, /^ccfest-2026-portrait-classic-[a-z]+-session-[a-z0-9-]+\.png$/, fileName);
+    assert(!/session\d+\.png$/.test(fileName), 'the file name is not a list position');
+
+    // Copy buttons for the caption and image description.
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.click('.maker-sharing summary');
+    await page.click('button[data-copy="maker-caption"]');
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), await page.inputValue('#maker-caption'), 'Copy caption puts the caption on the clipboard');
+    await page.click('button[data-copy="maker-alt"]');
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), await page.inputValue('#maker-alt'));
+
+    // Stacked layouts (phones and tablets): the poster is pinned above the controls.
+    for (const [width, height] of [[390, 844], [768, 1024]]) {
+      const small = await browser.newPage({ viewport: { width, height } });
+      await small.goto(new URL('poster-maker/', base).href);
+      await small.locator('#maker-workspace').waitFor({ state: 'visible' });
+      await small.waitForFunction(() => /^Ready/.test(document.getElementById('maker-status').textContent), null, { timeout: 60000 });
+      assert(!(await small.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `no horizontal scroll at ${width}px`);
+      await small.evaluate(() => scrollTo(0, 1400));
+      await small.waitForTimeout(200);
+      const rect = await small.evaluate(() => { const r = document.querySelector('.maker-preview-mat').getBoundingClientRect(); return [Math.round(r.top), Math.round(r.bottom), innerHeight]; });
+      assert(rect[0] >= 0 && rect[1] <= rect[2], `the pinned preview stays on screen at ${width}px (${rect})`);
+      assert(await small.locator('#maker-download-pin').isVisible(), `a Download button is pinned with the preview at ${width}px`);
+      await small.close();
+    }
 
     // Print view opens from a real click and gets the full-size image.
     await page.click('#maker-reset'); await settle();

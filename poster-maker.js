@@ -11,7 +11,7 @@
   const storageKey = 'ccfest-poster-v3';
   const preview = $('maker-canvas').querySelector('canvas');
   const overlay = $('maker-overlay');
-  const buttons = [$('maker-download'), $('maker-print')];
+  const buttons = [$('maker-download'), $('maker-download-pin'), $('maker-print')];
   const FORM_KEYS = Object.keys(A.DEFAULTS).filter(key => !['version', 'texts', 'layout'].includes(key));
   const art = new Map(); // `${mode}|${hover}` → recording: { frames: [12 stills] }
   const pending = new Set();
@@ -22,6 +22,11 @@
   let historyGroup = null, restoring = false;
   let galleryKey = '', storageAvailable = true;
   const setStatus = message => { status.textContent = message; };
+  // Over the preview while artwork is being recorded, so the wait is visible where you are looking.
+  const showLoading = (text, done = 0, total = 12) => { $('maker-loading').hidden = false; $('maker-loading-text').textContent = text; $('maker-loading-bar').value = total ? Math.round(100 * done / total) : 0; };
+  const hideLoading = () => { $('maker-loading').hidden = true; };
+  // File names carry the person or session, not its position in the list.
+  const slug = text => String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48).replace(/-+$/, '');
   const artKey = value => `${value.mode}|${value.hover}`;
   // The still the Moment slider points at.
   const frameOf = value => { const frames = art.get(artKey(value)).frames; return frames[Math.min(value.moment, frames.length - 1)]; };
@@ -163,11 +168,12 @@
       home: home.href, name: event.name, date: dateText, year: String(date.getUTCFullYear()), cost: event.cost || '',
       edition: String(event.eyebrow || '').split('·')[0].trim().toUpperCase(),
       facts: [event.cost, event.format === 'Virtual' ? 'Online' : event.format, event.level].filter(Boolean).join(' · '),
+      rounds: Object.fromEntries(items.filter(item => item.kind === 'workshops').map(item => [item.id, plain(item.title)])),
       times, site: 'ccfest.rocks/register/', url: 'https://ccfest.rocks/register/',
       credits: credits.map(c => `${c.role}: ${c.name}`).join(' · '),
-      keynotes: await Promise.all(keynotes.filter(k => k.name).map(async k => ({ ...(await person(k)), label: plain(k.label) }))),
+      keynotes: await Promise.all(keynotes.filter(k => k.name).map(async k => ({ ...(await person(k)), label: plain(k.label), slot: { opening: 'opening keynote', closing: 'closing keynote' }[plain(k.schedule_id)] || '' }))),
       sessions: await Promise.all(sessions.filter(s => s.title).map(async s => ({
-        title: plain(s.title), tags: (s.tags || []).map(plain),
+        title: plain(s.title), tags: (s.tags || []).map(plain), round: plain(s.schedule_id),
         description: plain(s.short_description) || opening(s.description, 230),
         presenters: await Promise.all((s.presenters || []).filter(p => p.name).map(person))
       }))),
@@ -195,11 +201,18 @@
   }
 
   // Which keynotes or sessions each spotlight template can feature, as indexes into the data.
+  // Each entry is [index, text, group]; sessions are grouped by the round they are in.
   function choices(template) {
-    if (template === 'keynote') return content.keynotes.map((k, i) => [i, k.name]);
+    if (template === 'keynote') return content.keynotes.map((k, i) => [i, k.slot ? `${k.name} (${k.slot})` : k.name, '']);
     const all = content.sessions.map((s, i) => [i, s.title, s]);
     const wanted = all.filter(([, , s]) => (template === 'panel') === isPanel(s));
-    return (wanted.length ? wanted : all).map(([i, title]) => [i, title]);
+    const list = wanted.length ? wanted : all;
+    if (template === 'panel') return list.map(([i, title]) => [i, title, '']);
+    const order = Object.keys(content.rounds);
+    const rank = s => (order.includes(s.round) ? order.indexOf(s.round) : order.length);
+    const label = s => content.rounds[s.round] || 'Round to be announced';
+    return [...list].sort((a, b) => rank(a[2]) - rank(b[2]) || a[0] - b[0])
+      .map(([i, title, s]) => [i, s.presenters.length === 1 ? `${title} — ${s.presenters[0].name}` : title, label(s)]);
   }
   const textKey = value => `${value.template}:${value.feature}`;
 
@@ -231,7 +244,12 @@
     $('maker-feature-label').textContent = template === 'keynote' ? 'Keynote speaker' : template === 'panel' ? 'Panel' : 'Session';
     const select = form.elements.feature;
     const wanted = String(select.dataset.template === template ? select.value : feature ?? '');
-    select.replaceChildren(...list.map(([i, text]) => new Option(text, String(i))));
+    const groups = new Map();
+    for (const [i, text, group] of list) {
+      if (!groups.has(group)) groups.set(group, group ? Object.assign(document.createElement('optgroup'), { label: group }) : document.createDocumentFragment());
+      groups.get(group).append(new Option(text, String(i)));
+    }
+    select.replaceChildren(...groups.values());
     select.dataset.template = template;
     select.value = list.some(([i]) => String(i) === wanted) ? wanted : String(list[0]?.[0] ?? 0);
     syncTextFields({ template, feature: Number(select.value) });
@@ -291,10 +309,11 @@
     pending.add(key); capturing++; syncButtons();
     const name = A.MODES[value.mode];
     setStatus(`Recording the ${name} animation from the homepage…`);
+    showLoading(`Recording the ${name} animation from the homepage…`);
     try {
       recordings++;
-      art.set(key, { id: recordings, ...await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++, onProgress: (done, total) => setStatus(`Recording the ${name} animation from the homepage… ${done} of ${total}`) }) });
-    } finally { pending.delete(key); capturing--; }
+      art.set(key, { id: recordings, ...await Stage.capture({ url: content.home, mode: value.mode, hover: value.hover, seed: seed++, onProgress: (done, total) => { setStatus(`Recording the ${name} animation from the homepage… ${done} of ${total}`); showLoading(`Recording the ${name} animation… ${done} of ${total}`, done, total); } }) });
+    } finally { pending.delete(key); capturing--; if (!capturing) hideLoading(); }
     update();
   }
 
@@ -321,10 +340,11 @@
       remember(next);
       const format = A.FORMATS[next.format];
       $('maker-dimensions').textContent = `${format.width} × ${format.height} px`;
+      $('maker-workspace').style.setProperty('--poster-ratio', (format.width / format.height).toFixed(4));
       $('maker-moment-value').value = `${next.moment + 1} / 12`;
       drawFilmstrip(next);
       $('maker-export-note').textContent = format.paper ? '300 ppi PNG. Print at actual size with browser headers and footers off. PDF contains raster artwork.' : 'Full-resolution PNG. Choose Letter or A4 for print / PDF.';
-      $('maker-print').textContent = format.paper ? 'Print / save PDF ↗' : 'Choose a print size ↗';
+      $('maker-print').textContent = format.paper ? 'Print / save PDF ↗' : 'Print / PDF: switch to Letter ↗';
       if (!art.get(artKey(next))) { ensureArt(next).catch(error => { showError(error.message); setStatus('The homepage animation could not be drawn.'); }); return; }
       const result = drawPreview(next);
       drawDesignGallery(next);
@@ -487,7 +507,8 @@
       setStatus('Drawing full-resolution artwork…');
       const canvas = drawExport();
       const blob = await new Promise((resolve, reject) => canvas.toBlob(value => (value ? resolve(value) : reject(new Error('Image export failed. Try again or choose a smaller size.'))), 'image/png'));
-      const who = ['keynote', 'session', 'panel'].includes(state.template) ? `-${state.template}${state.feature + 1}` : '';
+      const person = ['keynote', 'session', 'panel'].includes(state.template) ? featured(state) : null;
+      const who = person ? `-${state.template}-${slug(person.kind === 'keynote' ? person.people[0].name : person.title) || state.feature + 1}` : '';
       const filename = `ccfest-${content.year}-${state.format}-${state.design}-${state.mode}${who}`;
       if (!print) saveBlob(blob, `${filename}.png`);
       else {
@@ -540,6 +561,7 @@
     } catch (_) { restoreMessage = 'The previous draft could not be restored. Started with defaults.'; }
     fillForm(restored);
     $('maker-workspace').hidden = false;
+    status.className = 'maker-status'; $('maker-status-slot').appendChild(status);
     update();
     if (restoreMessage) setStatus(restoreMessage);
     form.addEventListener('submit', event => event.preventDefault());
@@ -590,7 +612,15 @@
       } catch (error) { showError(`Could not open preset: ${error.message}`); setStatus('The preset was not opened.'); }
       finally { event.target.value = ''; }
     };
-    $('maker-download').onclick = () => exportPoster(false);
+    $('maker-download').onclick = $('maker-download-pin').onclick = () => exportPoster(false);
+    document.querySelector('.maker-sharing').addEventListener('click', async event => {
+      const button = event.target.closest('button[data-copy]'); if (!button) return;
+      const field = $(button.dataset.copy);
+      try { await navigator.clipboard.writeText(field.value); }
+      catch (_) { field.focus(); field.select(); if (!document.execCommand('copy')) { setStatus('Select the text and copy it with Ctrl or ⌘ C.'); return; } }
+      const label = button.textContent; button.textContent = 'Copied ✓'; setStatus(`Copied the ${button.dataset.copy === 'maker-alt' ? 'image description' : 'caption'}.`);
+      setTimeout(() => { button.textContent = label; }, 1800);
+    });
     $('maker-print').onclick = () => exportPoster(true);
   } catch (error) { setStatus(error.message); status.setAttribute('role', 'alert'); }
 })();
