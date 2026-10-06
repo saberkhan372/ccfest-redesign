@@ -194,15 +194,14 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
     assert((await page.locator('#maker-feature optgroup').count()) >= 1, 'sessions are grouped by round');
     assert.match(await page.locator('#maker-feature optgroup').first().getAttribute('label'), /Round/, 'the first group is a round');
     const pin = () => page.evaluate(() => { const r = document.querySelector('.maker-preview-mat').getBoundingClientRect(); return { top: Math.round(r.top), bottom: Math.round(r.bottom), height: innerHeight }; });
-    await page.evaluate(() => scrollTo(0, 0));
+    await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
     const stage = await page.locator('.maker-stage').boundingBox();
     assert(stage.height <= 1000 - 24, `the whole poster fits the window (${stage.height}px high in 1000)`);
-    await page.evaluate(() => scrollTo(0, 900));
-    await page.waitForTimeout(200);
+    await page.evaluate(() => scrollTo({ top: 900, behavior: 'instant' }));
     const stuck = await pin();
     assert(stuck.top >= 0 && stuck.bottom <= stuck.height, `the preview stays in view while the controls scroll (${JSON.stringify(stuck)})`);
     assert((await page.locator('#maker-import').boundingBox()).width <= 2, 'the preset file input is hidden behind its Open preset button');
-    await page.evaluate(() => scrollTo(0, 0));
+    await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
 
     // Loading is shown over the preview, and the file name carries the session.
     await page.click('#maker-recapture');
@@ -223,6 +222,11 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
     await page.click('button[data-copy="maker-alt"]');
     assert.equal(await page.evaluate(() => navigator.clipboard.readText()), await page.inputValue('#maker-alt'));
 
+    // Repeated copy clicks must restore the original labels after the last feedback timer.
+    await page.locator('button[data-copy="maker-caption"]').dblclick();
+    await page.locator('button[data-copy="maker-alt"]').dblclick();
+    await page.waitForFunction(() => document.querySelector('button[data-copy="maker-caption"]').textContent === 'Copy caption' && document.querySelector('button[data-copy="maker-alt"]').textContent === 'Copy description', null, { timeout: 5000 });
+
     // Stacked layouts (phones and tablets): the poster is pinned above the controls.
     for (const [width, height] of [[390, 844], [768, 1024]]) {
       const small = await browser.newPage({ viewport: { width, height } });
@@ -230,8 +234,7 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
       await small.locator('#maker-workspace').waitFor({ state: 'visible' });
       await small.waitForFunction(() => /^Ready/.test(document.getElementById('maker-status').textContent), null, { timeout: 60000 });
       assert(!(await small.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `no horizontal scroll at ${width}px`);
-      await small.evaluate(() => scrollTo(0, 1400));
-      await small.waitForTimeout(200);
+      await small.evaluate(() => scrollTo({ top: 1400, behavior: 'instant' }));
       const rect = await small.evaluate(() => { const r = document.querySelector('.maker-preview-mat').getBoundingClientRect(); return [Math.round(r.top), Math.round(r.bottom), innerHeight]; });
       assert(rect[0] >= 0 && rect[1] <= rect[2], `the pinned preview stays on screen at ${width}px (${rect})`);
       assert(await small.locator('#maker-download-pin').isVisible(), `a Download button is pinned with the preview at ${width}px`);

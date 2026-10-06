@@ -613,13 +613,17 @@
       finally { event.target.value = ''; }
     };
     $('maker-download').onclick = $('maker-download-pin').onclick = () => exportPoster(false);
+    const copyFeedback = new WeakMap();
     document.querySelector('.maker-sharing').addEventListener('click', async event => {
       const button = event.target.closest('button[data-copy]'); if (!button) return;
+      const feedback = copyFeedback.get(button) || { label: button.textContent };
+      copyFeedback.set(button, feedback);
       const field = $(button.dataset.copy);
       try { await navigator.clipboard.writeText(field.value); }
       catch (_) { field.focus(); field.select(); if (!document.execCommand('copy')) { setStatus('Select the text and copy it with Ctrl or ⌘ C.'); return; } }
-      const label = button.textContent; button.textContent = 'Copied ✓'; setStatus(`Copied the ${button.dataset.copy === 'maker-alt' ? 'image description' : 'caption'}.`);
-      setTimeout(() => { button.textContent = label; }, 1800);
+      clearTimeout(feedback.timer);
+      button.textContent = 'Copied ✓'; setStatus(`Copied the ${button.dataset.copy === 'maker-alt' ? 'image description' : 'caption'}.`);
+      feedback.timer = setTimeout(() => { button.textContent = feedback.label; }, 1800);
     });
     $('maker-print').onclick = () => exportPoster(true);
   } catch (error) { setStatus(error.message); status.setAttribute('role', 'alert'); }

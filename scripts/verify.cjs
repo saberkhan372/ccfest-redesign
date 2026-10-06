@@ -184,7 +184,9 @@ const settleImages = page => page.evaluate(cap => Promise.all(
       assert.ok(total >= 15, 'workshops are listed');
       const ids = await sched.$$eval('.session-card[data-id]', cards => cards.map(c => c.dataset.id));
       assert.equal(new Set(ids).size, ids.length, 'session ids are unique');
-      assert.equal(await sched.locator('.session-card[data-format="Workshop"]:not([data-block])').count() > 0 ? 'pending' : 'all', await sched.locator('.schedule-pending').count() ? 'pending' : 'all', 'sessions without a round sit under "Round to be announced"');
+      const pendingCards = await sched.$$eval('.session-card[data-format="Workshop"]', cards => cards.filter(c => !c.dataset.block.trim()).map(c => ({ id: c.dataset.id, pending: Boolean(c.closest('.schedule-pending')), controls: c.querySelectorAll('.session-pref button').length })));
+      assert.equal(await sched.locator('.schedule-pending').count(), pendingCards.length ? 1 : 0, 'pending section exists exactly when needed');
+      assert.ok(pendingCards.every(c => c.pending && !c.controls), 'unassigned workshops stay visible without preference controls');
       const pref = (id, value) => sched.locator(`.session-card[data-id="${id}"] .session-pref button[data-pref="${value}"]`);
       const pressed = async (id, value) => (await pref(id, value).getAttribute('aria-pressed')) === 'true';
       await pref('naoto-hieda', 'first').click();

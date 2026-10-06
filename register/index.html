@@ -116,11 +116,11 @@ nav: "event"
                 </div>
 {% endif %}              </li>
 {% endfor %}            </ol>
-{% assign pending = 0 %}{% for session in sessions %}{% if session.title != blank and session.format == "Workshop" and session.schedule_id == blank %}{% assign pending = pending | plus: 1 %}{% endif %}{% endfor %}{% if pending > 0 %}            <section class="schedule-pending" aria-labelledby="pending-title">
+{% assign pending = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign pending_round = session.schedule_id | default: "" | strip %}{% if pending_title != "" and session.format == "Workshop" and pending_round == "" %}{% assign pending = pending | plus: 1 %}{% endif %}{% endfor %}{% if pending > 0 %}            <section class="schedule-pending" aria-labelledby="pending-title">
               <h3 id="pending-title">Round to be announced</h3>
               <p>These workshops are confirmed; their round will be added here soon.</p>
               <div class="session-grid">
-{% assign n = 0 %}{% for session in sessions %}{% if session.title != blank and session.format == "Workshop" and session.schedule_id == blank %}{% assign n = n | plus: 1 %}                {% include session-card.html session=session root=page.root order=n %}
+{% assign n = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign pending_round = session.schedule_id | default: "" | strip %}{% if pending_title != "" and session.format == "Workshop" and pending_round == "" %}{% assign n = n | plus: 1 %}                {% include session-card.html session=session root=page.root order=n %}
 {% endif %}{% endfor %}              </div>
             </section>
 {% endif %}          </div>

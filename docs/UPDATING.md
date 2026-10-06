@@ -85,6 +85,8 @@ Only put in what's actually confirmed. Everything below starts as "to be announc
 
 All five are also forms in the CMS, so this is usually a job for the admin UI rather than the editor.
 
+After changing schedule templates, run `ruby scripts/verify-schedule-fallback.rb` with the Ruby installation that has Jekyll, then the browser checks below. It builds temporary fixtures to confirm that missing, empty and whitespace-only rounds keep titled workshops visible under "Round to be announced", with empty round IDs for the client script. Incomplete session rows stay hidden. It does not change the event data.
+
 **The date in the title is the one thing a form cannot fix.** The hero title carries Francisca's blank date as underscores (`________,`), drawn from the Figma data. Filling in `date` updates the facts, the cards and the spoken name — but not the lettering. When the date is confirmed, edit that run's text in `design/figma-typography.json` and re-run the sync script.
 
 ---
