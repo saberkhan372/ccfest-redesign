@@ -25,12 +25,17 @@
   };
   const TEMPLATES = ['announcement', 'keynote', 'session', 'panel', 'community'];
   const BLOCKS = { logo: 'Wordmark', art: 'Artwork', info: 'Event details', people: 'People', copy: 'Supporting text', qr: 'QR code', date: 'Date', title: 'Title', cta: 'Registration' };
-  const DEFAULTS = { version: VERSION, template: 'announcement', format: 'portrait', mode: 'creativity', hover: true, moment: 11, labels: true, background: 'paper', feature: 0, bios: true, times: true, qr: true, copy: 'Workshops, talks, and community for creative coders.', texts: {}, layout: {} };
+  const DEFAULTS = { version: VERSION, template: 'announcement', design: 'classic', format: 'portrait', mode: 'creativity', hover: true, moment: 11, labels: true, background: 'paper', feature: 0, bios: true, times: true, qr: true, copy: 'Workshops, talks, and community for creative coders.', texts: {}, layout: {} };
+  // Keep legacy layouts intact; new designs have independent layouts for each featured item.
+  const layoutKey = state => !state.design || state.design === 'classic' ? state.format : `${state.design}:${state.template}:${state.feature}:${state.format}`;
 
   const plainText = (value, max) => typeof value === 'string' && value.length <= max && !/[<>]/.test(value) && ![...value].some(c => c.charCodeAt(0) < 32 && c !== '\n');
   function validate(value) {
     if (!value || typeof value !== 'object' || value.version !== VERSION) throw new Error('This preset is from a different version of the poster maker.');
     const result = { version: VERSION };
+    const design = value.design ?? 'classic';
+    if (design !== 'classic' && !Object.hasOwn(DESIGNS, design)) throw new Error('Choose a valid design.');
+    result.design = design;
     for (const [key, choices] of Object.entries({ template: TEMPLATES, format: Object.keys(FORMATS), mode: Object.keys(MODES), background: Object.keys(BACKGROUNDS) })) {
       if (!choices.includes(value[key])) throw new Error(`Choose a valid ${key}.`);
       result[key] = value[key];
@@ -52,6 +57,7 @@
     for (const [key, text] of Object.entries(value.texts || {})) {
       if (!/^(keynote|session|panel):\d{1,2}$/.test(key) || !text || typeof text !== 'object') throw new Error('A saved text edit is not valid.');
       const entry = {};
+      if ('title' in text) { if (!plainText(text.title, 200) || !text.title.trim()) throw new Error('Use a title of 1–200 characters of plain text.'); entry.title = text.title; }
       if ('description' in text) { if (!plainText(text.description, 600)) throw new Error('Keep the description under 600 characters of plain text.'); entry.description = text.description; }
       if ('bios' in text) {
         if (!Array.isArray(text.bios) || text.bios.length > 8 || !text.bios.every(bio => bio === null || plainText(bio, 400))) throw new Error('Keep each bio under 400 characters of plain text.');
@@ -62,7 +68,9 @@
     // Moved and resized blocks, per size.
     result.layout = {};
     for (const [format, blocks] of Object.entries(value.layout || {})) {
-      if (!FORMATS[format] || !blocks || typeof blocks !== 'object') throw new Error('A saved layout is not valid.');
+      const parts = format.split(':');
+      const scoped = parts.length === 4 && Object.hasOwn(DESIGNS, parts[0]) && TEMPLATES.includes(parts[1]) && /^\d{1,2}$/.test(parts[2]) && Object.hasOwn(FORMATS, parts[3]);
+      if ((!Object.hasOwn(FORMATS, format) && !scoped) || !blocks || typeof blocks !== 'object') throw new Error('A saved layout is not valid.');
       result.layout[format] = {};
       for (const [id, t] of Object.entries(blocks)) {
         const ok = BLOCKS[id] && t && [t.x, t.y, t.s].every(Number.isFinite) && Math.abs(t.x) <= 3000 && Math.abs(t.y) <= 3000 && t.s >= 0.25 && t.s <= 4;
@@ -140,6 +148,37 @@
     return lines.length * size * leading;
   }
 
+  // Change's canvas is blended with `darken` on the homepage. Its sketch repaints itself with #f5f5f2 at 15%
+  // every frame, and 8-bit rounding leaves each old trail stuck a few levels under that (#f2f2ef). `darken`
+  // hides all of it while the page is darker than #f5f5f2, as the paper (#edede9) is. White is lighter, so
+  // `darken` keeps the pale fill and the Cs the sketch has passed through come back as a faint grey ghost.
+  // poster-stage.js already makes the fill itself transparent, but the stuck trails sit just outside its
+  // tolerance, and widening that would move the stroke edges on paper. It records the fill as the layer's
+  // `clear` instead. On a page lighter than that, the layer is drawn as plain pixels, see-through exactly
+  // where the paper look shows nothing (RAMP levels of ink fade it in, so a trail ends softly rather than at
+  // an edge). Paper never takes this path, so it is unchanged.
+  const RAMP = 24;
+  const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
+  const lighterThan = (hex, clear) => rgb(hex).some((value, i) => value > clear[i]);
+  const forLightPage = new WeakMap(); // layer image → the same pixels, see-through where the paper look is blank
+  function keyedForLight(image) {
+    if (forLightPage.has(image)) return forLightPage.get(image);
+    const paper = rgb(BACKGROUNDS.paper);
+    const data = image.getContext('2d').getImageData(0, 0, image.width, image.height);
+    const px = data.data;
+    for (let i = 0; i < px.length; i += 4) {
+      // How far under the paper this pixel is in its darkest channel: what `darken` leaves on the paper.
+      const ink = Math.max(paper[0] - px[i], paper[1] - px[i + 1], paper[2] - px[i + 2]);
+      if (ink <= 0) px[i + 3] = 0;
+      else if (ink < RAMP) px[i + 3] = Math.round(px[i + 3] * ink / RAMP);
+    }
+    const keyed = document.createElement('canvas');
+    keyed.width = image.width; keyed.height = image.height;
+    keyed.getContext('2d').putImageData(data, 0, 0);
+    forLightPage.set(image, keyed);
+    return keyed;
+  }
+
   // Shristi's frame, scaled evenly (never stretched) around the two Cs, clipped to the box.
   // `pad` is the margin kept around the Cs as a fraction of their size; designs that want the
   // artwork larger ask for less.
@@ -167,8 +206,9 @@
       ctx.restore();
     }
     for (const layer of art.layers) {
-      ctx.globalCompositeOperation = layer.blend || 'source-over';
-      ctx.drawImage(layer.image, ox + layer.x * s, oy + layer.y * s, layer.w * s, layer.h * s);
+      const lift = layer.clear && layer.blend === 'darken' && lighterThan(BACKGROUNDS[state.background], layer.clear);
+      ctx.globalCompositeOperation = lift ? 'source-over' : layer.blend || 'source-over';
+      ctx.drawImage(lift ? keyedForLight(layer.image) : layer.image, ox + layer.x * s, oy + layer.y * s, layer.w * s, layer.h * s);
     }
     ctx.globalCompositeOperation = 'source-over';
     // "10 years of …": on the homepage these sit on shapes, confetti and tiles, which is fine at
@@ -423,15 +463,15 @@
     const H = format.height / format.width * 1000;
     const bottom = format.paper ? 20 : 0; // Keep print credits inside a 1/4-inch safe area.
     const design = state.design && DESIGNS[state.design];
-    const frame = { H, footer: H - bottom - 79, layout: (state.layout && state.layout[state.format]) || {}, boxes: [], problems: [], notes: [], pairs: new Set() };
+    const frame = { H, footer: H - bottom - 79, layout: (state.layout && state.layout[layoutKey(state)]) || {}, boxes: [], problems: [], notes: [], pairs: new Set() };
     ctx.save();
     try {
       ctx.scale(width / 1000, height / H);
       ctx.fillStyle = BACKGROUNDS[state.background]; ctx.fillRect(0, 0, 1000, H);
       // A design that has no layout for this size is reported, not improvised: export stays off and
       // the original layout is drawn so there is still a preview.
-      const unsupported = design && design.formats && !design.formats.includes(state.format);
-      if (unsupported) frame.problems.push(`${design.label} has no ${FORMATS[state.format].label.toLowerCase()} layout yet. Choose another size or design.`);
+      const unsupported = design && ((design.formats && !design.formats.includes(state.format)) || (design.templates && !design.templates.includes(state.template)));
+      if (unsupported) frame.problems.push(`${design.label} is not available for this content and size. Choose another size or design.`);
       if (design && !unsupported) design.draw(ctx, state, art, content, assets, frame);
       else classic(ctx, state, art, content, assets, frame);
       for (const box of frame.boxes) {
@@ -450,7 +490,7 @@
 
   // What a design file needs from this one: the drawing helpers and the palette.
   const kit = { font, line, wrap, wrapLines, lettered, singular, portrait, artwork, place, scaleOf, COLORS, BACKGROUNDS, INK };
-  const API = { VERSION, FORMATS, BACKGROUNDS, COLORS, MODES, TEMPLATES, BLOCKS, DEFAULTS, validate, render, thumbnail, registerDesign, designs: DESIGNS, kit };
+  const API = { VERSION, FORMATS, BACKGROUNDS, COLORS, MODES, TEMPLATES, BLOCKS, DEFAULTS, validate, layoutKey, render, thumbnail, registerDesign, designs: DESIGNS, kit };
   if (typeof module === 'object' && module.exports) module.exports = API;
   else root.CCPosterArt = API;
 })(typeof window === 'object' ? window : globalThis);

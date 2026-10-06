@@ -135,6 +135,41 @@ const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaborati
       assert.deepEqual(await downloadImage(), size, format);
     }
 
+    // New design choices, settings history, title edits and format compatibility.
+    await page.click('#maker-reset'); await settle();
+    await set({ design: 'bold-date' });
+    assert.equal(await error(), '');
+    await page.click('#maker-undo'); await settle();
+    assert.equal(await page.inputValue('#maker-design'), 'classic');
+    await page.click('#maker-redo'); await settle();
+    assert.equal(await page.inputValue('#maker-design'), 'bold-date');
+    for (const [design, template] of [['signature', 'announcement'], ['art-led', 'announcement'], ['speaker-led', 'keynote'], ['program-led', 'session'], ['minimal-print', 'community']]) {
+      await set({ template, design, bios: false });
+      assert.equal(await error(), '', design);
+      assert.equal(await page.locator(`#maker-design-gallery button[data-design="${design}"]`).getAttribute('aria-pressed'), 'true');
+    }
+    await set({ template: 'session', design: 'program-led' });
+    const originalTitle = await page.inputValue('#maker-text-title');
+    await page.fill('#maker-text-title', 'A shorter session title'); await settle();
+    await page.click('#maker-undo'); await settle();
+    assert.equal(await page.inputValue('#maker-text-title'), originalTitle);
+    await page.click('#maker-redo'); await settle();
+    assert.equal(await page.inputValue('#maker-text-title'), 'A shorter session title');
+    await set({ format: 'square' });
+    assert.equal(await page.inputValue('#maker-design'), 'classic', 'Unsupported sizes return to Classic');
+    assert(await page.locator('#maker-design option[value="program-led"]').isDisabled());
+    await page.click('#maker-undo'); await settle();
+    assert.equal(await page.inputValue('#maker-format'), 'portrait');
+    assert.equal(await page.inputValue('#maker-design'), 'program-led');
+    // A preset restore within the same template must restore the featured selection too.
+    await set({ template: 'keynote', design: 'speaker-led', feature: 0 });
+    await set({ feature: 1 });
+    await page.click('#maker-undo'); await settle();
+    assert.equal(await page.inputValue('#maker-feature'), '0');
+    await page.click('#maker-redo'); await settle();
+    assert.equal(await page.inputValue('#maker-feature'), '1');
+    await page.click('#maker-reset'); await settle();
+
     // Presets: save, change, reopen; bad files are refused.
     await set({ format: 'portrait', template: 'keynote', mode: 'coding' });
     await set({ feature: '1' });

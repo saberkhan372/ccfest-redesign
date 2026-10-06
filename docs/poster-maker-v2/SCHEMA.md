@@ -72,7 +72,7 @@ Plain JSON, so undo/redo (task 5) can be whole-object snapshots at the end of a 
 What changes, and why:
 
 - **`content` by ID**, with the type alongside. Reordering sessions, adding a keynote, or fixing a typo cannot change which person a poster shows.
-- **Design is a field.** The registry already exists ([registerDesign](../../poster-art.js:417)); `classic` stays registered, so every migrated draft keeps its look.
+- **Design is a field.** The registry already exists ([registerDesign](../../poster-art.js:449)); `classic` stays registered, so every migrated draft keeps its look.
 - **Text edits are keyed by the thing they edit** (session or presenter ID), not by `template:position`.
 - **Layout is keyed by `design/format`** and locks are separate, so moving blocks on one design never touches another, which is what task 5 asks.
 - **`source.labels`** keeps the human-readable name of everything referenced. It is what lets a project say "the session you saved was *X*" even after the data changes.
@@ -93,15 +93,15 @@ Settings cannot reproduce random artwork; the pixels and shapes have to be kept.
   "focus": { "x": 0, "y": 0, "w": 0, "h": 0 },
   "layers": [
     { "kind": "svg",    "x": 0, "y": 0, "w": 0, "h": 0, "blend": "source-over", "markup": "<svg …>" },
-    { "kind": "bitmap", "x": 0, "y": 0, "w": 0, "h": 0, "blend": "darken", "pixels": [2200, 1900], "blob": "<key>" }
+    { "kind": "bitmap", "x": 0, "y": 0, "w": 0, "h": 0, "blend": "darken", "pixels": [2200, 1900], "clear": [245, 245, 242], "blob": "<key>" }
   ],
   "labels": [ { "text": "10 years of", "x": 0, "y": 0, "w": 0, "h": 0, "size": 15 } ],
   "background": { "asset": "assets/…", "sha256": "…", "tile": [400, 400], "pos": ["0", "0"], "clip": null }
 }
 ```
 
-- **Vector layers keep their markup**, which the capture already produces and used to throw away (it is now kept on each layer: [poster-stage.js:292](../../poster-stage.js:292)). Redrawn from that string they are identical at any size.
-- **Bitmap layers** (canvas copies) are stored as PNG with their pixel size, so the effective resolution at print size can be checked and a low one warned about.
+- **Vector layers keep their markup**, which the capture already produces and used to throw away (it is now kept on each layer: [poster-stage.js:294](../../poster-stage.js:294)). Redrawn from that string they are identical at any size.
+- **Bitmap layers** (canvas copies) are stored as PNG with their pixel size, so the effective resolution at print size can be checked and a low one warned about. A canvas the capture keyed (Change) also keeps `clear`, the fill colour it made transparent: without it the renderer cannot draw the layer on a white poster, and the grey ghost of the Cs comes back (see [POSTER-MAKER.md](../POSTER-MAKER.md#change-on-white)).
 - **The Creative Commons wallpaper** is referenced by site path and hash, and embedded only in a portable export.
 - Measured cost of one saved still: **about 0.5 MB of markup (0.2 MB gzipped) plus 10–200 KB of PNG**, so roughly 0.2–0.4 MB with compression. `localStorage` (roughly 5 million characters per origin, shared with the draft, every access synchronous) would hold about ten raw stills and stall the page while writing them; **IndexedDB** stores Blobs without that ceiling, which is why task 6 should use it. A recorded 12-frame strip is about 2.4 MB gzipped.
 - **Animation is stored as the encoded clip**, not as frames. A 120-frame take would be about 24 MB of gzipped markup before bitmaps, against 0.8–1.4 MB for the MP4 ([ANIMATION.md](ANIMATION.md)). The consequence to state plainly in the interface: a stored clip is a finished render; changing the text means recording a new take.

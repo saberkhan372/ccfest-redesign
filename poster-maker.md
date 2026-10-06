@@ -1,6 +1,6 @@
 # Poster maker improvement plan
 
-Planning date: October 1, 2026. Status: proposed work, not implemented.
+Planning date: October 1, 2026. Updated October 5: the six existing portrait designs are now selectable in the editor, with compatible content/size choices, undo/redo, poster-only title edits, scoped layouts for new designs, and visible omission notes. Exact-artwork saving, additional design formats, batch exports, and production MP4/GIF remain planned. See [the usage guide](docs/POSTER-MAKER.md) for current behavior; the baseline and task descriptions below retain the original planning context.
 
 ## Goal and scope
 

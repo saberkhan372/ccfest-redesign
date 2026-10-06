@@ -4,7 +4,7 @@ Task 9 of [poster-maker.md](../../poster-maker.md): before promising MP4 or GIF,
 
 ## What was tried
 
-1. **Sampling.** `CCStageCapture.captureClip` ([poster-stage.js:350](../../poster-stage.js:350)), a new prototype in the existing capture adapter, samples the homepage animation once per display frame instead of keeping 12 stills. It hands each sample to the caller as it is taken, so nothing accumulates. Shristi's files are untouched.
+1. **Sampling.** `CCStageCapture.captureClip` ([poster-stage.js:355](../../poster-stage.js:355)), a new prototype in the existing capture adapter, samples the homepage animation once per display frame instead of keeping 12 stills. It hands each sample to the caller as it is taken, so nothing accumulates. Shristi's files are untouched.
 2. **Composing.** Every sample goes through the real `CCPosterArt.render` (the Signature design), so the date, facts, QR and footer are drawn by the same code that draws a still, on every frame.
 3. **Encoding.** `canvas.captureStream(0)` plus `requestFrame()` per sample, recorded by `MediaRecorder` as `video/mp4;codecs=avc1.640028`.
 4. **Checking.** In the same page the file is played back; in Node, `ffprobe` decodes every frame and reads the timing, and `ffmpeg` extracts frames to look at ([scripts/poster-clip-proof.cjs](../../scripts/poster-clip-proof.cjs)).

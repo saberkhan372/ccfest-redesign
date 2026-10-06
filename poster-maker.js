@@ -18,6 +18,9 @@
   let recordings = 0;
   let state, content, assets, busy = false, capturing = 0, timer, seed = 1, problems = [], selected = null;
   let edits = { texts: {}, layout: {} };
+  const history = window.CCPosterHistory();
+  let historyGroup = null, restoring = false;
+  let galleryKey = '', storageAvailable = true;
   const setStatus = message => { status.textContent = message; };
   const artKey = value => `${value.mode}|${value.hover}`;
   // The still the Moment slider points at.
@@ -26,7 +29,24 @@
   const syncButtons = () => {
     buttons.forEach(button => { button.disabled = !canExport(); });
     $('maker-recapture').disabled = busy || capturing > 0;
+    $('maker-undo').disabled = busy || !history.canUndo;
+    $('maker-redo').disabled = busy || !history.canRedo;
   };
+
+  // One undo step per drag or continuous text/slider edit. Captures are not history entries.
+  function remember(value) {
+    if (!restoring) history.push(value, historyGroup);
+  }
+  function travel(direction) {
+    if (busy) return;
+    clearTimeout(timer); update();
+    const next = history.move(direction);
+    if (!next) return;
+    historyGroup = null;
+    restoring = true;
+    try { fillForm(next); selected = null; update(); }
+    finally { restoring = false; syncButtons(); }
+  }
 
   function showError(message) {
     $('maker-error').textContent = message;
@@ -48,7 +68,44 @@
     }
     edits = { texts: structuredClone(value.texts || {}), layout: structuredClone(value.layout || {}) };
     $('maker-texts').dataset.key = '';
+    form.elements.feature.dataset.template = '';
     syncFeatureField(value.template, value.feature);
+  }
+
+  function syncDesignField(value) {
+    const select = form.elements.design;
+    for (const option of select.options) {
+      const design = A.designs[option.value];
+      option.disabled = !!design && (!design.templates.includes(value.template) || !design.formats.includes(value.format));
+    }
+    const unavailable = select.selectedOptions[0]?.disabled;
+    if (unavailable) select.value = 'classic';
+    const design = A.designs[select.value];
+    $('maker-design-help').textContent = (unavailable ? 'Switched to Classic for this content and size. ' : '') + (design ? `${design.summary} ${design.limits}` : 'Classic supports every content type and size. Choose social portrait to explore more designs.');
+  }
+
+  function drawDesignGallery(value) {
+    const recording = art.get(artKey(value));
+    if (!recording) return;
+    const keys = ['classic', ...Object.keys(A.designs).filter(key => A.designs[key].templates.includes(value.template) && A.designs[key].formats.includes(value.format))];
+    const key = JSON.stringify([recording.id, value.mode, value.hover, value.moment, value.template, value.feature, value.format, value.background, value.copy, value.bios, value.times, value.qr, value.labels, value.texts]);
+    if (key !== galleryKey) {
+      galleryKey = key;
+      $('maker-design-gallery').replaceChildren(...keys.map(design => {
+        const button = document.createElement('button');
+        button.type = 'button'; button.dataset.design = design;
+        const name = A.designs[design]?.label || 'Classic';
+        button.setAttribute('aria-label', `Use ${name} design`);
+        const canvas = document.createElement('canvas'); canvas.width = 180; canvas.height = Math.round(180 * A.FORMATS[value.format].height / A.FORMATS[value.format].width);
+        canvas.setAttribute('aria-hidden', 'true');
+        const label = document.createElement('span'); label.textContent = name;
+        try { A.render(canvas.getContext('2d'), { ...value, design, layout: {} }, frameOf(value), { ...content, feature: featured(value) }, assets, canvas.width, canvas.height); }
+        catch (_) { label.textContent = `${name} · adjust copy`; }
+        button.append(canvas, label);
+        return button;
+      }));
+    }
+    $('maker-design-gallery').querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.design === value.design)));
   }
   function image(url, optional = false) {
     return new Promise((resolve, reject) => {
@@ -159,7 +216,7 @@
     const session = content.sessions[value.feature];
     if (!session) throw new Error('Choose a session.');
     return {
-      kind: value.template, kicker: session.tags.join(' · ').toUpperCase(), title: session.title,
+      kind: value.template, kicker: session.tags.join(' · ').toUpperCase(), title: typeof edit.title === 'string' ? edit.title : session.title,
       description: typeof edit.description === 'string' ? edit.description : session.description,
       people: session.presenters.map(bio)
     };
@@ -186,7 +243,10 @@
     fields.dataset.key = key;
     const feature = featured(value);
     const blocks = [];
-    if (value.template !== 'keynote') blocks.push(textArea('maker-text-description', 'Description on the poster', feature.description, 5, 600, 'description'));
+    if (value.template !== 'keynote') {
+      blocks.push(textArea('maker-text-title', 'Title on the poster', feature.title, 3, 200, 'title'));
+      blocks.push(textArea('maker-text-description', 'Description on the poster', feature.description, 5, 600, 'description'));
+    }
     feature.people.forEach((person, i) => blocks.push(textArea(`maker-text-bio-${i}`, `Short bio: ${person.name}`, person.bio, 3, 400, `bio-${i}`)));
     fields.replaceChildren(...blocks.flat());
   }
@@ -207,6 +267,8 @@
     try { original = featured({ template, feature: Number(feature) }); } catch (_) { return; }
     const tidy = text => text.replace(/\s+/g, ' ').trim();
     const entry = {};
+    const title = fields.querySelector('[data-text="title"]');
+    if (title && tidy(title.value) !== original.title) entry.title = tidy(title.value);
     const description = fields.querySelector('[data-text="description"]');
     if (description && tidy(description.value) !== original.description) entry.description = tidy(description.value);
     const bios = original.people.map((person, i) => { const area = fields.querySelector(`[data-text="bio-${i}"]`); return area && tidy(area.value) !== person.bio ? tidy(area.value) : null; });
@@ -253,8 +315,10 @@
     try {
       let next = readForm();
       syncFeatureField(next.template, next.feature);
+      syncDesignField(next);
       next = readForm();
       state = next;
+      remember(next);
       const format = A.FORMATS[next.format];
       $('maker-dimensions').textContent = `${format.width} × ${format.height} px`;
       $('maker-moment-value').value = `${next.moment + 1} / 12`;
@@ -263,12 +327,20 @@
       $('maker-print').textContent = format.paper ? 'Print / save PDF ↗' : 'Choose a print size ↗';
       if (!art.get(artKey(next))) { ensureArt(next).catch(error => { showError(error.message); setStatus('The homepage animation could not be drawn.'); }); return; }
       const result = drawPreview(next);
+      drawDesignGallery(next);
       problems = result.problems;
+      const notes = [...result.notes];
+      if (['bold-date', 'art-led', 'speaker-led', 'program-led'].includes(next.design) && next.copy) notes.push('This design omits the supporting line; it is included in your caption.');
+      if (next.design === 'art-led' && next.times) notes.push('Art-led omits festival times; they are included in your caption.');
+      if (next.design === 'program-led' && featured(next)?.people.length > 2) notes.push('The panel layout omits the description and artwork to give presenters more space.');
+      if (next.design === 'classic' && ['square', 'landscape'].includes(next.format) && ['session', 'panel'].includes(next.template)) notes.push('This size omits the session description. Choose portrait or story to include it.');
+      $('maker-notes').replaceChildren(...[...new Set(notes)].map(text => { const item = document.createElement('li'); item.textContent = text; return item; }));
+      $('maker-notes').hidden = !notes.length;
       updateSharing(featured(next));
       showError(problems.join(' '));
       if (capturing) return;
-      try { localStorage.setItem(storageKey, JSON.stringify({ ...state, source: content.stamp })); } catch (_) { /* private mode */ }
-      setStatus(problems.length ? 'Fix the layout before exporting.' : 'Ready. Draft saved in this browser.');
+      try { localStorage.setItem(storageKey, JSON.stringify({ ...state, source: content.stamp })); storageAvailable = true; } catch (_) { storageAvailable = false; }
+      setStatus(problems.length ? 'Fix the layout before exporting.' : storageAvailable ? 'Ready. Draft saved in this browser.' : 'Ready. Browser storage is unavailable. Save a preset to keep your settings.');
     } catch (error) { problems = []; showError(error.message); setStatus('Change the settings above before exporting.'); }
   }
 
@@ -295,16 +367,17 @@
 
   /* ── Move and resize ─────────────────────────────────────────────── */
   function blockTransform(id) {
-    const layout = edits.layout[state.format] || {};
+    const layout = edits.layout[A.layoutKey(state)] || {};
     return { ...(layout[id] || { x: 0, y: 0, s: 1 }) };
   }
   function setTransform(id, t) {
-    const layout = edits.layout[state.format] || (edits.layout[state.format] = {});
+    const key = A.layoutKey(state);
+    const layout = edits.layout[key] || (edits.layout[key] = {});
     const round = n => Math.round(n * 10) / 10;
     const s = Math.min(4, Math.max(0.25, Math.round(t.s * 1000) / 1000));
     if (Math.abs(t.x) < 0.5 && Math.abs(t.y) < 0.5 && Math.abs(s - 1) < 0.005) delete layout[id];
     else layout[id] = { x: round(t.x), y: round(t.y), s };
-    if (!Object.keys(layout).length) delete edits.layout[state.format];
+    if (!Object.keys(layout).length) delete edits.layout[key];
   }
   // Redraws only the preview while dragging; the full update runs when the gesture ends.
   let frameRequest = 0;
@@ -415,7 +488,7 @@
       const canvas = drawExport();
       const blob = await new Promise((resolve, reject) => canvas.toBlob(value => (value ? resolve(value) : reject(new Error('Image export failed. Try again or choose a smaller size.'))), 'image/png'));
       const who = ['keynote', 'session', 'panel'].includes(state.template) ? `-${state.template}${state.feature + 1}` : '';
-      const filename = `ccfest-${content.year}-${state.format}-${state.mode}${who}`;
+      const filename = `ccfest-${content.year}-${state.format}-${state.design}-${state.mode}${who}`;
       if (!print) saveBlob(blob, `${filename}.png`);
       else {
         const url = URL.createObjectURL(blob);
@@ -447,6 +520,10 @@
     content.lettering = await loadLettering(content.home);
     const [logo, qr] = await Promise.all(['wordmark.svg', 'register-qr.svg'].map(file => image(new URL(`assets/poster-maker/${file}`, content.home).href)));
     assets = { logo, qr, logoRatio: logo.naturalHeight / logo.naturalWidth };
+    const logoResponse = await fetch(new URL('assets/poster-maker/wordmark.svg', content.home));
+    if (!logoResponse.ok) throw new Error('The wordmark could not load. Reload before exporting.');
+    assets.logoWhite = await image(`data:image/svg+xml;charset=utf-8,${encodeURIComponent((await logoResponse.text()).replace(/fill="#18181A"/gi, 'fill="#ffffff"'))}`);
+    for (const [key, design] of Object.entries(A.designs)) form.elements.design.add(new Option(design.label, key));
     // Internal: /poster-maker/?proofs lays the design directions side by side instead of opening
     // the editor. poster-proofs.js is loaded only then, and gets the event content and images.
     if (new URLSearchParams(location.search).has('proofs')) {
@@ -467,11 +544,26 @@
     if (restoreMessage) setStatus(restoreMessage);
     form.addEventListener('submit', event => event.preventDefault());
     form.addEventListener('input', event => {
+      historyGroup = event.target.matches('textarea,input[type=range]') ? event.target.id : null;
       if (event.target.dataset.text) readTexts();
       // Scrubbing redraws straight away; the frames are already recorded.
       if (event.target.name === 'moment') { clearTimeout(timer); update(); return; }
       buttons.forEach(button => { button.disabled = true; });
       clearTimeout(timer); timer = setTimeout(update, 120);
+    });
+    form.addEventListener('focusout', () => { clearTimeout(timer); update(); historyGroup = null; history.endGroup(); });
+    $('maker-design-gallery').addEventListener('click', event => {
+      const button = event.target.closest('button[data-design]');
+      if (!button) return;
+      historyGroup = null; history.endGroup();
+      form.elements.design.value = button.dataset.design; selected = null; update();
+    });
+    $('maker-undo').onclick = () => travel(-1);
+    $('maker-redo').onclick = () => travel(1);
+    $('maker-workspace').addEventListener('keydown', event => {
+      if (!(event.metaKey || event.ctrlKey) || event.altKey || event.target.matches('input,textarea,select')) return;
+      const key = event.key.toLowerCase();
+      if (key === 'z' || key === 'y') { event.preventDefault(); travel(key === 'y' || event.shiftKey ? 1 : -1); }
     });
     $('maker-filmstrip').addEventListener('click', event => {
       const moment = event.target.dataset && event.target.dataset.moment;
@@ -481,7 +573,7 @@
     });
     $('maker-recapture').onclick = () => { if (state) ensureArt(state, true).catch(error => showError(error.message)); };
     $('maker-text-reset').onclick = () => { if (!state) return; delete edits.texts[textKey(state)]; $('maker-texts').dataset.key = ''; syncTextFields(state); update(); };
-    $('maker-layout-reset').onclick = () => { if (!state) return; delete edits.layout[state.format]; selected = null; update(); };
+    $('maker-layout-reset').onclick = () => { if (!state) return; delete edits.layout[A.layoutKey(state)]; selected = null; update(); };
     $('maker-reset').onclick = () => { fillForm(A.DEFAULTS); update(); };
     $('maker-save').onclick = () => {
       try { const value = readForm(); saveBlob(new Blob([JSON.stringify({ ...value, source: content.stamp }, null, 2)], { type: 'application/json' }), `ccfest-preset-${value.template}-${value.mode}.json`); }

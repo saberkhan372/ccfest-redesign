@@ -499,6 +499,15 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
 .maker-optional { display: block; font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 4px; }
 .maker-help { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 10px 0; }
 .maker-help a { color: var(--accent); }
+.maker-design-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 14px 0 20px; }
+.maker-design-gallery button { min-width: 0; padding: 5px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; text-align: left; }
+.maker-design-gallery button[aria-pressed=true] { border: 2px solid var(--accent); padding: 4px; box-shadow: 0 0 0 1px var(--accent); }
+.maker-design-gallery canvas { display: block; width: 100%; height: auto; pointer-events: none; }
+.maker-design-gallery span { display: block; padding: 8px 2px 4px; font: 11px 'Overpass Mono', monospace; }
+.maker-edit-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.maker-edit-actions button:disabled { opacity: .45; cursor: default; }
+.maker-edit-actions .maker-help { margin: 0 0 0 4px; }
+.maker-notes { background: var(--surface); border-left: 3px solid var(--accent); padding: 14px 18px 14px 32px; font-size: 13px; line-height: 1.6; }
 .maker-filmstrip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin-top: 8px; }
 .maker-filmstrip canvas { width: 100%; height: auto; display: block; border: 1px solid var(--line); cursor: pointer; }
 .maker-filmstrip canvas.is-current { outline: 2px solid var(--accent); outline-offset: 1px; }

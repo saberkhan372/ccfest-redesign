@@ -95,12 +95,13 @@
 
   // Canvas pixels. If the sketch paints a flat, possibly translucent background (Change does),
   // that colour is made transparent so the poster shows through instead of a lighter rectangle.
+  // That colour comes back as `clear`: poster-art.js needs it to draw the layer on a white poster.
   function copyCanvas(el) {
     const copy = document.createElement('canvas');
     copy.width = el.width; copy.height = el.height;
     const ctx = copy.getContext('2d', { willReadFrequently: true });
     ctx.drawImage(el, 0, 0);
-    if (!copy.width || !copy.height) return copy;
+    if (!copy.width || !copy.height) return { image: copy };
     const data = ctx.getImageData(0, 0, copy.width, copy.height);
     const px = data.data;
     const at = (x, y) => (y * copy.width + x) * 4;
@@ -110,8 +111,9 @@
     if (a > 0 && corners.every(same)) {
       for (let i = 0; i < px.length; i += 4) if (same(i)) px[i + 3] = 0;
       ctx.putImageData(data, 0, 0);
+      return { image: copy, clear: [r, g, b] };
     }
-    return copy;
+    return { image: copy };
   }
 
   // Frames the posters on the shapes actually showing (so a swinging C stays in view),
@@ -290,7 +292,10 @@
         const { markup, box } = inlineSvg(el, win);
         // The markup stays with the layer: it is what a saved poster stores to draw this exact frame again.
         layers.push({ image: await svgImage(markup), markup, x: box.left - origin.left, y: box.top - origin.top, w: box.width, h: box.height, blend: blendOf(el, win) });
-      } else layers.push({ image: tag === 'canvas' ? copyCanvas(el) : boxImage(el, win), ...place(el), blend: blendOf(el, win) });
+      } else {
+        const { image, clear } = tag === 'canvas' ? copyCanvas(el) : { image: boxImage(el, win) };
+        layers.push({ image, ...place(el), blend: blendOf(el, win), ...(clear && { clear }) });
+      }
     }
     const labels = [...outer.querySelectorAll('.cc-text')].filter(el => shown(el, win)).map(el => {
       const style = win.getComputedStyle(el);

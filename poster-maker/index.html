@@ -14,7 +14,7 @@ hide_event_banner: true
   <section class="maker-heading page-width" aria-labelledby="page-title">
     <p class="eyebrow">CC Fest creative tools / 01</p>
     <h1 id="page-title">Make a CC Fest Poster</h1>
-    <p>Adjust, Download, and Share.</p>
+    <p>Choose your content, find a design, and make it yours.</p>
   </section>
   <noscript><p class="page-width">The poster maker needs JavaScript to draw and download artwork. <a href="../register/">Read the event details and register.</a></p></noscript>
   <div id="maker-data" hidden data-home="{{ page.root }}" data-event="{{ site.data.event | jsonify | escape }}" data-schedule="{{ site.data.schedule | jsonify | escape }}" data-keynotes="{{ site.data.keynotes.keynotes | jsonify | escape }}" data-sessions="{{ site.data.sessions.sessions | jsonify | escape }}" data-credits="{{ site.data.site.credits | jsonify | escape }}"></div>
@@ -23,7 +23,7 @@ hide_event_banner: true
     <form id="maker-controls" class="maker-controls">
       <fieldset>
         <legend><span>01</span> The essentials</legend>
-        <label for="maker-template">Template</label>
+        <label for="maker-template">Content</label>
         <select id="maker-template" name="template"><option value="announcement">Main announcement</option><option value="keynote">Keynote spotlight</option><option value="session">Session spotlight</option><option value="panel">Panel spotlight</option><option value="community">Community flier</option></select>
         <div id="maker-feature-field" hidden>
           <label for="maker-feature" id="maker-feature-label">Speaker</label>
@@ -35,6 +35,10 @@ hide_event_banner: true
         </div>
         <label for="maker-format">Size</label>
         <select id="maker-format" name="format"><option value="portrait">Social portrait · 1080 × 1350</option><option value="square">Square · 1080 × 1080</option><option value="story">Story · 1080 × 1920</option><option value="landscape">Landscape · 1200 × 630</option><option value="letter">US Letter · 8.5 × 11 in</option><option value="a4">A4 · 210 × 297 mm</option></select>
+        <label for="maker-design">Design</label>
+        <select id="maker-design" name="design" aria-describedby="maker-design-help"><option value="classic">Classic · all sizes</option></select>
+        <p id="maker-design-help" class="maker-help">Classic works at every size. Six additional designs are available for social portrait.</p>
+        <div id="maker-design-gallery" class="maker-design-gallery" aria-label="Choose a poster design"></div>
         <label for="maker-copy">Supporting line <span class="maker-optional">up to 100 characters</span></label>
         <textarea id="maker-copy" name="copy" rows="3" maxlength="100" aria-describedby="maker-copy-help"></textarea>
         <p id="maker-copy-help" class="maker-help">Event date, times, speakers, and sessions come from the site. Your edits stay in this browser.</p>
@@ -59,16 +63,20 @@ hide_event_banner: true
         <label class="maker-check"><input name="times" type="checkbox" checked> Show Pacific + Eastern times</label>
         <label class="maker-check"><input name="qr" type="checkbox" checked> Add registration QR code</label>
         <div class="maker-preset-actions"><button id="maker-save" type="button">Save preset</button><label class="maker-import" for="maker-import">Open preset</label><input id="maker-import" type="file" accept="application/json,.json"><button id="maker-reset" type="button">Reset</button></div>
+        <p class="maker-help">Presets save your settings and layout. Reopening records fresh artwork; it may look different.</p>
       </fieldset>
     </form>
     <div class="maker-preview-column">
       <div class="maker-preview-heading"><p class="eyebrow">Your poster / live preview</p><span id="maker-dimensions"></span></div>
+      <div class="maker-edit-actions" role="group" aria-label="Edit history"><button id="maker-undo" class="maker-small-button" type="button" disabled>Undo</button><button id="maker-redo" class="maker-small-button" type="button" disabled>Redo</button><span class="maker-help">Settings, text, and layout</span></div>
       <div class="maker-preview-mat"><div class="maker-stage"><div id="maker-canvas" role="img" aria-label="CC Fest poster preview"><canvas></canvas></div><div id="maker-overlay" class="maker-overlay" aria-label="Poster layout: select a block to move or resize it"></div></div></div>
       <p class="maker-help maker-layout-help">Drag any block on the poster to move it; drag its corner to resize. With the keyboard, Tab to a block, then use the arrow keys, + and −. Layout changes are kept for each size. <button id="maker-layout-reset" class="maker-small-button" type="button">Reset layout for this size</button></p>
       <p id="maker-error" role="alert" hidden></p>
+      <ul id="maker-notes" class="maker-notes" aria-label="Poster content notes" hidden></ul>
       <div class="maker-export-actions"><button id="maker-download" class="button button-solid" type="button">Download PNG ↓</button><button id="maker-print" class="button" type="button">Print / save PDF ↗</button></div>
       <p id="maker-export-note" class="maker-help">Full-resolution artwork. Nothing is uploaded or published.</p>
-      <details class="maker-sharing"><summary>Caption &amp; image description</summary><label for="maker-caption">Caption</label><textarea id="maker-caption" readonly rows="5"></textarea><label for="maker-alt">Image description</label><textarea id="maker-alt" readonly rows="4"></textarea><p class="maker-help">Select and copy this text when sharing your poster.</p></details>
+      <details class="maker-sharing"><summary>Caption &amp; image description</summary><label for="maker-caption">Caption</label><textarea id="maker-caption" readonly rows="5"></textarea><label for="maker-alt">Image description</label><textarea id="maker-alt" readonly rows="4"></textarea><p class="maker-help">Copy this text into the app when sharing. PNG downloads do not carry an image description.</p></details>
+      <p class="maker-help"><a href="https://www.figma.com/design/zcfrnWNC1Tyf81HiMeSC4y?node-id=19-125">Edit campaign spotlights in Figma ↗</a> · <a href="https://www.figma.com/design/zcfrnWNC1Tyf81HiMeSC4y?node-id=0-1">Open the carousel ↗</a> · <a href="https://www.figma.com/design/zcfrnWNC1Tyf81HiMeSC4y?node-id=26-125">Countdowns &amp; cover ↗</a></p>
     </div>
   </section>
   <section class="maker-about page-width" aria-labelledby="maker-about-title"><h2 id="maker-about-title">Made with creative code.</h2><p>The artwork is the homepage interactive, running live: the poster maker picks an animation, lets it play, and keeps one frame.</p><p>Event details: <a href="../register/">Virtual CC Fest 2026</a>. Typography and visual identity by Francisca José Rodrigues. Homepage interactives by Shristi Singh.</p></section>

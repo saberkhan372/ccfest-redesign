@@ -153,6 +153,7 @@
 
   /* ── 1 · Signature ─────────────────────────────────────────────────── */
   A.registerDesign('signature', {
+    templates: ['announcement', 'community'],
     label: 'Signature',
     use: 'General announcement',
     formats: ['portrait'],
@@ -194,6 +195,7 @@
 
   /* ── 2 · Bold date ─────────────────────────────────────────────────── */
   A.registerDesign('bold-date', {
+    templates: ['announcement', 'community'],
     label: 'Bold date',
     use: 'Reminders and countdown posts',
     formats: ['portrait'],
@@ -230,7 +232,7 @@
       const x = 560, w = 1000 - M - x;
       place(ctx, frame, 'info', [x, 700, w, 230], () => {
         let h = chips(ctx, facts(content), x, 700, w, 19, COLORS.ink, true) + 28;
-        mono(ctx, 15, 600); ctx.fillStyle = COLORS.ink; ctx.fillText('TIMES', x, 700 + h); h += 30;
+        if (state.times) { mono(ctx, 15, 600); ctx.fillStyle = COLORS.ink; ctx.fillText('TIMES', x, 700 + h); h += 30; }
         timeLines(ctx, state, content, x, 700 + h, 28, w, COLORS.ink, true);
       });
       pair(frame, 'ink', bg);
@@ -248,6 +250,7 @@
 
   /* ── 3 · Art-led ───────────────────────────────────────────────────── */
   A.registerDesign('art-led', {
+    templates: ['announcement', 'community'],
     label: 'Art-led',
     use: 'Social promotion, where the animation does the talking',
     formats: ['portrait'],
@@ -272,6 +275,7 @@
 
   /* ── 4 · Speaker-led ───────────────────────────────────────────────── */
   A.registerDesign('speaker-led', {
+    templates: ['keynote'],
     label: 'Speaker-led',
     use: 'Keynotes: one speaker, or a pair',
     formats: ['portrait'],
@@ -341,6 +345,7 @@
 
   /* ── 5 · Program-led ───────────────────────────────────────────────── */
   A.registerDesign('program-led', {
+    templates: ['session', 'panel'],
     label: 'Program-led',
     use: 'A session or the panel',
     formats: ['portrait'],
@@ -351,6 +356,8 @@
       const feature = content.feature;
       if (!feature || !feature.title) throw new Error('Choose a session.');
       const list = feature.people.slice(0, 4);
+      if (feature.people.length > 4) frame.problems.push('This design supports up to four presenters. Choose Classic to include everyone.');
+      if (list.length === 2) { frame.problems.push('Use Classic for a session with two presenters.'); return; }
       const title = fitTitle(ctx, feature.title, WIDTH, 5, [120, 108, 96, 84, 76, 68, 60, 54, 48, 44], 700, 1.06, list.length > 2 ? 290 : 440);
       if (!title) { frame.problems.push('This session title is too long for the poster. Shorten it for this poster only.'); return; }
       const bandBottom = Math.max(400, 150 + title.height + 56);
@@ -401,7 +408,7 @@
         const lines = Math.floor((floor - dy) / (24 * 1.35));
         if (feature.description && lines >= 2) {
           place(ctx, frame, 'copy', [M, dy, WIDTH, lines * 24 * 1.35], () => wrap(ctx, feature.description, M, dy, 24, WIDTH, lines, true, { clip: true, leading: 1.35, onClip: () => frame.notes.push('Description is clipped.') }));
-        }
+        } else if (feature.description) frame.notes.push('Description omitted to leave room for the title and presenter.');
       }
       pair(frame, 'ink', bg);
       // Date, address and times, with the QR code at the right.
@@ -419,6 +426,7 @@
 
   /* ── 6 · Minimal print ─────────────────────────────────────────────── */
   A.registerDesign('minimal-print', {
+    templates: ['announcement', 'community'],
     label: 'Minimal print',
     use: 'Noticeboards, schools and offices (best on Letter or A4)',
     formats: ['portrait'],
