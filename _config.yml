@@ -24,6 +24,11 @@ exclude:
   - GOTCHAS.md
   - README.md
   - poster-maker.md
+  - media-strat.md
+  - posters-oct1/
+  - social-oct1/
+  - schedule-posters/
+  - ccfest-session-spotlights/
   - docs/
   - scripts/
   - design/

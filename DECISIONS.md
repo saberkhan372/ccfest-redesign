@@ -1,5 +1,14 @@
 # Decisions — CC Fest redesign
 
+## 2026-10-06 — Schedule posters are built from the data, not drawn by hand
+**Why:** Workshops and rounds were still changing, and the carousel's "The day" slide had already gone stale. `scripts/build-schedule-posters.cjs` reads `_data/` and writes a short poster (1080 × 1350) and a long one (US Letter) as HTML, PNG and tagged PDF into `schedule-posters/`, so a rerun is enough after any programme change, and it fails if the content no longer fits.
+**Boundary:** The output folder is a campaign artifact, like `social-oct1/` and `posters-oct1/`: not committed and excluded from the site build (`_config.yml`). Only the script is in the repository. The look follows the carousel rules; the designers have not reviewed it.
+
+## 2026-09-28 — Local Zoom preparation, with explicit proposed rounds
+**Why:** Saber wants an exporter for the October 17 event and explicitly requested a hypothetical schedule. The organizer tool lives under the already-excluded `docs/` folder, uses a dated source snapshot, and exports files locally. Round assignments are labelled draft; Blair's first-round-only constraint is enforced. No public schedule changes follow from editing this tool.
+**Contact handling:** The repository snapshot contains no email addresses. A build can embed a supplied private contacts file into a portable editor outside the repository; saved plans exclude contacts. Missing keynote emails are never fabricated. The speakers export omits incomplete contact rows and lists them for follow-up.
+**Import boundary:** CSV columns follow Zoom's official field guide, with optional matching against an account's downloaded sample. Real import remains unverified. The guide does not specify a multi-speaker delimiter, so the panel CSV associates Amy and retains all names in its description; the other three panelists must be linked in Zoom. Presenter emails are not alternative-host assignments.
+
 ## 2026-09-15 — Provisional integration in the existing static site
 **Why:** Combine Francisca’s layout and Shristi’s supplied interactive without changing the no-build stack or modifying either designer’s source folder. Shristi’s final PR is still pending.
 **Rejected:** Blind branch merge, framework migration, or publishing the unfinished branch.
