@@ -1,5 +1,9 @@
 # Decisions — CC Fest redesign
 
+## 2026-10-06 — Require session identity and format in the CMS
+**Why:** The CMS save in `771f63e` removed the metadata needed to place all 17 sessions in the schedule. Restoring the existing IDs and assignments preserves saved choices and the new descriptions. ID and Format are now explicitly required in `.pages.yml`; When stays optional so unassigned workshops can use the existing "Round to be announced" section.
+**Limit:** Required fields protect the current form. Editors must reload Pages CMS after schema changes: a stale form that lacks these fields can still delete them. See `docs/CMS.md` and `GOTCHAS.md`.
+
 ## 2026-10-06 — Schedule posters are built from the data, not drawn by hand
 **Why:** Workshops and rounds were still changing, and the carousel's "The day" slide had already gone stale. `scripts/build-schedule-posters.cjs` reads `_data/` and writes a short poster (1080 × 1350) and a long one (US Letter) as HTML, PNG and tagged PDF into `schedule-posters/`, so a rerun is enough after any programme change, and it fails if the content no longer fits.
 **Boundary:** The output folder is a campaign artifact, like `social-oct1/` and `posters-oct1/`: not committed and excluded from the site build (`_config.yml`). Only the script is in the repository. The look follows the carousel rules; the designers have not reviewed it.

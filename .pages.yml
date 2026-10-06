@@ -69,8 +69,8 @@ content:
         description: "Leave empty until the schedule is settled; the page shows its announcement row by itself."
         fields:
           - { name: title, label: Session title, type: string, description: "A session only appears once it has a title." }
-          - { name: id, label: ID, type: string, description: "Short and permanent, e.g. naoto-hieda. Visitors' saved choices and calendar entries use it, so never change it once the page is live." }
-          - { name: format, label: Format, type: select, options: { values: [Workshop, Panel] } }
+          - { name: id, label: ID, type: string, required: true, description: "Short and permanent, e.g. naoto-hieda. Visitors' saved choices and calendar entries use it, so never change it once the page is live." }
+          - { name: format, label: Format, type: select, required: true, options: { values: [Workshop, Panel] } }
           - { name: schedule_id, label: When, type: select, required: false, options: { values: [round-1, round-2, panel] }, description: "round-1 = 9:30 am PT, round-2 = 11:00 am PT. Leave empty for a session whose round is not settled; it shows as 'Round to be announced'." }
           - { name: level, label: Level, type: select, required: false, options: { values: [Beginner, Intermediate, Advanced] } }
           - { name: language, label: Language, type: select, options: { values: [English, Spanish] }, description: "Default English." }

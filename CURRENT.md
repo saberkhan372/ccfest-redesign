@@ -1,5 +1,15 @@
 # Current state — October 6, 2026
 
+## CMS session recovery — 2026-10-06
+
+The live session disappearance comes from CMS commit `771f63e`: it removed all 84 scheduling metadata values (`id`, `format`, `schedule_id`, `level`, `language`) from the 17 sessions. `.pages.yml` already declared these fields; the deleted keys match an older form, consistent with a stale CMS schema, although the editor's browser was not inspected.
+
+Local branch `fix/cms-session-metadata` restores only those missing values from the previous commit. Every content value from the CMS save is preserved, including Kofi's new description. The result is eight workshops in Round 1, one panel and eight workshops in Round 2, using the original published IDs. ID and Format are now explicitly required in the current CMS form; When remains optional. `docs/CMS.md`, `GOTCHAS.md` and `DECISIONS.md` explain the schema reload and recovery behavior.
+
+Verified after the final data/schema changes: Jekyll 3.10 safe-mode build; `scripts/verify-schedule-fallback.rb`; full `scripts/verify.cjs` in Chromium at 320/390/768/1440 (pages, images/fonts/links, schedule choices/time zones/calendar/PDF/PNG, blocked storage, registration dialog, motion and no-JS fallback); all 17 rendered cards and Kofi's text; desktop/mobile screenshots inspected; semantic comparison confirms only the restored metadata differs from the CMS save. `git diff --check` passes. No designer-owned files, Figma or private records were accessed or changed.
+
+Saber explicitly approved committing and pushing this recovery to `main`, which publishes it. Next task: verify the resulting GitHub Pages deployment and live page. Before the next content edit, reload Pages CMS and confirm that ID, Format, When, Level and Language are visible. A real CMS save with the refreshed form and the live recovery are pending verification at this commit.
+
 ## Completed this session
 
 Fixed the three findings from the [October 6 review](docs/REVIEW-2026-10-06.md). The schedule keeps titled workshops visible when their round is missing, empty or whitespace-only; their client-side round ID is empty, so they receive no preference controls. Copy buttons keep their original labels and restart one feedback timer per button. Sticky-preview browser checks now scroll instantly before measuring. Added regression coverage for actual Jekyll rendering, pending-card detection and repeated Copy clicks; documented the fixture command in docs/UPDATING.md.

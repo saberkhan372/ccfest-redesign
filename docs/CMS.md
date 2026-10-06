@@ -78,3 +78,11 @@ node scripts/sync-typography.cjs   # then confirm git reports no change
 4. Editors without GitHub accounts are invited by email from inside Pages CMS.
 
 A save is a normal commit. If a bad value ever breaks the build, GitHub emails about the failed build and reverting that one commit fixes it.
+
+## After the form definitions change
+
+Reload Pages CMS before editing after a change to `.pages.yml`, then reopen the Sessions form. Check that an existing session shows its ID, Format, When, Level and Language. If those fields are missing, reload or reopen the repository before saving. Pages CMS saves only the fields in its loaded form; an older form can remove newly added data even when you only edit a description.
+
+ID and Format are required for each session. Keep published IDs unchanged so visitors' saved choices still work. When remains optional: a workshop with no assigned round appears under "Round to be announced".
+
+The October 6 CMS save removed the scheduling fields from all 17 sessions. Recovery restored those fields from the preceding commit while preserving the new descriptions; reverting the entire save would have lost those content edits. For a local check after a save, build the site and run `node scripts/verify.cjs` against the build as described above. GitHub Pages can build successfully even when sessions have disappeared.
