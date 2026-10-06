@@ -103,24 +103,25 @@ nav: "event"
               <p class="schedule-note">The file works with Apple Calendar, Outlook and Google Calendar (Settings → Import). It includes the keynotes, the panel and your first choice in each round (second choices and maybes are not added), and is a snapshot: if the schedule changes later, download it again. The PDF and PNG are printable copies of your choices, with times in the zone chosen above.</p>
             </div>
             <ol class="schedule-blocks">
-{% for item in schedule.items %}{% assign in_block = sessions | where: "schedule_id", item.id %}{% capture who %}{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}{{ keynote.name | strip }}{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{{ session.title | strip }}{% endfor %}{% endif %}{% endcapture %}              <li class="schedule-block schedule-block-{{ item.kind | default: 'other' }}" id="{{ item.id | default: forloop.index | escape }}" data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}" data-kind="{{ item.kind | escape }}" data-summary="{{ item.title | escape }}{% if who != "" %} — {{ who | escape }}{% endif %}">
+{% for item in schedule.items %}{% assign in_block = sessions | where: "schedule_id", item.id %}{% capture who %}{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}{{ keynote.name | strip }}{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{% if session.format == "Panel" %}{{ session.title | strip }}{% endif %}{% endfor %}{% endif %}{% endcapture %}              <li class="schedule-block schedule-block-{{ item.kind | default: 'other' }}" id="{{ item.id | default: forloop.index | escape }}" data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}" data-kind="{{ item.kind | escape }}" data-summary="{{ item.title | escape }}{% if who != "" %} — {{ who | escape }}{% endif %}">
                 <div class="schedule-block-head">
                   <h3>{{ item.title | escape }}</h3>
                   <p class="schedule-times">{% for zone in schedule.zones %}{% assign shift = zone.utc_offset | minus: schedule.zones[0].utc_offset | times: 60 %}<span data-label="{{ zone.label | escape }}">{% include time-range.html from=item.start to=item.end shift=shift %} <small>{{ zone.label | escape }}</small></span>{% endfor %}<span class="schedule-local" hidden></span></p>
                 </div>
 {% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}                <p class="schedule-people"><a href="#keynote-{{ item.id | escape }}">{{ keynote.name | escape }}</a> <small>keynote</small></p>
-{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}                {% include session-card.html session=session root=page.root order=forloop.index %}
-{% endfor %}{% elsif item.kind == "workshops" %}                <div class="session-grid">
+{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{% if session.format == "Panel" %}                {% include session-card.html session=session root=page.root order=forloop.index %}
+{% endif %}{% endfor %}{% elsif item.kind == "workshops" %}                <div class="session-grid">
 {% for session in in_block %}                {% include session-card.html session=session root=page.root order=forloop.index %}
 {% endfor %}                  <p class="schedule-empty" hidden></p>
                 </div>
 {% endif %}              </li>
 {% endfor %}            </ol>
-{% assign pending = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign pending_round = session.schedule_id | default: "" | strip %}{% if pending_title != "" and session.format == "Workshop" and pending_round == "" %}{% assign pending = pending | plus: 1 %}{% endif %}{% endfor %}{% if pending > 0 %}            <section class="schedule-pending" aria-labelledby="pending-title">
+{%- comment -%} A titled workshop is "to be announced" unless its schedule_id is exactly the id of a workshop round: a missing, empty, padded, mistyped or removed id all land here instead of vanishing. {%- endcomment -%}
+{% capture round_ids %}|{% for item in schedule.items %}{% if item.kind == "workshops" %}{{ item.id }}|{% endif %}{% endfor %}{% endcapture %}{% assign pending = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign round_key = "|" | append: session.schedule_id | append: "|" %}{% assign known_round = false %}{% if round_ids contains round_key %}{% assign known_round = true %}{% endif %}{% if pending_title != "" and session.format == "Workshop" and known_round == false %}{% assign pending = pending | plus: 1 %}{% endif %}{% endfor %}{% if pending > 0 %}            <section class="schedule-pending" aria-labelledby="pending-title">
               <h3 id="pending-title">Round to be announced</h3>
               <p>These workshops are confirmed; their round will be added here soon.</p>
               <div class="session-grid">
-{% assign n = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign pending_round = session.schedule_id | default: "" | strip %}{% if pending_title != "" and session.format == "Workshop" and pending_round == "" %}{% assign n = n | plus: 1 %}                {% include session-card.html session=session root=page.root order=n %}
+{% assign n = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign round_key = "|" | append: session.schedule_id | append: "|" %}{% assign known_round = false %}{% if round_ids contains round_key %}{% assign known_round = true %}{% endif %}{% if pending_title != "" and session.format == "Workshop" and known_round == false %}{% assign n = n | plus: 1 %}                {% include session-card.html session=session root=page.root order=n pending=true %}
 {% endif %}{% endfor %}              </div>
             </section>
 {% endif %}          </div>

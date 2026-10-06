@@ -14,6 +14,10 @@ Host-side changes only: register/index.html, _includes/session-card.html, poster
 - scripts/verify-poster-state.cjs; scripts/verify-schedule-fallback.rb (missing/empty/whitespace round and title fixtures). The fallback test also rejects the original template.
 - JavaScript syntax and git diff --check. Fresh Chrome schedule/editor screenshots inspected.
 
+## Follow-up fix — 2026-10-06 (Claude)
+
+Review of the commit above found one remaining hole: a workshop whose `schedule_id` matched no workshop round (mistyped, padded, removed, or `panel`) rendered nowhere. A workshop now counts as scheduled only if its `schedule_id` is exactly the id of a workshop block in `_data/schedule.yml`; everything else goes under "Round to be announced" with no preference controls, and the panel block shows only panels. `scripts/verify-schedule-fallback.rb` gained those cases (it fails on the previous template and passes now). If a third round is added, its id must also be added to the `schedule_id` options in `.pages.yml`.
+
 ## Open work and limits
 
 Safari/Firefox, screen-reader behavior, actual calendar-app import, touch dragging, phone keyboard/short landscape layout, physical printing and live registration remain unverified. The earlier small-screen preview-collapse suggestion is a separate design improvement. The old review's environment blockers no longer apply to this session.

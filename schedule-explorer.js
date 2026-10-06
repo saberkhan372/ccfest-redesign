@@ -62,7 +62,7 @@
   // ---- preferences ------------------------------------------------------------------------------
   const CHOICES = [['first', 'First choice'], ['second', 'Second choice'], ['maybe', 'Maybe']];
   for (const card of workshops) {
-    if (!card.dataset.block) continue;   // no round yet, nothing to rank
+    if (!card.dataset.block || card.closest('.schedule-pending')) continue;   // no round yet, nothing to rank
     const group = document.createElement('div');
     group.className = 'session-pref';
     group.setAttribute('role', 'group');

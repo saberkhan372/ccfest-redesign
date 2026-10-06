@@ -26,16 +26,23 @@ Dir.mktmpdir('ccfest-schedule-fallback-') do |tmp|
     untitled['title'] = value unless value.nil?
     fixtures << untitled
   end
+  # A round that is not exactly the id of a workshop round also means "to be announced": mistyped,
+  # padded with a space, removed, or the id of the panel block.
+  { 'typo' => 'round-9', 'padded' => "#{round} ", 'panelish' => 'panel' }.each do |name, value|
+    fixtures << { 'id' => name, 'title' => "Pending #{name}", 'format' => 'Workshop', 'schedule_id' => value }
+  end
+  fixtures << { 'id' => 'real-panel', 'title' => 'Fixture panel', 'format' => 'Panel', 'schedule_id' => 'panel', 'presenters' => [{ 'name' => 'Panelist One' }] }
   File.write(File.join(input, '_data/sessions.yml'), { 'sessions' => fixtures }.to_yaml)
   config = Jekyll.configuration('source' => input, 'destination' => output, 'safe' => true, 'quiet' => true)
   Jekyll::Site.new(config).process
   page = Nokogiri::HTML(File.read(File.join(output, 'register/index.html')))
   cards = page.css('.session-card')
-  raise "Expected four titled workshops, got #{cards.size}" unless cards.size == 4
+  raise "Expected eight titled sessions (1 assigned, 6 pending, 1 panel), got #{cards.size}" unless cards.size == 8
   pending = page.css('.schedule-pending .session-card')
-  raise 'Missing, empty and whitespace rounds must all render as pending' unless pending.map { |c| c['data-id'] }.sort == %w[empty missing whitespace]
+  raise "Missing, empty, whitespace, mistyped, padded and panel-id rounds must all render as pending, got #{pending.map { |c| c['data-id'] }.sort.inspect}" unless pending.map { |c| c['data-id'] }.sort == %w[empty missing padded panelish typo whitespace]
+  raise 'The panel block must hold only the panel' unless page.css('#panel .session-card').map { |c| c['data-id'] } == ['real-panel']
   raise 'Pending workshops must have empty client-side round IDs' unless pending.all? { |c| c['data-block'] == '' }
   raise 'Assigned workshop moved out of its round' unless page.css("##{round} .session-card[data-id='assigned']").size == 1
   raise 'Untitled fixture rendered' unless page.css('[data-id^="untitled-"]').empty?
 end
-puts 'PASS: actual Jekyll rendering preserves pending workshops for missing/empty/whitespace rounds and skips untitled entries.'
+puts 'PASS: actual Jekyll rendering keeps every titled workshop visible (missing, empty, whitespace, mistyped, padded or panel-id rounds go under Round to be announced), keeps the panel block to panels, and skips untitled entries.'
