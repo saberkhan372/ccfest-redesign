@@ -1,0 +1,20 @@
+name: Activate checked Pages publishing
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/activate-pages.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Switch existing Pages site to Actions without changing the domain
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
+          gh api "repos/$GITHUB_REPOSITORY/pages" --jq '{build_type, cname, https_enforced, status}'
