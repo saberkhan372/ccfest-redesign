@@ -67,3 +67,5 @@
 - The Actions workflow cannot gate a simultaneous branch-based Pages publisher. Change Pages Source to GitHub Actions during approved rollout.
 - Required fields and local schema projection do not prove hosted CMS preserves fields in an already-open tab. Reload forms after schema changes and complete the real-save checklist in docs/CMS-ROLLOUT.md.
 - Legacy presenter URLs lacking https://, and one multi-URL value, remain unchanged and produce warnings. They are not automatically rewritten to guessed destinations.
+
+- During rollout, a subsequent GitHub runner received a location-based 403 from the Playwright browser CDN even though the first run succeeded. CI now uses the runner's preinstalled Google Chrome with pinned Playwright; it still fails if a real browser is unavailable and never skips browser checks.

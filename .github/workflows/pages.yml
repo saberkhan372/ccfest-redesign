@@ -47,7 +47,9 @@ jobs:
       - name: Install isolated browser tooling
         run: |
           npm install --prefix "$RUNNER_TEMP/cms-browser" playwright@1.58.2
-          "$RUNNER_TEMP/cms-browser/node_modules/.bin/playwright" install --with-deps chromium
+          browser_bin=$(command -v google-chrome || command -v google-chrome-stable)
+          "$browser_bin" --version
+          echo "CHROMIUM_PATH=$browser_bin" >> "$GITHUB_ENV"
           echo "NODE_PATH=$RUNNER_TEMP/cms-browser/node_modules" >> "$GITHUB_ENV"
       - name: Verify rendered pages in Chromium
         run: |

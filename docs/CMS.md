@@ -98,6 +98,6 @@ node scripts/verify-poster-state.cjs
 git diff --check
 ```
 
-`CHROMIUM_PATH=/path/to/chromium` supports a locally installed Chromium. CI installs a pinned Playwright release outside the repository. `verify-publish.cjs` is content-generic; `verify.cjs` also retains detailed current-event assertions, including the October 17, 2026 date and current speaker IDs.
+`CHROMIUM_PATH=/path/to/chromium` supports a locally installed Chromium. CI installs a pinned Playwright release outside the repository and uses the Google Chrome already supplied by the GitHub runner, avoiding a separate browser-CDN download. `verify-publish.cjs` is content-generic; `verify.cjs` also retains detailed current-event assertions, including the October 17, 2026 date and current speaker IDs.
 
 Build order is validate → derive event/time-zone data → sync lettering → Jekyll safe build → reconcile source with rendered cards. Generated `_data/generated_*.json` and `_config.build.yml` are build-owned, ignored by Git and not editable CMS content. Always use `scripts/build.rb` for a publishing build.
