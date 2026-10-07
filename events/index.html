@@ -1,17 +1,17 @@
 ---
 layout: base
-title: "Events — CC Fest"
-description: "Upcoming CC Fest events: free creative coding gatherings, workshops, and educator camps."
-body_class: "inner-page events-page"
-root: "../"
-home_href: "../"
-nav_current: "events"
+body_class: inner-page events-page
+root: ../
+home_href: ../
+nav_current: events
+copy_key: events_page
 ---
-{% assign event = site.data.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
+{% assign copy = site.data.events_page %}
+{% assign event = site.data.generated_event | default: site.data.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
       <section class="hero page-hero page-width" aria-labelledby="page-title">
-        <p class="eyebrow">What’s next</p>
-        <h1 id="page-title">Events</h1>
-        <p class="hero-summary">Free gatherings, workshops, and camps for creative coders of all levels.</p>
+        <p class="eyebrow">{{ copy.page.eyebrow | escape }}</p>
+        <h1 id="page-title">{{ copy.page.heading | escape }}</h1>
+        <p class="hero-summary">{% include editorial.html text=copy.page.summary %}</p>
       </section>
 
       <section class="section section-tinted" id="upcoming" aria-labelledby="upcoming-title">
@@ -19,8 +19,8 @@ nav_current: "events"
           <div class="section-heading">
             <p>01</p>
             <div>
-              <h2 id="upcoming-title">Upcoming</h2>
-              <p>Dates and registration are announced on the mailing list first.</p>
+              <h2 id="upcoming-title">{{ copy.upcoming.heading | escape }}</h2>
+              <p>{% include editorial.html text=copy.upcoming.body %}</p>
             </div>
           </div>
 
@@ -29,14 +29,14 @@ nav_current: "events"
               <div>
                 <p class="eyebrow">10th anniversary · {{ event.format | escape }} · {{ event.cost | escape }}</p>
                 <h3>{{ event.name | escape }}</h3>
-                <p>Workshops, talks, and community for creative coders of all levels. {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}Date to be announced{% endif %} — {% if registration_url != "" %}registration is open.{% else %}join the mailing list for updates.{% endif %}</p>
-                <a class="button button-solid" href="../register/">Event details →</a>
+                <p>{% include editorial.html text=copy.states.event_intro %} {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_pending %}{% endif %} — {% if registration_url != "" %}{% include editorial.html text=copy.states.registration_open_short %}{% else %}{% include editorial.html text=copy.states.registration_pending_short %}{% endif %}</p>
+                <a class="button button-solid" href="../register/">{{ copy.upcoming.link_label | escape }}</a>
               </div>
               <dl>
-                <div><dt>Format</dt><dd>{{ event.format | escape }}</dd></div>
-                <div><dt>Date</dt><dd>{% if event_date != "" %}{{ event.date | date: "%B %-d, %Y" }}{% else %}To be confirmed{% endif %}</dd></div>
-                <div><dt>Cost</dt><dd>{{ event.cost | escape }}</dd></div>
-                <div><dt>Experience</dt><dd>{{ event.level | escape }}</dd></div>
+                <div><dt>{{ copy.upcoming.label | escape }}</dt><dd>{{ event.format | escape }}</dd></div>
+                <div><dt>{{ copy.upcoming.label_2 | escape }}</dt><dd>{% if event_date != "" %}{{ event.date | date: "%B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_unconfirmed %}{% endif %}</dd></div>
+                <div><dt>{{ copy.upcoming.label_3 | escape }}</dt><dd>{{ event.cost | escape }}</dd></div>
+                <div><dt>{{ copy.upcoming.label_4 | escape }}</dt><dd>{{ event.level | escape }}</dd></div>
               </dl>
             </li>
 {% for camp in site.data.camps.camps %}            {% include event-card.html camp=camp %}
@@ -48,13 +48,13 @@ nav_current: "events"
         <div class="section-heading">
           <p>02</p>
           <div>
-            <h2 id="more-title">Ten years of CC Fest</h2>
-            <p>Browse agendas from past gatherings, or bring CC Fest to your city.</p>
+            <h2 id="more-title">{{ copy.more.heading | escape }}</h2>
+            <p>{% include editorial.html text=copy.more.body %}</p>
           </div>
         </div>
         <div class="hero-actions">
-          <a class="button button-solid" href="../past-events/">See past events →</a>
-          <a class="button" href="mailto:{{ site.data.site.email | escape }}?subject=Organizing%20a%20CC%20Fest">Organize a CC Fest</a>
+          <a class="button button-solid" href="../past-events/">{{ copy.more.link_label | escape }}</a>
+          <a class="button" href="mailto:{{ site.data.site.email | escape }}?subject=Organizing%20a%20CC%20Fest">{{ copy.more.link_label_2 | escape }}</a>
         </div>
       </section>
     </main>

@@ -8,7 +8,7 @@ const { chromium } = require('playwright');
 const base = process.argv[2] || 'http://127.0.0.1:8876/';
 const MODES = ['creativity', 'change', 'connection', 'celebration', 'collaboration', 'creative-commons', 'conversations', 'community', 'curiosity', 'coding'];
 (async () => {
-  const browser = await chromium.launch({ channel: 'chrome', headless: true });
+  const browser = await chromium.launch({ headless: true, ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : { channel: 'chrome' }) });
   try {
     const page = await browser.newPage({ acceptDownloads: true, viewport: { width: 1440, height: 1000 } });
     const errors = [];

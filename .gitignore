@@ -12,3 +12,8 @@ figma-to-html-registration (2)/
 _site/
 .jekyll-cache/
 .jekyll-metadata
+_data/generated_event.json
+_data/generated_schedule.json
+_config.build.yml
+.bundle/
+vendor/

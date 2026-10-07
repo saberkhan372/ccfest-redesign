@@ -67,14 +67,20 @@ const escapeHtml = s => s
   .replaceAll('"', '&quot;');
 
 /* Build the <span> for every run of one Figma text node. */
-function render(id) {
+function render(id, dynamic = true) {
   const node = nodes.find(n => n.id === id);
   if (!node) throw new Error(`No Figma data for node ${id} in design/figma-typography.json`);
 
   return node.runs.map((run, i) => {
     // The event title's " ________, " run is Francisca's blank date rule.
     // The h1's aria-label supplies the spoken name, so the underscores are decorative.
-    const text = run.text;
+    let text = run.text;
+    let trusted = false;
+    if (dynamic && ['218:127', '251:741'].includes(id)) {
+      const last = node.runs.length - 1;
+      if (i === last) { text = '{{ event_year | escape }}'; trusted = true; }
+      if (id === '251:741' && i === last - 1) { text = '{{ event_title_date | escape }}'; trusted = true; }
+    }
 
     // Variable font axes, e.g. 'wdth' 150, 'wght' 700.
     const axes = Object.entries(run.font.variationSettings || {})
@@ -98,8 +104,16 @@ function render(id) {
       `text-transform: ${textTransform}`,
     ].join('; ');
 
-    return `<span data-figma-run="${i}" style="${css}">${escapeHtml(text).replaceAll('\n', '<br>')}</span>`;
+    return `<span data-figma-run="${i}" style="${css}">${(trusted ? text : escapeHtml(text)).replaceAll('\n', '<br>')}</span>`;
   }).join('');
+}
+
+function heading(id) {
+  if (!['218:127', '251:741'].includes(id)) return render(id);
+  const standard = render(id);
+  const first = render(id, false).match(/^<span[^>]*>/)[0];
+  const custom = `${first}{{ event_lettered_name | escape }}</span>${id === '251:741' ? '{{ event_title_date | escape }}' : ' '}{{ event_year | escape }}`;
+  return `{% include event-context.html %}{% if event_lettered_name == 'Virtual CC Fest' %}${standard}{% else %}${custom}{% endif %}`;
 }
 
 for (const [file, elements] of Object.entries(pages)) {
@@ -113,7 +127,7 @@ for (const [file, elements] of Object.entries(pages)) {
 
     html = html.replace(element, (_, attributes) => {
       const kept = attributes.replace(/ data-figma-node="[^"]*"/g, '');
-      return `<${tag}${kept} data-figma-node="${id}">${render(id)}</${tag}>`;
+      return `<${tag}${kept} data-figma-node="${id}">${heading(id)}</${tag}>`;
     });
   }
 
@@ -141,5 +155,15 @@ for (const [name, id] of Object.entries(posterNodes)) {
     upper: run.case === 'UPPER',
     lineHeight: run.line && run.line.unit === 'PERCENT' ? run.line.value / 100 : null,
   }));
+}
+const eventPath = path.join(root, '_data/generated_event.json');
+if (fs.existsSync(eventPath)) {
+  const event = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
+  const runs = lettering.eventTitle;
+  runs.at(-1).text = String(event.year);
+  runs.at(-2).text = event.title_date;
+  if (event.lettered_name !== 'Virtual CC Fest') {
+    lettering.eventTitle = [{ ...runs[0], text: event.lettered_name }, ...runs.slice(-2)];
+  }
 }
 fs.writeFileSync(path.join(root, 'assets/poster-maker/lettering.json'), `${JSON.stringify(lettering, null, 2)}\n`);

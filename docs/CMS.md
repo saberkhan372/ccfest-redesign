@@ -1,88 +1,103 @@
-# Editing the site without touching code
+# Editing the site with Pages CMS
 
-On this branch the six pages are built by **Jekyll** from data files, and **Pages CMS** puts a web form over those data files. Saving a form commits to the repository; GitHub Pages rebuilds; the change is live in about a minute.
+Pages CMS edits public YAML content in this repository. Saving creates a Git commit. Once the checked publication workflow is activated, a save publishes only after source validation, Jekyll rendering and browser checks pass. A failed check leaves the previous successful site live. See [the rollout instructions](CMS-ROLLOUT.md) for activation status and recovery.
 
-Related: [UPDATING.md](UPDATING.md) · [TEMPLATE.md](TEMPLATE.md) · [TYPOGRAPHY.md](TYPOGRAPHY.md) · [PAGES-CMS-PLAN.md](PAGES-CMS-PLAN.md) (the original plan)
+## What the CMS covers
 
----
+| Form | Content file | What you edit |
+|---|---|---|
+| Upcoming event | `_data/event.yml` | Name, confirmed date, fallback year, summary, facts, registration and donation settings |
+| Keynote speakers | `_data/keynotes.yml` | Speakers, schedule assignment, bios, photos and websites |
+| Sessions | `_data/sessions.yml` | Permanent IDs, title, format, round, level, language, descriptions, presenters and resources |
+| Schedule | `_data/schedule.yml` | Ordered blocks, times and named time zones |
+| Past events | `_data/past_events.yml` | Archive rows, posters, credits, classes and homepage location badges |
+| Camps and programmes | `_data/camps.yml` | Programme identity, summary, link and facts |
+| Site details | `_data/site.yml` | Contact, footer, organizer, designer credits, share image, announcement and mailing provider |
+| Homepage copy | `_data/home.yml` | Introductions, About, welcome list, history, mailing and community copy, metadata |
+| Registration page copy | `_data/register.yml` | Announcement states, joining steps, registration and calendar explanations, metadata |
+| Events page copy | `_data/events_page.yml` | Headings, descriptions, calls to action and metadata |
+| Visible Java page | `_data/visible_java.yml` | Interest-form URL, curriculum, outcomes, audience, logistics, FAQ, classroom sketch and metadata |
+| Past events page copy | `_data/past_events_page.yml` | Archive introductions, photos/first-event links and metadata |
+| Mailing list page copy | `_data/mailing_list_page.yml` | Sign-up introductions, email fallback, topics, privacy copy and metadata |
+| Code of conduct | `_data/code_of_conduct.yml` | Existing policy sections, examples, report steps, attribution and metadata |
 
-## What moved, and what did not
+Layout, CSS, scripts, navigation routes, accessibility controls, fixed designer lettering and animation choices remain developer-owned. The event lettering is the exception: its words, date and year follow event data while retaining the original Figma styles. Existing designer credits and policy attribution must stay intact. Private attendee, donation and provider records are outside this CMS.
 
-| Now a form field | Still in code or Figma |
+## Editing sessions safely
+
+A saved session needs a title, permanent ID and Workshop/Panel format. Never change an ID after publication: saved choices and calendar entries use it. Reordering sessions preserves identity. Adding a confirmed session is supported; no check assumes there must always be 17 sessions.
+
+Choose a workshop round from **When**, or leave it empty for “Round to be announced.” Pending workshops remain visible but have no preference buttons and do not enter calendar exports. Panels need a panel block; keynotes need keynote blocks. Nonempty invalid assignments block publication even though the template defensively keeps misplaced workshops visible in previews.
+
+Use **Level**, **Language** and **Format** for classification. New forms default language to English; rendering also defaults an omitted language to English. Posters use these fields too. Tags are optional extra topics and do not determine whether a session is a panel.
+
+A removed or renamed published ID blocks publication against the last successful deployment. For an intentional removal, a developer lists that ID and the exact baseline commit in `scripts/content-removals.yml`. This is a targeted exception, not a switch disabling checks.
+
+## Event dates and schedule
+
+A confirmed date supplies the year across event headings, accessible names, cards, banner, metadata, calendar and posters. A trailing year in the event name follows that date. The Year field is the fallback while the date is unknown. Custom names retain the site's display font; fixed brand lettering stays designer-owned.
+
+Times use 24-hour `HH:MM`, from `00:00` to `23:59`, in the first zone. Blocks must be ordered, with end after start and no overlap. The shipped Pacific and Eastern columns use `America/Los_Angeles` and `America/New_York`; their offsets follow the event date, including daylight saving. Other IANA names are supported for whole-hour offsets. A blank IANA name uses a manually checked fixed offset. Half-hour offsets require a separate schedule enhancement.
+
+When adding or removing a round, update both Schedule and the Sessions “When” options in `.pages.yml`. The validator rejects a mismatch. Keep existing block IDs stable.
+
+## Empty fields
+
+| Empty value | Result |
 |---|---|
-| Event name, date, format, cost, level, registration link, Luma event ID, donation note | Every layout, colour, and spacing rule |
-| Keynote speakers, sessions | Francisca's lettered headings (`data-figma-run` spans) |
-| The past-event archive and the homepage location badges | Shristi's interactive and all the motion |
-| Camps and programmes on /events/ | The prose on the About, Mailing List, and Code of Conduct pages |
-| Contact email, footer tagline, organizer name and LinkedIn, designer credits | |
+| Event date | Honest unconfirmed-date copy; no Event structured data or poster export |
+| Keynote list | The existing two announcement cards |
+| Registration URL | Mailing-list invitation; floating Register banner disappears |
+| Luma event ID | Ordinary link to Luma instead of the embedded dialog |
+| Donation note | Donation line disappears |
+| Workshop round | Visible pending workshop without preferences/calendar entry |
+| Optional photo | Existing text/initial fallback |
 
-Nothing in the admin UI can reach the lettering. It is generated from `design/figma-typography.json` by `scripts/sync-typography.cjs`, which the CMS never runs.
+An empty session list or removal of a published row requires documenting those intentional ID removals. Required values cannot be cleared in a publishing change. The template's defensive announcement fallbacks still exist.
 
-## Leaving a field empty is a real answer
+## Copy, links and shared values
 
-The announcement states are structural, not copy:
+Body copy supports **bold**, *emphasis*, inline `code` and `[link text](https://example.org/)`. Copy is escaped before Markdown rendering; raw HTML and editor-supplied Liquid never execute. Headings and labels use plain text, unless their field explicitly supports Markdown.
 
-| Empty field | What the site shows |
-|---|---|
-| `event.date` | "To be confirmed", and "TBC <year>" where space is tight |
-| `keynotes` | The two "to be announced" keynote cards Francisca designed |
-| `sessions` | The single "to be announced" session row |
-| `event.registration_url` | The mailing-list invitation instead of a registration button, and no floating "Upcoming" reminder on any page |
-| `event.luma_event_id` | Register links to Luma instead of opening the form on the page ([REGISTRATION.md](REGISTRATION.md)) |
-| `event.donation_note` | No donation line beside the Register button |
+Named tokens keep shared values consistent: `{contact_email}`, `{organizer_name}`, `{event_name}`, `{event_year}` (metadata), `{camp_description}`, `{camp_eyebrow}` and `{round_count}` (joining instructions). Do not rename tokens. Unknown tokens in prose fail validation. Keep URLs complete with `https://`; email links use `mailto:`. Relative links must retain the page's existing folder depth.
 
-So nobody ever has to invent a date or a speaker to make a page look finished. Clearing a field in the CMS is exactly as safe as never filling it in.
+Curriculum, outcomes, logistics, FAQ, welcome/topic lists and policy examples are reorderable lists. The sample Java sketch is displayed as escaped text, never executed. Do not add fictional dates, speakers, prices or links, or describe donations as tax-deductible.
 
-## The files
+## Images
 
-```
-_config.yml            Jekyll settings. No plugins — GitHub Pages only allows a fixed set.
-_layouts/base.html     The <head>, header, nav and footer every page shares.
-_includes/             One file per repeated row: past-row, keynote-card, session-row,
-                       event-card, the nav, and the three logo lockups.
-_data/*.yml            The content that changes. This is what the forms edit.
-.pages.yml             The form definitions.
-<page>/index.html      Front matter + that page's <main> block, nothing else.
-```
+New content images belong in `assets/uploads/`. Image fields start browsing there, use safe upload filenames and can still select legacy images from `assets/`; existing paths have not moved. The media manager has separate **New content images** and **Existing images** entries. Both filter to supported image extensions so scripts and fonts do not appear as upload choices.
 
-Each page's front matter carries its own title, description, body class, and `root` (`""` on the homepage, `"../"` elsewhere) so every asset path stays relative. That matters: the site is served from a project path on github.io, not a domain root.
+Use JPG/PNG/WebP for presenter photos, roughly square at 400px or more. Archive posters should be readable at about 720px width; shared preview images use 1200×630. Keep images reasonably small, describe meaningful archive/share images with the corresponding alt-text field, and retain known poster designer credits. Replacing a photo does not require renaming the old file. Verify the page after saving; broken local asset references block publication.
 
-## Building it locally
+## After a form-schema change
 
-Jekyll 3.10 — the version GitHub Pages runs:
+Reload Pages CMS and reopen the form before editing. A previously open tab may still use an older schema. Every YAML key, including nested presenter keys, must appear in `.pages.yml`; otherwise a form save can remove it. The validator checks this recursively and tests a model of schema serialization.
+
+The earlier incident removed 84 session metadata values. That loss is reproduced by a failing regression fixture. Required fields alone are not the full protection: validation, rendered reconciliation and the deployment dependency are all necessary. A real hosted CMS save and stale-tab test have **not** yet been performed for this change; use the checklist in [CMS-ROLLOUT.md](CMS-ROLLOUT.md). The local schema projection test does not establish hosted-CMS behavior.
+
+## Local build and checks
+
+Use Ruby 3.3, Node 22+ and the checked-in Gemfile/lockfile. No JavaScript package or application bundler is added.
 
 ```bash
-jekyll build --destination /tmp/ccfest-site && npx http-server /tmp/ccfest-site -p 8881 -c-1
+bundle install
+bundle exec ruby scripts/test-content.rb
+CONTENT_BASELINE=<last-successful-deployment-sha> bundle exec ruby scripts/build.rb _site
+bundle exec ruby scripts/test-rendered.rb _site
+bundle exec ruby scripts/verify-schedule-fallback.rb
+node scripts/serve.cjs _site 8876
 ```
 
-Then open http://127.0.0.1:8881/. Use `http-server`, not `python3 -m http.server`: the Python one drops requests under a headless browser's parallel loads and will show you an unstyled page.
-
-Installing Jekyll on this Mac needed a workaround; see [../GOTCHAS.md](../GOTCHAS.md).
-
-## Checking a change did no harm
-
-The strongest check, and the one used throughout this branch: the built HTML should be **byte-identical** to what it was before, unless you meant to change it.
+In another terminal, with Playwright installed in your development environment:
 
 ```bash
-jekyll build --destination /tmp/after
-diff -r /tmp/before /tmp/after
-node scripts/verify.cjs http://127.0.0.1:8881/
-node scripts/sync-typography.cjs   # then confirm git reports no change
+node scripts/verify-publish.cjs http://127.0.0.1:8876/
+node scripts/verify.cjs http://127.0.0.1:8876/
+node scripts/verify-poster.cjs http://127.0.0.1:8876/
+node scripts/verify-poster-state.cjs
+git diff --check
 ```
 
-## Connecting the CMS
+`CHROMIUM_PATH=/path/to/chromium` supports a locally installed Chromium. CI installs a pinned Playwright release outside the repository. `verify-publish.cjs` is content-generic; `verify.cjs` also retains detailed current-event assertions, including the October 17, 2026 date and current speaker IDs.
 
-1. Sign in at [app.pagescms.org](https://app.pagescms.org) with the GitHub account that owns the repository.
-2. Add this repository and choose this branch.
-3. The forms come from `.pages.yml`; there is nothing else to configure.
-4. Editors without GitHub accounts are invited by email from inside Pages CMS.
-
-A save is a normal commit. If a bad value ever breaks the build, GitHub emails about the failed build and reverting that one commit fixes it.
-
-## After the form definitions change
-
-Reload Pages CMS before editing after a change to `.pages.yml`, then reopen the Sessions form. Check that an existing session shows its ID, Format, When, Level and Language. If those fields are missing, reload or reopen the repository before saving. Pages CMS saves only the fields in its loaded form; an older form can remove newly added data even when you only edit a description.
-
-ID and Format are required for each session. Keep published IDs unchanged so visitors' saved choices still work. When remains optional: a workshop with no assigned round appears under "Round to be announced".
-
-The October 6 CMS save removed the scheduling fields from all 17 sessions. Recovery restored those fields from the preceding commit while preserving the new descriptions; reverting the entire save would have lost those content edits. For a local check after a save, build the site and run `node scripts/verify.cjs` against the build as described above. GitHub Pages can build successfully even when sessions have disappeared.
+Build order is validate → derive event/time-zone data → sync lettering → Jekyll safe build → reconcile source with rendered cards. Generated `_data/generated_*.json` and `_config.build.yml` are build-owned, ignored by Git and not editable CMS content. Always use `scripts/build.rb` for a publishing build.

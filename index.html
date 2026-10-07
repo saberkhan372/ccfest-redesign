@@ -1,23 +1,20 @@
 ---
 layout: base
-title: "CC Fest — Creative Coding Festival"
-description: "CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community."
-body_class: "home-page"
-root: ""
-home_href: "./"
+body_class: home-page
+root: ''
+home_href: ./
 home: true
+copy_key: home
 ---
-{% assign event = site.data.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
+{% assign copy = site.data.home %}
+{% assign event = site.data.generated_event | default: site.data.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
 
       <!-- ── Hero ── -->
       <section class="home-hero page-width" aria-label="CC Fest">
         <h1 class="home-hero-title anim-hero-title" data-figma-node="218:113"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 71, 'wght' 400; font-weight: 400; font-style: italic; letter-spacing: -0.03em; text-transform: none">CC </span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 71, 'wght' 400; font-weight: 400; font-style: italic; letter-spacing: 0em; text-transform: none">FEST</span></h1>
         <img class="hero-shape" src="assets/design/hero-shape.svg" alt="" aria-hidden="true">
         <hr class="hero-rule anim-hero-rule">
-        <p class="home-hero-sub anim-hero-sub">
-          A free and friendly gathering for creative coding —
-          workshops, talks, and community.
-        </p>
+        <p class="home-hero-sub anim-hero-sub">{% include editorial.html text=copy.home_hero.body %}</p>
       </section>
 
       <!-- Shristi’s interactive, from her pull request (saberkhan372/ccfest-redesign#1).
@@ -488,13 +485,13 @@ home: true
         <div class="page-width upcoming-inner">
           <div class="upcoming-copy anim-scroll anim-upcoming-copy">
             <p class="eyebrow upcoming-eyebrow">Upcoming · {{ event.format | escape }} · {{ event.cost | escape }}</p>
-            <h2 id="upcoming-title" aria-label="{{ event.name | escape }}" data-figma-node="218:127"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l </span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> F</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wght' 200, 'wdth' 100; font-weight: 200; font-style: italic; letter-spacing: 0em; text-transform: uppercase">2026</span></h2>
+            <h2 id="upcoming-title" aria-label="{{ event.name | escape }}" data-figma-node="218:127">{% include event-context.html %}{% if event_lettered_name == 'Virtual CC Fest' %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l </span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> F</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wght' 200, 'wdth' 100; font-weight: 200; font-style: italic; letter-spacing: 0em; text-transform: uppercase">{{ event_year | escape }}</span>{% else %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">{{ event_lettered_name | escape }}</span> {{ event_year | escape }}{% endif %}</h2>
             <p>
               Workshops, talks, and community for creative coders of all levels.
-              {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}Date to be announced{% endif %} — {% if registration_url != "" %}registration is open.{% else %}join the mailing list for updates.{% endif %}
+              {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_pending %}{% endif %} — {% if registration_url != "" %}{% include editorial.html text=copy.states.registration_open_short %}{% else %}{% include editorial.html text=copy.states.registration_pending_short %}{% endif %}
             </p>
-            <p>Part of <a href="https://day.processing.org/">Processing Community Day 2026</a>.</p>
-            <a class="button button-light" href="register/">View event &amp; register →</a>
+            <p>{% include editorial.html text=copy.upcoming.body %}</p>
+            <a class="button button-light" href="register/">{{ copy.upcoming.link_label | escape }}</a>
           </div>
           <div class="upcoming-facts anim-scroll anim-upcoming-meta">
             <div><span>Format</span><strong>{{ event.format | escape }}</strong></div>
@@ -508,24 +505,15 @@ home: true
       <!-- ── About ── -->
       <section class="section page-width home-about" id="about" aria-labelledby="about-title">
         <div class="about-lead anim-scroll">
-          <p class="eyebrow">About CC Fest</p>
+          <p class="eyebrow">{{ copy.about.eyebrow | escape }}</p>
           <h2 id="about-title" data-figma-node="218:150"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">Creative coding<br>for everyone.</span></h2>
         </div>
         <div class="about-body anim-scroll">
-          <p>
-            CC Fest is a free and friendly event for anyone curious about
-            creative code. Come spend a few hours with us — make interactive
-            and engaging digital art, animation, and games, work with AI or
-            hardware, and explore many other options. Hear from keynote
-            speakers on important and timely topics related to creative coding.
-          </p>
+          <p>{% include editorial.html text=copy.about.body %}</p>
           <div class="welcome-block">
-            <p class="eyebrow">We welcome</p>
-            <ul class="welcome-list">
-              <li>Students, artists, hobbyists, creatives, and tinkerers who are curious to learn</li>
-              <li>Educators and community organizers who are looking for inspiration</li>
-              <li>Everyone who would like to learn more about creative code and our community</li>
-            </ul>
+            <p class="eyebrow">{{ copy.about.eyebrow_2 | escape }}</p>
+            <ul class="welcome-list">{% for entry in copy.welcome_list %}<li>{% include editorial.html text=entry %}</li>
+{% endfor %}</ul>
           </div>
         </div>
       </section>
@@ -534,24 +522,16 @@ home: true
       <section class="section section-tinted" id="past-events" aria-labelledby="past-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>10 years · 2016–2025</p>
+            <p>{% include editorial.html text=copy.past_events.body %}</p>
             <div>
               <h2 id="past-title" data-figma-node="218:170"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">P</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">a</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">st Eve</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 78, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">s</span></h2>
-              <p>CC Fest has been gathering creative coders since 2016.</p>
+              <p>{% include editorial.html text=copy.past_events.body_2 %}</p>
             </div>
           </div>
           <div class="past-events-body anim-scroll">
-            <p>
-              We hosted our first virtual event on <strong>July 11, 2020</strong>.
-              Previous in-person CC Fests have taken place in New York City,
-              Los Angeles, and San Francisco.
-              <a href="https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb" target="_blank" rel="noopener">Read about the first CC Fest at NYU&#8209;ITP in October 2016.</a>
-            </p>
-            <p>
-              Want to organize a CC Fest in your city?
-              <a href="mailto:{{ site.data.site.email | escape }}">Email Saber Khan.</a>
-            </p>
-            <p><a href="past-events/">See all past events and agendas →</a></p>
+            <p>{% include editorial.html text=copy.past_events.body_3 %}</p>
+            <p>{% include editorial.html text=copy.past_events.body_4 %}</p>
+            <p>{% include editorial.html text=copy.past_events.body_5 %}</p>
           </div>
           <div class="location-chips" aria-label="Past CC Fest locations">
 {% for chip in site.data.past_events.chips %}            <div class="location-chip anim-chip"><strong>{{ chip.label | escape }}</strong><span>{{ chip.note | escape }}</span></div>
@@ -565,27 +545,23 @@ home: true
            that is set, and the "email us" copy when neither is. -->
 {% assign list = site.data.site.mailing_list %}{% assign list_form_id = list.embed_form_id | default: "" | strip %}{% assign list_form_host = list.embed_host | default: "" | strip %}{% assign list_signup_url = list.signup_url | default: "" | strip %}      <section class="section mailing-section" id="mailing-list" aria-labelledby="mailing-title">
         <div class="section-heading">
-          <p>Stay in touch</p>
+          <p>{% include editorial.html text=copy.mailing_list.body %}</p>
           <div>
             <h2 id="mailing-title" data-figma-node="218:209"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.025em; text-transform: none">Join the mailing list.</span></h2>
-            <p>Get notified about upcoming events and CC Fest news.</p>
+            <p>{% include editorial.html text=copy.mailing_list.body_2 %}</p>
           </div>
         </div>
         <div class="mailing-body anim-scroll">
-{% if list_form_id != "" %}          <p>Add your email and we’ll send a note to confirm.</p>
+{% if list_form_id != "" %}          <p>{% include editorial.html text=copy.mailing_list.body_3 %}</p>
           <div class="signup-embed"><script async src="https://{{ list_form_host | escape }}/form/{{ list_form_id | escape }}.js" data-form="{{ list_form_id | escape }}"></script></div>
           <noscript>
-            <p>The sign-up form needs JavaScript. {% if list_signup_url != "" %}<a href="{{ list_signup_url | escape }}">Sign up on EmailOctopus</a>, or email{% else %}Email{% endif %}
-            <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.organizer.name | escape }}</a> with the subject line <em>Join mailing list</em>.</p>
+            <p>{% include editorial.html text=copy.states.form_needs_js %} {% if list_signup_url != "" %}<a href="{{ list_signup_url | escape }}">{% include editorial.html text=copy.states.signup_external %}</a>, or email{% else %}Email{% endif %}
+            <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.organizer.name | escape }}</a> {% include editorial.html text=copy.states.join_email_subject %}</p>
           </noscript>
-          <p class="mailing-more"><a href="mailing-list/">What you’ll hear about →</a></p>
-{% elsif list_signup_url != "" %}          <p>Sign-up opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.</p>
+          <p class="mailing-more">{% include editorial.html text=copy.mailing_list.body_4 %}</p>
+{% elsif list_signup_url != "" %}          <p>{% include editorial.html text=copy.mailing_list.body_5 %}</p>
           <p class="mailing-more"><a href="{{ list_signup_url | escape }}" target="_blank" rel="noopener">Join the mailing list ↗</a></p>
-{% else %}          <p>
-            To join the CC Fest mailing list, send an email to
-            <a href="mailto:{{ site.data.site.email | escape }}?subject=Join mailing list">{{ site.data.site.organizer.name | escape }}</a>
-            with the subject line <em>Join mailing list</em>.
-          </p>
+{% else %}          <p>{% include editorial.html text=copy.mailing_list.body_6 %}</p>
 {% endif %}        </div>
       </section>
 
@@ -593,28 +569,17 @@ home: true
       <section class="section section-tinted" id="code-of-conduct" aria-labelledby="coc-title">
         <div class="page-width">
           <div class="section-heading">
-            <p>Community</p>
+            <p>{% include editorial.html text=copy.code_of_conduct.body %}</p>
             <div>
               <h2 id="coc-title" data-figma-node="218:215"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 336; font-weight: 336; font-style: normal; letter-spacing: -0.025em; text-transform: none">Code of<br>Conduct</span></h2>
-              <p>How we want to behave as a community, openly and clearly.</p>
+              <p>{% include editorial.html text=copy.code_of_conduct.body_2 %}</p>
             </div>
           </div>
           <div class="coc-body">
             <img class="community-shape" src="assets/design/community-shape.svg" alt="" aria-hidden="true">
-            <p>
-              Our goal is to make CC Fest a space where many different people
-              can come together to share and learn from each other. It isn’t
-              about being “nice.” We ask everyone — organizers, speakers, guests,
-              and attendees — to treat others with respect, listen generously,
-              and work towards a thriving and equitable environment for all.
-            </p>
-            <p>
-              Conflict is unavoidable. What matters is how we deal with it. If
-              something goes wrong, speak up if you feel safe to, or reach out to
-              <a href="mailto:{{ site.data.site.email | escape }}">{{ site.data.site.organizer.name | escape }}</a>
-              and we will help you.
-            </p>
-            <p><a href="code-of-conduct/">Read the full code of conduct →</a></p>
+            <p>{% include editorial.html text=copy.code_of_conduct.body_3 %}</p>
+            <p>{% include editorial.html text=copy.code_of_conduct.body_4 %}</p>
+            <p>{% include editorial.html text=copy.code_of_conduct.body_5 %}</p>
           </div>
         </div>
       </section>

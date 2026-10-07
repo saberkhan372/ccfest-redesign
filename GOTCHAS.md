@@ -59,3 +59,11 @@
 - **Change's canvas only looks clean because a blend mode hides its pale trails, and only over paper.** The sketch clears itself with #f5f5f2 at 15% each frame, so 8-bit rounding leaves old trails stuck at #f2f2ef (3 levels under it, alpha 255, where never-stroked pixels sit at alpha 252). `copyCanvas()` keys out pixels within 10 of the corner colour; these are 12 away. `darken` hides them over paper (#edede9) and shows them over white as a ghost of the Cs. `artwork()` in `poster-art.js` lifts a layer that carries `clear` when the page is lighter than that colour, so anything new that draws the artwork must go through it. Widening `copyCanvas()`'s tolerance is not the fix: it changes paper's stroke edges.
 
 - **A Change recording made right after seconds of heavy canvas drawing in the same page came out static** (a C with a bar, identical for moments 2-12), while the same sequence in a fresh page recorded the chevrons. Seen three times in a comparison script that rendered Letter-size posters between captures; not diagnosed, and the maker's own flows have not shown it. Record in a quiet page, and look at the frames before trusting numbers taken from them.
+
+## CMS build and activation — October 7, 2026
+
+- YAML serializers may emit unquoted 09:00 times; Ruby/Psych can interpret them as sexagesimal numbers. Keep every HH:MM schedule value quoted. Source validation catches the mismatch.
+- Generated event/schedule JSON is ignored build output. Run scripts/build.rb for publication; a standalone Jekyll build does not derive calendar offsets or poster lettering.
+- The Actions workflow cannot gate a simultaneous branch-based Pages publisher. Change Pages Source to GitHub Actions during approved rollout.
+- Required fields and local schema projection do not prove hosted CMS preserves fields in an already-open tab. Reload forms after schema changes and complete the real-save checklist in docs/CMS-ROLLOUT.md.
+- Legacy presenter URLs lacking https://, and one multi-URL value, remain unchanged and produce warnings. They are not automatically rewritten to guessed destinations.

@@ -1,0 +1,26 @@
+meta:
+  title: Events — CC Fest
+  description: 'Upcoming CC Fest events: free creative coding gatherings, workshops, and educator camps.'
+page:
+  eyebrow: What’s next
+  heading: Events
+  summary: Free gatherings, workshops, and camps for creative coders of all levels.
+upcoming:
+  heading: Upcoming
+  body: Dates and registration are announced on the mailing list first.
+  link_label: Event details →
+  label: Format
+  label_2: Date
+  label_3: Cost
+  label_4: Experience
+more:
+  heading: Ten years of CC Fest
+  body: Browse agendas from past gatherings, or bring CC Fest to your city.
+  link_label: See past events →
+  link_label_2: Organize a CC Fest
+states:
+  date_pending: Date to be announced
+  date_unconfirmed: To be confirmed
+  registration_open_short: registration is open.
+  registration_pending_short: join the mailing list for updates.
+  event_intro: Workshops, talks, and community for creative coders of all levels.

@@ -50,7 +50,7 @@ const settleImages = page => page.evaluate(cap => Promise.all(
 ), 5000);
 
 (async () => {
-  const browser = await chromium.launch({ channel: 'chrome', headless: true });
+  const browser = await chromium.launch({ headless: true, ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : { channel: 'chrome' }) });
   const errors = [];
   try {
     for (const width of WIDTHS) {

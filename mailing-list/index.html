@@ -1,57 +1,43 @@
 ---
 layout: base
-title: "Mailing List — CC Fest"
-description: "Join the CC Fest mailing list for event dates, workshops, educator camps, and community news."
-body_class: "inner-page mailing-list-page"
-root: "../"
-home_href: "../"
-nav_current: "mailing-list"
+body_class: inner-page mailing-list-page
+root: ../
+home_href: ../
+nav_current: mailing-list
+copy_key: mailing_list_page
 ---
+{% assign copy = site.data.mailing_list_page %}
 {% assign list = site.data.site.mailing_list %}{% assign signup_url = list.signup_url | default: "" | strip %}{% assign embed_form_id = list.embed_form_id | default: "" | strip %}{% assign embed_host = list.embed_host | default: "" | strip %}    <main id="main-content">
       <section class="hero page-hero page-width" aria-labelledby="page-title">
-        <p class="eyebrow">Stay in touch</p>
+        <p class="eyebrow">{{ copy.page.eyebrow | escape }}</p>
         <h1 id="page-title" data-figma-node="218:209"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.025em; text-transform: none">Join the mailing list.</span></h1>
-        <p class="hero-summary">Get notified about upcoming events and CC Fest news.</p>
+        <p class="hero-summary">{% include editorial.html text=copy.page.summary %}</p>
       </section>
 
       <section class="section page-width" id="join" aria-labelledby="join-title">
         <div class="signup-panel">
           <div>
-            <p class="eyebrow">How to join</p>
-{% if embed_form_id != "" %}            <h2 id="join-title">Sign up.</h2>
-            <p>Add your email below and we’ll send a note to confirm. The form is run by EmailOctopus, who send the list for us.</p>
+            <p class="eyebrow">{{ copy.join.eyebrow | escape }}</p>
+{% if embed_form_id != "" %}            <h2 id="join-title">{{ copy.join.heading | escape }}</h2>
+            <p>{% include editorial.html text=copy.join.body %}</p>
             <div class="signup-embed"><script async src="https://{{ embed_host | escape }}/form/{{ embed_form_id | escape }}.js" data-form="{{ embed_form_id | escape }}"></script></div>
             <noscript>
-              <p>The sign-up form needs JavaScript. {% if signup_url != "" %}<a href="{{ signup_url | escape }}">Sign up on EmailOctopus</a>, or email{% else %}Email{% endif %}
-              <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.organizer.name | escape }}</a> with the subject line <em>Join mailing list</em>.</p>
+              <p>{% include editorial.html text=copy.states.form_needs_js %} {% if signup_url != "" %}<a href="{{ signup_url | escape }}">{% include editorial.html text=copy.states.signup_external %}</a>, or email{% else %}Email{% endif %}
+              <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.organizer.name | escape }}</a> {% include editorial.html text=copy.states.join_email_subject %}</p>
             </noscript>
-{% elsif signup_url != "" %}            <h2 id="join-title">Sign up.</h2>
-            <p>The sign-up form opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.</p>
-            <a class="button button-solid" href="{{ signup_url | escape }}" target="_blank" rel="noopener">Join the mailing list ↗</a>
-{% else %}            <h2 id="join-title">Send one email.</h2>
-            <p>
-              Email <a href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ site.data.site.organizer.name | escape }}</a>
-              with the subject line <em>Join mailing list</em>, and you’ll be added to the list.
-            </p>
-            <a class="button button-solid" href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">Join the mailing list →</a>
+{% elsif signup_url != "" %}            <h2 id="join-title">{{ copy.join.heading_2 | escape }}</h2>
+            <p>{% include editorial.html text=copy.join.body_2 %}</p>
+            <a class="button button-solid" href="{{ signup_url | escape }}" target="_blank" rel="noopener">{{ copy.join.link_label | escape }}</a>
+{% else %}            <h2 id="join-title">{{ copy.join.heading_3 | escape }}</h2>
+            <p>{% include editorial.html text=copy.join.body_3 %}</p>
+            <a class="button button-solid" href="mailto:{{ site.data.site.email | escape }}?subject=Join%20mailing%20list">{{ copy.join.link_label_2 | escape }}</a>
 {% endif %}          </div>
           <div>
-            <p class="eyebrow">What you’ll hear about</p>
-            <ul class="signup-list">
-              <li>Virtual CC Fest dates, presenters, and registration</li>
-              <li>Workshops and free educator camps, like Visible Java</li>
-              <li>Monthly office hours to talk about creative coding projects, classes, and camps</li>
-            </ul>
+            <p class="eyebrow">{{ copy.join.eyebrow_2 | escape }}</p>
+            <ul class="signup-list">{% for entry in copy.signup_list %}<li>{% include editorial.html text=entry %}</li>
+{% endfor %}</ul>
           </div>
         </div>
-{% if embed_form_id != "" or signup_url != "" %}        <p class="signup-note">
-          We respect your privacy. Every CC Fest email carries an unsubscribe link, or write to
-          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.organizer.name | escape }}</a>
-          and we’ll take you off the list.
-        </p>{% else %}        <p class="signup-note">
-          We respect your privacy. Unsubscribe any time by emailing
-          <a href="mailto:{{ site.data.site.email | escape }}?subject=Unsubscribe">{{ site.data.site.organizer.name | escape }}</a>
-          or replying to any CC Fest email.
-        </p>{% endif %}
+{% if embed_form_id != "" or signup_url != "" %}        <p class="signup-note">{% include editorial.html text=copy.join.body_4 %}</p>{% else %}        <p class="signup-note">{% include editorial.html text=copy.join.body_5 %}</p>{% endif %}
       </section>
     </main>

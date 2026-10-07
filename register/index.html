@@ -1,21 +1,21 @@
 ---
 layout: base
-title: "Virtual CC Fest 2026 — CC Fest"
-description: "Virtual CC Fest 2026 — a free gathering for creative coding workshops, talks, and community."
-body_class: "event-page"
-root: "../"
-home_href: "../"
-nav: "event"
+body_class: event-page
+root: ../
+home_href: ../
+nav: event
+copy_key: register
 ---
-{% assign event = site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}{% assign keynote_count = 0 %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}{% assign keynote_count = keynote_count | plus: 1 %}{% endif %}{% endfor %}{% assign session_count = 0 %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}{% assign session_count = session_count | plus: 1 %}{% endif %}{% endfor %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}{% assign luma_event_id = event.luma_event_id | default: "" | strip %}{% assign donation_note = event.donation_note | default: "" | strip %}    <main id="main-content">
+{% assign copy = site.data.register %}
+{% assign event = site.data.generated_event | default: site.data.event %}{% assign keynotes = site.data.keynotes.keynotes %}{% assign sessions = site.data.sessions.sessions %}{% assign keynote_count = 0 %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}{% assign keynote_count = keynote_count | plus: 1 %}{% endif %}{% endfor %}{% assign session_count = 0 %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}{% assign session_count = session_count | plus: 1 %}{% endif %}{% endfor %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}{% assign luma_event_id = event.luma_event_id | default: "" | strip %}{% assign donation_note = event.donation_note | default: "" | strip %}    <main id="main-content">
       <section class="hero page-width" id="top" aria-labelledby="event-title">
         <p class="eyebrow">{{ event.eyebrow | escape }}</p>
-        <h1 id="event-title"{% if event_date == "" %} aria-label="{{ event.name | escape }}"{% endif %} data-figma-node="251:741"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">F</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="10" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none"> October 17, </span><span data-figma-run="11" style="font-family: 'Anybody'; font-variation-settings: 'wght' 100, 'wdth' 100; font-weight: 100; font-style: italic; letter-spacing: 0em; text-transform: none">2026</span></h1>
+        <h1 id="event-title"{% if event_date == "" %} aria-label="{{ event.name | escape }}"{% endif %} data-figma-node="251:741">{% include event-context.html %}{% if event_lettered_name == 'Virtual CC Fest' %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">F</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="10" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">{{ event_title_date | escape }}</span><span data-figma-run="11" style="font-family: 'Anybody'; font-variation-settings: 'wght' 100, 'wdth' 100; font-weight: 100; font-style: italic; letter-spacing: 0em; text-transform: none">{{ event_year | escape }}</span>{% else %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">{{ event_lettered_name | escape }}</span>{{ event_title_date | escape }}{{ event_year | escape }}{% endif %}</h1>
         <p class="hero-summary">{{ event.summary | escape }}</p>
-        <p>Part of <a href="https://day.processing.org/">Processing Community Day 2026</a>.</p>
+        <p>{% include editorial.html text=copy.top.body %}</p>
         <div class="hero-actions">
-          <a class="button button-solid" href="#registration">Register</a>
-          <a class="button" href="#sessions">View sessions</a>
+          <a class="button button-solid" href="#registration">{{ copy.top.link_label | escape }}</a>
+          <a class="button" href="#sessions">{{ copy.top.link_label_2 | escape }}</a>
         </div>
       </section>
 
@@ -27,7 +27,7 @@ nav: "event"
           </div>
           <div>
             <span>Date</span>
-            <strong>{% if event_date != "" %}{{ event.date | date: "%B %-d, %Y" }}{% else %}To be confirmed{% endif %}</strong>
+            <strong>{% if event_date != "" %}{{ event.date | date: "%B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_unconfirmed %}{% endif %}</strong>
           </div>
           <div>
             <span>Cost</span>
@@ -45,7 +45,7 @@ nav: "event"
           <p>01</p>
           <div>
             <h2 id="keynotes-title" data-figma-node="251:765"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">K</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 129, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">y</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
-{% if keynote_count == 0 %}            <p>Speakers to be announced.</p>
+{% if keynote_count == 0 %}            <p>{% include editorial.html text=copy.keynotes.body %}</p>
 {% endif %}
           </div>
         </div>
@@ -53,39 +53,39 @@ nav: "event"
         <div class="keynote-layout">
           <img src="../assets/design/keynote-shape.svg" alt="" aria-hidden="true">
 {% if keynote_count == 0 %}          <article class="keynote-card">
-            <p class="eyebrow">Keynote 01</p>
-            <h3>New perspectives.</h3>
-            <p>Speaker to be announced. Keynote speakers and their stories are on the way.</p>
+            <p class="eyebrow">{{ copy.keynotes.eyebrow | escape }}</p>
+            <h3>{{ copy.keynotes.heading | escape }}</h3>
+            <p>{% include editorial.html text=copy.keynotes.body_2 %}</p>
           </article>
           <article class="keynote-card">
-            <p class="eyebrow">Keynote 02</p>
-            <h3>Shared curiosity.</h3>
-            <p>Speaker to be announced. Join the mailing list to hear who’s speaking.</p>
+            <p class="eyebrow">{{ copy.keynotes.eyebrow_2 | escape }}</p>
+            <h3>{{ copy.keynotes.heading_2 | escape }}</h3>
+            <p>{% include editorial.html text=copy.keynotes.body_3 %}</p>
           </article>
 {% else %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}          {% include keynote-card.html keynote=keynote %}
 {% endif %}{% endfor %}{% endif %}        </div>
       </section>
 
-{% assign schedule = site.data.schedule %}      <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
+{% assign schedule = site.data.generated_schedule | default: site.data.schedule %}      <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
         <div class="page-width">
           <div class="section-heading">
             <p>02</p>
             <div>
               <h2 id="sessions-title" data-figma-node="251:788"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">S</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">i</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 125, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
-              <p>{% if schedule.items.size > 0 %}{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}The whole day in order. With JavaScript you can mark which workshops you want in each round.{% else %}Workshops and talks for creative coders. The schedule will be announced here.{% endif %}</p>
+              <p>{% if schedule.items.size > 0 %}{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}{% include editorial.html text=copy.states.schedule_intro %}{% else %}{% include editorial.html text=copy.states.schedule_pending %}{% endif %}</p>
             </div>
           </div>
 
 {% if schedule.items.size == 0 %}          <div class="session-row">
-            <p class="session-time">Times TBA</p>
+            <p class="session-time">{% include editorial.html text=copy.sessions.body %}</p>
             <div class="session-presenter">
-              <p class="eyebrow">Presenters</p>
+              <p class="eyebrow">{{ copy.sessions.eyebrow | escape }}</p>
               <strong>To be announced</strong>
             </div>
             <div class="session-details">
               <div class="tag-row"><span>All levels</span><span>Workshops</span><span>Talks</span></div>
-              <h3>A little code. A lot of possibility.</h3>
-              <p>Explore creative tools, make something new, and learn alongside the community. Session times, presenters, and workshop details will appear here once confirmed.</p>
+              <h3>{{ copy.sessions.heading | escape }}</h3>
+              <p>{% include editorial.html text=copy.sessions.body_2 %}</p>
             </div>
           </div>
 {% else %}          <div id="schedule" class="schedule" tabindex="-1"{% if event_date != "" %} data-date="{{ event.date | date: '%Y-%m-%d' }}"{% endif %} data-utc-offset="{{ schedule.zones[0].utc_offset }}" data-event-name="{{ event.name | escape }}" data-page-url="https://ccfest.rocks/register/">
@@ -96,11 +96,11 @@ nav: "event"
             </div>
             <p class="schedule-status" role="status" aria-live="polite"></p>
             <div class="schedule-mine" hidden>
-              <h3>My choices</h3>
-              <p class="schedule-mine-hint">Workshops in a round run at the same time. On each one, mark a first choice, a second choice (one of each per round) and any number of maybes. Your choices stay in this browser.</p>
+              <h3>{{ copy.sessions.heading_2 | escape }}</h3>
+              <p class="schedule-mine-hint">{% include editorial.html text=copy.sessions.body_3 %}</p>
               <ul class="schedule-mine-list"></ul>
               <p class="schedule-mine-actions"><button type="button" class="button button-solid schedule-ics" disabled>Download calendar file (.ics)</button> <button type="button" class="button schedule-pdf" disabled>Download PDF</button> <button type="button" class="button schedule-png" disabled>Download PNG</button></p>
-              <p class="schedule-note">The file works with Apple Calendar, Outlook and Google Calendar (Settings → Import). It includes the keynotes, the panel and your first choice in each round (second choices and maybes are not added), and is a snapshot: if the schedule changes later, download it again. The PDF and PNG are printable copies of your choices, with times in the zone chosen above.</p>
+              <p class="schedule-note">{% include editorial.html text=copy.sessions.body_4 %}</p>
             </div>
             <ol class="schedule-blocks">
 {% for item in schedule.items %}{% assign in_block = sessions | where: "schedule_id", item.id %}{% capture who %}{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}{{ keynote.name | strip }}{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{% if session.format == "Panel" %}{{ session.title | strip }}{% endif %}{% endfor %}{% endif %}{% endcapture %}              <li class="schedule-block schedule-block-{{ item.kind | default: 'other' }}" id="{{ item.id | default: forloop.index | escape }}" data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}" data-kind="{{ item.kind | escape }}" data-summary="{{ item.title | escape }}{% if who != "" %} — {{ who | escape }}{% endif %}">
@@ -118,8 +118,8 @@ nav: "event"
 {% endfor %}            </ol>
 {%- comment -%} A titled workshop is "to be announced" unless its schedule_id is exactly the id of a workshop round: a missing, empty, padded, mistyped or removed id all land here instead of vanishing. {%- endcomment -%}
 {% capture round_ids %}|{% for item in schedule.items %}{% if item.kind == "workshops" %}{{ item.id }}|{% endif %}{% endfor %}{% endcapture %}{% assign pending = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign round_key = "|" | append: session.schedule_id | append: "|" %}{% assign known_round = false %}{% if round_ids contains round_key %}{% assign known_round = true %}{% endif %}{% if pending_title != "" and session.format == "Workshop" and known_round == false %}{% assign pending = pending | plus: 1 %}{% endif %}{% endfor %}{% if pending > 0 %}            <section class="schedule-pending" aria-labelledby="pending-title">
-              <h3 id="pending-title">Round to be announced</h3>
-              <p>These workshops are confirmed; their round will be added here soon.</p>
+              <h3 id="pending-title">{{ copy.pending.heading | escape }}</h3>
+              <p>{% include editorial.html text=copy.pending.body %}</p>
               <div class="session-grid">
 {% assign n = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign round_key = "|" | append: session.schedule_id | append: "|" %}{% assign known_round = false %}{% if round_ids contains round_key %}{% assign known_round = true %}{% endif %}{% if pending_title != "" and session.format == "Workshop" and known_round == false %}{% assign n = n | plus: 1 %}                {% include session-card.html session=session root=page.root order=n pending=true %}
 {% endif %}{% endfor %}              </div>
@@ -136,29 +136,29 @@ nav: "event"
             <p>03</p>
             <div>
               <h2 id="registration-title" data-figma-node="251:843"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">R</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">gi</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.01em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 60, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">r</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">ati</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 140, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.02em; text-transform: none">o</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span></h2>
-              <p>{% if registration_url != "" %}Registration is open. Sign up to save your place.{% else %}Registration is not open yet. Join the mailing list to hear when it opens.{% endif %}</p>
+              <p>{% if registration_url != "" %}{% include editorial.html text=copy.states.registration_open %}{% else %}{% include editorial.html text=copy.states.registration_pending %}{% endif %}</p>
             </div>
           </div>
 
           <div class="embed-notice">
             <p class="eyebrow">{{ event.cost | escape }} · Online · {{ event.level | escape }}</p>
-{% if registration_url != "" %}            <h3>Registration is open.</h3>
-            <p>Save your place at {{ event.name | escape }}.</p>
+{% if registration_url != "" %}            <h3>{{ copy.registration.heading | escape }}</h3>
+            <p>{% include editorial.html text=copy.registration.body %}</p>
 {% if donation_note != "" %}            <p>{{ donation_note | escape }}</p>
-{% endif %}            <a class="button button-solid" href="{{ registration_url | escape }}" target="_blank" rel="noopener"{% if luma_event_id != "" %} data-luma-event="{{ luma_event_id | escape }}"{% endif %}>Register<span class="external-mark" aria-hidden="true"> ↗</span></a>
-{% else %}            <h3>Be the first to know.</h3>
-            <p>We’re getting ready for the next CC Fest. Get an email when the date and registration are announced.</p>
-            <a class="button button-solid" href="../mailing-list/">Join the mailing list →</a>
+{% endif %}            <a class="button button-solid" href="{{ registration_url | escape }}" target="_blank" rel="noopener"{% if luma_event_id != "" %} data-luma-event="{{ luma_event_id | escape }}"{% endif %}>{{ copy.registration.link_label | escape }}<span class="external-mark" aria-hidden="true"> ↗</span></a>
+{% else %}            <h3>{{ copy.registration.heading_2 | escape }}</h3>
+            <p>{% include editorial.html text=copy.registration.body_2 %}</p>
+            <a class="button button-solid" href="../mailing-list/">{{ copy.registration.link_label_2 | escape }}</a>
 {% endif %}          </div>
 {% if registration_url != "" and luma_event_id != "" %}
           <!-- Luma's form, opened by registration.js. Without JavaScript the Register link goes to Luma instead. -->
           <dialog class="registration-dialog" id="registration-dialog" aria-labelledby="registration-dialog-title">
             <div class="registration-dialog-bar">
-              <p class="eyebrow" id="registration-dialog-title">Register · {{ event.name | escape }}</p>
+              <p class="eyebrow" id="registration-dialog-title">{% include editorial.html text=copy.registration.eyebrow %}</p>
               <button type="button" class="button registration-dialog-close">Close</button>
             </div>
             <iframe title="Registration form for {{ event.name | escape }}, provided by Luma" allow="payment; fullscreen"></iframe>
-            <p class="registration-dialog-note">Form not loading? <a href="{{ registration_url | escape }}" target="_blank" rel="noopener">Register on Luma instead ↗</a></p>
+            <p class="registration-dialog-note">{% include editorial.html text=copy.states.luma_fallback_intro %} <a href="{{ registration_url | escape }}" target="_blank" rel="noopener">{% include editorial.html text=copy.states.luma_fallback_link %}</a></p>
           </dialog>
           {% assign rev = site.github.build_revision | default: "" %}<script src="{{ page.root }}registration.js{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
 {% endif %}        </div>
@@ -168,18 +168,14 @@ nav: "event"
         <div class="section-heading">
           <p>04</p>
           <div>
-            <h2 id="how-to-join-title">How to join on the day</h2>
-            <p>Virtual CC Fest runs on Zoom Events: one lobby, with several workshops happening at once in each round.</p>
+            <h2 id="how-to-join-title">{{ copy.how_to_join.heading | escape }}</h2>
+            <p>{% include editorial.html text=copy.how_to_join.body %}</p>
           </div>
         </div>
 
-        <ol class="join-steps">
-          <li><strong>Register via Luma.</strong> <a href="#registration">Sign up above</a> to save your place.</li>
-          <li><strong>Watch for your Zoom invite.</strong> You will receive an invitation to the Zoom event the day before, with reminders in the hours before it starts.</li>
-          <li><strong>Join the lobby.</strong> On the day, open the Zoom event and join the lobby.</li>
-          <li><strong>Pick a session.</strong> There are two rounds of concurrent sessions, so drop in and out as you like. Questions go in the chat.</li>
-        </ol>
-        <p class="join-help">Stuck? Email <a href="mailto:{{ site.data.site.email | escape }}?subject=Joining%20CC%20Fest">{{ site.data.site.email | escape }}</a> and we’ll help you get in.</p>
+        <ol class="join-steps">{% for entry in copy.join_steps %}<li>{% include editorial.html text=entry %}</li>
+{% endfor %}</ol>
+        <p class="join-help">{% include editorial.html text=copy.how_to_join.body_2 %}</p>
       </section>
 
       <div class="history-shape" aria-hidden="true"><img src="../assets/design/registration-shape.svg" alt=""></div>
@@ -187,7 +183,7 @@ nav: "event"
         <div class="page-width history-note-inner">
           <p>CC <span class="caps">Fest</span> began on</p>
           <strong>October 22, 2016</strong>
-          <p>in New York City with <b>40</b> participants</p>
+          <p>{% include editorial.html text=copy.history_note.body %}</p>
         </div>
       </aside>
     </main>

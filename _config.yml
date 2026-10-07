@@ -16,6 +16,11 @@ theme:
 # Repository folders that are not part of the published site: the designers'
 # untouched source exports, the docs, the build scripts, and the Figma data.
 exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - _config.build.yml
   - AGENTS.md
   - CLAUDE.md
   - CURRENT.md

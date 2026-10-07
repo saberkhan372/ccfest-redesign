@@ -1,0 +1,19 @@
+{%- comment -%} Typography also works in a plain Jekyll preview before generated data exists. {%- endcomment -%}
+{%- assign event_year = event.year -%}
+{%- assign context_date = event.date | default: "" | strip -%}
+{%- if context_date != "" -%}{%- assign event_year = event.date | date: "%Y" -%}{%- endif -%}
+{%- assign event_lettered_name = event.lettered_name | default: event.name -%}
+{%- unless event.lettered_name -%}
+  {%- assign context_last = event.name | split: " " | last -%}
+  {%- assign context_number = context_last | plus: 0 -%}
+  {%- assign context_size = context_last | size -%}
+  {%- if context_size == 4 and context_number >= 1900 and context_number <= 2200 -%}
+    {%- assign context_length = event.name | size | minus: 5 -%}
+    {%- assign event_lettered_name = event.name | slice: 0, context_length -%}
+  {%- endif -%}
+{%- endunless -%}
+{%- if context_date != "" -%}
+  {%- assign event_title_date = event.date | date: " %B %-d, " -%}
+{%- else -%}
+  {%- assign event_title_date = " — date to be announced, " -%}
+{%- endif -%}

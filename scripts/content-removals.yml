@@ -1,0 +1,4 @@
+# Set the exact last successful deployment SHA and list only IDs deliberately removed.
+# Leave empty for normal edits. This does not waive any other validation.
+baseline: ''
+session_ids: []

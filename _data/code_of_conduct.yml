@@ -1,0 +1,127 @@
+meta:
+  title: Code of Conduct — CC Fest
+  description: 'The CC Fest Code of Conduct: how we want to behave as a community, and what to do when things go
+    wrong.'
+page:
+  eyebrow: Community
+  summary: How we want to behave as a community, openly and clearly, so it’s not hidden or secret.
+  link_label: Report a concern
+report_steps:
+- Report received.
+- If immediate action is required, the organizer ({organizer_name}) will take action. This might involve a correction,
+  a discussion, or ejection from the session. In a busy, active session, sometimes things are missed. We will do
+  our best to stay aware of what is happening. Please help us.
+- After the session, {organizer_name} will review the incident.
+- First violations will result in a warning; severe or repeat incidents will result in expulsion from CC Fest.
+- After each CC Fest we will set aside a specific time to discuss the CoC and the ways we can do better.
+please_dont:
+- Talk over people.
+- Make assumptions about people (of course, this is unavoidable, but try to minimize your assumptions).
+- Romantically or sexually pursue people at CC Fest or in the context of CC Fest.
+- Comment on people’s appearance if you aren’t sure how it will be received.
+- Harass people. If someone doesn’t want to talk to you, let it go.
+- Make dismissive, patronizing, violent, or passive-aggressive jokes or comments.
+- Make jokes about pronouncing people’s names, especially if that person is already trying to speak your language.
+- Diminish or underestimate structural inequities.
+- Use ableist or racist language. Of course, language changes over time are cultural and complicated, but avoid
+  words that “punch down” at people. If you are curious about “ableist words” or “racist words” a quick search will
+  help!
+- Assume that if a person makes a small mistake with their words, they are a “bad person.”
+- Assume another person is more important or valuable because they are more “famous,” well-connected, or professionally
+  accomplished.
+- Assume that everyone else knows each other or that you are the outsider. None of us know everyone, and almost
+  everyone has feelings of insecurity.
+- Excuse or justify the bad behavior of others. It’s easy to feel overwhelmed in moments of conflict and say things
+  that make things worse, like “I’m sure they didn’t mean that” and “maybe you’re taking this the wrong way.”
+- Assume that “you are wrong” and “no one will help you” with an issue. We want to help!
+please_do:
+- Make space for newcomers and outsiders, and help them feel welcome even if you are a newcomer yourself!
+- Speak about your lived experience and knowledge.
+- Participate in a way that makes you feel good and invested.
+- Honor your accessibility needs and let people know if they can help make the space better for you.
+- Be aware of your own privilege and the ways you do or don’t take up space.
+- Make delightful spaces for others to contribute, help other people to shine.
+- Always listen generously, especially when listening to people speak in their second or third language.
+- Always be learning.
+- 'Use people’s pronouns (for example: she/her) correctly. If you don’t know, use their name or ask. If you make
+  a mistake, apologize, correct yourself, and move on.'
+- Ask questions rather than make assumptions.
+- When interrupting racism, sexism, ableism, or transphobia, try to explicitly address the behavior or phrase and
+  educate (rather than name-calling).
+- If you have the capacity and are coming from a place of privilege, practice correcting people and being corrected
+  yourself. Ideally, we take feedback as a gift. In practice, it can feel like an attack. Practice helps with this.
+- Apologize quickly and concisely when you realize you’ve done something wrong. Make a sincere effort to do better
+  quietly.
+- Escalate any issues to the CC Fest organizer, even if the issues are with our friends or with us. We want to make
+  this space suitable for you!
+table_of_contents:
+- '[Why we have a code of conduct](#why)'
+- '[Who it’s for](#who)'
+- '[What it looks like in action](#in-action)'
+- '[Specific examples](#examples)'
+- '[When things go wrong](#when-things-go-wrong)'
+- '[When things go wrong because of you](#because-of-you)'
+- '[When an incident is reported](#reports)'
+contents:
+  eyebrow: On this page
+why:
+  heading: Why do we have a code of conduct?
+  body: The Code of Conduct makes space for us to deeply consider and share our goals and be open and clear about
+    how we want to behave, as a community, so it’s not hidden or secret. Our goal is to make CC Fest a space where
+    many different people can come together to share and learn from each other.
+  body_2: We want people to come to CC Fest and participate and thrive no matter their experience, gender identity
+    and expression, disability, sexual orientation, personal appearance, race, ethnicity, body size, age, nationality,
+    or religion.
+  body_3: 'When different people come together in a space there is huge potential for learning, collaboration, and
+    real change. Unfortunately, there is also friction and conflict. This conflict emerges for many reasons including:
+    historical and current racism, colonialism, sexism, ableism, transphobia, wealth inequality, and unhealed community
+    and individual trauma.'
+  body_4: Conflict is unavoidable. Our goal with the CoC isn’t to avoid conflict, it’s to have clearly communicated
+    principles around how we deal with it. We wrote this CoC with the knowledge that the CoC will and should change,
+    as we learn more and grow as a community.
+who:
+  heading: Who is this code of conduct for?
+  body: This CoC is for everyone, including CC Fest organizers, speakers, invited guests, and attendees.
+in_action:
+  heading: What does this actually look like in action?
+  body: When attending CC Fest sessions, we expect people to treat others with respect, to listen generously, and
+    to work towards a thriving and equitable environment for all. The CoC is not about being “nice,” it’s about
+    working towards an equitable environment where people from different backgrounds can come together to share
+    and learn from each other.
+  body_2: The CoC applies to everyone equitably. Differences in power, histories, and current realities mean that
+    in order to be equitable, we need to always consider specific relationships and environments when contextualizing
+    words and actions.
+examples:
+  heading: Specific examples
+  body: Below are some examples that commonly come up. It would be impossible to write a full list here, but we
+    hope these will help you get a feeling for what we expect.
+  heading_2: Please do
+  heading_3: Please don’t
+when_things_go_wrong:
+  heading: What to do when things go wrong
+  body: 'If you are able and feel safe to do so, speak up in the moment: clearly name the behaviour and ask the
+    person to stop.'
+  body_2: You can also reach out to the event organizer and we will help you.
+  eyebrow: Contact the organizer
+  body_3: '[Email {organizer_name}](mailto:{contact_email}) (for any CC Fest event)'
+because_of_you:
+  heading: What to do when things go wrong (because of you)
+  body: If you are able, apologise immediately and clearly. Avoid phrases like “I’m sorry you felt X” and instead
+    use phrases like “I’m sorry I said that.” It can be hard to apologize in the moment of confrontation, but it’s
+    much easier than doing it later.
+  body_2: It can be tempting to talk about your intentions, but intentions aren’t important here. Of course, intentions
+    do matter, but when you’ve hurt someone, the important thing isn’t what you meant to do, the important thing
+    is what has happened.
+  body_3: Take a break. Emotions are powerful and can lead us to say things we later regret. This can be an excellent
+    moment for learning! Please don’t ask the person you just hurt! It’s an excellent opportunity to self-educate
+    with books or with Google.
+reports:
+  heading: What happens when an incident is reported
+  body: When an incident is reported, the person reporting the incident is to be treated with kindness, respect,
+    and care. Safety and consent should be the priority. When you are reporting something to us, we will not ask
+    you to confront anyone and we will not tell anyone who you are. We also strongly encourage you to reach out
+    to your support network to discuss and decompress.
+  body_2: 'The steps after an incident report will be as follows:'
+  body_3: People make mistakes, and we want to foster a culture where small mistakes can be corrected. We believe
+    in restorative justice, and we are interested in building systems that help everyone to thrive.
+  body_4: This code of conduct was created by [Marie Claire Flanagan](https://marieflanagan.com/about/).

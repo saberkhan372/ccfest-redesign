@@ -83,11 +83,11 @@ Only put in what's actually confirmed. Everything below starts as "to be announc
 | Donation note | `_data/event.yml` → `donation_note` (only if the Luma ticket takes donations) |
 | A past event | `_data/past_events.yml` → `events`, newest first |
 
-All five are also forms in the CMS, so this is usually a job for the admin UI rather than the editor.
+These are also forms in the CMS, so this is usually a job for the admin UI rather than the editor.
 
 After changing schedule templates, run `ruby scripts/verify-schedule-fallback.rb` with the Ruby installation that has Jekyll, then the browser checks below. It builds temporary fixtures to confirm that a workshop whose round is missing, empty, whitespace-only, mistyped, padded with a space, removed, or the id of the panel keeps showing under "Round to be announced" (a round counts as real only if it is exactly the id of a workshop block in `_data/schedule.yml`), with an empty round ID for the client script, and that the panel block holds only panels. If you add a third round, also add its id to the "When" options in `.pages.yml`, or the CMS cannot assign sessions to it. Incomplete session rows stay hidden. It does not change the event data.
 
-**The date in the title is the one thing a form cannot fix.** The hero title carries Francisca's blank date as underscores (`________,`), drawn from the Figma data. Filling in `date` updates the facts, the cards and the spoken name — but not the lettering. When the date is confirmed, edit that run's text in `design/figma-typography.json` and re-run the sync script.
+**The event title now follows the form.** The checked build derives event year and named time-zone offsets from the confirmed date, then runs the typography generator. Francisca's fixed lettering styles remain in `design/figma-typography.json`; do not hand-edit generated spans. Use `bundle exec ruby scripts/build.rb _site`, not a standalone Jekyll command, for a publishing build. Page prose and metadata now have seven additional CMS forms; see [CMS.md](CMS.md). Activation and hosted-CMS verification are tracked in [CMS-ROLLOUT.md](CMS-ROLLOUT.md).
 
 ---
 

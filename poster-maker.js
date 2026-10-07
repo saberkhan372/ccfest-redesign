@@ -133,7 +133,12 @@
     }
     return result;
   }
-  const isPanel = session => session.tags.some(tag => tag.toLowerCase() === 'panel');
+  const isPanel = session => session.format === 'Panel';
+  const sessionTags = session => {
+    const standard = [session.level, session.language && session.language !== 'English' ? session.language : '', session.format === 'Panel' ? 'Panel' : ''].filter(Boolean);
+    const extras = (session.tags || []).flatMap(tag => plain(tag).split(/,\s*/)).filter(tag => !['beginner', 'intermediate', 'advanced', 'english', 'spanish', 'panel', 'workshop'].includes(tag.toLowerCase()));
+    return [...new Set([...standard, ...extras].map(plain))];
+  };
 
   async function eventContent() {
     const data = $('maker-data').dataset;
@@ -173,7 +178,7 @@
       credits: credits.map(c => `${c.role}: ${c.name}`).join(' · '),
       keynotes: await Promise.all(keynotes.filter(k => k.name).map(async k => ({ ...(await person(k)), label: plain(k.label), slot: { opening: 'opening keynote', closing: 'closing keynote' }[plain(k.schedule_id)] || '' }))),
       sessions: await Promise.all(sessions.filter(s => s.title).map(async s => ({
-        title: plain(s.title), tags: (s.tags || []).map(plain), round: plain(s.schedule_id),
+        id: plain(s.id), title: plain(s.title), format: plain(s.format), level: plain(s.level), language: plain(s.language) || 'English', tags: sessionTags(s), round: plain(s.schedule_id),
         description: plain(s.short_description) || opening(s.description, 230),
         presenters: await Promise.all((s.presenters || []).filter(p => p.name).map(person))
       }))),

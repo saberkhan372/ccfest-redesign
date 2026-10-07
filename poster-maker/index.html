@@ -17,7 +17,7 @@ hide_event_banner: true
     <p>Choose your content, find a design, and make it yours.</p>
   </section>
   <noscript><p class="page-width">The poster maker needs JavaScript to draw and download artwork. <a href="../register/">Read the event details and register.</a></p></noscript>
-  <div id="maker-data" hidden data-home="{{ page.root }}" data-event="{{ site.data.event | jsonify | escape }}" data-schedule="{{ site.data.schedule | jsonify | escape }}" data-keynotes="{{ site.data.keynotes.keynotes | jsonify | escape }}" data-sessions="{{ site.data.sessions.sessions | jsonify | escape }}" data-credits="{{ site.data.site.credits | jsonify | escape }}"></div>
+  <div id="maker-data" hidden data-home="{{ page.root }}" data-event="{{ site.data.generated_event | default: site.data.event | jsonify | escape }}" data-schedule="{{ site.data.generated_schedule | default: site.data.schedule | jsonify | escape }}" data-keynotes="{{ site.data.keynotes.keynotes | jsonify | escape }}" data-sessions="{{ site.data.sessions.sessions | jsonify | escape }}" data-credits="{{ site.data.site.credits | jsonify | escape }}"></div>
   <p id="maker-status" class="maker-status page-width" role="status" hidden>Loading the drawing tools…</p>
   <section id="maker-workspace" class="maker-workspace page-width" aria-label="Poster editor" hidden>
     <form id="maker-controls" class="maker-controls">

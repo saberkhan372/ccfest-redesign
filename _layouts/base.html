@@ -1,3 +1,9 @@
+{%- assign page_copy = site.data[page.copy_key] -%}
+{%- assign meta_title = page_copy.meta.title | default: page.title -%}
+{%- assign meta_description = page_copy.meta.description | default: page.description -%}
+{%- assign meta_event = site.data.generated_event | default: site.data.event -%}
+{%- assign meta_title = meta_title | replace: "{event_name}", meta_event.name | replace: "{event_year}", meta_event.year -%}
+{%- assign meta_description = meta_description | replace: "{event_name}", meta_event.name | replace: "{event_year}", meta_event.year -%}
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="{{ page.description | escape }}"
+      content="{{ meta_description | escape }}"
     >
     <meta name="theme-color" content="#edede9">
-    <title>{{ page.title | escape }}</title>
+    <title>{{ meta_title | escape }}</title>
 {%- if page.noindex %}
     <meta name="robots" content="noindex, nofollow">
 {%- endif %}
@@ -16,8 +22,8 @@
     <link rel="canonical" href="{{ page.url | absolute_url }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ site.title | escape }}">
-    <meta property="og:title" content="{{ page.title | escape }}">
-    <meta property="og:description" content="{{ page.description | escape }}">
+    <meta property="og:title" content="{{ meta_title | escape }}">
+    <meta property="og:description" content="{{ meta_description | escape }}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
 {%- assign share = site.data.site.share_image | default: "" | strip %}{% assign share_lead = share | slice: 0 %}{% if share_lead == "/" %}{% assign share = share | remove_first: "/" %}{% endif %}
 {%- if share != "" %}
@@ -31,10 +37,10 @@
 {%- else %}
     <meta name="twitter:card" content="summary">
 {%- endif %}
-    <meta name="twitter:title" content="{{ page.title | escape }}">
-    <meta name="twitter:description" content="{{ page.description | escape }}">
-{%- assign ld_event = site.data.event %}{% assign ld_date = ld_event.date | default: "" | strip %}
-{%- if page.nav == "event" and ld_date != "" %}{% assign ld_day = ld_event.date | date: "%Y-%m-%d" %}{% assign ld_items = site.data.schedule.items %}{% assign ld_offset = site.data.schedule.zones[0].utc_offset %}{% if ld_offset < 0 %}{% assign ld_sign = "-" %}{% assign ld_hours = ld_offset | times: -1 %}{% else %}{% assign ld_sign = "+" %}{% assign ld_hours = ld_offset %}{% endif %}{% assign ld_tz = ld_hours | prepend: "0" | slice: -2, 2 | prepend: ld_sign | append: ":00" %}{% assign ld_reg = ld_event.registration_url | default: "" | strip %}
+    <meta name="twitter:title" content="{{ meta_title | escape }}">
+    <meta name="twitter:description" content="{{ meta_description | escape }}">
+{%- assign ld_schedule = site.data.generated_schedule | default: site.data.schedule %}{%- assign ld_event = site.data.generated_event | default: site.data.event %}{% assign ld_date = ld_event.date | default: "" | strip %}
+{%- if page.nav == "event" and ld_date != "" %}{% assign ld_day = ld_event.date | date: "%Y-%m-%d" %}{% assign ld_items = ld_schedule.items %}{% assign ld_offset = ld_schedule.zones[0].utc_offset %}{% if ld_offset < 0 %}{% assign ld_sign = "-" %}{% assign ld_hours = ld_offset | times: -1 %}{% else %}{% assign ld_sign = "+" %}{% assign ld_hours = ld_offset %}{% endif %}{% assign ld_tz = ld_hours | prepend: "0" | slice: -2, 2 | prepend: ld_sign | append: ":00" %}{% assign ld_reg = ld_event.registration_url | default: "" | strip %}
     <!-- Event details for search engines, built from _data/event.yml and _data/schedule.yml. -->
     <script type="application/ld+json">
     {
@@ -87,7 +93,7 @@
       {% include contact-links.html %}
       <p class="design-credits">{% for credit in site.data.site.credits %}{{ credit.role | escape }}: <a href="{{ credit.url | escape }}">{{ credit.name | escape }}</a>{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
     </footer>
-{%- assign banner_event = site.data.event %}{% assign banner_url = banner_event.registration_url | default: "" | strip %}{% assign banner_date = banner_event.date | default: "" | strip %}
+{%- assign banner_event = site.data.generated_event | default: site.data.event %}{% assign banner_url = banner_event.registration_url | default: "" | strip %}{% assign banner_date = banner_event.date | default: "" | strip %}
 {%- if banner_url != "" and page.hide_event_banner != true %}
 
     <!-- Floating reminder while registration is open (event-banner.js). Clearing the registration link in the CMS removes it. -->

@@ -1,0 +1,31 @@
+meta:
+  title: Mailing List — CC Fest
+  description: Join the CC Fest mailing list for event dates, workshops, educator camps, and community news.
+signup_list:
+- Virtual CC Fest dates, presenters, and registration
+- Workshops and free educator camps, like Visible Java
+- Monthly office hours to talk about creative coding projects, classes, and camps
+page:
+  eyebrow: Stay in touch
+  summary: Get notified about upcoming events and CC Fest news.
+join:
+  eyebrow: How to join
+  heading: Sign up.
+  body: Add your email below and we’ll send a note to confirm. The form is run by EmailOctopus, who send the list
+    for us.
+  heading_2: Sign up.
+  body_2: The sign-up form opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.
+  link_label: Join the mailing list ↗
+  heading_3: Send one email.
+  body_3: Email [{organizer_name}](mailto:{contact_email}?subject=Join%20mailing%20list) with the subject line *Join
+    mailing list*, and you’ll be added to the list.
+  link_label_2: Join the mailing list →
+  eyebrow_2: What you’ll hear about
+  body_4: We respect your privacy. Every CC Fest email carries an unsubscribe link, or write to [{organizer_name}](mailto:{contact_email}?subject=Unsubscribe)
+    and we’ll take you off the list.
+  body_5: We respect your privacy. Unsubscribe any time by emailing [{organizer_name}](mailto:{contact_email}?subject=Unsubscribe)
+    or replying to any CC Fest email.
+states:
+  form_needs_js: The sign-up form needs JavaScript.
+  signup_external: Sign up on EmailOctopus
+  join_email_subject: with the subject line *Join mailing list*.

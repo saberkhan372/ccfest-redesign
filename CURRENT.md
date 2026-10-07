@@ -1,4 +1,14 @@
-# Current state — October 6, 2026
+# Current state — October 7, 2026
+
+## Latest task — CMS improvements implemented locally
+
+Implemented [the CMS improvement plan](docs/CMS-IMPROVEMENT-PLAN.md) on local branch `cms-improvements`, based on the live recovery commit `413b33e`. The seven existing data forms now have seven additional page-copy/metadata forms. Homepage, registration, events, Visible Java, past-events, mailing and policy prose are editable; curriculum, outcomes, FAQ, logistics and policy lists are structured. Existing public copy matches the baseline, including Kofi's description; all 17 session IDs, routes, media paths and credits survive.
+
+Added Gemfile/lockfile and `scripts/build.rb`, recursive CMS/schema validation, published-ID protection against the last successful Pages deployment, deliberate rendered-omission tests and a checked Pages workflow. Build order is validation → event/time-zone preparation → typography → Jekyll safe build → rendered reconciliation → browser checks → verified artifact → dependent deploy. Event headings/year/metadata and named-zone offsets follow shared data; posters use session format/level/language. New image browsing starts in `assets/uploads`, retaining legacy assets. Designer-owned files remain byte-identical.
+
+Verified: 13 content regression tests / 59 assertions, recursive schema projection over all 14 forms, the original metadata-loss fixture, protected IDs/reordering/intentional removal, valid pending/new workshops, invalid rounds/times/images/links, future date/year/daylight-saving preparation; omitted/duplicate/mistitled rendered-card rejection; current 17-card reconciliation; actual Jekyll defensive schedule fallback; full `verify.cjs` and content-generic publication checks at 320/390/768/1440; registration dialog, choices/calendar/PDF/PNG, blocked storage and no-JS; full poster browser and pure-state suites; mobile screenshot inspection; unchanged public-text comparison; idempotent typography; JavaScript syntax and `git diff --check`.
+
+Saber explicitly authorized push and activation. The coordinated rollout is in progress: Pages settings were read successfully and still report legacy/main. Direct activation and a temporary Actions job both returned HTTP 403; Saber has been given the exact Pages setting to change. The temporary activation workflow will be removed with the implementation commit. No new checked deployment has yet been verified. A real authenticated Pages CMS save, media upload and stale-tab roundtrip remain unverified; local projection tests are not a substitute. Optional previews were not introduced. [CMS-ROLLOUT.md](docs/CMS-ROLLOUT.md) has the exact activation, save-test and recovery steps. Publishing is authorized by Saber’s “Push and activate” instruction.
 
 ## CMS session recovery — 2026-10-06
 
@@ -8,7 +18,7 @@ Local branch `fix/cms-session-metadata` restores only those missing values from 
 
 Verified after the final data/schema changes: Jekyll 3.10 safe-mode build; `scripts/verify-schedule-fallback.rb`; full `scripts/verify.cjs` in Chromium at 320/390/768/1440 (pages, images/fonts/links, schedule choices/time zones/calendar/PDF/PNG, blocked storage, registration dialog, motion and no-JS fallback); all 17 rendered cards and Kofi's text; desktop/mobile screenshots inspected; semantic comparison confirms only the restored metadata differs from the CMS save. `git diff --check` passes. No designer-owned files, Figma or private records were accessed or changed.
 
-Saber explicitly approved committing and pushing this recovery to `main`, which publishes it. Next task: verify the resulting GitHub Pages deployment and live page. Before the next content edit, reload Pages CMS and confirm that ID, Format, When, Level and Language are visible. A real CMS save with the refreshed form and the live recovery are pending verification at this commit.
+Saber explicitly approved committing and pushing this recovery to `main`. It is published as `413b33e`; [GitHub Pages build and deployment](https://github.com/saberkhan372/ccfest-redesign/actions/runs/37548533512) completed successfully. The live revision and all 17 sessions were verified, including the preserved Kofi description, session choices/calendar export, no horizontal overflow at 320/390/768/1440 and the no-JavaScript fallback. Before the next content edit, reload Pages CMS and confirm that ID, Format, When, Level and Language are visible. A real CMS save with the refreshed form remains unverified.
 
 ## Completed this session
 
@@ -36,4 +46,4 @@ Other ongoing work is preserved: Claude's schedule posters (PNG/tagged PDF/HTML)
 
 ## Next task
 
-Verify the GitHub Pages deployment for the authorized fixes commit, then check the live register page and poster maker. Preview serves /private/tmp/ccfest-fixes-oct6/site; check logs and screenshots are in /private/tmp/ccfest-fixes-oct6/. Session-wrap applied while preserving the previous notes in the archive.
+Complete the authorized push and coordinate switching Pages Source to GitHub Actions with the main update so the old branch publisher cannot bypass validation. Verify the new Actions deployment and live revision. Complete the hosted-CMS checklist on a test branch; record the actual save and stale-tab behavior. The live site remains `413b33e` until an approved publication.

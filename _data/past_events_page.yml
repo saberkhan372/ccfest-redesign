@@ -1,0 +1,29 @@
+meta:
+  title: Past Events — CC Fest
+  description: 'Ten years of CC Fest: past creative coding gatherings in New York City, Los Angeles, San Francisco,
+    and online, with agendas.'
+page:
+  eyebrow: 10 years · 2016–2026
+  summary: CC Fest has gathered creative coders in person in New York City, Los Angeles, and San Francisco, and
+    online since July 11, 2020.
+  link_label: Photos from in-person events ↗
+  link_url: https://saber-khan-hp7r.squarespace.com/pictures
+  link_label_2: The first CC Fest ↗
+  link_url_2: https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb
+archive:
+  heading: Event archive
+  body: Newest first. Links open each event’s agenda, announcement, or slides.
+classes:
+  heading: Camps and classes
+  body: Multi-week online camps for educators and curious learners, newest first.
+posters:
+  heading: Posters
+  body: Posters and fliers from past events, newest first.
+organize:
+  heading: Bring CC Fest to your city
+  body: Not near a past location? Organize a CC Fest where you are.
+  link_label: Email Saber Khan
+  link_label_2: Upcoming events →
+history_note:
+  body: CC Fest began on
+  body_2: in New York City with 40 participants.

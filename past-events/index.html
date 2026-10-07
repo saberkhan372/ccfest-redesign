@@ -1,22 +1,20 @@
 ---
 layout: base
-title: "Past Events — CC Fest"
-description: "Ten years of CC Fest: past creative coding gatherings in New York City, Los Angeles, San Francisco, and online, with agendas."
-body_class: "inner-page past-events-page"
-root: "../"
-home_href: "../"
-nav_current: "past-events"
+body_class: inner-page past-events-page
+root: ../
+home_href: ../
+nav_current: past-events
+copy_key: past_events_page
 ---
+{% assign copy = site.data.past_events_page %}
     <main id="main-content">
       <section class="hero page-hero page-width" aria-labelledby="page-title">
-        <p class="eyebrow">10 years · 2016–2026</p>
+        <p class="eyebrow">{{ copy.page.eyebrow | escape }}</p>
         <h1 id="page-title" data-figma-node="218:170"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">P</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">a</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">st Eve</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 78, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">s</span></h1>
-        <p class="hero-summary">
-          CC Fest has gathered creative coders in person in New York City, Los Angeles, and San Francisco, and online since July 11, 2020.
-        </p>
+        <p class="hero-summary">{% include editorial.html text=copy.page.summary %}</p>
         <div class="hero-actions">
-          <a class="button button-solid" href="https://saber-khan-hp7r.squarespace.com/pictures" target="_blank" rel="noopener">Photos from in-person events ↗</a>
-          <a class="button" href="https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb" target="_blank" rel="noopener">The first CC Fest ↗</a>
+          <a class="button button-solid" href="{{ copy.page.link_url | escape }}" target="_blank" rel="noopener">{{ copy.page.link_label | escape }}</a>
+          <a class="button" href="{{ copy.page.link_url_2 | escape }}" target="_blank" rel="noopener">{{ copy.page.link_label_2 | escape }}</a>
         </div>
       </section>
 
@@ -25,8 +23,8 @@ nav_current: "past-events"
           <div class="section-heading">
             <p>01</p>
             <div>
-              <h2 id="archive-title">Event archive</h2>
-              <p>Newest first. Links open each event’s agenda, announcement, or slides.</p>
+              <h2 id="archive-title">{{ copy.archive.heading | escape }}</h2>
+              <p>{% include editorial.html text=copy.archive.body %}</p>
             </div>
           </div>
 
@@ -40,8 +38,8 @@ nav_current: "past-events"
         <div class="section-heading">
           <p>02</p>
           <div>
-            <h2 id="classes-title">Camps and classes</h2>
-            <p>Multi-week online camps for educators and curious learners, newest first.</p>
+            <h2 id="classes-title">{{ copy.classes.heading | escape }}</h2>
+            <p>{% include editorial.html text=copy.classes.body %}</p>
           </div>
         </div>
 
@@ -55,8 +53,8 @@ nav_current: "past-events"
           <div class="section-heading">
             <p>03</p>
             <div>
-              <h2 id="posters-title">Posters</h2>
-              <p>Posters and fliers from past events, newest first.</p>
+              <h2 id="posters-title">{{ copy.posters.heading | escape }}</h2>
+              <p>{% include editorial.html text=copy.posters.body %}</p>
             </div>
           </div>
 
@@ -75,21 +73,21 @@ nav_current: "past-events"
         <div class="section-heading">
           <p>04</p>
           <div>
-            <h2 id="organize-title">Bring CC Fest to your city</h2>
-            <p>Not near a past location? Organize a CC Fest where you are.</p>
+            <h2 id="organize-title">{{ copy.organize.heading | escape }}</h2>
+            <p>{% include editorial.html text=copy.organize.body %}</p>
           </div>
         </div>
         <div class="hero-actions">
-          <a class="button button-solid" href="mailto:{{ site.data.site.email | escape }}?subject=Organizing%20a%20CC%20Fest">Email Saber Khan</a>
-          <a class="button" href="../events/">Upcoming events →</a>
+          <a class="button button-solid" href="mailto:{{ site.data.site.email | escape }}?subject=Organizing%20a%20CC%20Fest">{{ copy.organize.link_label | escape }}</a>
+          <a class="button" href="../events/">{{ copy.organize.link_label_2 | escape }}</a>
         </div>
       </section>
 
       <aside class="history-note" aria-label="CC Fest history note">
         <div class="page-width history-note-inner">
-          <p>CC Fest began on</p>
+          <p>{% include editorial.html text=copy.history_note.body %}</p>
           <strong>October 22, 2016</strong>
-          <p>in New York City with 40 participants.</p>
+          <p>{% include editorial.html text=copy.history_note.body_2 %}</p>
         </div>
       </aside>
     </main>

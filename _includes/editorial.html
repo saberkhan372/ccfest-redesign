@@ -1,0 +1,10 @@
+{%- comment -%} CMS prose is escaped before Markdown rendering. Only named substitutions are allowed; this never evaluates Liquid supplied by an editor. {%- endcomment -%}
+{%- assign editorial = include.text | default: "" -%}
+{%- assign editorial_event = site.data.generated_event | default: site.data.event -%}
+{%- assign editorial_camp = site.data.camps.camps | where: "id", "visible-java" | first -%}
+{%- assign editorial_schedule = site.data.generated_schedule | default: site.data.schedule -%}
+{%- assign editorial_rounds = editorial_schedule.items | where: "kind", "workshops" | size -%}
+{%- if editorial_rounds == 2 -%}{%- assign editorial_rounds = "two" -%}{%- endif -%}
+{%- assign editorial = editorial | replace: "{round_count}", editorial_rounds -%}
+{%- assign editorial = editorial | replace: "{contact_email}", site.data.site.email | replace: "{organizer_name}", site.data.site.organizer.name | replace: "{event_name}", editorial_event.name | replace: "{camp_description}", editorial_camp.description | replace: "{camp_eyebrow}", editorial_camp.eyebrow -%}
+{{- editorial | escape | markdownify | remove: "<p>" | remove: "</p>" | strip -}}

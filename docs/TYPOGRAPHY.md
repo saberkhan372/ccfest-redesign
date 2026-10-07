@@ -136,3 +136,7 @@ The event page's history band (nodes 251:850–852) has per-letter tweaks that F
 ## If lettering can't be reproduced
 
 Export that one element from Figma as outlined SVG, keep an accessible text label (`aria-label` or visually hidden text), and leave the rest of the page as live text. Don't flatten a whole page into images.
+
+## CMS event binding — October 2026
+
+The event nodes `218:127` and `251:741` retain their run styling, but their year/date are bound by the generator to the shared event context. The standard Virtual CC Fest name keeps the per-letter runs; custom names use the existing first-run display style. Other designer lettering remains fixed. `scripts/build.rb` validates YAML and prepares event/date/time-zone data before syncing headings and poster lettering. A plain Jekyll preview has a Liquid fallback for these headings, but publication must use the checked build so posters, metadata and calendar offsets agree.

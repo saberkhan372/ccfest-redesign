@@ -1,0 +1,106 @@
+meta:
+  title: 'Visible Java: Processing for AP CS A — CC Fest'
+  description: 'A free CC Fest educator camp: teach AP Computer Science A through Processing, with animation, interaction,
+    visual models, and student-made projects.'
+interest_url: https://docs.google.com/forms/d/e/1FAIpQLSejHAD2X6rUvnoSzIv8aSlFvJc0BZT46u7sIsKbSqt2xQBo_Q/viewform
+faq:
+- question: Is Processing the same as p5.js?
+  answer: No. They share a creative coding philosophy and similar drawing APIs, but Processing uses Java while p5.js
+    uses JavaScript. This camp focuses on Java because the goal is a direct bridge to AP Computer Science A.
+- question: How does this align with AP Computer Science A?
+  answer: We use Processing to make variables, control flow, classes, arrays, and algorithms visible, then explicitly
+    translate projects into standard Java methods, classes, tests, and AP-style written reasoning.
+- question: Do I need prior Processing experience?
+  answer: No. Basic Java familiarity is useful, but the first session starts with Processing’s sketch structure
+    and explains what it provides behind the scenes.
+- question: Is this an official College Board workshop?
+  answer: No. This is an independent CC Fest educator camp designed to complement AP CSA teaching, not an official
+    College Board professional development event.
+- question: Are the dates final?
+  answer: Not yet. The interest form will help choose a schedule that works for the first cohort.
+page:
+  eyebrow: '[Events](../) / {camp_eyebrow}'
+  heading: Visible Java
+  summary: Processing for AP CS A. {camp_description}
+  link_label: Join the interest list ↗
+  link_label_2: See the workshop arc
+concept:
+  eyebrow: The concept
+  heading: Teach the Java students can see.
+  body: Processing keeps Java’s core ideas intact while making every variable, loop, condition, and object produce
+    visible behavior. That gives students a concrete way to reason about code before translating their work into
+    standard AP-style Java.
+  heading_2: Who this is for
+  body_2: // Java that moves
+arc:
+  heading: Proposed workshop arc
+  body: Four sessions from sketch to AP task, moving from Processing’s immediate feedback to the standard Java forms
+    students need.
+outcomes:
+  heading: What you will leave with
+  body: Tools you can teach with immediately.
+  heading_6: Sample classroom directions
+logistics:
+  heading: Format and logistics
+  body: A practical pilot, shaped with the first cohort.
+faq_copy:
+  heading: Frequently asked questions
+interest:
+  eyebrow: Join the pilot
+  heading: Interested? Help shape the first camp.
+  body: Share a little about your teaching context, experience, and availability. This is an interest list, not
+    a binding registration.
+  link_label: Open the interest form ↗
+  body_2: Questions? Email [{contact_email}](mailto:{contact_email}?subject=Visible%20Java).
+classroom_directions:
+- title: One idea, three environments
+  description: Compare the same program as a Processing sketch, a plain Java class, and an AP-style method.
+- title: Port a finished sketch
+  description: Separate model from drawing code, then test the model in standard Java.
+- title: Translate API boundaries
+  description: Identify what Processing provides and what the student’s own Java is responsible for.
+learning_outcomes:
+- title: Runnable Processing sketches
+  description: Small, expressive programs that make Java concepts observable and debuggable.
+- title: AP-aligned translation activities
+  description: Prompts that move from a sketch into standard Java methods, classes, arrays, and reasoning.
+- title: Adaptable project prompts
+  description: Creative constraints flexible enough for different classrooms and student interests.
+- title: A clearer bridge to Java
+  description: A practical way to connect visual experimentation with precise AP CSA vocabulary and expectations.
+workshop_arc:
+- title: From sketch to Java
+  description: '`setup()`, `draw()`, variables, methods, scope, and what Processing supplies behind the scenes.'
+  optional: false
+- title: Logic you can see
+  description: Conditionals, loops, state, input, debugging, and animations students can pause and trace.
+  optional: false
+- title: Objects become worlds
+  description: Classes, constructors, arrays, `ArrayList`, and collections of visual objects that interact.
+  optional: false
+- title: From creative project to AP task
+  description: Translate Processing work into standard Java, AP-style methods, testing, and written reasoning.
+  optional: false
+- title: Optional studio
+  description: Adapt one project for your own classroom, get feedback, and share it with the group.
+  optional: true
+logistics_facts:
+- label: Format
+  value: Four live online workshops + optional studio
+- label: Session length
+  value: 90–120 minutes
+- label: Cost
+  value: Free
+- label: Prerequisites
+  value: Java comfort helps; no Processing experience required
+- label: Technology
+  value: A laptop or desktop that can run Processing and Java
+- label: Dates
+  value: Selected from interest-list availability
+audience:
+- Current and future AP Computer Science A teachers
+- Creative coding educators moving from p5.js to Java
+- Teachers looking for visual ways to teach abstraction and objects
+- Anyone curious about connecting open-ended projects to AP CSA reasoning
+code_example: "float x = 60;\n\nvoid draw() {\n  background(12, 107, 99);\n  circle(x, height / 2, 48);\n  x = x\
+  \ + 2;\n}"

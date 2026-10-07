@@ -94,3 +94,11 @@
 ## 2026-10-05 — Campaign editability uses native Figma layers and an explicit inventory
 **Why:** Saber authorized the separate campaign file. The missing countdowns and teaser cover reuse its components, variables and artwork on a new page, with native text; existing pages and Francisca’s source file stay intact. `docs/FIGMA-POSTERS.md` maps each of the 30 static assets to its frame and distinguishes editable adaptations from exact matches.
 **Rejected:** Flattened poster-image imports labelled editable; claiming the MP4s are editable timelines; silently adding the two extra spotlight workshops to public programme data.
+
+## CMS checks and page copy — October 7, 2026
+
+Keep Pages CMS and static Jekyll. Fourteen explicit forms own public YAML, including seven page-copy/metadata files. Recursive validation rejects undeclared nested keys; source-to-render reconciliation rejects dropped/duplicated session cards. Published IDs are compared with the last successful Pages deployment, with exact-baseline, per-ID removal exceptions. Templates retain defensive pending fallbacks, while publishing rejects nonempty invalid assignments.
+
+The prepared Pages Actions workflow validates and builds before uploading its artifact; deploy depends on the build. Production protection requires switching Pages from branch publishing to Actions and verifying a live run. This has not been activated locally. Named IANA zones derive whole-hour offsets from the event date. Event headings/poster lettering bind to shared data without changing fixed designer artwork or owned scripts. Session format/level/language drive posters; legacy tags are only additional topics.
+
+CMS prose uses escaped Markdown and a fixed named-token substitution list; editor HTML/Liquid never executes. Existing image paths stay put; new images use assets/uploads. No framework, JavaScript package manifest, preview service or private content store was added. Hosted-CMS roundtrips remain a distinct verification step; schema projection fixtures do not substitute for them.

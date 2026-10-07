@@ -1,0 +1,61 @@
+meta:
+  title: '{event_name} — CC Fest'
+  description: '{event_name} — a free gathering for creative coding workshops, talks, and community.'
+join_steps:
+- '**Register via Luma.** [Sign up above](#registration) to save your place.'
+- '**Watch for your Zoom invite.** You will receive an invitation to the Zoom event the day before, with reminders
+  in the hours before it starts.'
+- '**Join the lobby.** On the day, open the Zoom event and join the lobby.'
+- '**Pick a session.** There are {round_count} rounds of concurrent sessions, so drop in and out as you like. Questions
+  go in the chat.'
+top:
+  body: Part of [Processing Community Day 2026](https://day.processing.org/).
+  link_label: Register
+  link_label_2: View sessions
+keynotes:
+  body: Speakers to be announced.
+  eyebrow: Keynote 01
+  heading: New perspectives.
+  body_2: Speaker to be announced. Keynote speakers and their stories are on the way.
+  eyebrow_2: Keynote 02
+  heading_2: Shared curiosity.
+  body_3: Speaker to be announced. Join the mailing list to hear who’s speaking.
+sessions:
+  body: Times TBA
+  eyebrow: Presenters
+  heading: A little code. A lot of possibility.
+  body_2: Explore creative tools, make something new, and learn alongside the community. Session times, presenters,
+    and workshop details will appear here once confirmed.
+  heading_2: My choices
+  body_3: Workshops in a round run at the same time. On each one, mark a first choice, a second choice (one of each
+    per round) and any number of maybes. Your choices stay in this browser.
+  body_4: 'The file works with Apple Calendar, Outlook and Google Calendar (Settings → Import). It includes the
+    keynotes, the panel and your first choice in each round (second choices and maybes are not added), and is a
+    snapshot: if the schedule changes later, download it again. The PDF and PNG are printable copies of your choices,
+    with times in the zone chosen above.'
+pending:
+  heading: Round to be announced
+  body: These workshops are confirmed; their round will be added here soon.
+registration:
+  heading: Registration is open.
+  body: Save your place at {event_name}.
+  link_label: Register
+  heading_2: Be the first to know.
+  body_2: We’re getting ready for the next CC Fest. Get an email when the date and registration are announced.
+  link_label_2: Join the mailing list →
+  eyebrow: Register · {event_name}
+how_to_join:
+  heading: How to join on the day
+  body: 'Virtual CC Fest runs on Zoom Events: one lobby, with several workshops happening at once in each round.'
+  body_2: Stuck? Email [{contact_email}](mailto:{contact_email}?subject=Joining%20CC%20Fest) and we’ll help you
+    get in.
+history_note:
+  body: in New York City with **40** participants
+states:
+  date_unconfirmed: To be confirmed
+  schedule_intro: The whole day in order. With JavaScript you can mark which workshops you want in each round.
+  schedule_pending: Workshops and talks for creative coders. The schedule will be announced here.
+  registration_open: Registration is open. Sign up to save your place.
+  registration_pending: Registration is not open yet. Join the mailing list to hear when it opens.
+  luma_fallback_intro: Form not loading?
+  luma_fallback_link: Register on Luma instead ↗

@@ -1,0 +1,49 @@
+meta:
+  title: CC Fest — Creative Coding Festival
+  description: 'CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community.'
+welcome_list:
+- Students, artists, hobbyists, creatives, and tinkerers who are curious to learn
+- Educators and community organizers who are looking for inspiration
+- Everyone who would like to learn more about creative code and our community
+home_hero:
+  body: A free and friendly gathering for creative coding — workshops, talks, and community.
+upcoming:
+  body: Part of [Processing Community Day 2026](https://day.processing.org/).
+  link_label: View event & register →
+about:
+  eyebrow: About CC Fest
+  body: CC Fest is a free and friendly event for anyone curious about creative code. Come spend a few hours with
+    us — make interactive and engaging digital art, animation, and games, work with AI or hardware, and explore
+    many other options. Hear from keynote speakers on important and timely topics related to creative coding.
+  eyebrow_2: We welcome
+past_events:
+  body: 10 years · 2016–2025
+  body_2: CC Fest has been gathering creative coders since 2016.
+  body_3: We hosted our first virtual event on **July 11, 2020**. Previous in-person CC Fests have taken place in
+    New York City, Los Angeles, and San Francisco. [Read about the first CC Fest at NYU‑ITP in October 2016.](https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb)
+  body_4: Want to organize a CC Fest in your city? [Email Saber Khan.](mailto:{contact_email})
+  body_5: '[See all past events and agendas →](past-events/)'
+mailing_list:
+  body: Stay in touch
+  body_2: Get notified about upcoming events and CC Fest news.
+  body_3: Add your email and we’ll send a note to confirm.
+  body_4: '[What you’ll hear about →](mailing-list/)'
+  body_5: Sign-up opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.
+  body_6: To join the CC Fest mailing list, send an email to [{organizer_name}](mailto:{contact_email}?subject=Join%20mailing%20list)
+    with the subject line *Join mailing list*.
+code_of_conduct:
+  body: Community
+  body_2: How we want to behave as a community, openly and clearly.
+  body_3: Our goal is to make CC Fest a space where many different people can come together to share and learn from
+    each other. It isn’t about being “nice.” We ask everyone — organizers, speakers, guests, and attendees — to
+    treat others with respect, listen generously, and work towards a thriving and equitable environment for all.
+  body_4: Conflict is unavoidable. What matters is how we deal with it. If something goes wrong, speak up if you
+    feel safe to, or reach out to [{organizer_name}](mailto:{contact_email}) and we will help you.
+  body_5: '[Read the full code of conduct →](code-of-conduct/)'
+states:
+  date_pending: Date to be announced
+  registration_open_short: registration is open.
+  registration_pending_short: join the mailing list for updates.
+  form_needs_js: The sign-up form needs JavaScript.
+  signup_external: Sign up on EmailOctopus
+  join_email_subject: with the subject line *Join mailing list*.

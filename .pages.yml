@@ -1,227 +1,1987 @@
-# Pages CMS — the editing forms at app.pagescms.org.
-#
-# Each entry below is one form over one data file. Saving a form commits to this
-# repository; GitHub Pages then rebuilds the site, usually inside a minute.
-#
-# WHAT IS DELIBERATELY NOT HERE
-#   Layout, colour, and Francisca's lettering. The lettered headings are
-#   generated from design/figma-typography.json by scripts/sync-typography.cjs,
-#   and no form can reach them. See docs/TYPOGRAPHY.md.
-#
-# LEAVING A FIELD EMPTY IS A REAL ANSWER
-#   An empty date shows "To be confirmed", an empty keynote list shows the
-#   "to be announced" cards, and an empty registration link keeps the mailing
-#   list invitation. Never type a placeholder to make a page look finished.
-
 media:
+- name: uploads
+  label: New content images
+  input: assets/uploads
+  output: /assets/uploads
+  extensions:
+  - jpg
+  - jpeg
+  - png
+  - webp
+  - gif
+  - svg
+- name: legacy
+  label: Existing images (keep paths)
   input: assets
   output: /assets
-
+  extensions:
+  - jpg
+  - jpeg
+  - png
+  - webp
+  - gif
+  - svg
 content:
-  - name: event
-    label: Upcoming event
-    type: file
-    path: _data/event.yml
-    icon: calendar
-    fields:
-      - { name: name, label: Event name, type: string, description: "Used for the facts, the card on Events, and screen readers. The big lettered title on the page is Figma artwork and does not change with this." }
-      - { name: year, label: Year, type: number, description: "Shown as 'TBC 2026' on the homepage while the date is unconfirmed." }
-      - { name: eyebrow, label: Small line above the title, type: string }
-      - { name: summary, label: One-line summary, type: text }
-      - { name: date, label: Date, type: date, description: "Leave empty for 'To be confirmed'. Do not invent a date." }
-      - { name: format, label: Format, type: string, description: "e.g. Virtual" }
-      - { name: cost, label: Cost, type: string, description: "e.g. Free" }
-      - { name: level, label: Experience level, type: string, description: "e.g. All levels" }
-      - { name: registration_url, label: Registration link, type: string, description: "The Luma event page, e.g. https://luma.com/…. Leave empty until registration is really open — the page then invites people to the mailing list instead." }
-      - { name: luma_event_id, label: Luma event ID, type: string, required: false, description: "Optional. Starts with evt-. In Luma: Manage event → More → Embed Registration Button. With it, Register opens the form on this page; without it, Register links to Luma." }
-      - { name: donation_note, label: Donation note, type: text, required: false, description: "Shown beside the Register button once registration is open. Only mention donations if the Luma ticket really has a flexible amount. Leave empty to hide." }
-
+- name: event
+  label: Upcoming event
+  type: file
+  path: _data/event.yml
+  icon: calendar
+  fields:
+  - name: name
+    label: Event name
+    type: string
+    description: Event name. A trailing year follows the confirmed date automatically. Custom names use the existing
+      display font.
+    required: true
+  - name: year
+    label: Year
+    type: number
+    description: Fallback year while the date is unconfirmed; a confirmed date supplies the year everywhere.
+  - name: eyebrow
+    label: Small line above the title
+    type: string
+  - name: summary
+    label: One-line summary
+    type: text
+  - name: date
+    label: Date
+    type: date
+    description: Leave empty for 'To be confirmed'. Do not invent a date.
+  - name: format
+    label: Format
+    type: string
+    description: e.g. Virtual
+  - name: cost
+    label: Cost
+    type: string
+    description: e.g. Free
+  - name: level
+    label: Experience level
+    type: string
+    description: e.g. All levels
+  - name: registration_url
+    label: Registration link
+    type: string
+    description: The Luma event page, e.g. https://luma.com/…. Leave empty until registration is really open — the
+      page then invites people to the mailing list instead.
+  - name: luma_event_id
+    label: Luma event ID
+    type: string
+    required: false
+    description: 'Optional. Starts with evt-. In Luma: Manage event → More → Embed Registration Button. With it,
+      Register opens the form on this page; without it, Register links to Luma.'
+  - name: donation_note
+    label: Donation note
+    type: text
+    required: false
+    description: Shown beside the Register button once registration is open. Only mention donations if the Luma
+      ticket really has a flexible amount. Leave empty to hide.
+- name: keynotes
+  label: Keynote speakers
+  type: file
+  path: _data/keynotes.yml
+  icon: mic
+  fields:
   - name: keynotes
-    label: Keynote speakers
-    type: file
-    path: _data/keynotes.yml
-    icon: mic
+    label: Keynotes
+    type: object
+    list: true
+    description: Leave this empty until speakers are confirmed; the page shows its 'to be announced' cards by itself.
     fields:
-      - name: keynotes
-        label: Keynotes
-        type: object
-        list: true
-        description: "Leave this empty until speakers are confirmed; the page shows its 'to be announced' cards by itself."
-        fields:
-          - { name: label, label: Label, type: string, description: "e.g. Keynote 01" }
-          - { name: schedule_id, label: When, type: select, required: false, options: { values: [opening, closing] }, description: "Which keynote block of the day this speaker is in." }
-          - { name: name, label: Name or talk title, type: string }
-          - { name: bio, label: Bio, type: text, description: "To link a name or organisation, write [Social Software Lab](https://sosoft.arts.ucla.edu/). Links open in a new tab." }
-          - { name: short_bio, label: Short bio (posters), type: text, required: false, description: "Optional. One sentence for posters. Left empty, posters use the first sentence of the bio." }
-          - { name: photo, label: Photo, type: image, required: false, description: "Shown beside the bio, cropped to a tall frame centred on the person." }
-          - { name: url, label: Website, type: string, required: false }
-
+    - name: label
+      label: Label
+      type: string
+      description: e.g. Keynote 01
+    - name: schedule_id
+      label: When
+      type: select
+      required: false
+      options:
+        values:
+        - opening
+        - closing
+      description: Which keynote block of the day this speaker is in.
+    - name: name
+      label: Name or talk title
+      type: string
+    - name: bio
+      label: Bio
+      type: text
+      description: To link a name or organisation, write [Social Software Lab](https://sosoft.arts.ucla.edu/). Links
+        open in a new tab.
+    - name: short_bio
+      label: Short bio (posters)
+      type: text
+      required: false
+      description: Optional. One sentence for posters. Left empty, posters use the first sentence of the bio.
+    - name: photo
+      label: Photo
+      type: image
+      required: false
+      description: Shown beside the bio, cropped to a tall frame centred on the person.
+      options:
+        media: legacy
+        path: assets/uploads
+        rename: safe
+    - name: url
+      label: Website
+      type: string
+      required: false
+- name: sessions
+  label: Sessions
+  type: file
+  path: _data/sessions.yml
+  icon: list
+  fields:
   - name: sessions
     label: Sessions
-    type: file
-    path: _data/sessions.yml
-    icon: list
+    type: object
+    list: true
+    description: Leave empty until the schedule is settled; the page shows its announcement row by itself.
     fields:
-      - name: sessions
-        label: Sessions
-        type: object
-        list: true
-        description: "Leave empty until the schedule is settled; the page shows its announcement row by itself."
-        fields:
-          - { name: title, label: Session title, type: string, description: "A session only appears once it has a title." }
-          - { name: id, label: ID, type: string, required: true, description: "Short and permanent, e.g. naoto-hieda. Visitors' saved choices and calendar entries use it, so never change it once the page is live." }
-          - { name: format, label: Format, type: select, required: true, options: { values: [Workshop, Panel] } }
-          - { name: schedule_id, label: When, type: select, required: false, options: { values: [round-1, round-2, panel] }, description: "round-1 = 9:30 am PT, round-2 = 11:00 am PT. Leave empty for a session whose round is not settled; it shows as 'Round to be announced'." }
-          - { name: level, label: Level, type: select, required: false, options: { values: [Beginner, Intermediate, Advanced] } }
-          - { name: language, label: Language, type: select, options: { values: [English, Spanish] }, description: "Default English." }
-          - { name: tags, label: Tags, type: string, list: true, description: "Short labels, e.g. Beginner, Panel" }
-          - { name: description, label: Description, type: text, required: false, description: "Blank lines become line breaks." }
-          - { name: short_description, label: Short description (posters), type: text, required: false, description: "Optional. One or two sentences for posters. Left empty, posters use the first sentence of the description." }
-          - { name: resource_url, label: Resources link, type: string, required: false }
-          - name: presenters
-            label: Presenters
-            type: object
-            list: true
-            description: "One for a session; several for a panel (they are then labelled Panelists)."
-            fields:
-              - { name: name, label: Name, type: string }
-              - { name: pronouns, label: Pronouns, type: string, required: false }
-              - { name: photo, label: Photo, type: image, required: false, description: "Square, about 400px. Without one, the first letter of the name is shown." }
-              - { name: url, label: Website, type: string, required: false }
-              - { name: bio, label: Bio, type: text, required: false, description: "To link a name or organisation, write [Processing Foundation](https://processingfoundation.org). Links open in a new tab." }
-              - { name: short_bio, label: Short bio (posters), type: text, required: false, description: "Optional. One sentence for posters. Left empty, posters use the first sentence of the bio." }
-
-  - name: schedule
-    label: Schedule
-    type: file
-    path: _data/schedule.yml
-    icon: clock
+    - name: title
+      label: Session title
+      type: string
+      description: A session only appears once it has a title.
+      required: true
+    - name: id
+      label: ID
+      type: string
+      required: true
+      description: Short and permanent, e.g. naoto-hieda. Visitors' saved choices and calendar entries use it, so
+        never change it once the page is live.
+      pattern: ^[a-z0-9][a-z0-9-]*$
+    - name: format
+      label: Format
+      type: select
+      required: true
+      options:
+        values:
+        - Workshop
+        - Panel
+    - name: schedule_id
+      label: When
+      type: select
+      required: false
+      options:
+        values:
+        - label: Round 1 (first workshop block)
+          value: round-1
+        - label: Round 2 (second workshop block)
+          value: round-2
+        - label: Panel discussion
+          value: panel
+      description: Choose a block from Schedule. Leave empty for a pending workshop. Do not rename published IDs;
+        update this option list if a round is added.
+    - name: level
+      label: Level
+      type: select
+      required: false
+      options:
+        values:
+        - Beginner
+        - Intermediate
+        - Advanced
+    - name: language
+      label: Language
+      type: select
+      options:
+        values:
+        - English
+        - Spanish
+      description: Default English.
+      default: English
+    - name: tags
+      label: Tags
+      type: string
+      list: true
+      description: Optional extra topics. Level, language and Panel labels come from the dedicated fields, including
+        on posters.
+    - name: description
+      label: Description
+      type: text
+      required: false
+      description: Blank lines become line breaks.
+    - name: short_description
+      label: Short description (posters)
+      type: text
+      required: false
+      description: Optional. One or two sentences for posters. Left empty, posters use the first sentence of the
+        description.
+    - name: resource_url
+      label: Resources link
+      type: string
+      required: false
+    - name: presenters
+      label: Presenters
+      type: object
+      list: true
+      description: One for a session; several for a panel (they are then labelled Panelists).
+      fields:
+      - name: name
+        label: Name
+        type: string
+      - name: pronouns
+        label: Pronouns
+        type: string
+        required: false
+      - name: photo
+        label: Photo
+        type: image
+        required: false
+        description: Square, about 400px. Without one, the first letter of the name is shown.
+        options:
+          media: legacy
+          path: assets/uploads
+          rename: safe
+      - name: url
+        label: Website
+        type: string
+        required: false
+      - name: bio
+        label: Bio
+        type: text
+        required: false
+        description: To link a name or organisation, write [Processing Foundation](https://processingfoundation.org).
+          Links open in a new tab.
+      - name: short_bio
+        label: Short bio (posters)
+        type: text
+        required: false
+        description: Optional. One sentence for posters. Left empty, posters use the first sentence of the bio.
+- name: schedule
+  label: Schedule
+  type: file
+  path: _data/schedule.yml
+  icon: clock
+  fields:
+  - name: zones
+    label: Time zone columns
+    type: object
+    list: true
+    description: First zone owns the running-order times. IANA names derive the correct offset for the event date,
+      including daylight saving.
     fields:
-      - name: zones
-        label: Time zone columns
-        type: object
-        list: true
-        description: "The first zone is the one the times below are written in. October 17 is daylight time: Pacific -7, Eastern -4."
-        fields:
-          - { name: label, label: Column heading, type: string, description: "e.g. Pacific (PT)" }
-          - { name: utc_offset, label: UTC offset in hours, type: number }
-      - name: items
-        label: Running order
-        type: object
-        list: true
-        description: "Leave empty to hide the Schedule section."
-        fields:
-          - { name: id, label: ID, type: string, description: "opening, round-1, panel, round-2 or closing. Sessions and keynotes point at these; do not rename." }
-          - { name: kind, label: Kind, type: select, options: { values: [keynote, workshops, panel] } }
-          - { name: title, label: What's on, type: string }
-          - { name: start, label: Starts (HH:MM, 24-hour, first zone), type: string, pattern: "^[0-2][0-9]:[0-5][0-9]$" }
-          - { name: end, label: Ends (HH:MM, 24-hour, first zone), type: string, pattern: "^[0-2][0-9]:[0-5][0-9]$" }
-
+    - name: label
+      label: Column heading
+      type: string
+      description: e.g. Pacific (PT)
+    - name: utc_offset
+      label: UTC offset in hours
+      type: number
+    - name: timezone
+      label: IANA time zone
+      type: string
+      required: false
+      description: e.g. America/Los_Angeles. Leave empty only for a manually verified fixed UTC offset.
+  - name: items
+    label: Running order
+    type: object
+    list: true
+    description: Leave empty to hide the Schedule section.
+    fields:
+    - name: id
+      label: ID
+      type: string
+      description: opening, round-1, panel, round-2 or closing. Sessions and keynotes point at these; do not rename.
+      required: true
+    - name: kind
+      label: Kind
+      type: select
+      options:
+        values:
+        - keynote
+        - workshops
+        - panel
+      required: true
+    - name: title
+      label: What's on
+      type: string
+      required: true
+    - name: start
+      label: Starts (HH:MM
+      24-hour: null
+      first zone): null
+      type: string
+      pattern: ^(?:[01][0-9]|2[0-3]):[0-5][0-9]$
+      required: true
+    - name: end
+      label: Ends (HH:MM
+      24-hour: null
+      first zone): null
+      type: string
+      pattern: ^(?:[01][0-9]|2[0-3]):[0-5][0-9]$
+      required: true
+- name: past_events
+  label: Past events
+  type: file
+  path: _data/past_events.yml
+  icon: archive
+  fields:
+  - name: events
+    label: Archive (newest first)
+    type: object
+    list: true
+    fields:
+    - name: datetime
+      label: Machine-readable date
+      type: string
+      description: YYYY-MM-DD, YYYY-MM, or just the year when that is all that is known.
+    - name: date_label
+      label: Date as shown
+      type: string
+      description: e.g. Mar 21, 2026, or 2019
+    - name: place
+      label: Place
+      type: string
+      description: e.g. Virtual, or NYC · NYU ITP
+    - name: url
+      label: Agenda link
+      type: string
+      required: false
+      description: Leave empty when there is no agenda to link to, and fill in the title below instead.
+    - name: link_text
+      label: Agenda link text
+      type: string
+      required: false
+      description: The arrow is added for you.
+    - name: title
+      label: Title (when there is no link)
+      type: string
+      required: false
+    - name: poster
+      label: Poster
+      type: image
+      required: false
+      description: Shown in the Posters grid on Past Events. About 720px wide.
+      options:
+        media: legacy
+        path: assets/uploads
+        rename: safe
+    - name: poster_alt
+      label: Poster description
+      type: string
+      required: false
+      description: 'For screen readers: what the poster shows, including the date and any keynote names on it.'
+    - name: poster_credit
+      label: Poster designer
+      type: string
+      required: false
+      description: Shown as 'Design by …'. Leave empty when not known.
+  - name: classes
+    label: Camps and classes (newest first)
+    type: object
+    list: true
+    description: Multi-week camps and courses, listed under the archive on Past Events.
+    fields:
+    - name: datetime
+      label: Machine-readable date
+      type: string
+      description: YYYY-MM-DD, or just the year.
+    - name: date_label
+      label: Date as shown
+      type: string
+      description: e.g. Fall 2024
+    - name: place
+      label: Place
+      type: string
+      description: e.g. Online
+    - name: url
+      label: Link
+      type: string
+      required: false
+    - name: link_text
+      label: Link text
+      type: string
+      required: false
+      description: The arrow is added for you.
+    - name: title
+      label: Title (when there is no link)
+      type: string
+      required: false
+  - name: chips
+    label: Homepage location badges
+    type: object
+    list: true
+    description: The short badges on the homepage. They summarise the archive, so several events can share one badge.
+    fields:
+    - name: label
+      label: Place
+      type: string
+      description: e.g. NYC
+    - name: note
+      label: When
+      type: string
+      description: e.g. Oct 2016 · NYU ITP
+- name: camps
+  label: Camps and programmes
+  type: file
+  path: _data/camps.yml
+  icon: graduation-cap
+  fields:
+  - name: camps
+    label: Camps
+    type: object
+    list: true
+    fields:
+    - name: id
+      label: Permanent camp ID
+      type: string
+      required: true
+      description: visible-java identifies the camp page independently of its link.
+    - name: name
+      label: Name
+      type: string
+    - name: eyebrow
+      label: Small line above the name
+      type: string
+    - name: description
+      label: Description
+      type: text
+    - name: url
+      label: Link
+      type: string
+      description: A page on this site relative to Events (e.g. visible-java/), or a full https:// link, which opens
+        in a new tab.
+    - name: link_text
+      label: Link text
+      type: string
+      description: The arrow is added for you.
+    - name: facts
+      label: Facts
+      type: object
+      list: true
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: value
+        label: Value
+        type: string
+- name: site
+  label: Site details
+  type: file
+  path: _data/site.yml
+  icon: settings
+  fields:
+  - name: email
+    label: Contact email
+    type: string
+    description: Appears in every footer and in the mailing-list links.
+  - name: tagline
+    label: Footer tagline
+    type: text
+  - name: organizer
+    label: Organizer
+    type: object
+    description: Shown in the footer in place of a bare email address.
+    fields:
+    - name: name
+      label: Name
+      type: string
+    - name: linkedin
+      label: LinkedIn URL
+      type: string
+      required: false
+      description: Leave empty and the LinkedIn icon is not shown at all.
+  - name: share_image
+    label: Link preview image
+    type: image
+    required: false
+    description: Shown when someone shares a ccfest.rocks link on LinkedIn, Bluesky, Slack, etc. 1200×630 pixels,
+      important content in the middle. After changing it, refresh LinkedIn's copy at linkedin.com/post-inspector.
+    options:
+      media: legacy
+      path: assets/uploads
+      rename: safe
+  - name: share_image_alt
+    label: Link preview image description
+    type: string
+    required: false
+  - name: announcement
+    label: Announcement bar
+    type: object
+    description: The strip across the top of every page. Leave the link empty to remove it.
+    fields:
+    - name: eyebrow
+      label: Small label
+      type: string
+      required: false
+      description: e.g. New
+    - name: text
+      label: Text
+      type: string
+      required: false
+    - name: link_text
+      label: Link text
+      type: string
+      required: false
+      description: e.g. Learn more
+    - name: url
+      label: Link
+      type: string
+      required: false
+      description: A page on this site without a leading slash, e.g. events/visible-java/, or a full https:// link.
+        Empty removes the bar.
+  - name: mailing_list
+    label: Mailing list
+    type: object
+    description: Leave every field empty and the site keeps the 'email us to join' flow. Fill ONE of the first two.
+    fields:
+    - name: embed_form_id
+      label: EmailOctopus form id
+      type: string
+      required: false
+      description: 'The id in the embed snippet: <script src=".../form/<ID>.js" data-form="<ID>">. Paste just the
+        id. Empty means the page keeps the ''email us to join'' text.'
+    - name: embed_host
+      label: Embed host
+      type: string
+      required: false
+      description: The host from that same snippet, e.g. eomail5.com. Take it from the snippet rather than assuming.
+    - name: signup_url
+      label: Hosted sign-up page (fallback)
+      type: string
+      required: false
+      description: Shown to visitors without JavaScript, and used on its own if no form id is set.
+  - name: credits
+    label: Designer credits
+    type: object
+    list: true
+    description: Francisca and Shristi asked for these on every page. Please keep them.
+    fields:
+    - name: role
+      label: Role
+      type: string
+    - name: name
+      label: Name
+      type: string
+    - name: url
+      label: Website
+      type: string
+- name: home
+  label: Homepage copy
+  type: file
+  path: _data/home.yml
+  fields:
+  - name: meta
+    label: Meta
+    type: object
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: CC Fest — Creative Coding Festival'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: CC Fest — a free and friendly gathering for creative coding: workshops, talks, and community.'
+  - name: welcome_list
+    label: Welcome list
+    type: text
+    list: true
+  - name: home_hero
+    label: Home hero
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: A free and friendly gathering for creative coding — workshops, talks, and community.'
+  - name: upcoming
+    label: Upcoming
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Part of [Processing Community Day 2026](https://day.processing.org/).'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: View event & register →'
+  - name: about
+    label: About
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: About CC Fest'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: CC Fest is a free and friendly event for anyone curious about creative code. Come spend
+        a few hours '
+    - name: eyebrow_2
+      label: Eyebrow 2
+      type: string
+      required: false
+      description: 'Current: We welcome'
   - name: past_events
     label: Past events
-    type: file
-    path: _data/past_events.yml
-    icon: archive
+    type: object
     fields:
-      - name: events
-        label: Archive (newest first)
-        type: object
-        list: true
-        fields:
-          - { name: datetime, label: Machine-readable date, type: string, description: "YYYY-MM-DD, YYYY-MM, or just the year when that is all that is known." }
-          - { name: date_label, label: Date as shown, type: string, description: "e.g. Mar 21, 2026, or 2019" }
-          - { name: place, label: Place, type: string, description: "e.g. Virtual, or NYC · NYU ITP" }
-          - { name: url, label: Agenda link, type: string, required: false, description: "Leave empty when there is no agenda to link to, and fill in the title below instead." }
-          - { name: link_text, label: Agenda link text, type: string, required: false, description: "The arrow is added for you." }
-          - { name: title, label: Title (when there is no link), type: string, required: false }
-          - { name: poster, label: Poster, type: image, required: false, description: "Shown in the Posters grid on Past Events. About 720px wide." }
-          - { name: poster_alt, label: Poster description, type: string, required: false, description: "For screen readers: what the poster shows, including the date and any keynote names on it." }
-          - { name: poster_credit, label: Poster designer, type: string, required: false, description: "Shown as 'Design by …'. Leave empty when not known." }
-      - name: classes
-        label: Camps and classes (newest first)
-        type: object
-        list: true
-        description: "Multi-week camps and courses, listed under the archive on Past Events."
-        fields:
-          - { name: datetime, label: Machine-readable date, type: string, description: "YYYY-MM-DD, or just the year." }
-          - { name: date_label, label: Date as shown, type: string, description: "e.g. Fall 2024" }
-          - { name: place, label: Place, type: string, description: "e.g. Online" }
-          - { name: url, label: Link, type: string, required: false }
-          - { name: link_text, label: Link text, type: string, required: false, description: "The arrow is added for you." }
-          - { name: title, label: Title (when there is no link), type: string, required: false }
-      - name: chips
-        label: Homepage location badges
-        type: object
-        list: true
-        description: "The short badges on the homepage. They summarise the archive, so several events can share one badge."
-        fields:
-          - { name: label, label: Place, type: string, description: "e.g. NYC" }
-          - { name: note, label: When, type: string, description: "e.g. Oct 2016 · NYU ITP" }
-
-  - name: camps
-    label: Camps and programmes
-    type: file
-    path: _data/camps.yml
-    icon: graduation-cap
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: 10 years · 2016–2025'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: CC Fest has been gathering creative coders since 2016.'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: We hosted our first virtual event on **July 11, 2020**. Previous in-person CC Fests have
+        taken place'
+    - name: body_4
+      label: Body 4
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Want to organize a CC Fest in your city? [Email Saber Khan.](mailto:{contact_email})'
+    - name: body_5
+      label: Body 5
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: [See all past events and agendas →](past-events/)'
+  - name: mailing_list
+    label: Mailing list
+    type: object
     fields:
-      - name: camps
-        label: Camps
-        type: object
-        list: true
-        fields:
-          - { name: name, label: Name, type: string }
-          - { name: eyebrow, label: Small line above the name, type: string }
-          - { name: description, label: Description, type: text }
-          - { name: url, label: Link, type: string, description: "A page on this site relative to Events (e.g. visible-java/), or a full https:// link, which opens in a new tab." }
-          - { name: link_text, label: Link text, type: string, description: "The arrow is added for you." }
-          - name: facts
-            label: Facts
-            type: object
-            list: true
-            fields:
-              - { name: label, label: Label, type: string }
-              - { name: value, label: Value, type: string }
-
-  - name: site
-    label: Site details
-    type: file
-    path: _data/site.yml
-    icon: settings
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Stay in touch'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Get notified about upcoming events and CC Fest news.'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Add your email and we’ll send a note to confirm.'
+    - name: body_4
+      label: Body 4
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: [What you’ll hear about →](mailing-list/)'
+    - name: body_5
+      label: Body 5
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Sign-up opens on EmailOctopus, who send the list for us. You can unsubscribe from any email.'
+    - name: body_6
+      label: Body 6
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: To join the CC Fest mailing list, send an email to [{organizer_name}](mailto:{contact_email}?subject'
+  - name: code_of_conduct
+    label: Code of conduct
+    type: object
     fields:
-      - { name: email, label: Contact email, type: string, description: "Appears in every footer and in the mailing-list links." }
-      - { name: tagline, label: Footer tagline, type: text }
-      - name: organizer
-        label: Organizer
-        type: object
-        description: "Shown in the footer in place of a bare email address."
-        fields:
-          - { name: name, label: Name, type: string }
-          - { name: linkedin, label: LinkedIn URL, type: string, required: false, description: "Leave empty and the LinkedIn icon is not shown at all." }
-      - { name: share_image, label: Link preview image, type: image, required: false, description: "Shown when someone shares a ccfest.rocks link on LinkedIn, Bluesky, Slack, etc. 1200×630 pixels, important content in the middle. After changing it, refresh LinkedIn's copy at linkedin.com/post-inspector." }
-      - { name: share_image_alt, label: Link preview image description, type: string, required: false }
-      - name: announcement
-        label: Announcement bar
-        type: object
-        description: "The strip across the top of every page. Leave the link empty to remove it."
-        fields:
-          - { name: eyebrow, label: Small label, type: string, required: false, description: "e.g. New" }
-          - { name: text, label: Text, type: string, required: false }
-          - { name: link_text, label: Link text, type: string, required: false, description: "e.g. Learn more" }
-          - { name: url, label: Link, type: string, required: false, description: "A page on this site without a leading slash, e.g. events/visible-java/, or a full https:// link. Empty removes the bar." }
-      - name: mailing_list
-        label: Mailing list
-        type: object
-        description: "Leave every field empty and the site keeps the 'email us to join' flow. Fill ONE of the first two."
-        fields:
-          - { name: embed_form_id, label: "EmailOctopus form id", type: string, required: false, description: "The id in the embed snippet: <script src=\".../form/<ID>.js\" data-form=\"<ID>\">. Paste just the id. Empty means the page keeps the 'email us to join' text." }
-          - { name: embed_host, label: "Embed host", type: string, required: false, description: "The host from that same snippet, e.g. eomail5.com. Take it from the snippet rather than assuming." }
-          - { name: signup_url, label: "Hosted sign-up page (fallback)", type: string, required: false, description: "Shown to visitors without JavaScript, and used on its own if no form id is set." }
-      - name: credits
-        label: Designer credits
-        type: object
-        list: true
-        description: "Francisca and Shristi asked for these on every page. Please keep them."
-        fields:
-          - { name: role, label: Role, type: string }
-          - { name: name, label: Name, type: string }
-          - { name: url, label: Website, type: string }
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Community'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: How we want to behave as a community, openly and clearly.'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Our goal is to make CC Fest a space where many different people can come together to share
+        and learn'
+    - name: body_4
+      label: Body 4
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Conflict is unavoidable. What matters is how we deal with it. If something goes wrong,
+        speak up if y'
+    - name: body_5
+      label: Body 5
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: [Read the full code of conduct →](code-of-conduct/)'
+  - name: states
+    label: States
+    type: object
+    fields:
+    - name: date_pending
+      label: Date pending
+      type: string
+      required: false
+      description: 'Current: Date to be announced'
+    - name: registration_open_short
+      label: Registration open short
+      type: string
+      required: false
+      description: 'Current: registration is open.'
+    - name: registration_pending_short
+      label: Registration pending short
+      type: string
+      required: false
+      description: 'Current: join the mailing list for updates.'
+    - name: form_needs_js
+      label: Form needs js
+      type: string
+      required: false
+      description: 'Current: The sign-up form needs JavaScript.'
+    - name: signup_external
+      label: Signup external
+      type: string
+      required: false
+      description: 'Current: Sign up on EmailOctopus'
+    - name: join_email_subject
+      label: Join email subject
+      type: string
+      required: false
+      description: 'Current: with the subject line *Join mailing list*.'
+- name: register
+  label: Registration page copy
+  type: file
+  path: _data/register.yml
+  fields:
+  - name: meta
+    label: Meta
+    type: object
+    fields:
+    - name: title
+      label: Title
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: {event_name} — CC Fest'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: {event_name} — a free gathering for creative coding workshops, talks, and community.'
+  - name: join_steps
+    label: Join steps
+    type: text
+    list: true
+  - name: top
+    label: Top
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Part of [Processing Community Day 2026](https://day.processing.org/).'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Register'
+    - name: link_label_2
+      label: Link label 2
+      type: string
+      required: false
+      description: 'Current: View sessions'
+  - name: keynotes
+    label: Keynotes
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Speakers to be announced.'
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: Keynote 01'
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: New perspectives.'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Speaker to be announced. Keynote speakers and their stories are on the way.'
+    - name: eyebrow_2
+      label: Eyebrow 2
+      type: string
+      required: false
+      description: 'Current: Keynote 02'
+    - name: heading_2
+      label: Heading 2
+      type: string
+      required: false
+      description: 'Current: Shared curiosity.'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Speaker to be announced. Join the mailing list to hear who’s speaking.'
+  - name: sessions
+    label: Sessions
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Times TBA'
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: Presenters'
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: A little code. A lot of possibility.'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Explore creative tools, make something new, and learn alongside the community. Session
+        times, presen'
+    - name: heading_2
+      label: Heading 2
+      type: string
+      required: false
+      description: 'Current: My choices'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Workshops in a round run at the same time. On each one, mark a first choice, a second choice
+        (one of'
+    - name: body_4
+      label: Body 4
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: The file works with Apple Calendar, Outlook and Google Calendar (Settings → Import). It
+        includes the'
+  - name: pending
+    label: Pending
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Round to be announced'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: These workshops are confirmed; their round will be added here soon.'
+  - name: registration
+    label: Registration
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Registration is open.'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Save your place at {event_name}.'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Register'
+    - name: heading_2
+      label: Heading 2
+      type: string
+      required: false
+      description: 'Current: Be the first to know.'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: We’re getting ready for the next CC Fest. Get an email when the date and registration are
+        announced.'
+    - name: link_label_2
+      label: Link label 2
+      type: string
+      required: false
+      description: 'Current: Join the mailing list →'
+    - name: eyebrow
+      label: Eyebrow
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Register · {event_name}'
+  - name: how_to_join
+    label: How to join
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: How to join on the day'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Virtual CC Fest runs on Zoom Events: one lobby, with several workshops happening at once
+        in each rou'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Stuck? Email [{contact_email}](mailto:{contact_email}?subject=Joining%20CC%20Fest) and
+        we’ll help yo'
+  - name: history_note
+    label: History note
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: in New York City with **40** participants'
+  - name: states
+    label: States
+    type: object
+    fields:
+    - name: date_unconfirmed
+      label: Date unconfirmed
+      type: string
+      required: false
+      description: 'Current: To be confirmed'
+    - name: schedule_intro
+      label: Schedule intro
+      type: string
+      required: false
+      description: 'Current: The whole day in order. With JavaScript you can mark which workshops you want in each
+        round.'
+    - name: schedule_pending
+      label: Schedule pending
+      type: string
+      required: false
+      description: 'Current: Workshops and talks for creative coders. The schedule will be announced here.'
+    - name: registration_open
+      label: Registration open
+      type: string
+      required: false
+      description: 'Current: Registration is open. Sign up to save your place.'
+    - name: registration_pending
+      label: Registration pending
+      type: string
+      required: false
+      description: 'Current: Registration is not open yet. Join the mailing list to hear when it opens.'
+    - name: luma_fallback_intro
+      label: Luma fallback intro
+      type: string
+      required: false
+      description: 'Current: Form not loading?'
+    - name: luma_fallback_link
+      label: Luma fallback link
+      type: string
+      required: false
+      description: 'Current: Register on Luma instead ↗'
+- name: events_page
+  label: Events page copy
+  type: file
+  path: _data/events_page.yml
+  fields:
+  - name: meta
+    label: Meta
+    type: object
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: Events — CC Fest'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Upcoming CC Fest events: free creative coding gatherings, workshops, and educator camps.'
+  - name: page
+    label: Page
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: What’s next'
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Events'
+    - name: summary
+      label: Summary
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Free gatherings, workshops, and camps for creative coders of all levels.'
+  - name: upcoming
+    label: Upcoming
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Upcoming'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Dates and registration are announced on the mailing list first.'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Event details →'
+    - name: label
+      label: Label
+      type: string
+      required: false
+      description: 'Current: Format'
+    - name: label_2
+      label: Label 2
+      type: string
+      required: false
+      description: 'Current: Date'
+    - name: label_3
+      label: Label 3
+      type: string
+      required: false
+      description: 'Current: Cost'
+    - name: label_4
+      label: Label 4
+      type: string
+      required: false
+      description: 'Current: Experience'
+  - name: more
+    label: More
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Ten years of CC Fest'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Browse agendas from past gatherings, or bring CC Fest to your city.'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: See past events →'
+    - name: link_label_2
+      label: Link label 2
+      type: string
+      required: false
+      description: 'Current: Organize a CC Fest'
+  - name: states
+    label: States
+    type: object
+    fields:
+    - name: date_pending
+      label: Date pending
+      type: string
+      required: false
+      description: 'Current: Date to be announced'
+    - name: date_unconfirmed
+      label: Date unconfirmed
+      type: string
+      required: false
+      description: 'Current: To be confirmed'
+    - name: registration_open_short
+      label: Registration open short
+      type: string
+      required: false
+      description: 'Current: registration is open.'
+    - name: registration_pending_short
+      label: Registration pending short
+      type: string
+      required: false
+      description: 'Current: join the mailing list for updates.'
+    - name: event_intro
+      label: Event intro
+      type: string
+      required: false
+      description: 'Current: Workshops, talks, and community for creative coders of all levels.'
+- name: visible_java
+  label: Visible Java page
+  type: file
+  path: _data/visible_java.yml
+  fields:
+  - name: meta
+    label: Meta
+    type: object
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: Visible Java: Processing for AP CS A — CC Fest'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: A free CC Fest educator camp: teach AP Computer Science A through Processing, with animation,
+        intera'
+  - name: interest_url
+    label: Interest url
+    type: string
+    required: false
+    description: 'Current: https://docs.google.com/forms/d/e/1FAIpQLSejHAD2X6rUvnoSzIv8aSlFvJc0BZT46u7sIsKbSqt2xQBo_Q/viewform'
+  - name: faq
+    label: Faq
+    type: object
+    list: true
+    fields:
+    - name: question
+      label: Question
+      type: string
+      required: true
+      description: 'Current: Is Processing the same as p5.js?'
+    - name: answer
+      label: Answer
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: No. They share a creative coding philosophy and similar drawing APIs, but Processing uses
+        Java while'
+  - name: page
+    label: Page
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: [Events](../) / {camp_eyebrow}'
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Visible Java'
+    - name: summary
+      label: Summary
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Processing for AP CS A. {camp_description}'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Join the interest list ↗'
+    - name: link_label_2
+      label: Link label 2
+      type: string
+      required: false
+      description: 'Current: See the workshop arc'
+  - name: concept
+    label: Concept
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: The concept'
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Teach the Java students can see.'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Processing keeps Java’s core ideas intact while making every variable, loop, condition,
+        and object p'
+    - name: heading_2
+      label: Heading 2
+      type: string
+      required: false
+      description: 'Current: Who this is for'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: // Java that moves'
+  - name: arc
+    label: Arc
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Proposed workshop arc'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Four sessions from sketch to AP task, moving from Processing’s immediate feedback to the
+        standard Ja'
+  - name: outcomes
+    label: Outcomes
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: What you will leave with'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Tools you can teach with immediately.'
+    - name: heading_6
+      label: Heading 6
+      type: string
+      required: false
+      description: 'Current: Sample classroom directions'
+  - name: logistics
+    label: Logistics
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Format and logistics'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: A practical pilot, shaped with the first cohort.'
+  - name: faq_copy
+    label: Faq copy
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Frequently asked questions'
+  - name: interest
+    label: Interest
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: Join the pilot'
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Interested? Help shape the first camp.'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Share a little about your teaching context, experience, and availability. This is an interest
+        list, '
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Open the interest form ↗'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Questions? Email [{contact_email}](mailto:{contact_email}?subject=Visible%20Java).'
+  - name: classroom_directions
+    label: Classroom directions
+    type: object
+    list: true
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: One idea, three environments'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Compare the same program as a Processing sketch, a plain Java class, and an AP-style method.'
+  - name: learning_outcomes
+    label: Learning outcomes
+    type: object
+    list: true
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: Runnable Processing sketches'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Small, expressive programs that make Java concepts observable and debuggable.'
+  - name: workshop_arc
+    label: Workshop arc
+    type: object
+    list: true
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: From sketch to Java'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: `setup()`, `draw()`, variables, methods, scope, and what Processing supplies behind the
+        scenes.'
+    - name: optional
+      label: Optional
+      type: boolean
+  - name: logistics_facts
+    label: Logistics facts
+    type: object
+    list: true
+    fields:
+    - name: label
+      label: Label
+      type: string
+      required: false
+      description: 'Current: Format'
+    - name: value
+      label: Value
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Four live online workshops + optional studio'
+  - name: audience
+    label: Audience
+    type: text
+    list: true
+  - name: code_example
+    label: Classroom sketch
+    type: text
+    description: Plain code. Shown as text; it is never executed.
+- name: past_events_page
+  label: Past events page copy
+  type: file
+  path: _data/past_events_page.yml
+  fields:
+  - name: meta
+    label: Meta
+    type: object
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: Past Events — CC Fest'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Ten years of CC Fest: past creative coding gatherings in New York City, Los Angeles, San
+        Francisco, '
+  - name: page
+    label: Page
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: 10 years · 2016–2026'
+    - name: summary
+      label: Summary
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: CC Fest has gathered creative coders in person in New York City, Los Angeles, and San Francisco,
+        and'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Photos from in-person events ↗'
+    - name: link_url
+      label: Link url
+      type: string
+      required: false
+      description: 'Current: https://saber-khan-hp7r.squarespace.com/pictures'
+    - name: link_label_2
+      label: Link label 2
+      type: string
+      required: false
+      description: 'Current: The first CC Fest ↗'
+    - name: link_url_2
+      label: Link url 2
+      type: string
+      required: false
+      description: 'Current: https://medium.com/@saber.khan/first-cc-fest-at-nyu-itp-bb7e30b0e9cb'
+  - name: archive
+    label: Archive
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Event archive'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Newest first. Links open each event’s agenda, announcement, or slides.'
+  - name: classes
+    label: Classes
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Camps and classes'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Multi-week online camps for educators and curious learners, newest first.'
+  - name: posters
+    label: Posters
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Posters'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Posters and fliers from past events, newest first.'
+  - name: organize
+    label: Organize
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Bring CC Fest to your city'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Not near a past location? Organize a CC Fest where you are.'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Email Saber Khan'
+    - name: link_label_2
+      label: Link label 2
+      type: string
+      required: false
+      description: 'Current: Upcoming events →'
+  - name: history_note
+    label: History note
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: CC Fest began on'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: in New York City with 40 participants.'
+- name: mailing_list_page
+  label: Mailing list page copy
+  type: file
+  path: _data/mailing_list_page.yml
+  fields:
+  - name: meta
+    label: Meta
+    type: object
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: Mailing List — CC Fest'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Join the CC Fest mailing list for event dates, workshops, educator camps, and community
+        news.'
+  - name: signup_list
+    label: Signup list
+    type: text
+    list: true
+  - name: page
+    label: Page
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: Stay in touch'
+    - name: summary
+      label: Summary
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Get notified about upcoming events and CC Fest news.'
+  - name: join
+    label: Join
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: How to join'
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Sign up.'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Add your email below and we’ll send a note to confirm. The form is run by EmailOctopus,
+        who send the'
+    - name: heading_2
+      label: Heading 2
+      type: string
+      required: false
+      description: 'Current: Sign up.'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: The sign-up form opens on EmailOctopus, who send the list for us. You can unsubscribe from
+        any email'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Join the mailing list ↗'
+    - name: heading_3
+      label: Heading 3
+      type: string
+      required: false
+      description: 'Current: Send one email.'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Email [{organizer_name}](mailto:{contact_email}?subject=Join%20mailing%20list) with the
+        subject line'
+    - name: link_label_2
+      label: Link label 2
+      type: string
+      required: false
+      description: 'Current: Join the mailing list →'
+    - name: eyebrow_2
+      label: Eyebrow 2
+      type: string
+      required: false
+      description: 'Current: What you’ll hear about'
+    - name: body_4
+      label: Body 4
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: We respect your privacy. Every CC Fest email carries an unsubscribe link, or write to [{organizer_na'
+    - name: body_5
+      label: Body 5
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: We respect your privacy. Unsubscribe any time by emailing [{organizer_name}](mailto:{contact_email}?'
+  - name: states
+    label: States
+    type: object
+    fields:
+    - name: form_needs_js
+      label: Form needs js
+      type: string
+      required: false
+      description: 'Current: The sign-up form needs JavaScript.'
+    - name: signup_external
+      label: Signup external
+      type: string
+      required: false
+      description: 'Current: Sign up on EmailOctopus'
+    - name: join_email_subject
+      label: Join email subject
+      type: string
+      required: false
+      description: 'Current: with the subject line *Join mailing list*.'
+- name: code_of_conduct
+  label: Code of conduct
+  type: file
+  path: _data/code_of_conduct.yml
+  fields:
+  - name: meta
+    label: Meta
+    type: object
+    fields:
+    - name: title
+      label: Title
+      type: string
+      required: true
+      description: 'Current: Code of Conduct — CC Fest'
+    - name: description
+      label: Description
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: The CC Fest Code of Conduct: how we want to behave as a community, and what to do when
+        things go wro'
+  - name: page
+    label: Page
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: Community'
+    - name: summary
+      label: Summary
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: How we want to behave as a community, openly and clearly, so it’s not hidden or secret.'
+    - name: link_label
+      label: Link label
+      type: string
+      required: false
+      description: 'Current: Report a concern'
+  - name: report_steps
+    label: Report steps
+    type: text
+    list: true
+  - name: please_dont
+    label: Please dont
+    type: text
+    list: true
+  - name: please_do
+    label: Please do
+    type: text
+    list: true
+  - name: table_of_contents
+    label: Table of contents
+    type: text
+    list: true
+  - name: contents
+    label: Contents
+    type: object
+    fields:
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: On this page'
+  - name: why
+    label: Why
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Why do we have a code of conduct?'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: The Code of Conduct makes space for us to deeply consider and share our goals and be open
+        and clear '
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: We want people to come to CC Fest and participate and thrive no matter their experience,
+        gender iden'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: When different people come together in a space there is huge potential for learning, collaboration, '
+    - name: body_4
+      label: Body 4
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Conflict is unavoidable. Our goal with the CoC isn’t to avoid conflict, it’s to have clearly
+        communi'
+  - name: who
+    label: Who
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Who is this code of conduct for?'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: This CoC is for everyone, including CC Fest organizers, speakers, invited guests, and attendees.'
+  - name: in_action
+    label: In action
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: What does this actually look like in action?'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: When attending CC Fest sessions, we expect people to treat others with respect, to listen
+        generously'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: The CoC applies to everyone equitably. Differences in power, histories, and current realities
+        mean t'
+  - name: examples
+    label: Examples
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: Specific examples'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Below are some examples that commonly come up. It would be impossible to write a full list
+        here, but'
+    - name: heading_2
+      label: Heading 2
+      type: string
+      required: false
+      description: 'Current: Please do'
+    - name: heading_3
+      label: Heading 3
+      type: string
+      required: false
+      description: 'Current: Please don’t'
+  - name: when_things_go_wrong
+    label: When things go wrong
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: What to do when things go wrong'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: If you are able and feel safe to do so, speak up in the moment: clearly name the behaviour
+        and ask t'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: You can also reach out to the event organizer and we will help you.'
+    - name: eyebrow
+      label: Eyebrow
+      type: string
+      required: false
+      description: 'Current: Contact the organizer'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: [Email {organizer_name}](mailto:{contact_email}) (for any CC Fest event)'
+  - name: because_of_you
+    label: Because of you
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: What to do when things go wrong (because of you)'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: If you are able, apologise immediately and clearly. Avoid phrases like “I’m sorry you felt
+        X” and in'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: It can be tempting to talk about your intentions, but intentions aren’t important here.
+        Of course, i'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: Take a break. Emotions are powerful and can lead us to say things we later regret. This
+        can be an ex'
+  - name: reports
+    label: Reports
+    type: object
+    fields:
+    - name: heading
+      label: Heading
+      type: string
+      required: true
+      description: 'Current: What happens when an incident is reported'
+    - name: body
+      label: Body
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: When an incident is reported, the person reporting the incident is to be treated with kindness,
+        resp'
+    - name: body_2
+      label: Body 2
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: The steps after an incident report will be as follows:'
+    - name: body_3
+      label: Body 3
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: People make mistakes, and we want to foster a culture where small mistakes can be corrected.
+        We beli'
+    - name: body_4
+      label: Body 4
+      type: text
+      required: false
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values. Current: This code of conduct was created by [Marie Claire Flanagan](https://marieflanagan.com/about/).'

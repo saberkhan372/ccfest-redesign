@@ -1,0 +1,80 @@
+name: Checked Pages publication
+on:
+  push:
+    branches: [main, cms-improvements]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: read
+
+# Serialize main builds without cancelling an in-progress deployment.
+concurrency:
+  group: checked-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve last successfully published identity baseline
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CONTENT_BOOTSTRAP_BASELINE: 413b33ea49ce6a774c9a6e61cd90490e3d1357d0
+        run: |
+          baseline=$(ruby scripts/deployed-baseline.rb)
+          git cat-file -e "$baseline^{commit}"
+          echo "CONTENT_BASELINE=$baseline" >> "$GITHUB_ENV"
+      - name: Test validators and CMS field preservation
+        run: bundle exec ruby scripts/test-content.rb
+      - name: Validate, prepare shared data, generate and build
+        run: bundle exec ruby scripts/build.rb _site
+      - name: Prove rendered omissions are rejected
+        run: bundle exec ruby scripts/test-rendered.rb _site
+      - name: Install isolated browser tooling
+        run: |
+          npm install --prefix "$RUNNER_TEMP/cms-browser" playwright@1.58.2
+          "$RUNNER_TEMP/cms-browser/node_modules/.bin/playwright" install --with-deps chromium
+          echo "NODE_PATH=$RUNNER_TEMP/cms-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Verify rendered pages in Chromium
+        run: |
+          node scripts/serve.cjs _site 8876 > "$RUNNER_TEMP/preview.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5; do
+            if curl --fail --silent http://127.0.0.1:8876/ > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/verify-publish.cjs http://127.0.0.1:8876/
+      - name: Upload verified Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
