@@ -70,32 +70,12 @@ sessions:
     language: English
     tags:
       - Intermediate
-    description: >-
-      A series of interconnected experiments that build on and combine the
-      methods of various research papers to create things like:
-
-
-      A 700,000 parameter singing voice (with adjustable diphthongs, stresses,
-      lyrics and melody/bar placement) distilled from a 15M parameter
-      text-to-speech model.
-
-
-      An animated codec that carries data on colored cells which can be used to
-      make cartoons. Borrowing the animation industry concept of a “traceback
-      tremble”, it duplicates full header records for every unique frame, in a
-      pleasing-looking way.
-
-
-      A tiny register machine (based on the 16 glyphs of the aforementioned
-      codec) that slowly computes bits of a halting probability. Bound by the
-      rules of a Storytelling Engine, the “Omega Numbers” computed are being
-      tested as the seed for a 3D world that plays out the stories its own seed
-      is built on, running in an original game engine.
-
-
-      All these things (and more!) have been designed to run on microcontrollers
-      with 512KB of internal ram (2-8MB external). Firmware feels like the
-      future, which is why these experiments are not designed for the internet.
+    description: Animator and songwriter Shane Curry shares how years of wrestling
+      with creative software led him to start building his own tools with AI.
+      Tools can make it faster to explore ideas and arrange data in artful ways.
+      This talk explores some of the many creative choices being made in
+      software that never gets exposed to the user, using examples from a series
+      of educational experiments on microcontrollers that resulted in software.
     presenters:
       - name: Shane Curry
         pronouns: he/him
