@@ -99,7 +99,7 @@ module CCContent
     def url(value, path, relative: false)
       v = text(value)
       return if v.empty?
-      return if relative && v.match?(%r{\A(?:/?(?:assets|events|register|past-events|mailing-list|code-of-conduct)/|#|\.{0,2}/)}) && !v.start_with?('//')
+      return if relative && v.match?(%r{\A(?:/?(?:assets|events|register|past-events|history|mailing-list|code-of-conduct)/|#|\.{0,2}/)}) && !v.start_with?('//')
       return if relative && v.match?(%r{\A[a-z0-9][a-z0-9-]*(?:/[a-z0-9][a-z0-9-]*)*/\z})
       uri = URI.parse(v)
       if uri.scheme.nil?

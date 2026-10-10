@@ -50,7 +50,6 @@ const pages = {
     ['h2', 'id="sessions-title"', '251:788'],
     ['h2', 'id="registration-title"', '251:843'],
   ],
-  'past-events/index.html': [['h1', 'id="page-title"', '218:170']],
   'mailing-list/index.html': [['h1', 'id="page-title"', '218:209']],
   'code-of-conduct/index.html': [['h1', 'id="page-title"', '218:215']],
 

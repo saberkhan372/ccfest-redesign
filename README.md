@@ -27,7 +27,8 @@ python3 -m http.server 8876 --bind 127.0.0.1
 | `/` | `index.html` — homepage |
 | `/register/` | `register/index.html` — event details and registration |
 | `/events/` | `events/index.html` — upcoming events (Virtual CC Fest, Visible Java) |
-| `/past-events/` | `past-events/index.html` — archive with agenda links |
+| `/history/` | `history/index.html` — the CC Fest history: timeline, camps, posters and the past events archive (a standalone static page) |
+| `/past-events/` | `past-events/index.html` — redirects to `/history/` |
 | `/mailing-list/` | `mailing-list/index.html` — how to join |
 | `/code-of-conduct/` | `code-of-conduct/index.html` — full code of conduct |
 

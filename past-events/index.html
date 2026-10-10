@@ -1,93 +1,15 @@
----
-layout: base
-body_class: inner-page past-events-page
-root: ../
-home_href: ../
-nav_current: past-events
-copy_key: past_events_page
----
-{% assign copy = site.data.past_events_page %}
-    <main id="main-content">
-      <section class="hero page-hero page-width" aria-labelledby="page-title">
-        <p class="eyebrow">{{ copy.page.eyebrow | escape }}</p>
-        <h1 id="page-title" data-figma-node="218:170"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">P</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">a</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">st Eve</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 78, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">t</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: -0.03em; text-transform: none">s</span></h1>
-        <p class="hero-summary">{% include editorial.html text=copy.page.summary %}</p>
-        <div class="hero-actions">
-          <a class="button button-solid" href="{{ copy.page.link_url | escape }}" target="_blank" rel="noopener">{{ copy.page.link_label | escape }}</a>
-          <a class="button" href="{{ copy.page.link_url_2 | escape }}" target="_blank" rel="noopener">{{ copy.page.link_label_2 | escape }}</a>
-        </div>
-      </section>
-
-      <section class="section section-tinted" id="archive" aria-labelledby="archive-title">
-        <div class="page-width">
-          <div class="section-heading">
-            <p>01</p>
-            <div>
-              <h2 id="archive-title">{{ copy.archive.heading | escape }}</h2>
-              <p>{% include editorial.html text=copy.archive.body %}</p>
-            </div>
-          </div>
-
-          <ol class="past-list" reversed>
-{% for event in site.data.past_events.events %}            {% include past-row.html event=event %}
-{% endfor %}          </ol>
-        </div>
-      </section>
-
-      <section class="section page-width" id="classes" aria-labelledby="classes-title">
-        <div class="section-heading">
-          <p>02</p>
-          <div>
-            <h2 id="classes-title">{{ copy.classes.heading | escape }}</h2>
-            <p>{% include editorial.html text=copy.classes.body %}</p>
-          </div>
-        </div>
-
-        <ol class="past-list" reversed>
-{% for event in site.data.past_events.classes %}          {% include past-row.html event=event %}
-{% endfor %}        </ol>
-      </section>
-
-      <section class="section section-tinted" id="posters" aria-labelledby="posters-title">
-        <div class="page-width">
-          <div class="section-heading">
-            <p>03</p>
-            <div>
-              <h2 id="posters-title">{{ copy.posters.heading | escape }}</h2>
-              <p>{% include editorial.html text=copy.posters.body %}</p>
-            </div>
-          </div>
-
-          <ul class="poster-grid">
-{% for event in site.data.past_events.events %}{% assign poster = event.poster | default: "" | strip %}{% assign lead = poster | slice: 0 %}{% if lead == "/" %}{% assign poster = poster | remove_first: "/" %}{% endif %}{% if poster != "" %}{% assign credit = event.poster_credit | default: "" | strip %}            <li>
-              <figure>
-                <img src="{{ page.root }}{{ poster | escape }}" alt="{{ event.poster_alt | default: "" | escape }}" loading="lazy">
-                <figcaption><time datetime="{{ event.datetime | escape }}">{{ event.date_label | escape }}</time> · {{ event.place | escape }}{% if credit != "" %}<span class="poster-credit">Design by {{ credit | escape }}</span>{% endif %}</figcaption>
-              </figure>
-            </li>
-{% endif %}{% endfor %}          </ul>
-        </div>
-      </section>
-
-      <section class="section page-width" id="organize" aria-labelledby="organize-title">
-        <div class="section-heading">
-          <p>04</p>
-          <div>
-            <h2 id="organize-title">{{ copy.organize.heading | escape }}</h2>
-            <p>{% include editorial.html text=copy.organize.body %}</p>
-          </div>
-        </div>
-        <div class="hero-actions">
-          <a class="button button-solid" href="mailto:{{ site.data.site.email | escape }}?subject=Organizing%20a%20CC%20Fest">{{ copy.organize.link_label | escape }}</a>
-          <a class="button" href="../events/">{{ copy.organize.link_label_2 | escape }}</a>
-        </div>
-      </section>
-
-      <aside class="history-note" aria-label="CC Fest history note">
-        <div class="page-width history-note-inner">
-          <p>{% include editorial.html text=copy.history_note.body %}</p>
-          <strong>October 22, 2016</strong>
-          <p>{% include editorial.html text=copy.history_note.body_2 %}</p>
-        </div>
-      </aside>
-    </main>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CC Fest history: past events</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="../history/">
+<meta http-equiv="refresh" content="0; url=../history/">
+</head>
+<body>
+<p>Past events are now part of <a href="../history/">the CC Fest history</a>.</p>
+<script>location.replace('../history/');</script>
+</body>
+</html>
