@@ -346,9 +346,7 @@ dialog>p{margin:16px 0;font-size:15px;line-height:1.55}
 .community{margin-top:72px;padding-top:40px;border-top:1px solid var(--dark-line)}
 .community-note{max-width:380px;font-size:15px;color:var(--line)}
 .community-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:32px;background:var(--dark-line)}
-.community-grid>div{padding:28px 26px;background:var(--ink)}
-.community-grid>.community-wide{grid-column:1 / -1}
-.community-grid strong{display:block;font:700 clamp(40px,4.4vw,60px)/1 var(--sans);letter-spacing:-.03em;color:var(--lime);font-variant-numeric:tabular-nums}
+.community-grid>div{padding:28px 26px;background:var(--ink)}.community-grid strong{display:block;font:700 clamp(40px,4.4vw,60px)/1 var(--sans);letter-spacing:-.03em;color:var(--lime);font-variant-numeric:tabular-nums}
 .community-grid span{display:block;margin-top:14px;font-size:15px;line-height:1.5;color:var(--surface)}
 .community-method{display:grid;gap:10px;margin-top:32px;font-size:14px;line-height:1.6;color:var(--line)}
 .community-method li{position:relative;padding-left:20px}
