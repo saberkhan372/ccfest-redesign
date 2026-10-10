@@ -213,6 +213,7 @@ img{display:block;max-width:100%}
 .photo-expand{position:absolute;right:10px;bottom:10px;display:grid;place-items:center;width:36px;height:36px;background:var(--paper);font-size:18px;line-height:1}
 .photo-meta{display:flex;justify-content:space-between;gap:12px;margin:14px 0 8px;font:400 11px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .photo-credit{max-width:380px;font-size:14px;line-height:1.55;color:var(--muted)}
+.photo-moment{display:block;margin-bottom:4px;color:var(--ink)}
 
 /* Chapter 05: lime band with the sketch */
 .practice-section{background:var(--lime)}
@@ -223,9 +224,7 @@ img{display:block;max-width:100%}
 .camp-grid .large-copy{font-size:24px}
 .camp-figure{margin-top:22px;padding-top:16px;border-top:1px solid var(--ink);font-size:16px}
 .camp-figure strong{display:block;font:700 48px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.camp-figure span{display:block;margin-top:6px;font:400 11px/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .camp-feedback{margin-top:18px;font-size:16px;font-weight:500}
-.camp-feedback span{display:block;margin-top:6px;font-size:14px;font-weight:300;line-height:1.55}
 .sketch-card{padding:26px;background:var(--paper);border:1px solid var(--ink)}
 /* One contributor's story, in their approved words, after the camp text. */
 .story-feature{max-width:760px;margin-top:64px;padding:32px;background:var(--paper);border:1px solid var(--ink)}
@@ -357,7 +356,6 @@ dialog>p{margin:16px 0;font-size:15px;line-height:1.55}
 .community-grid .community-label+span{margin-top:8px;font-size:14px;color:var(--line)}
 .community-grid .community-label a{text-underline-offset:4px}
 .community-coverage{max-width:720px;margin-top:24px;font-size:15px;line-height:1.6;color:var(--line)}
-.community-counting p{max-width:760px;margin:6px 0 8px;font-size:14px;line-height:1.65;color:var(--line)}
 .community-method{display:grid;gap:10px;margin-top:32px;font-size:14px;line-height:1.6;color:var(--line)}
 .community-method li{position:relative;padding-left:20px}
 .community-method li:before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;background:var(--lime)}
