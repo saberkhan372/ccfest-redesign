@@ -1,0 +1,40 @@
+/* Host-side styling for the ten-mode stage (src/interactive). Shristi's files there are copied
+   unchanged from ccfest-redesign. These rules follow the host overrides in that repository's
+   redesign.css (sections 7, 9 and 10), written with this page's tokens. Loaded after
+   animations.css, so these win. Her stage stays 95dvh tall, as her PR #1 note asks. */
+:root{--cc-orange:var(--orange);--accent-ink:var(--ink);--page-pad:var(--gutter)}
+/* The stage's intro line uses the eyebrow label style. */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.anim-stage{width:100%;border:0;background:var(--stage)}
+.anim-stage-main{outline:0}
+.stage-intro{position:absolute;top:1.5rem;left:50%;translate:-50% 0;z-index:2;width:max-content;max-width:calc(100% - 2*var(--page-pad));margin:0;padding:.2rem .5rem;background:var(--stage);color:var(--muted);text-align:center}
+.fx-connection-canvas{width:100%;height:100%}
+.modes-list{inset:3.25rem var(--page-pad) auto;justify-content:center;align-items:center}
+.modes-list > .mode-btn{font-family:Anybody,sans-serif;font-size:12px;padding:.6rem .8rem;color:var(--ink);border:1px solid var(--line);border-radius:0}
+.modes-list > .mode-btn.is-active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.modes-list > .mode-btn:focus-visible{outline:3px solid var(--ink)}
+/* The labels use Anybody here. animations.css names a Caslon face whose licence is not in the repository, so it is not shipped. */
+.cc-text{font-family:Anybody,sans-serif;font-size:clamp(.8rem,2vmin,1.25rem);font-weight:500}
+.cc-text-right{color:var(--ink)}
+/* Without JavaScript the mode buttons are hidden and motion is frozen. */
+html:not(.js) .modes-list,html:not(.js) .stage-intro{display:none}
+html:not(.js) .anim-stage *{animation-play-state:paused!important;transition:none!important}
+.anim-stage:not(.canvas-ready)[data-mode="change"] .cc-path{opacity:1}
+.fx-change canvas{mix-blend-mode:darken}
+@media (max-width:650px){
+ .anim-stage{min-height:540px;height:540px}
+ .modes-list{gap:.35rem;top:2.4rem}
+ .stage-intro{top:.9rem}
+ .stage-intro-more{display:none}
+ .modes-list > .mode-btn{font-size:11px;padding:.5rem}
+ .cc-text{top:calc(50% + .2882*var(--mono-w) + .5rem);bottom:auto;transform:translateX(-50%);text-align:center;font-size:14px}
+ .cc-text-left{left:calc(50% - .2118*var(--mono-w))}
+ .cc-text-right{left:calc(50% + .2974*var(--mono-w));right:auto}
+}
+@media (prefers-reduced-motion:reduce){
+ .anim-stage *,.anim-stage *::before,.anim-stage *::after{animation:none!important;transition:none!important}
+ .anim-stage-main[data-mode="creative-commons"]{clip-path:none}
+ .anim-stage[data-mode="change"] .cc-path{opacity:1}
+ .fx-change,.fx-confetti{display:none!important}
+ .anim-stage .cc-scribble{mask:none}
+}
