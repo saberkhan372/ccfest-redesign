@@ -10,8 +10,10 @@
 @media (max-width:650px){.anim-stage{--modes-bottom:calc(2.4rem + 7.7rem);--art-shift:64px}}
 .monogram-wrap{margin-top:calc(2 * var(--art-shift))}
 .cc-text{translate:0 var(--art-shift)}
-/* animations.css names a Caslon face that is not shipped, and some stage text still asks for it. This face has the same
-   name and descriptors, so the later rule wins and the stage uses the Anybody file the page already ships. Nothing requests the missing file. */
+/* animations.css names a Caslon face that is not shipped. The overrides that keep stage text out of that family are in the page head
+   (src/template.html), because rules here do nothing until this file has loaded. This face is a second guard: it has the same name and
+   descriptors, so it is tried first for any text that still names caslon. Chromium still falls back to the missing file for characters
+   the Anybody file lacks (arrows such as → ↗ ↓, and ✓), so stage text must not use the family at all. */
 @font-face{font-family:'caslon';src:url('assets/fonts/Anybody.ttf') format('truetype');font-style:normal;font-display:swap}
 /* The stage's intro line uses the eyebrow label style. */
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}

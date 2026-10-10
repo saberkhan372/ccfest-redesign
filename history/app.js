@@ -5,13 +5,15 @@ const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
 let selectedYear='2016',selectedCity='all';
 const eventNodes=$$('.event');
+// The result line counts completed festivals and camps separately. Upcoming items are shown but not counted.
+const plural=(n,word)=>`${n} ${word}${n===1?'':'s'}`;
 function filterEvents(){
-  let count=0;
+  let count=0,camps=0;
  for(const el of eventNodes){
   const show=(selectedYear==='all'||el.dataset.year===selectedYear)&&(selectedCity==='all'||el.dataset.city===selectedCity);
-  el.hidden=!show;if(show&&!el.classList.contains('upcoming')&&!el.classList.contains('camp'))count++;
+  el.hidden=!show;if(show&&!el.classList.contains('upcoming')){if(el.classList.contains('camp'))camps++;else count++}
  }
- $('#result-count').textContent=`${count} documented festival${count===1?'':'s'}${selectedYear==='all'?'':` · ${selectedYear}`}`;
+ $('#result-count').textContent=`${plural(count,'festival')}${camps?` · ${plural(camps,'camp')}`:''}${selectedYear==='all'?'':` · ${selectedYear}`}`;
  $$('#year-filters button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.year===selectedYear)));
  $$('.location-filters button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.city===selectedCity)));
  let empty=$('#empty-state');
@@ -20,11 +22,11 @@ function filterEvents(){
  const yr=Number(selectedYear);
  $('#era-copy').textContent=selectedYear==='all'?'The format changed. The invitation stayed open.':yr<2020?'Shared tables. New ideas. A growing circle of makers.':yr<2023?'The room became a link. The community kept making.':yr<2025?'In-person gatherings and virtual connections. More ways to belong.':'Virtual festivals and online camps. The invitation keeps going.';
 }
-// The chart column for the selected year is highlighted. The timeline shows the same year.
+// The chart column for the selected year is highlighted. The timeline shows the same year. "all" matches no column, so it clears the highlight.
 function highlightChartYear(year){
  $$('.event-chart [data-chart-year]').forEach(c=>c.classList.toggle('is-selected',c.dataset.chartYear===String(year)));
 }
-$$('[data-year]').filter(el=>el.tagName==='BUTTON').forEach(b=>b.addEventListener('click',()=>{selectedYear=b.dataset.year;filterEvents();if(selectedYear!=='all')highlightChartYear(selectedYear)}));
+$$('[data-year]').filter(el=>el.tagName==='BUTTON').forEach(b=>b.addEventListener('click',()=>{selectedYear=b.dataset.year;filterEvents();highlightChartYear(selectedYear)}));
 $$('[data-city]').filter(el=>el.tagName==='BUTTON').forEach(b=>b.addEventListener('click',()=>{selectedCity=b.dataset.city;filterEvents()}));
 // Choosing a year in the chart filters the timeline to that year.
 $$('.event-chart [data-chart-year]').forEach(a=>a.addEventListener('click',event=>{
