@@ -20,6 +20,8 @@ img{display:block;max-width:100%}
 .js-only{display:none}
 .js .js-only{display:flex}
 [hidden]{display:none!important}
+/* Without JavaScript every year panel shows, so the decade overview is complete. The script only hides the years it does not select. */
+html:not(.js) .year-panel-item[hidden]{display:grid!important}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .numbers-section :focus-visible{outline-color:var(--lime)}
 .skip{position:fixed;top:-100px;left:20px;z-index:100;padding:12px;background:var(--lime);color:var(--ink)}
@@ -136,7 +138,7 @@ img{display:block;max-width:100%}
 .thread-art i:nth-child(2){background:var(--orange);transform:translateX(36px)}
 .thread-art i:nth-child(3){background:var(--lime)}
 .thread-art i:nth-child(4){background:var(--paper);transform:translateX(36px)}
-.event{display:grid;grid-template-columns:108px minmax(0,1fr);gap:24px;padding:32px 0;border-bottom:1px solid var(--line)}
+.event{display:grid;grid-template-columns:108px minmax(0,1fr);gap:24px;padding:32px 0;border-bottom:1px solid var(--line);scroll-margin-top:120px}
 .event-year{font:700 30px/1.05 var(--sans);letter-spacing:-.03em}
 .event-date{display:block;margin-top:8px;font:400 12px/1.5 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .event-body{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:28px;align-items:start}

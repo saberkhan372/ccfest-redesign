@@ -18,7 +18,7 @@ function filterEvents(){
  if(!empty){empty=document.createElement('p');empty.id='empty-state';empty.className='empty-state';empty.textContent='No festivals match these filters. Try another year or place.';$('#events').append(empty)}
  empty.hidden=eventNodes.some(el=>!el.hidden);
  const yr=Number(selectedYear);
- $('#era-copy').textContent=selectedYear==='all'?'The format changed. The invitation stayed open.':yr<2020?'Shared tables. New ideas. A growing circle of makers.':yr<2023?'The room became a link. The community kept making.':'In-person gatherings and virtual connections. More ways to belong.';
+ $('#era-copy').textContent=selectedYear==='all'?'The format changed. The invitation stayed open.':yr<2020?'Shared tables. New ideas. A growing circle of makers.':yr<2023?'The room became a link. The community kept making.':yr<2025?'In-person gatherings and virtual connections. More ways to belong.':'Virtual festivals and online camps. The invitation keeps going.';
 }
 // The year panel under the chart shows one year at a time, and the chart column for that year is highlighted.
 function showYearPanel(year){
@@ -98,5 +98,19 @@ $$('[data-pattern]').forEach(b=>b.addEventListener('click',()=>{
  const picked=names.slice(0,10).sort((x,y)=>x.querySelector('summary').textContent.localeCompare(y.querySelector('summary').textContent,'en',{sensitivity:'base'}));
  sample.replaceChildren(...picked.map(el=>el.cloneNode(true)));
 })();
-filterEvents();
-showYearPanel(selectedYear);
+// A link to a festival or camp record opens its year, in every place, and scrolls to that record. Other fragments, such as #top or #timeline, are left to the browser.
+// The browser's own fragment scroll runs before the filters hide the record, so the script scrolls to it after the filters apply.
+function recordFromHash(){
+ let el=null;
+ try{el=document.getElementById(decodeURIComponent(location.hash.slice(1)))}catch{return null}
+ if(!el||!el.classList.contains('event')||!el.closest('#events'))return null;
+ selectedYear=el.dataset.year;selectedCity='all';
+ return el;
+}
+function openHashRecord(behavior){
+ const el=recordFromHash();
+ filterEvents();showYearPanel(selectedYear);
+ if(el)el.scrollIntoView({behavior,block:'start'});
+}
+openHashRecord('instant');
+window.addEventListener('hashchange',()=>openHashRecord(matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'));
