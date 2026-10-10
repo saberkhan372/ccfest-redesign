@@ -3,6 +3,13 @@
    redesign.css (sections 7, 9 and 10), written with this page's tokens. Loaded after
    animations.css, so these win. Her stage stays 95dvh tall, as her PR #1 note asks. */
 :root{--cc-orange:var(--orange);--accent-ink:var(--ink);--page-pad:var(--gutter)}
+/* The monogram and its two labels sit centred in the stage, which leaves a large gap under them and a smaller one under the mode buttons.
+   Shifting them down by half the height of the buttons (measured from the top of the stage) makes the gap above and below the art equal.
+   The shift does not depend on the stage height, so it holds at every size. */
+.anim-stage{--modes-bottom:calc(3.25rem + 2.625rem);--art-shift:calc(var(--modes-bottom) / 2)}
+@media (max-width:650px){.anim-stage{--modes-bottom:calc(2.4rem + 7.7rem);--art-shift:64px}}
+.monogram-wrap{margin-top:calc(2 * var(--art-shift))}
+.cc-text{translate:0 var(--art-shift)}
 /* animations.css names a Caslon face that is not shipped, and some stage text still asks for it. This face has the same
    name and descriptors, so the later rule wins and the stage uses the Anybody file the page already ships. Nothing requests the missing file. */
 @font-face{font-family:'caslon';src:url('assets/fonts/Anybody.ttf') format('truetype');font-style:normal;font-display:swap}
