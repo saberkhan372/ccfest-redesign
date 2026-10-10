@@ -17,7 +17,7 @@ Pages CMS edits public YAML content in this repository. Saving creates a Git com
 | Registration page copy | `_data/register.yml` | Announcement states, joining steps, registration and calendar explanations, metadata |
 | Events page copy | `_data/events_page.yml` | Headings, descriptions, calls to action and metadata |
 | Visible Java page | `_data/visible_java.yml` | Interest-form URL, curriculum, outcomes, audience, logistics, FAQ, classroom sketch and metadata |
-| Past events page copy | `_data/past_events_page.yml` | Archive introductions, photos/first-event links and metadata |
+| Past events archive | `_data/past_events.yml` | Homepage location chips and CMS entries only. The History page (`history/`) is a static copy and does not read this file, so past events shown there must also be updated in its source |
 | Mailing list page copy | `_data/mailing_list_page.yml` | Sign-up introductions, email fallback, topics, privacy copy and metadata |
 | Code of conduct | `_data/code_of_conduct.yml` | Existing policy sections, examples, report steps, attribution and metadata |
 
