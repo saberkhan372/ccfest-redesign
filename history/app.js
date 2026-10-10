@@ -20,16 +20,15 @@ function filterEvents(){
  const yr=Number(selectedYear);
  $('#era-copy').textContent=selectedYear==='all'?'The format changed. The invitation stayed open.':yr<2020?'Shared tables. New ideas. A growing circle of makers.':yr<2023?'The room became a link. The community kept making.':yr<2025?'In-person gatherings and virtual connections. More ways to belong.':'Virtual festivals and online camps. The invitation keeps going.';
 }
-// The year panel under the chart shows one year at a time, and the chart column for that year is highlighted.
-function showYearPanel(year){
- $$('[data-year-panel]').forEach(p=>p.hidden=p.dataset.yearPanel!==String(year));
+// The chart column for the selected year is highlighted. The timeline shows the same year.
+function highlightChartYear(year){
  $$('.event-chart [data-chart-year]').forEach(c=>c.classList.toggle('is-selected',c.dataset.chartYear===String(year)));
 }
-$$('[data-year]').filter(el=>el.tagName==='BUTTON').forEach(b=>b.addEventListener('click',()=>{selectedYear=b.dataset.year;filterEvents();if(selectedYear!=='all')showYearPanel(selectedYear)}));
+$$('[data-year]').filter(el=>el.tagName==='BUTTON').forEach(b=>b.addEventListener('click',()=>{selectedYear=b.dataset.year;filterEvents();if(selectedYear!=='all')highlightChartYear(selectedYear)}));
 $$('[data-city]').filter(el=>el.tagName==='BUTTON').forEach(b=>b.addEventListener('click',()=>{selectedCity=b.dataset.city;filterEvents()}));
-// Choosing a year in the chart opens its festivals below the chart and filters the timeline. The panel's button jumps to the timeline.
+// Choosing a year in the chart filters the timeline to that year.
 $$('.event-chart [data-chart-year]').forEach(a=>a.addEventListener('click',event=>{
- event.preventDefault();selectedYear=a.dataset.chartYear;selectedCity='all';filterEvents();showYearPanel(selectedYear);
+ event.preventDefault();selectedYear=a.dataset.chartYear;selectedCity='all';filterEvents();highlightChartYear(selectedYear);
 }));
 let galleryCity='all',currentPhoto=0,photoOpener=null;
 const dialog=$('#photo-dialog');
@@ -104,7 +103,7 @@ function recordFromHash(){
 }
 function openHashRecord(behavior){
  const el=recordFromHash();
- filterEvents();showYearPanel(selectedYear);
+ filterEvents();highlightChartYear(selectedYear);
  if(el)el.scrollIntoView({behavior,block:'start'});
 }
 openHashRecord('instant');

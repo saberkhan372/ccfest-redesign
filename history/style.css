@@ -20,8 +20,6 @@ img{display:block;max-width:100%}
 .js-only{display:none}
 .js .js-only{display:flex}
 [hidden]{display:none!important}
-/* Without JavaScript every year panel shows, so the decade overview is complete. The script only hides the years it does not select. */
-html:not(.js) .year-panel-item[hidden]{display:grid!important}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .numbers-section :focus-visible{outline-color:var(--lime)}
 .skip{position:fixed;top:-100px;left:20px;z-index:100;padding:12px;background:var(--lime);color:var(--ink)}
@@ -106,15 +104,6 @@ html:not(.js) .year-panel-item[hidden]{display:grid!important}
 .phases li{padding-top:18px;border-top:1px solid var(--ink)}
 .phase-years{display:block;font:700 26px/1.1 var(--sans);letter-spacing:-.03em}
 .phases p{margin-top:12px;font-size:16px}
-.decade-note{margin-top:40px;font-size:15px;color:var(--muted)}
-.year-num{font:700 28px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.year-count,.year-places{font:400 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.year-body{display:grid;gap:16px;padding-bottom:26px}
-.year-body ul{border-top:1px solid var(--soft-line)}
-.year-body li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 20px;padding:12px 0;border-bottom:1px solid var(--soft-line)}
-.li-date{font:400 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
-.li-title{font-weight:600}
-.li-venue{grid-column:2;font-size:14px;color:var(--muted)}
 .explorer-controls{flex-direction:column;gap:22px}
 .year-filters{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .year-filters button{min-height:44px;padding:10px 12px;border:1px solid transparent;font:400 12px/1.4 var(--mono);letter-spacing:.04em}
@@ -307,10 +296,6 @@ dialog>p{margin:16px 0;font-size:15px;line-height:1.55}
  .fact{padding:18px}
  .fact strong{font-size:44px}
  .phases{grid-template-columns:1fr}
- .year-places{grid-column:2}
- .year-count{grid-column:2}
- .year-body li{grid-template-columns:1fr}
- .li-venue{grid-column:1}
  .filter-line{align-items:flex-start;flex-direction:column}
  .location-filters button,.gallery-filters button{padding:9px 12px}
  .event{grid-template-columns:1fr;gap:12px;padding:26px 0}
@@ -371,9 +356,6 @@ dialog>p{margin:16px 0;font-size:15px;line-height:1.55}
 }
 
 /* Layout, October 9, 2026: the year panel sits under the chart, and long descriptions and the poster wall fold away */
-.year-panel{margin-top:40px}
-.year-panel-item{display:grid;gap:16px;padding-top:24px;border-top:1px solid var(--ink)}
-.year-panel-head{display:grid;grid-template-columns:96px 130px minmax(0,1fr);align-items:center;gap:20px}
 .chart-band{margin-top:40px;padding:32px;background:var(--ink);color:var(--surface)}
 .chart-band :focus-visible{outline-color:var(--lime)}
 .chart-band .source-note{color:var(--line)}
@@ -386,4 +368,4 @@ dialog>p{margin:16px 0;font-size:15px;line-height:1.55}
 .browse-intro{margin-top:24px}
 .browse-intro p{max-width:600px;margin-top:12px;font-size:16px}
 .browse-posters .poster-wall{margin-top:32px}
-@media (max-width:720px){.chart-band{padding:20px}.year-panel-head{grid-template-columns:64px minmax(0,1fr);gap:12px}}
+@media (max-width:720px){.chart-band{padding:20px}}

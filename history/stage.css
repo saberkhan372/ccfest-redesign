@@ -3,6 +3,9 @@
    redesign.css (sections 7, 9 and 10), written with this page's tokens. Loaded after
    animations.css, so these win. Her stage stays 95dvh tall, as her PR #1 note asks. */
 :root{--cc-orange:var(--orange);--accent-ink:var(--ink);--page-pad:var(--gutter)}
+/* animations.css names a Caslon face that is not shipped, and some stage text still asks for it. This face has the same
+   name and descriptors, so the later rule wins and the stage uses the Anybody file the page already ships. Nothing requests the missing file. */
+@font-face{font-family:'caslon';src:url('assets/fonts/Anybody.ttf') format('truetype');font-style:normal;font-display:swap}
 /* The stage's intro line uses the eyebrow label style. */
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .anim-stage{width:100%;border:0;background:var(--stage)}
