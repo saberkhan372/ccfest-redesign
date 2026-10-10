@@ -40,7 +40,6 @@ const pages = {
     ['h1', 'class="home-hero-title anim-hero-title"', '218:113'],
     ['h2', 'id="upcoming-title"', '218:127'],
     ['h2', 'id="about-title"', '218:150'],
-    ['h2', 'id="past-title"', '218:170'],
     ['h2', 'id="mailing-title"', '218:209'],
     ['h2', 'id="coc-title"', '218:215'],
   ],
