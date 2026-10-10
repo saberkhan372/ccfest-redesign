@@ -31,11 +31,6 @@ $$('[data-city]').filter(el=>el.tagName==='BUTTON').forEach(b=>b.addEventListene
 $$('.event-chart [data-chart-year]').forEach(a=>a.addEventListener('click',event=>{
  event.preventDefault();selectedYear=a.dataset.chartYear;selectedCity='all';filterEvents();showYearPanel(selectedYear);
 }));
-$$('[data-timeline-year]').forEach(b=>b.addEventListener('click',()=>{
- selectedYear=b.dataset.timelineYear;selectedCity='all';filterEvents();
- $('#timeline').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
- $(`#year-filters [data-year="${selectedYear}"]`).focus({preventScroll:true});
-}));
 let galleryCity='all',currentPhoto=0,photoOpener=null;
 const dialog=$('#photo-dialog');
 const availablePhotos=()=>archivePhotos.map((p,i)=>({p,i})).filter(({p})=>galleryCity==='all'||p.city===galleryCity);

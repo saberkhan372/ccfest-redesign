@@ -3,7 +3,7 @@
 @font-face{font-family:Anybody;src:url('assets/fonts/Anybody.ttf') format('truetype');font-style:normal;font-weight:100 900;font-stretch:50% 150%;font-display:swap}
 @font-face{font-family:Anybody;src:url('assets/fonts/Anybody-Italic.ttf') format('truetype');font-style:italic;font-weight:100 900;font-stretch:50% 150%;font-display:swap}
 @font-face{font-family:"Overpass Mono";src:url('assets/fonts/OverpassMono.ttf') format('truetype');font-style:normal;font-weight:300 700;font-display:swap}
-:root{--paper:#edede9;--surface:#f4f4f1;--tint:#e5e5e2;--ink:#18181a;--muted:#62625e;--line:#c4c4c0;--soft-line:#dcdcd8;--accent:#2d5bff;--orange:#ff4d2e;--lime:#c8ff32;--orange-text:#b12b14;--fact-ground:#161614;--fact-label:#ff795f;--fact-rule:#444444;--stage:#e2e2dd;--camp:#b7b7b7;--dark-line:#3a3a3d;--sans:Anybody,Arial,sans-serif;--mono:"Overpass Mono",ui-monospace,Menlo,monospace;--gutter:clamp(20px,4.45vw,64px);color-scheme:light}
+:root{--paper:#edede9;--surface:#f4f4f1;--tint:#e5e5e2;--ink:#18181a;--muted:#62625e;--line:#c4c4c0;--soft-line:#dcdcd8;--accent:#2d5bff;--orange:#ff4d2e;--lime:#c8ff32;--orange-text:#b12b14;--fact-ground:#161614;--fact-label:#ff795f;--fact-rule:#444444;--stage:#e2e2dd;--online:#5ce1e6;--camp:#ff7ac6;--dark-line:#3a3a3d;--sans:Anybody,Arial,sans-serif;--mono:"Overpass Mono",ui-monospace,Menlo,monospace;--gutter:clamp(20px,4.45vw,64px);color-scheme:light}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:110px}
 body{margin:0;background:var(--paper);color:var(--ink);font:300 16px/1.75 var(--sans)}
@@ -115,8 +115,6 @@ html:not(.js) .year-panel-item[hidden]{display:grid!important}
 .li-date{font:400 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .li-title{font-weight:600}
 .li-venue{grid-column:2;font-size:14px;color:var(--muted)}
-.year-jump{justify-self:start;min-height:44px;padding:10px 16px;border:1px solid var(--ink);font-size:14px;font-weight:500}
-.year-jump:hover{background:var(--ink);color:var(--paper)}
 .explorer-controls{flex-direction:column;gap:22px}
 .year-filters{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .year-filters button{min-height:44px;padding:10px 12px;border:1px solid transparent;font:400 12px/1.4 var(--mono);letter-spacing:.04em}
@@ -146,7 +144,7 @@ html:not(.js) .year-panel-item[hidden]{display:grid!important}
 .location-dot{display:inline-block;width:10px;height:10px;background:var(--accent)}
 .location-dot.la{background:var(--orange)}
 .location-dot.sf{background:var(--lime);box-shadow:inset 0 0 0 1px var(--ink)}
-.location-dot.online{background:var(--muted)}
+.location-dot.online{background:var(--online);box-shadow:inset 0 0 0 1px var(--ink)}
 .event h3{font-size:26px;line-height:1.15;font-weight:600;letter-spacing:-.02em}
 .event p{max-width:600px;margin-top:10px;font-size:16px;line-height:1.6}
 .event-source{display:inline-block;margin-top:14px;font-size:15px;font-weight:500;text-decoration:underline;text-underline-offset:4px}
@@ -188,7 +186,7 @@ html:not(.js) .year-panel-item[hidden]{display:grid!important}
 .legend i.nyc{background:var(--accent);border-color:var(--accent)}
 .legend i.la{background:var(--orange);border-color:var(--orange)}
 .legend i.sf{background:var(--lime);border-color:var(--lime)}
-.legend i.online{background:var(--paper);border-color:var(--paper)}
+.legend i.online{background:var(--online);border-color:var(--online)}
 .legend i.camp{background:var(--camp);border-color:var(--paper);border-style:dashed}
 .chart-instruction{padding-top:16px;font-size:14px}
 .event-chart{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:12px;align-items:end;height:290px;margin-top:40px;border-bottom:1px solid var(--dark-line)}
@@ -200,7 +198,7 @@ html:not(.js) .year-panel-item[hidden]{display:grid!important}
 .chart-block.nyc{background:var(--accent);border-color:var(--accent)}
 .chart-block.la{background:var(--orange);border-color:var(--orange)}
 .chart-block.sf{background:var(--lime);border-color:var(--lime)}
-.chart-block.online{background:var(--paper);border-color:var(--paper)}
+.chart-block.online{background:var(--online);border-color:var(--online)}
 .chart-block.camp{background:var(--camp);border-color:var(--paper);border-style:dashed}
 .chart-year{margin-top:14px;text-align:center;font:500 12px/1 var(--mono)}
 .chart-footnote{display:flex;flex-wrap:wrap;justify-content:space-between;gap:25px;margin-top:26px;font:400 11px/1.6 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--line)}
@@ -349,6 +347,7 @@ dialog>p{margin:16px 0;font-size:15px;line-height:1.55}
 .community-note{max-width:380px;font-size:15px;color:var(--line)}
 .community-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:32px;background:var(--dark-line)}
 .community-grid>div{padding:28px 26px;background:var(--ink)}
+.community-grid>.community-wide{grid-column:1 / -1}
 .community-grid strong{display:block;font:700 clamp(40px,4.4vw,60px)/1 var(--sans);letter-spacing:-.03em;color:var(--lime);font-variant-numeric:tabular-nums}
 .community-grid span{display:block;margin-top:14px;font-size:15px;line-height:1.5;color:var(--surface)}
 .community-method{display:grid;gap:10px;margin-top:32px;font-size:14px;line-height:1.6;color:var(--line)}
@@ -357,7 +356,7 @@ dialog>p{margin:16px 0;font-size:15px;line-height:1.55}
 
 /* Upcoming festivals and camps: shown on the page, never counted as completed records */
 .upcoming-tag{display:inline-block;margin-left:8px;padding:3px 8px;background:var(--lime);color:var(--ink);font:400 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
-.camp-tag{display:inline-block;margin-left:8px;padding:3px 8px;background:var(--orange);color:var(--ink);font:400 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
+.camp-tag{display:inline-block;margin-left:8px;padding:3px 8px;background:var(--camp);color:var(--ink);font:400 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
 .people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0 32px;margin-top:32px}
 .person{border-top:1px solid var(--line)}
 .person summary{cursor:pointer;display:flex;justify-content:space-between;gap:12px;padding:14px 0;font:600 18px/1.3 var(--sans);list-style:none}
