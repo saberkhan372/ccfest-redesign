@@ -3,8 +3,8 @@ meta:
   description: '{event_name} — a free gathering for creative coding workshops, talks, and community.'
 join_steps:
 - '**Register via Luma.** [Sign up above](#registration) to save your place.'
-- '**Watch for your Zoom invite.** You will receive an invitation to the Zoom event the day before, with reminders
-  in the hours before it starts.'
+- '**Watch for your Zoom invite.** Zoom Events emails your personal join link to the address you registered with,
+  then sends reminders the day before and an hour before it starts. You don’t need a Zoom account.'
 - '**Join the lobby.** On the day, open the Zoom event and join the lobby.'
 - '**Pick a session.** There are {round_count} rounds of concurrent sessions, so drop in and out as you like. Questions
   go in the chat.'
