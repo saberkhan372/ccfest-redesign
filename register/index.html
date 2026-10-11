@@ -165,17 +165,34 @@ copy_key: register
       </section>
 
       <section class="section page-width" id="how-to-join" aria-labelledby="how-to-join-title">
-        <div class="section-heading">
-          <p>04</p>
-          <div>
-            <h2 id="how-to-join-title">{{ copy.how_to_join.heading | escape }}</h2>
-            <p>{% include editorial.html text=copy.how_to_join.body %}</p>
-          </div>
-        </div>
+        <div class="join-layout">
+          <div class="join-main">
+            <div class="section-heading">
+              <p>04</p>
+              <div>
+                <h2 id="how-to-join-title">{{ copy.how_to_join.heading | escape }}</h2>
+                <p>{% include editorial.html text=copy.how_to_join.body %}</p>
+              </div>
+            </div>
 
-        <ol class="join-steps">{% for entry in copy.join_steps %}<li>{% include editorial.html text=entry %}</li>
+            <ol class="join-steps">{% for entry in copy.join_steps %}<li>{% include editorial.html text=entry %}</li>
 {% endfor %}</ol>
-        <p class="join-help">{% include editorial.html text=copy.how_to_join.body_2 %}</p>
+            <p class="join-help">{% include editorial.html text=copy.how_to_join.body_2 %}</p>
+          </div>
+{% assign join_timeline = copy.how_to_join.timeline %}{% if join_timeline.size > 0 %}{% assign join_day = site.data.generated_schedule | default: site.data.schedule %}
+          <ol class="join-timeline" aria-label="Timeline, from registering to the festival day">
+{% for step in join_timeline %}            <li class="join-timeline-step">
+              <span class="join-timeline-icon join-timeline-icon-{{ forloop.index }}" aria-hidden="true">{% include join-icon.html step=forloop.index %}</span>
+              <p class="join-timeline-when">{{ step.when | escape }}</p>
+              <p class="join-timeline-title">{{ step.title | escape }}</p>
+{% if step.body %}              <p class="join-timeline-body">{% include editorial.html text=step.body %}</p>
+{% endif %}{% if forloop.last and join_day.items.size > 0 %}              <div class="join-day">
+                <div class="join-day-bar" aria-hidden="true">{% for item in join_day.items %}{% assign from = item.start | split: ":" %}{% assign to = item.end | split: ":" %}{% assign from_minutes = from[0] | times: 60 | plus: from[1] %}{% assign to_minutes = to[0] | times: 60 | plus: to[1] %}<span class="join-day-{{ item.kind | default: 'other' | escape }}" style="flex-grow: {{ to_minutes | minus: from_minutes }}"></span>{% endfor %}</div>
+                <ol class="join-day-list" aria-label="The festival day, Pacific time">{% for item in join_day.items %}<li class="join-day-{{ item.kind | default: 'other' | escape }}"><span class="join-day-time">{% include time-range.html from=item.start to=item.end shift=0 %}</span> {% case item.kind %}{% when 'keynote' %}Keynote{% when 'workshops' %}Workshops{% when 'panel' %}Panel{% else %}{{ item.title | escape }}{% endcase %}</li>{% endfor %}</ol>
+              </div>
+{% endif %}            </li>
+{% endfor %}          </ol>{% endif %}
+        </div>
       </section>
 
       <div class="history-shape" aria-hidden="true"><img src="../assets/design/registration-shape.svg" alt=""></div>

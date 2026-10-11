@@ -49,6 +49,19 @@ how_to_join:
   body: 'Virtual CC Fest runs on Zoom Events: one lobby, with several workshops happening at once in each round.'
   body_2: Stuck? Email [{contact_email}](mailto:{contact_email}?subject=Joining%20CC%20Fest) and we’ll help you
     get in.
+  timeline:
+  - when: Luma · any time before the day
+    title: Register
+    body: Free, with an optional donation.
+  - when: Zoom Events · by email
+    title: Get your join link
+    body: A personal link to the address you registered with. No Zoom account needed.
+  - when: Fri, Oct 16 · 9:00 pm PT
+    title: Lobby opens
+    body: That’s midnight ET. Check your link works the night before.
+  - when: Sat, Oct 17 · 9:00 am PT
+    title: Festival day
+    body: Keynotes, a panel and {round_count} rounds of workshops.
 history_note:
   body: in New York City with **40** participants
 states:

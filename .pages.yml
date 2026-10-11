@@ -989,6 +989,29 @@ content:
       description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
         values. Current: Stuck? Email [{contact_email}](mailto:{contact_email}?subject=Joining%20CC%20Fest) and
         we’ll help yo'
+    - name: timeline
+      label: Timeline
+      type: object
+      list: true
+      description: 'The illustrated timeline beside the join steps. Keep four entries in this order (register, join link,
+        lobby, festival day): each has its own icon, and the last one also shows the day’s schedule from the Schedule
+        file.'
+      fields:
+      - name: when
+        label: When
+        type: string
+        required: true
+        description: 'Short label above the title, for example: Fri, Oct 16 · 9:00 pm PT'
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: body
+        label: Body
+        type: text
+        required: false
+        description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+          values.'
   - name: history_note
     label: History note
     type: object
