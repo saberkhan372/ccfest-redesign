@@ -1,0 +1,125 @@
+{
+  "updated_at": "2026-10-11T07:41:17.829Z",
+  "source": "luma-export",
+  "time_zone": "America/Los_Angeles",
+  "event_date": "2026-10-17",
+  "total": 234,
+  "donors": 65,
+  "days": [
+    {
+      "date": "2026-09-17",
+      "count": 14,
+      "donors": 7
+    },
+    {
+      "date": "2026-09-18",
+      "count": 10,
+      "donors": 7
+    },
+    {
+      "date": "2026-09-19",
+      "count": 20,
+      "donors": 5
+    },
+    {
+      "date": "2026-09-20",
+      "count": 5,
+      "donors": 0
+    },
+    {
+      "date": "2026-09-21",
+      "count": 9,
+      "donors": 2
+    },
+    {
+      "date": "2026-09-22",
+      "count": 5,
+      "donors": 0
+    },
+    {
+      "date": "2026-09-23",
+      "count": 4,
+      "donors": 2
+    },
+    {
+      "date": "2026-09-24",
+      "count": 10,
+      "donors": 1
+    },
+    {
+      "date": "2026-09-25",
+      "count": 1,
+      "donors": 0
+    },
+    {
+      "date": "2026-09-27",
+      "count": 3,
+      "donors": 2
+    },
+    {
+      "date": "2026-09-28",
+      "count": 7,
+      "donors": 2
+    },
+    {
+      "date": "2026-09-29",
+      "count": 9,
+      "donors": 3
+    },
+    {
+      "date": "2026-09-30",
+      "count": 18,
+      "donors": 5
+    },
+    {
+      "date": "2026-10-01",
+      "count": 4,
+      "donors": 0
+    },
+    {
+      "date": "2026-10-02",
+      "count": 5,
+      "donors": 1
+    },
+    {
+      "date": "2026-10-03",
+      "count": 3,
+      "donors": 1
+    },
+    {
+      "date": "2026-10-04",
+      "count": 3,
+      "donors": 1
+    },
+    {
+      "date": "2026-10-05",
+      "count": 12,
+      "donors": 2
+    },
+    {
+      "date": "2026-10-06",
+      "count": 35,
+      "donors": 9
+    },
+    {
+      "date": "2026-10-07",
+      "count": 19,
+      "donors": 5
+    },
+    {
+      "date": "2026-10-08",
+      "count": 21,
+      "donors": 6
+    },
+    {
+      "date": "2026-10-09",
+      "count": 7,
+      "donors": 1
+    },
+    {
+      "date": "2026-10-10",
+      "count": 10,
+      "donors": 3
+    }
+  ]
+}

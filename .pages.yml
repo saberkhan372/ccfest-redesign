@@ -1012,6 +1012,18 @@ content:
         required: false
         description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
           values.'
+  - name: registration_garden
+    label: Registration garden
+    type: object
+    description: 'The sprout drawing under the Register button. Its counts come from _data/registration_garden.json, which
+      a GitHub Action refreshes from Luma; only the words are edited here.'
+    fields:
+    - name: caption
+      label: Caption
+      type: text
+      required: true
+      description: 'Markdown: **bold**, *emphasis*, `code`, [label](https://…). Named tokens preserve shared contact/event
+        values.'
   - name: history_note
     label: History note
     type: object

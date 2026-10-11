@@ -1,0 +1,46 @@
+name: Update registration garden
+# Every three hours until the event day, counts Luma registrations per day (no names, emails or amounts) into
+# _data/registration_garden.json and, when a count changed, commits it and starts the checked Pages publication.
+# Needs the LUMA_API_KEY repository secret (a Luma Plus key for the calendar that owns the event); without it the run
+# does nothing. scripts/update-registration-garden.cjs stops changing anything after the event date.
+on:
+  schedule:
+    - cron: '23 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: registration-garden
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test the counting script
+        run: node scripts/test-registration-garden.cjs
+      - name: Count registrations from Luma
+        env:
+          LUMA_API_KEY: ${{ secrets.LUMA_API_KEY }}
+        run: node scripts/update-registration-garden.cjs
+      - name: Commit and publish when a count changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- _data/registration_garden.json; then echo "No change to publish."; exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add _data/registration_garden.json
+          git commit -m 'Registration garden: update counts from Luma'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # A push made with the workflow token does not start other workflows, so ask for the publication run.
+          gh workflow run pages.yml --ref main

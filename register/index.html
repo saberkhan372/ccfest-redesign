@@ -150,7 +150,16 @@ copy_key: register
             <p>{% include editorial.html text=copy.registration.body_2 %}</p>
             <a class="button button-solid" href="../mailing-list/">{{ copy.registration.link_label_2 | escape }}</a>
 {% endif %}          </div>
-{% if registration_url != "" and luma_event_id != "" %}
+{% assign garden = site.data.registration_garden %}{% if registration_url != "" and garden and garden.total > 0 %}
+          <!-- Counts only, from _data/registration_garden.json (scripts/update-registration-garden.cjs, refreshed by a GitHub Action). -->
+          <figure class="registration-garden" aria-labelledby="garden-caption">
+            <p class="garden-count"><strong>{{ garden.total }}</strong> registered{% if garden.donors > 0 %} · <strong>{{ garden.donors }}</strong> with a donation{% endif %}<span class="garden-countdown"></span></p>
+            <canvas class="garden-canvas" hidden></canvas>
+            <figcaption id="garden-caption">{% include editorial.html text=copy.registration_garden.caption %} <span class="garden-updated" data-updated="{{ garden.updated_at | escape }}">Counts updated {{ garden.updated_at | date: "%b %-d" }}.</span></figcaption>
+            <script type="application/json" class="garden-data">{{ garden | jsonify }}</script>
+          </figure>
+          {% assign rev = site.github.build_revision | default: "" %}<script src="{{ page.root }}registration-garden.js{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
+{% endif %}{% if registration_url != "" and luma_event_id != "" %}
           <!-- Luma's form, opened by registration.js. Without JavaScript the Register link goes to Luma instead. -->
           <dialog class="registration-dialog" id="registration-dialog" aria-labelledby="registration-dialog-title">
             <div class="registration-dialog-bar">

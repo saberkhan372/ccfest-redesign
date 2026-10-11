@@ -62,6 +62,9 @@ how_to_join:
   - when: Sat, Oct 17 · 9:00 am PT
     title: Festival day
     body: Keynotes, a panel and {round_count} rounds of workshops.
+registration_garden:
+  caption: Each sprout is one registration, planted on the day it came in. Flowers mark registrations that came with
+    a donation.
 history_note:
   body: in New York City with **40** participants
 states:
