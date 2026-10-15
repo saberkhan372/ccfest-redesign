@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-10-14T16:07:59.899Z",
+  "updated_at": "2026-10-15T04:08:05.127Z",
   "source": "luma-export",
   "time_zone": "America/Los_Angeles",
   "event_date": "2026-10-17",
-  "total": 270,
-  "donors": 77,
+  "total": 274,
+  "donors": 78,
   "days": [
     {
       "date": "2026-09-17",
@@ -138,8 +138,8 @@
     },
     {
       "date": "2026-10-14",
-      "count": 2,
-      "donors": 2
+      "count": 6,
+      "donors": 3
     }
   ]
 }
