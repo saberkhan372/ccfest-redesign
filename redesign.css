@@ -94,13 +94,15 @@ button { font: inherit; }
 .icon-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* --- 4. Homepage --------------------------------------------------------- */
-.home-hero { overflow: hidden; position: relative; padding-top: clamp(3rem,6.7vw,6rem); padding-bottom: clamp(3rem,6.7vw,6rem); }
+.home-hero { overflow: visible clip; position: relative; padding-top: clamp(3rem,6.7vw,6rem); padding-bottom: clamp(3rem,6.7vw,6rem); }
 /* Giant italic "CC FEST". 400/1440 of the frame — the Figma ratio, so it holds as the
    frame grows past 1440 (see §2): 400px at the design width, 500px at a 2000px window. */
 .home-hero-title { position: relative; z-index: 1; font-family: Anybody, sans-serif; font-style: italic; font-weight: 400; font-variation-settings: 'wdth' 71; font-size: clamp(5rem,27.7778vw,calc(var(--page-width) * .2778)); letter-spacing: 0; line-height: .8; white-space: nowrap; margin: 0 0 2.5rem; }
 .hero-rule { position: relative; z-index: 1; margin-bottom: 2.5rem; }
 .home-hero-sub { font-size: clamp(.9rem,1.25vw,18px); line-height: 1.7; max-width: 480px; }
-.hero-shape { --shape-w: clamp(65px,20vw,calc(var(--page-width) * .198)); position: absolute; bottom: calc(var(--shape-w) * -1.169); left: 0; width: var(--shape-w); height: auto; object-fit: contain; pointer-events: none; }
+/* Flush with the window edge, not the frame: past 1440 the frame is centred with a margin each side,
+   so the hero clips only top and bottom and the half-circle reaches back across the left margin. */
+.hero-shape { --shape-w: clamp(65px,20vw,calc(var(--page-width) * .198)); position: absolute; bottom: calc(var(--shape-w) * -1.169); left: min(0px, 50% - 50vw); width: var(--shape-w); height: auto; object-fit: contain; pointer-events: none; }
 /* Upcoming event band (orange) */
 .upcoming-band { background: var(--orange); color: var(--ink); }
 .upcoming-copy > p { color: var(--ink); }
