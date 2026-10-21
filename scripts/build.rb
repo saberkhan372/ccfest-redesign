@@ -13,6 +13,7 @@ Dir.chdir(root) do
   revision = ENV.fetch('GITHUB_SHA', '')
   File.write('_config.build.yml', {'github' => {'build_revision' => revision}}.to_yaml)
   abort('Jekyll build failed') unless system('bundle', 'exec', 'jekyll', 'build', '--safe', '--config', '_config.yml,_config.build.yml', '--destination', output)
+  abort('Recap person linking failed') unless system('bundle', 'exec', 'ruby', 'scripts/link-recap-people.rb', output)
   abort('Rendered content verification failed') unless system('bundle', 'exec', 'ruby', 'scripts/verify-rendered-content.rb', root, output)
   abort('Recap verification failed') unless system('bundle', 'exec', 'ruby', 'scripts/verify-recaps.rb', output)
 ensure

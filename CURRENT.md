@@ -1,5 +1,16 @@
 # Current state — October 7, 2026
 
+## October 21, 2026 — link people throughout the event archive
+
+VERIFIED locally. At Saber's request, the archive now links 273 person mentions across all twenty-one pages, including the prose, captions, quote attributions, presenter headings and program bios. A reviewed directory covers forty-three people, including all twenty-two presenters and other referenced artists, educators and contributors. Personal sites are preferred; identified institutional, gallery or professional profiles fill the gaps. Ambiguous Dan/Daniel aliases are scoped to reviewed pages.
+
+The standard build adds static links after Jekyll and verifies unchanged text and existing anchors; the frozen program and Notion prose snapshots remain intact. A second linking pass adds zero links. Archive verification now requires person links on every page and the correct URL on all twenty-two profile headings. The publication browser suite checks all twenty-nine pages at 320/390/768/1440, redirects and no-JavaScript content; desktop/mobile session screenshots were inspected. Source validation, full build, archive route/media checks and diff checks pass. No designer-owned files or styling changed.
+
+External destinations were checked against the public program, reviewed resource links and public identity sources; automated HTTP checks were also run. LinkedIn can serve a login/challenge page. Vera Molnár uses ZKM's collection profile because her personal site's HTTPS certificate mismatches its hostname. Cross-browser and screen-reader checks remain unverified. Publication follows the existing explicit commit/push/main authorization; the Pages run and live revision are checked after the push and reported in the conversation/local handoff. Manual session wrap used because the session-wrap skill is unavailable.
+
+Next: maintain names, aliases and evidence in `_data/recap_people.json` as recap content changes; always use `scripts/build.rb` so the static linking step runs.
+
+
 ## October 20, 2026 — October 17 archive publication
 
 VERIFIED locally; publication explicitly authorized by Saber after the plan and preview review. This entry supersedes the local-preview-only boundary below. The permanent event home is `/events/october-17-2026/`, with nineteen individual recaps and an original `program/`. Events, home and History now point to the archive and no longer advertise October 17 registration. Register is a fragment-aware browser redirect with a visible no-JavaScript fallback and archive canonical; archived registration and planning controls are retired. Visible Java remains upcoming.

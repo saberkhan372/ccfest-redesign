@@ -7,6 +7,8 @@ root = File.expand_path('..', __dir__)
 built = File.expand_path(ARGV.fetch(0))
 manifest = JSON.parse(File.read(File.join(root, 'docs/recaps/import-manifest.json')))
 data = JSON.parse(File.read(File.join(root, '_data/recap_oct17.json')))
+people = JSON.parse(File.read(File.join(root, '_data/recap_people.json'))).fetch('people')
+person_urls = people.map { |person| person.fetch('url') }
 routes = manifest.fetch('routes')
 raise 'Wrong route count' unless routes.size == 21
 routes.each do |route|
@@ -19,6 +21,14 @@ routes.each do |route|
   raise "Private evidence leaked: #{route}" if doc.at_css('main').text.match?(/Editorial evidence|RecordingnewChat|GMT2026|Source packet|confirm before publishing/)
   raise "Unconverted source: #{route}" if doc.to_html.match?(/notion-file-block:|<mention|<toggle|<image /)
   raise "Designer credits missing: #{route}" unless doc.at_css('.design-credits').text.include?('Francisca') && doc.at_css('.design-credits').text.include?('Shristi')
+  raise "Person links missing: #{route}" if doc.css('main a.recap-person-link').empty?
+  doc.css('main a.recap-person-link').each do |link|
+    raise "Unreviewed person URL: #{route}" unless person_urls.include?(link['href'])
+  end
+  doc.css('.recap-person h3').each do |heading|
+    person = people.find { |entry| entry.fetch('name') == heading.text }
+    raise "Presenter name is not linked: #{heading.text}" unless person && heading.at_css('a')&.[]('href') == person.fetch('url')
+  end
   doc.css('a[href], img[src], link[href], script[src]').each do |node|
     value = node['href'] || node['src']
     uri = URI.parse(value.gsub(' ', '%20'))

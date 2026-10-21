@@ -1,0 +1,391 @@
+{
+  "reviewed_on": "2026-10-21",
+  "people": [
+    {
+      "name": "Daniel Shiffman",
+      "url": "https://thecodingtrain.com/",
+      "aliases": [
+        "Dan Shiffman",
+        "Shiffman"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program.",
+      "page_aliases": {
+        "index": [
+          "Dan"
+        ],
+        "daniel-shiffman": [
+          "Dan"
+        ],
+        "naoto-hieda": [
+          "Dan"
+        ],
+        "sai-ram-ved-vijapurapu": [
+          "Dan"
+        ]
+      }
+    },
+    {
+      "name": "Lauren Lee McCarthy",
+      "url": "https://get-lauren.net/",
+      "aliases": [
+        "Lauren",
+        "McCarthy"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Amy B. Woodman",
+      "url": "https://www.amybwoodman.com",
+      "aliases": [
+        "Amy Woodman",
+        "Amy",
+        "Woodman"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Daniel Schneider",
+      "url": "https://community.csteachers.org/cstaarizona/sectiondirectory/chapterleaders",
+      "aliases": [
+        "Schneider"
+      ],
+      "evidence": "CSTA Arizona leadership profile; matching Code.org educator.",
+      "page_aliases": {
+        "index": [
+          "Daniel"
+        ],
+        "teaching-creativity-today": [
+          "Dan"
+        ],
+        "program": [
+          "Dan"
+        ]
+      }
+    },
+    {
+      "name": "David DeLiema",
+      "url": "https://www.david-deliema.com/",
+      "aliases": [
+        "David",
+        "DeLiema"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Adrienne Gifford",
+      "url": "https://processingfoundation.org/people/adrienne-gifford/",
+      "aliases": [
+        "Adrienne",
+        "Gifford"
+      ],
+      "evidence": "Processing Foundation profile; matching Pacific Northwest teacher and Art + Code collaborator."
+    },
+    {
+      "name": "Shane Curry",
+      "url": "https://www.shanecurry.com",
+      "aliases": [
+        "Shane",
+        "Curry"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Kemi Ukadike",
+      "url": "https://github.com/ukadike",
+      "aliases": [
+        "Kemi Sijuwade-Ukadike",
+        "Kemi",
+        "Ukadike"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Jessica Valarezo",
+      "url": "https://www.linkedin.com/in/jessicavalarezo/",
+      "aliases": [
+        "Jessica",
+        "Valarezo"
+      ],
+      "evidence": "Existing professional profile in the reviewed recap; page title identifies Jessica V. at LitLab.ai. Some automated requests are blocked by LinkedIn."
+    },
+    {
+      "name": "Naoto Hieda",
+      "url": "https://naotohieda.com/",
+      "aliases": [
+        "Naoto",
+        "Hieda"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Matthew Raupp",
+      "url": "https://www.instagram.com/raupp2112/",
+      "aliases": [
+        "Matthew",
+        "Raupp"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Emily Thomforde",
+      "url": "https://thegrene.github.io",
+      "aliases": [
+        "Emily",
+        "Thomforde"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Blair Subbaraman",
+      "url": "https://blairsubbaraman.com/",
+      "aliases": [
+        "Blair",
+        "Subbaraman"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Sai Ram Ved Vijapurapu",
+      "url": "https://motion.sairamved.com",
+      "aliases": [
+        "Sai",
+        "Vijapurapu"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Tristan Bunn",
+      "url": "https://tabreturn.com",
+      "aliases": [
+        "Tristan",
+        "Bunn"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "M DeNardo",
+      "url": "https://markdenardo.github.io/mdn/main.html",
+      "aliases": [
+        "DeNardo"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Julien Gachadoat",
+      "url": "https://www.v3ga.net",
+      "aliases": [
+        "Julien",
+        "Gachadoat"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Kofi Oduro (Illestpreacha)",
+      "url": "https://blog.illestpreacha.com/",
+      "aliases": [
+        "Kofi Oduro",
+        "Kofi",
+        "Oduro",
+        "Illestpreacha"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Sandra Soto",
+      "url": "https://www.instagram.com/san8252000/",
+      "aliases": [
+        "Sandra",
+        "Soto"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Aleksandra Jovanić",
+      "url": "https://aleksandrajovanic.com",
+      "aliases": [
+        "Aleksandra",
+        "Jovanić"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Melissa Cooper",
+      "url": "https://quietlegacycollective.com/missy-cooper",
+      "aliases": [
+        "Missy Cooper",
+        "Missy",
+        "Cooper"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Caleb Foss",
+      "url": "https://github.com/calebfoss",
+      "aliases": [
+        "Caleb",
+        "Foss"
+      ],
+      "evidence": "Presenter URL in the archived public CC Fest program."
+    },
+    {
+      "name": "Mitch Resnick",
+      "url": "https://web.media.mit.edu/~mres/",
+      "aliases": [
+        "Resnick"
+      ],
+      "evidence": "Existing resource link in the reviewed opening keynote recap."
+    },
+    {
+      "name": "Allison Parrish",
+      "url": "https://www.decontextualize.com/",
+      "aliases": [
+        "Parrish"
+      ],
+      "evidence": "Existing resource link in the reviewed opening keynote recap."
+    },
+    {
+      "name": "Zach Lieberman",
+      "url": "http://zach.li/",
+      "aliases": [
+        "Lieberman"
+      ],
+      "evidence": "Existing resource link in the reviewed opening keynote recap."
+    },
+    {
+      "name": "Seymour Papert",
+      "url": "https://www.media.mit.edu/posts/in-memory-seymour-papert/",
+      "aliases": [
+        "Papert"
+      ],
+      "evidence": "MIT Media Lab memorial profile."
+    },
+    {
+      "name": "Maya Man",
+      "url": "https://mayaontheinter.net/",
+      "aliases": [],
+      "evidence": "Personal site confirmed by bitforms gallery artist profile: https://www.bitforms.art/artist/maya-man/"
+    },
+    {
+      "name": "John Roy",
+      "url": "https://www.ragnardigital.art/artists/john-roy",
+      "aliases": [],
+      "evidence": "Collection artist profile includes Segrid (1973), the work discussed."
+    },
+    {
+      "name": "Holly Grimm",
+      "url": "https://hollygrimm.com/",
+      "aliases": [
+        "Grimm"
+      ],
+      "evidence": "Personal site and artist bio."
+    },
+    {
+      "name": "Jim Schmitz",
+      "url": "https://ixora.io/",
+      "aliases": [
+        "Schmitz"
+      ],
+      "evidence": "Personal website linked by the creator profile https://github.com/hx2A; py5 documentation identifies Jim Schmitz as @hx2A."
+    },
+    {
+      "name": "Vera Molnár",
+      "url": "https://zkm.de/en/persons/vera-molnar",
+      "aliases": [],
+      "evidence": "ZKM collection profile. The personal site has a certificate mismatch over HTTPS; the Digital Art Museum profile returned an intermittent 503."
+    },
+    {
+      "name": "Grace Hertlein",
+      "url": "https://zkm.de/en/persons/grace-c-hertlein",
+      "aliases": [
+        "Hertlein"
+      ],
+      "evidence": "ZKM collection profile identifies the Computer Graphics and Art editor."
+    },
+    {
+      "name": "Matthew Epler",
+      "url": "https://www.matthewepler.design/",
+      "aliases": [
+        "Epler"
+      ],
+      "evidence": "Personal site identifies creative technologist and Kinograph founder."
+    },
+    {
+      "name": "Manfred Mohr",
+      "url": "https://emohr.com/",
+      "aliases": [
+        "Mohr"
+      ],
+      "evidence": "Personal artist site."
+    },
+    {
+      "name": "Courtney Cazden",
+      "url": "https://www.gse.harvard.edu/directory/faculty/courtney-cazden",
+      "aliases": [
+        "Cazden"
+      ],
+      "evidence": "Harvard Graduate School of Education faculty profile."
+    },
+    {
+      "name": "Björk",
+      "url": "https://www.bjork.com/",
+      "aliases": [],
+      "evidence": "Official artist website."
+    },
+    {
+      "name": "Yoko Ono",
+      "url": "https://www.imaginepeace.com/",
+      "aliases": [
+        "Ono"
+      ],
+      "evidence": "Official artist site with About Yoko Ono section."
+    },
+    {
+      "name": "Sol LeWitt",
+      "url": "https://www.pacegallery.com/artists/sol-lewitt/",
+      "aliases": [
+        "LeWitt"
+      ],
+      "evidence": "Representing gallery artist profile and estate credits."
+    },
+    {
+      "name": "Casey Reas",
+      "url": "https://reas.com/",
+      "aliases": [
+        "Reas"
+      ],
+      "evidence": "Existing artist URL in the archived keynote bio."
+    },
+    {
+      "name": "Alison O’Daniel",
+      "url": "https://alisonodaniel.com/",
+      "aliases": [
+        "Alison O'Daniel"
+      ],
+      "evidence": "Existing resource link in the reviewed closing keynote recap."
+    },
+    {
+      "name": "Saber Khan",
+      "url": "https://www.linkedin.com/in/edsaber/",
+      "aliases": [
+        "Saber"
+      ],
+      "evidence": "Existing site footer organizer link."
+    },
+    {
+      "name": "Francisca José Rodrigues",
+      "url": "https://franciscajose.com/",
+      "aliases": [
+        "Francisca"
+      ],
+      "evidence": "Existing site footer designer credit."
+    },
+    {
+      "name": "Shristi Singh",
+      "url": "https://shristi.super.site/",
+      "aliases": [
+        "Shristi"
+      ],
+      "evidence": "Existing site footer interactive designer credit."
+    }
+  ]
+}

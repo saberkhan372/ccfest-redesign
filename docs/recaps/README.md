@@ -10,6 +10,12 @@ Notion remains the writing source. `_data/recap_oct17.json` is a deliberate read
 
 At Saber's specific authorization, only session names, material-sharing permissions and resource links were read from the supplied feedback sheet. Four links were confirmed for Tristan, Blair, Sai and Julien; the three GitHub repositories are public, and Sai's public 2026 guide was opened successfully. No response names, reflections, technical feedback or other response columns were read or copied into this repository. The source sheet itself is not published here.
 
+## Person links
+
+`_data/recap_people.json` is the reviewed directory for names and websites/profiles, with evidence and explicit aliases. Prefer a personal site; use an institutional, gallery, or professional profile when needed. Short names that could identify multiple people are enabled only on reviewed pages. Existing links, linked session cards, code, attributes, and disclosure/button labels are left intact.
+
+The checked `scripts/build.rb` pipeline runs `scripts/link-recap-people.rb` after Jekyll, so names in the story, captions, attributions, presenter headings and frozen program bios receive ordinary static links without modifying the Notion snapshot or historical program. It verifies exact text preservation and unchanged existing links. Use this build pipeline, rather than bare `jekyll build`, for a complete archive preview. No browser JavaScript or network lookup is needed to add the links; future people and aliases require a reviewed directory update.
+
 ## Images and quotes
 
 `_data/recap_media.json` maps five existing demonstration images to ten local WebP derivatives, totalling about 0.95 MB. `media-manifest.json` preserves original frame hashes, source recording/time and derivative hashes. Original recordings/stills remain unchanged outside this checkout. The website uses Missy's 11:00 demonstration frame; the retained Notion image is from 9:30. Both depict the earlier screen-based work, not the physical painting.
