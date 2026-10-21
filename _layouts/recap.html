@@ -1,0 +1,41 @@
+---
+layout: base
+---
+{% assign recap = site.data.recap_oct17 %}
+{% assign session = false %}{% if page.recap_kind == 'session' %}{% assign session = recap.sessions | where: "slug", page.session_id | first %}{% endif %}
+<main id="main-content">
+  <section class="recap-hero page-width" aria-labelledby="page-title">
+    <div class="recap-kicker"><p class="eyebrow">CC Fest · October 17, 2026</p><p class="eyebrow">{% if session %}{{ session.format | escape }}{% else %}The tenth anniversary{% endif %}</p></div>
+    {% if session %}<a class="recap-back" href="../">← The whole gathering</a>{% endif %}
+    <h1 id="page-title">{{ page.heading | escape }}</h1>
+    <div class="recap-hero-bottom">
+      <p class="hero-summary">{% if session %}{{ session.presenter | escape }}{% else %}Nineteen sessions. Four questions. A community learning together.{% endif %}</p>
+      <div class="hero-actions">
+        {% if session %}<a class="button button-solid" href="{{ session.replay | escape }}">Watch the replay ↗</a><a class="button" href="../#sessions">All 19 sessions</a>{% else %}<a class="button button-solid" href="#chapter-1">Read the story ↓</a><a class="button" href="#sessions">Explore all 19 sessions</a>{% endif %}
+      </div>
+    </div>
+  </section>
+  <nav class="page-width recap-program-link" aria-label="Event archive"><a href="{% if session %}../{% endif %}program/">Original program & presenter information →</a></nav>
+  {% unless session %}
+  {% assign cover = site.data.recap_media.notion_images['shiffman-collage-together-v2.jpg'] %}
+  <figure class="recap-cover page-width"><img src="{{ cover.src }}" srcset="{{ cover.small }} 720w, {{ cover.src }} 1440w" sizes="100vw" width="{{ cover.width }}" height="{{ cover.height }}" alt="Words, names and shapes fill the bright yellow shared canvas at the end of Daniel Shiffman's keynote." fetchpriority="high"><figcaption>A gathering becomes a collage. The shared canvas at the end of Dan's opening keynote.</figcaption></figure>
+  {% endunless %}
+  <div class="recap-reading page-width">
+    <article class="recap-prose" aria-label="{% if session %}Session recap{% else %}Event story{% endif %}">
+      {{ content }}
+      {% if session %}{% include recap-presenters.html session=session %}{% endif %}
+    </article>
+    <aside class="recap-rail" aria-label="{% if session %}Session information{% else %}In this story{% endif %}">
+      {% if session %}<p class="eyebrow">The session</p><p>{{ session.time | escape }}<br>{{ session.format | escape }}</p><a href="{{ session.replay | escape }}">Watch on YouTube ↗</a><p class="eyebrow">Keep exploring</p>{% for other in recap.sessions %}{% if other.group == session.group and other.slug != session.slug %}<a href="../{{ other.slug }}/">{{ other.title | escape }}<small>{{ other.presenter | escape }}</small></a>{% endif %}{% endfor %}
+      {% else %}<p class="eyebrow">In this story</p><nav aria-label="Story chapters">{% for item in page.toc %}<a href="#{{ item.id }}">{{ item.title | escape }}</a>{% endfor %}<a href="#sessions">All sessions & replays</a></nav><a class="recap-playlist" href="{{ recap.event.playlist | escape }}">Watch the full playlist ↗</a>{% endif %}
+    </aside>
+  </div>
+  {% unless session %}
+  <section class="recap-directory" id="sessions" aria-labelledby="sessions-title"><div class="page-width">
+    <div class="recap-directory-heading"><p class="eyebrow">The whole gathering</p><h2 id="sessions-title">Keep exploring.</h2><p>Every session, with a recap, replay, takeaways, and something to try.</p></div>
+    <div class="recap-grid">{% for item in recap.sessions %}<a class="recap-card" href="{{ item.slug }}/"><span class="recap-card-top"><span class="eyebrow">{{ item.format | escape }}</span><span class="eyebrow">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span></span><h3>{{ item.title | escape }}</h3><p>{{ item.presenter | escape }}</p><span class="recap-card-footer">{{ item.time | escape }}<span aria-hidden="true">↗</span></span></a>{% endfor %}</div>
+  </div></section>
+  {% else %}
+  <section class="recap-return page-width" aria-labelledby="return-title"><p class="eyebrow">One gathering, many ways in</p><h2 id="return-title">Find your next question.</h2><a class="button button-solid" href="../#sessions">Explore all 19 sessions →</a></section>
+  {% endunless %}
+</main>

@@ -19,12 +19,12 @@
     <meta name="robots" content="noindex, nofollow">
 {%- endif %}
     <link rel="icon" type="image/svg+xml" sizes="any" href="{{ page.root }}assets/favicon-cc.svg">
-    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    <link rel="canonical" href="{{ page.canonical | default: page.url | absolute_url }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ site.title | escape }}">
     <meta property="og:title" content="{{ meta_title | escape }}">
     <meta property="og:description" content="{{ meta_description | escape }}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:url" content="{{ page.canonical | default: page.url | absolute_url }}">
 {%- assign share = site.data.site.share_image | default: "" | strip %}{% assign share_lead = share | slice: 0 %}{% if share_lead == "/" %}{% assign share = share | remove_first: "/" %}{% endif %}
 {%- if share != "" %}
     <meta property="og:image" content="{{ share | prepend: "/" | absolute_url }}">

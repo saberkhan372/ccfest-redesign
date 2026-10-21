@@ -1,0 +1,7 @@
+{% assign original = site.data.recap_program.sessions | where: "id", include.session.program_id | first %}
+{% if original %}
+<section class="recap-original" aria-labelledby="original-description"><h2 id="original-description">From the original program</h2><p class="eyebrow">Published before the event</p><h3>{{ original.title | escape }}</h3><p>{{ original.description | escape | newline_to_br }}</p>
+{% if original.resource_url %}<p><a href="{{ original.resource_url | escape }}">Session resources ↗</a></p>{% endif %}
+<h2 id="presenters">About the presenters</h2>
+{% for person in original.presenters %}{% include recap-person.html person=person %}{% endfor %}</section>
+{% else %}{% assign name = include.session.presenter %}{% assign person = site.data.recap_program.keynotes | where: "name", name | first %}{% if person %}<section class="recap-original" aria-labelledby="presenters"><h2 id="presenters">About the presenter</h2>{% include recap-person.html person=person %}</section>{% endif %}{% endif %}

@@ -1,5 +1,30 @@
 # Current state — October 7, 2026
 
+## October 20, 2026 — October 17 archive publication
+
+VERIFIED locally; publication explicitly authorized by Saber after the plan and preview review. This entry supersedes the local-preview-only boundary below. The permanent event home is `/events/october-17-2026/`, with nineteen individual recaps and an original `program/`. Events, home and History now point to the archive and no longer advertise October 17 registration. Register is a fragment-aware browser redirect with a visible no-JavaScript fallback and archive canonical; archived registration and planning controls are retired. Visible Java remains upcoming.
+
+The public program is frozen in `_data/recap_program.json`, preserving nineteen sessions and twenty-two presenter profiles independently of future CMS event edits. Existing descriptions, portraits, bios, resource links, credits and speaker IDs are retained. Notion's reader-facing snapshot supplies the recap prose; internal evidence is excluded. Only the specifically authorized session/permission/material-link columns of the supplied feedback sheet were read. Four presenter-shared resource destinations were checked and linked from the program; no feedback text was read or imported.
+
+Fresh verification after the final implementation: source validation and static build; twenty-one archive routes, local links/anchors, all nineteen story/replay links, twenty-two profiles and ten media hashes; rendered omission/duplicate/title rejection; pending-session rendering fixtures; thirteen CMS tests (58 assertions); publication browser suite across all twenty-nine pages at 320/390/768/1440; legacy Register fragment redirects and no-JavaScript program; additional homepage keyboard/motion/offscreen and schedule time-zone checks through `VERIFY_INTERACTIONS_ONLY=1 scripts/verify.cjs`. Desktop/mobile archive, program, session and Events screenshots inspected; syntax and diff checks passed. The repeated full screenshot suite was stopped after 320/390px; all widths were separately completed by the publication suite. Designer-owned files remain identical.
+
+Implementation work is isolated under `zoom_exporter/recap-site-preview`, based on origin/main `063f8d8`, preserving the original checkout's unrelated changes. Publishing uses the existing checked Pages workflow on main. The deployment run and live revision are verified after pushing and reported in the chat and the original checkout's local handoff. No DNS or hosting changes. Guide, source/media/redirect manifests: `docs/recaps/`.
+
+Limits: selected quotes were checked against transcripts and independent audio transcriptions, not human listening or a full viewing of all recordings. Saber approved publication of the reviewed images; this does not assert independent rights clearance. Cross-browser, screen-reader and complete supporting-resource checks remain unverified. The unavailable session-wrap skill is replaced by this manual handoff.
+
+
+## October 20, 2026 — linked recaps and branded local preview
+
+VERIFIED for the local preview phase. Saber authorized updating the Notion story and preparing the website presentation. The event recap now connects all nineteen sessions through four thematic questions, with opening and closing keynotes as bookends, while preserving the images, chronological index and editorial-notes child page. The Notion notes distinguish editorial connections from sourced spoken callbacks.
+
+This detached worktree at `zoom_exporter/recap-site-preview` starts from saved origin/main `063f8d8`; the main checkout's existing work remains intact. It adds a clean Notion snapshot, an offline importer, twenty static pages, five images in two derivative sizes, a shared recap layout, scoped host CSS and a Recap navigation link. Existing Jekyll/Pages CMS and designer-owned sources remain unchanged. The ordinary build now regenerates and checks recap pages. See [the import guide](docs/recaps/README.md) and its route/media manifests.
+
+Fresh checks after the final implementation change: complete `scripts/build.rb` with source validation, existing seventeen-session schedule reconciliation, and twenty-page recap checks; `scripts/verify-publish.cjs` across all twenty-eight pages at 320/390/768/1440, plus saved schedule choices/calendar and no-JavaScript content; JavaScript syntax and `git diff --check`. Desktop hub/story/session and mobile hub/story screenshots inspected. The playlist was opened in YouTube and showed the matching event title and nineteen recordings. The broader animation suite `verify.cjs` was stopped after its 320px pass; its full run is not claimed.
+
+Preview: http://127.0.0.1:8897/recaps/october-17-2026/ (loopback server; built files in `/tmp/ccfest-recap-preview-site`). All recap pages are noindex/nofollow. The Mac build used a temporary Ruby 3.4 compatibility Gemfile, documented in the guide; repository dependency files were not changed.
+
+Remaining: human listening to selected quote clips, image reuse/consent review (especially names/handles in the shared-collage image), complete supporting-resource destination checks, cross-browser/accessibility review and final editorial approval. No commit, push, deploy, DNS, live-site changes or hosted CMS saves. Next: review this preview, then reconcile it with current main and explicitly authorize publication when ready. Session-wrap skill was unavailable; this entry and the import guide provide the handoff.
+
 ## Latest task — CMS improvements published and activated
 
 Saber approved “Push and activate” and completed the owner-only Pages Source change. The API confirms `build_type: workflow`, custom domain `ccfest.rocks`, HTTPS enforced and status built. The implementation is published on `main` as `95e7910`; [Checked Pages publication run 37575337520](https://github.com/saberkhan372/ccfest-redesign/actions/runs/37575337520) passed both build and deploy. The temporary activation workflow is removed. The old branch-based publisher no longer bypasses the checks.

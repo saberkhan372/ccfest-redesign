@@ -3,6 +3,7 @@
 require 'jekyll'
 require 'nokogiri'
 require 'tmpdir'
+require 'json'
 require 'fileutils'
 
 source = File.expand_path(ARGV[0] || '..', ARGV[0] ? Dir.pwd : __dir__)
@@ -11,11 +12,12 @@ Dir.mktmpdir('ccfest-schedule-fallback-') do |tmp|
   input = File.join(tmp, 'source')
   output = File.join(tmp, 'site')
   FileUtils.mkdir_p(input)
-  %w[register _includes _layouts _data].each do |dir|
+  %w[events _includes _layouts _data].each do |dir|
     FileUtils.cp_r(File.join(source, dir), input)
   end
 
-  schedule = YAML.load_file(File.join(input, '_data/schedule.yml'))
+  archive = JSON.parse(File.read(File.join(input, '_data/recap_program.json')))
+  schedule = archive.fetch('schedule')
   round = schedule.fetch('items').find { |item| item['kind'] == 'workshops' }.fetch('id')
   fixtures = [{ 'id' => 'assigned', 'title' => 'Assigned workshop', 'format' => 'Workshop', 'schedule_id' => round }]
   { 'missing' => nil, 'empty' => '', 'whitespace' => '   ' }.each do |name, value|
@@ -32,10 +34,11 @@ Dir.mktmpdir('ccfest-schedule-fallback-') do |tmp|
     fixtures << { 'id' => name, 'title' => "Pending #{name}", 'format' => 'Workshop', 'schedule_id' => value }
   end
   fixtures << { 'id' => 'real-panel', 'title' => 'Fixture panel', 'format' => 'Panel', 'schedule_id' => 'panel', 'presenters' => [{ 'name' => 'Panelist One' }] }
-  File.write(File.join(input, '_data/sessions.yml'), { 'sessions' => fixtures }.to_yaml)
+  archive['sessions'] = fixtures
+  File.write(File.join(input, '_data/recap_program.json'), JSON.generate(archive))
   config = Jekyll.configuration('source' => input, 'destination' => output, 'safe' => true, 'quiet' => true)
   Jekyll::Site.new(config).process
-  page = Nokogiri::HTML(File.read(File.join(output, 'register/index.html')))
+  page = Nokogiri::HTML(File.read(File.join(output, 'events/october-17-2026/program/index.html')))
   cards = page.css('.session-card')
   raise "Expected eight titled sessions (1 assigned, 6 pending, 1 panel), got #{cards.size}" unless cards.size == 8
   pending = page.css('.schedule-pending .session-card')

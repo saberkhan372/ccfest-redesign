@@ -1,8 +1,8 @@
 meta:
   title: Events — CC Fest
-  description: 'Upcoming CC Fest events: free creative coding gatherings, workshops, and educator camps.'
+  description: 'Upcoming CC Fest gatherings and camps, plus recaps and recordings from past events.'
 page:
-  eyebrow: What’s next
+  eyebrow: Gatherings, past and future
   heading: Events
   summary: Free gatherings, workshops, and camps for creative coders of all levels.
 upcoming:

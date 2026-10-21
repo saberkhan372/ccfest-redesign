@@ -5,8 +5,9 @@ source = File.expand_path(ARGV[0] || File.join(__dir__, '..'))
 output = File.expand_path(ARGV[1] || File.join(source, '_site'))
 data = CCContent::Validator.new(source).validate
 abort(data.errors.join("\n")) unless data.errors.empty?
-sessions = data.data.fetch('sessions').fetch('sessions').select { |s| !s['title'].to_s.strip.empty? }
-page = Nokogiri::HTML(File.read(File.join(output, 'register/index.html')))
+archive = JSON.parse(File.read(File.join(source, '_data/recap_program.json')))
+sessions = archive.fetch('sessions').select { |s| !s['title'].to_s.strip.empty? }
+page = Nokogiri::HTML(File.read(File.join(output, 'events/october-17-2026/program/index.html')))
 cards = page.css('.session-card')
 abort('Rendered session count does not match validated source') unless cards.size == sessions.size
 sessions.each do |session|
@@ -20,12 +21,12 @@ sessions.each do |session|
     abort("Wrong round for #{session['id']}") unless card.ancestors.any? { |node| node['id'] == session['schedule_id'] }
   end
 end
-keynotes = data.data.fetch('keynotes').fetch('keynotes').select { |k| !k['name'].to_s.strip.empty? }
+keynotes = archive.fetch('keynotes').select { |k| !k['name'].to_s.strip.empty? }
 unless keynotes.empty?
   headings = page.css('.keynote-card h3').map { |node| node.text.strip }
   abort('Keynote cards do not match published speakers') unless headings == keynotes.map { |k| k['name'] }
 end
-expected_blocks = data.data.fetch('schedule').fetch('items').map { |b| b['id'] }
+expected_blocks = archive.fetch('schedule').fetch('items').map { |b| b['id'] }
 abort('Rendered running order does not match source') unless page.css('.schedule-block').map { |b| b['id'] } == expected_blocks
 Dir.glob(File.join(output, '**/index.html')).each do |file|
   html = Nokogiri::HTML(File.read(file))

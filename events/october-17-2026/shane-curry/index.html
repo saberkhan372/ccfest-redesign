@@ -1,0 +1,40 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: Research-Paper-Monster-Mash — CC Fest
+description: 'Shane Curry: Research-Paper-Monster-Mash. Recap, replay, takeaways and
+  resources from CC Fest on October 17, 2026.'
+heading: Research-Paper-Monster-Mash
+noindex: false
+recap_kind: session
+session_id: shane-curry
+---
+{% raw %}
+<p>Shane Curry is a professional traditional animator and the timing supervisor on American Dad, with credits that include She-Ra, Trolls, Duncanville and Golden Axe. He opened by explaining his specialty, the exposure sheet: a frame-by-frame chart of which drawings appear when, aligned to dialogue and camera moves. He described it as a static abstraction of real-time behavior among interdependent objects, even declaring camera moves at the top “like declaring variables.”</p>
+
+<p>His relationship with software has been uneasy. Every tool he loved, from Toon Boom Harmony to Blender and Unreal Engine, eventually left him behind as updates piled up, and he found that his successes came from working around software rather than with it. Over the past six months, agentic coding changed that. Working nights and weekends, he used AI coding agents to recreate experiments from as many research papers in his field as he could find. The process was creatively fulfilling and also made him ambivalent, given how endless the exploration became. It led him to a working definition: self-expression is the authored arrangement of data.</p>
+
+<p>He showed what that means with lines. Strictly, a line is two points plus decisions about how much data to store between them. One input tracker is quick and honest in the moment but cuts corners when you draw fast; a smoothed version is honest after the fact but lags behind your hand. Artists, he argued, should be able to choose either on purpose, not get one by accident. He kept experiments small enough to debug what the agents were doing, using a chunky 4×3 pixel font for that reason, and explored subpixel animation on an 8×8 LED grid and an “animated codec,” a QR-code-like cartoon that encodes a short animation in its own trembling lines. He built the slide software for the talk himself and drew its artwork by hand.</p>
+
+<p>In a long Q&amp;A, Curry explained that he searches for papers with code, judges them by whether the result excites him, and often learns from the agent that he has independently rediscovered published work. Asked about the animation industry, he said he is still exclusively a traditional animator, that few new shows are starting, and that he has more fun building tools than wrestling with large 3D packages. He remains against visual generative AI, which he sees as a finished product he cannot manipulate, but expects studios may one day build their own software for each production. His advice drew on a clothing metaphor: not everyone needs to make their own clothes, but everyone should learn to dress themselves.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Expression lives in data decisions. How often a tool samples a stroke, and whether it smooths it, shapes what an artist can do (00:10:03–00:11:19).</li>
+  <li>Keep experiments small enough to check. Simple, chunky systems made it possible to verify what coding agents were building (00:12:28–00:13:37).</li>
+  <li>Choose real constraints. Arbitrary limits feel false, but your own domain expertise, and even your ignorance in a new field, can guide what you build (00:23:00–00:25:38).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>Editorial suggestion based on Curry’s line demo: write two p5.js drawing tools, one that draws a line between raw mouse positions each frame and one that eases toward the mouse with lerp(). Draw quickly with each and decide which kind of honesty you want.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=ifdT65Gg-Is">Watch on YouTube</a></p>
+
+{% endraw %}

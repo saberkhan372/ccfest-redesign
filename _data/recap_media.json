@@ -1,0 +1,34 @@
+{
+  "notion_images": {
+    "shiffman-collage-together-v2.jpg": {
+      "small": "/assets/recaps/october-17-2026/shiffman-collage-720.webp",
+      "src": "/assets/recaps/october-17-2026/shiffman-collage-1440.webp",
+      "width": 1440,
+      "height": 810
+    },
+    "cooper-reveal-sketch.jpg": {
+      "small": "/assets/recaps/october-17-2026/cooper-painting-720.webp",
+      "src": "/assets/recaps/october-17-2026/cooper-painting-1440.webp",
+      "width": 1440,
+      "height": 788
+    },
+    "soto-servo-creature.jpg": {
+      "small": "/assets/recaps/october-17-2026/soto-creature-720.webp",
+      "src": "/assets/recaps/october-17-2026/soto-creature-1440.webp",
+      "width": 1440,
+      "height": 656
+    },
+    "jovanic-cube-net.jpg": {
+      "small": "/assets/recaps/october-17-2026/jovanic-cube-720.webp",
+      "src": "/assets/recaps/october-17-2026/jovanic-cube-1440.webp",
+      "width": 1440,
+      "height": 810
+    },
+    "oduro-hydra-tiles.jpg": {
+      "small": "/assets/recaps/october-17-2026/kofi-21m00-720.webp",
+      "src": "/assets/recaps/october-17-2026/kofi-21m00-1440.webp",
+      "width": 1440,
+      "height": 860
+    }
+  }
+}

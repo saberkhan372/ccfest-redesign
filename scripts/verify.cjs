@@ -29,8 +29,10 @@ const { chromium } = require('playwright');
 const base = process.argv[2] || 'http://127.0.0.1:8876/';
 
 /* Paths are relative to `base`. '' is the homepage. */
-const PAGES = ['', 'register/', 'events/', 'events/visible-java/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'];
-const WIDTHS = [320, 390, 768, 1440];
+const PAGES = ['', 'register/', 'events/', 'events/visible-java/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'].concat(require('../docs/recaps/import-manifest.json').routes.map(route => route.replace(/^\//, '')));
+// After verify-publish.cjs has checked every page at all four widths, run only
+// this suite's additional homepage/time-zone/no-JS interactions without duplicating screenshots.
+const WIDTHS = process.env.VERIFY_INTERACTIONS_ONLY === '1' ? [] : [320, 390, 768, 1440];
 
 /*
  * Wait for every image to finish, however it finishes. The posters are `loading="lazy"`, so
@@ -91,7 +93,7 @@ const settleImages = page => page.evaluate(cap => Promise.all(
 
         await page.evaluate(() => scrollTo(0, 0));
         if (width === 390 || width === 1440) {
-          await page.screenshot({ path: `/tmp/ccfest-${path ? path.replace(/\/$/, '') : 'home'}-${width}.png`, fullPage: true });
+          await page.screenshot({ path: `/tmp/ccfest-${path ? path.replace(/\/$/, '').replaceAll('/', '-') : 'home'}-${width}.png`, fullPage: true });
         }
       }
       console.log(`PASS pages, fonts, images, anchors, reveal visibility, overflow, event reminder clear of credits at ${width}px`);
@@ -152,7 +154,7 @@ const settleImages = page => page.evaluate(cap => Promise.all(
       await page.goto(new URL('events/', base).href);
       assert.equal(await page.locator('.event-banner').isVisible(), false, 'Hide should last for the visit');
       const fresh = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-      await fresh.goto(new URL('register/', base).href);
+      await fresh.goto(new URL('events/october-17-2026/program/', base).href);
       assert.equal(await fresh.locator('.event-banner').isVisible(), true);
       await fresh.locator('#registration').scrollIntoViewIfNeeded();
       await fresh.waitForTimeout(200);
@@ -165,7 +167,7 @@ const settleImages = page => page.evaluate(cap => Promise.all(
 
     /* Schedule time zone helper on the event page. */
     const sched = await browser.newPage({ viewport: { width: 1440, height: 900 }, timezoneId: 'Asia/Tokyo' });
-    await sched.goto(new URL('register/', base).href);
+    await sched.goto(new URL('events/october-17-2026/program/', base).href);
     if (await sched.locator('#schedule').count()) {
       const firstLocal = sched.locator('#schedule .schedule-block').first().locator('.schedule-local');
       assert.equal(await sched.locator('#schedule-zone-select').inputValue(), 'Asia/Tokyo', 'defaults to the visitor time zone');
@@ -176,74 +178,13 @@ const settleImages = page => page.evaluate(cap => Promise.all(
     } else {
       console.log('SKIP schedule: _data/schedule.yml has no items');
     }
-    /* Schedule explorer: first/second choice and maybes per round, My choices, calendar file, blocked storage. */
-    if (await sched.locator('#schedule').count()) {
-      await sched.waitForSelector('.schedule[data-ready]');
-      const shown = () => sched.locator('.session-card[data-format="Workshop"]:not([hidden])').count();
-      const total = await shown();
-      assert.ok(total >= 15, 'workshops are listed');
-      const ids = await sched.$$eval('.session-card[data-id]', cards => cards.map(c => c.dataset.id));
-      assert.equal(new Set(ids).size, ids.length, 'session ids are unique');
-      const pendingCards = await sched.$$eval('.session-card[data-format="Workshop"]', cards => cards.filter(c => !c.dataset.block.trim()).map(c => ({ id: c.dataset.id, pending: Boolean(c.closest('.schedule-pending')), controls: c.querySelectorAll('.session-pref button').length })));
-      assert.equal(await sched.locator('.schedule-pending').count(), pendingCards.length ? 1 : 0, 'pending section exists exactly when needed');
-      assert.ok(pendingCards.every(c => c.pending && !c.controls), 'unassigned workshops stay visible without preference controls');
-      const pref = (id, value) => sched.locator(`.session-card[data-id="${id}"] .session-pref button[data-pref="${value}"]`);
-      const pressed = async (id, value) => (await pref(id, value).getAttribute('aria-pressed')) === 'true';
-      await pref('naoto-hieda', 'first').click();
-      await pref('kemi-ukadike', 'first').click();
-      assert.ok(await pressed('kemi-ukadike', 'first'), 'a new first choice takes the round');
-      assert.ok(await pressed('naoto-hieda', 'maybe'), 'the earlier first choice becomes a maybe');
-      await pref('blair-subbaraman', 'second').click();
-      await pref('tristan-bunn', 'second').click();
-      assert.ok(await pressed('tristan-bunn', 'second') && await pressed('blair-subbaraman', 'maybe'), 'one second choice per round');
-      await pref('emily-thomforde', 'maybe').click();
-      assert.ok(await pressed('emily-thomforde', 'maybe') && await pressed('naoto-hieda', 'maybe'), 'any number of maybes in a round');
-      await pref('emily-thomforde', 'maybe').click();
-      assert.ok(!(await pressed('emily-thomforde', 'maybe')), 'clicking again clears it');
-      await pref('caleb-foss', 'first').click();
-      await sched.reload();
-      await sched.waitForSelector('.schedule[data-ready]');
-      assert.ok(await pressed('kemi-ukadike', 'first') && await pressed('tristan-bunn', 'second'), 'preferences survive a reload');
-      await sched.click('.schedule-mine-toggle');
-      assert.equal(await shown(), 5, 'My choices shows only the workshops with a preference');
-      const [download] = await Promise.all([sched.waitForEvent('download'), sched.click('.schedule-ics')]);
-      const ics = require('fs').readFileSync(await download.path(), 'utf8').replace(/\r\n /g, '');
-      assert.match(ics, /DTSTART:20261017T160000Z/, 'opening keynote at 9:00 PDT in UTC');
-      assert.match(ics, /UID:kemi-ukadike@ccfest.rocks/);
-      assert.match(ics, /UID:caleb-foss@ccfest.rocks/);
-      assert.ok(!/UID:naoto-hieda|UID:tristan-bunn|UID:blair-subbaraman/.test(ics), 'second choices and maybes are not exported');
-      assert.equal((ics.match(/BEGIN:VEVENT/g) || []).length, 5, 'opening, two first choices, panel, closing');
-      const [pngDl] = await Promise.all([sched.waitForEvent('download'), sched.click('.schedule-png')]);
-      const pngBytes = require('fs').readFileSync(await pngDl.path());
-      assert.equal(pngBytes.subarray(1, 4).toString(), 'PNG', 'the PNG download is a PNG');
-      assert.equal(pngBytes.readUInt32BE(16), 1224, 'PNG is a Letter page at 2x');
-      const [pdfDl] = await Promise.all([sched.waitForEvent('download'), sched.click('.schedule-pdf')]);
-      const pdf = require('fs').readFileSync(await pdfDl.path(), 'latin1');
-      assert.ok(pdf.startsWith('%PDF-1.4') && pdf.trimEnd().endsWith('%%EOF'), 'the PDF download is a PDF');
-      assert.match(pdf, /First choice: Access Is the Interface/, 'PDF lists the first choice as text');
-      assert.match(pdf, /Second choice: The Nature of Code, but Python/, 'PDF lists the second choice');
-      assert.match(pdf, /Welcome \+ Opening Keynote/, 'PDF keeps the keynotes');
-      console.log('PASS schedule explorer: first and second choice and maybes per round, My choices, .ics');
-      const blocked = await browser.newPage({ viewport: { width: 390, height: 800 } });
-      await blocked.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new Error('blocked'); } }); });
-      await blocked.goto(new URL('register/', base).href);
-      await blocked.waitForSelector('.schedule[data-ready]');
-      await blocked.locator('.session-card[data-id="sandra-soto"] .session-pref button[data-pref="first"]').click();
-      assert.equal(await blocked.locator('.session-card[data-id="sandra-soto"] .session-pref button[data-pref="first"]').getAttribute('aria-pressed'), 'true', 'choosing works when storage is blocked');
-      const [accentDl] = await Promise.all([blocked.waitForEvent('download'), blocked.click('.schedule-pdf')]);
-      assert.match(require('fs').readFileSync(await accentDl.path(), 'latin1'), /La tecnolog\xeda como lenguaje creativo/, 'PDF keeps accents Helvetica has (WinAnsi)');
-      for (const width of [320, 390, 768, 1440]) {
-        await blocked.setViewportSize({ width, height: 800 });
-        assert.ok(!(await blocked.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `no horizontal scroll at ${width}px`);
-      }
-      await blocked.close();
-      console.log('PASS schedule works with storage blocked, and without horizontal scroll at 320/390/768/1440');
-    }
+    assert.equal(await sched.locator('.session-pref, .schedule-mine').count(), 0, 'archive retires workshop planning');
+    assert.equal(await sched.locator('.session-card').count(), 17, 'archive retains all workshops and panel');
     await sched.close();
 
     /* Registration dialog. It only exists once _data/event.yml has registration_url and luma_event_id. */
     const register = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-    await register.goto(new URL('register/', base).href);
+    await register.goto(new URL('events/october-17-2026/program/', base).href);
     const lumaLink = register.locator('[data-luma-event]');
     if (await lumaLink.count()) {
       const dialog = register.locator('#registration-dialog');
@@ -255,7 +196,7 @@ const settleImages = page => page.evaluate(cap => Promise.all(
       assert.equal(await register.evaluate(() => document.activeElement.hasAttribute('data-luma-event')), true, 'focus should return to Register');
       console.log('PASS registration dialog opens, loads Luma, closes on Escape, returns focus');
     } else {
-      console.log('SKIP registration dialog: no Luma event id in _data/event.yml yet');
+      console.log('PASS archive: registration dialog retired');
     }
     await register.close();
 
@@ -264,11 +205,11 @@ const settleImages = page => page.evaluate(cap => Promise.all(
     await noJS.goto(base);
     assert.equal(await noJS.locator('.modes-list').isVisible(), false);
     assert.equal(await noJS.locator('.upcoming-copy').evaluate(e => getComputedStyle(e).opacity), '1');
-    await noJS.goto(new URL('register/', base).href);
+    await noJS.goto(new URL('events/october-17-2026/program/', base).href);
     if (await noJS.locator('#schedule').count()) {
       assert.equal(await noJS.locator('.schedule-zone').isVisible(), false, 'no picker without JavaScript');
       assert.match(await noJS.locator('#schedule .schedule-times').first().textContent(), /9:00/, 'Pacific times still show');
-      assert.equal(await noJS.locator('#schedule .schedule-tools').isVisible(), false, 'no tools row without JavaScript');
+      assert.equal(await noJS.locator('#schedule .schedule-tools').count(), 0, 'planning controls retired');
       assert.ok((await noJS.locator('#schedule .session-card:visible').count()) >= 10, 'every session is readable without JavaScript');
     }
     if (await noJS.locator('[data-luma-event]').count()) {

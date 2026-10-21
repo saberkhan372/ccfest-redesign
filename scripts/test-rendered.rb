@@ -6,12 +6,12 @@ require 'nokogiri'
 require 'open3'
 root = File.expand_path('..', __dir__)
 output = File.expand_path(ARGV.fetch(0, '_site'))
-original = File.read(File.join(output, 'register/index.html'))
+original = File.read(File.join(output, 'events/october-17-2026/program/index.html'))
 Dir.mktmpdir('ccfest-rendered-') do |temp|
-  Dir.children(output).each { |name| FileUtils.ln_s(File.join(output, name), File.join(temp, name)) unless name == 'register' }
-  FileUtils.mkdir_p(File.join(temp, 'register'))
+  Dir.children(output).each { |name| FileUtils.ln_s(File.join(output, name), File.join(temp, name)) unless name == 'events' }
+  FileUtils.cp_r(File.join(output, 'events'), File.join(temp, 'events'))
   check = lambda do |html, expected|
-    File.write(File.join(temp, 'register/index.html'), html)
+    File.write(File.join(temp, 'events/october-17-2026/program/index.html'), html)
     log, status = Open3.capture2e('ruby', File.join(root, 'scripts/verify-rendered-content.rb'), root, temp)
     abort("Reconciliation regression: expected #{expected.inspect}, got #{log}") if status.success? || !log.include?(expected)
   end

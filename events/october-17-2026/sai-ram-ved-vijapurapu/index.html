@@ -1,0 +1,47 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: Delightful motion loops — CC Fest
+description: 'Sai Ram Ved Vijapurapu: Delightful motion loops. Recap, replay, takeaways
+  and resources from CC Fest on October 17, 2026.'
+heading: Delightful motion loops
+noindex: false
+recap_kind: session
+session_id: sai-ram-ved-vijapurapu
+---
+{% raw %}
+<p>Sai Ram Ved Vijapurapu has taken part in Genuary, a January challenge that offers a new generative art prompt each day, for several years. His sketches focus on motion rather than color or form: how to make things move in ways that feel satisfying. In this follow-along workshop he rebuilt one of last year’s pieces, a stack of black and white shapes whose motion is driven by trigonometric functions, from an empty p5.js sketch.</p>
+
+<p>He started with habits he uses in most sketches: a full-window canvas, sizes defined relative to the canvas width, and translate() to move the origin to the center so the x and y arguments stay free for motion. frameCount supplied a steadily increasing number, and the graphing calculator Desmos showed how sin() turns that number into a smooth wave between −1 and 1. Because that range is only a pixel or two, he used map() to stretch it to a quarter of the canvas height and slowed the input by multiplying frameCount by 0.1.</p>
+
+<p>A loop drew many circles, largest first so each smaller one sits on top, alternating black and white using the remainder of the loop index divided by 2. Subtracting a small multiple of the loop index from each circle’s input made each one lag slightly behind the next, producing a rippling pattern from about 20 lines of code. He then turned to the 12 principles of animation from Disney animators, using a circle-based visualization of them, and focused on easing: real objects speed up and slow down, as in the windup and release of a throw. A pure sine wave is smooth but plain. Experimenting in Desmos, he nested functions to reshape the motion, landing on atan(10 × sin(x)), which lingers at each end and moves quickly through the middle. Graphing first showed him the new minimum and maximum to use in map().</p>
+
+<p>To finish, he made a perfect loop. Since sine repeats every 2π, setting the input to TWO_PI × frameCount ÷ 120 completes one cycle in exactly 120 frames, and saveGif() with frame units records just that cycle. Swapping circles for squares with rectMode(CENTER) recreated the original piece. He encouraged everyone to try Genuary, saying that a daily practice and his own black-and-white constraint had helped him develop a recognizable style, echoing Daniel Shiffman’s keynote.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Graph before you code. Desmos makes it easy to see how a function behaves and what its range is before mapping it to motion (00:09:25–00:11:00, 00:31:11–00:36:46).</li>
+  <li>Small offsets make rich patterns. Subtracting a little of the loop index from each shape’s input creates lagging waves (00:22:22–00:26:30).</li>
+  <li>Plan the loop length. Tie the input to TWO_PI divided by a frame count so the animation repeats exactly, then save that many frames (00:41:11–00:49:00).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>From the workshop: in p5.js, draw ten nested circles whose y position is map(sin(x − i × 0.1), −1, 1, −height/4, height/4). Replace sin(x) with atan(10 × sin(x)), find its new range in Desmos, and update map(). Then set x to TWO_PI × frameCount / 120 and record one 120-frame loop with saveGif(‘loop’, 120, { units: ‘frames’ }).</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=J33_HJULLnk">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://itp-tracker.notion.site/Delightful-Motion-Loops-2026-3fcd7eb4971b8076a13ef3751cabef51">Workshop guide (Notion)</a></li>
+  <li><a href="https://editor.p5js.org/sairamved/sketches/B7vd1BAjS">Workshop sketch in the p5.js editor</a></li>
+  <li><a href="https://genuary.art/">Genuary</a></li>
+  <li><a href="https://desmos.com/">Desmos</a></li>
+</ul>
+
+{% endraw %}

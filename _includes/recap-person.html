@@ -1,0 +1,3 @@
+{% assign person = include.person %}<div class="recap-person">
+{% if person.photo %}{% assign start = person.photo | slice: 0 %}<img src="{% unless start == '/' %}/{% endunless %}{{ person.photo | escape }}" alt="Portrait of {{ person.name | escape }}" width="112" height="112" loading="lazy">{% endif %}
+<h3>{{ person.name | escape }}</h3>{% if person.pronouns %}<p>{{ person.pronouns | escape }}</p>{% endif %}{% include bio.html text=person.bio %}{% if person.url %}<p><a href="{{ person.url | escape }}">Presenter website ↗</a></p>{% endif %}</div>

@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { chromium } = require('playwright');
 const base = process.argv[2] || 'http://127.0.0.1:8876/';
-const paths = ['', 'register/', 'events/', 'events/visible-java/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'];
+const paths = ['', 'register/', 'events/', 'events/visible-java/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'].concat(require('../docs/recaps/import-manifest.json').routes.map(route => route.replace(/^\//, '')));
 (async () => {
   const browser = await chromium.launch({ headless: true, ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}) });
   const errors = [];
@@ -42,44 +42,30 @@ const paths = ['', 'register/', 'events/', 'events/visible-java/', 'history/', '
           return issues;
         });
         assert.deepEqual(issues, [], `${route || '/'} at ${width}`);
+        if ([390, 1440].includes(width) && ['events/', 'events/october-17-2026/', 'events/october-17-2026/program/', 'events/october-17-2026/missy-cooper/'].includes(route)) {
+          await page.screenshot({path: `/tmp/ccfest-published-${route.replaceAll('/', '-')}${width}.png`, fullPage: false});
+        }
       }
       await page.close();
       console.log(`PASS publication pages at ${width}px`);
     }
     const page = await browser.newPage({ acceptDownloads: true });
-    await page.goto(new URL('poster-maker/', base).href);
-    const expected = await page.locator('#maker-data').evaluate(n => JSON.parse(n.dataset.sessions).filter(s => s.title && s.title.trim()));
-    const event = await page.locator('#maker-data').evaluate(n => JSON.parse(n.dataset.event));
-    await page.goto(new URL('register/', base).href);
+    const expected = require('../_data/recap_program.json').sessions;
+    await page.goto(new URL('events/october-17-2026/program/', base).href);
     assert.equal(await page.locator('.session-card').count(), expected.length);
-    const scheduled = expected.filter(s => s.format === 'Workshop' && s.schedule_id && s.schedule_id.trim());
-    if (await page.locator('.schedule').count()) {
-      await page.waitForSelector('.schedule[data-ready]');
-      for (const session of scheduled) {
-        assert.equal(await page.locator(`.session-card[data-id="${session.id}"] .session-pref button`).count(), 3);
-      }
-      const pending = expected.filter(s => s.format === 'Workshop' && !String(s.schedule_id || '').trim());
-      for (const session of pending) assert.equal(await page.locator(`.session-card[data-id="${session.id}"] .session-pref button`).count(), 0);
-      if (scheduled.length && event.date) {
-        const session = scheduled[0];
-        const pref = page.locator(`.session-card[data-id="${session.id}"] .session-pref button[data-pref="first"]`);
-        await pref.click();
-        await page.reload();
-        await page.waitForSelector('.schedule[data-ready]');
-        assert.equal(await pref.getAttribute('aria-pressed'), 'true');
-        const [download] = await Promise.all([page.waitForEvent('download'), page.locator('.schedule-ics').click()]);
-        const calendar = fs.readFileSync(await download.path(), 'utf8').replace(/\r\n /g, '');
-        assert.ok(calendar.includes(`UID:${session.id}@ccfest.rocks`));
-        assert.ok(calendar.includes('BEGIN:VCALENDAR') && calendar.includes('DTSTART:'));
-      }
+    assert.equal(await page.locator('.session-pref, .schedule-mine, [data-luma-event]').count(), 0, 'archive has no planning or checkout controls');
+    assert.equal(await page.locator('a[href^="/events/october-17-2026/"]').count() >= 19, true);
+    for (const [hash, target] of [['', ''], ['#registration', ''], ['#schedule', 'program/#schedule'], ['#sessions', '#sessions'], ['#keynotes', 'program/#keynotes']]) {
+      await page.goto(new URL('register/' + hash, base).href);
+      await page.waitForURL(new URL('events/october-17-2026/' + target, base).href);
     }
     const noJS = await browser.newPage({ javaScriptEnabled: false });
-    await noJS.goto(new URL('register/', base).href);
+    await noJS.goto(new URL('events/october-17-2026/program/', base).href);
     assert.equal(await noJS.locator('.session-card:visible').count(), expected.length);
     assert.equal(await noJS.locator('.session-pref button:visible').count(), 0);
     await noJS.close();
     await page.close();
     assert.deepEqual(errors, []);
-    console.log(`PASS publication: ${expected.length} sessions, saved choices/calendar where available, no-JavaScript content.`);
+    console.log(`PASS publication: ${expected.length} sessions, archived program and legacy redirects, no-JavaScript content.`);
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

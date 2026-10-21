@@ -1,0 +1,47 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: 'Recoding: Tracing the origins of generative art — CC Fest'
+description: 'Julien Gachadoat: Recoding: Tracing the origins of generative art. Recap,
+  replay, takeaways and resources from CC Fest on October 17, 2026.'
+heading: 'Recoding: Tracing the origins of generative art'
+noindex: false
+recap_kind: session
+session_id: julien-gachadoat
+---
+{% raw %}
+<p>Julien Gachadoat, a generative artist based in Bordeaux who works as v3ga, has used Processing for about 20 years and helped translate its early alpha version. His practice centers on autonomous systems drawn with pen plotters; he estimated he has made 700 to 800 plots over roughly seven years of near-daily iteration, a habit he linked to Zach Lieberman, whom Daniel Shiffman had cited in the keynote. He also showed a dice-based drawing protocol he first used with Vera Molnár in 2023, now installed so visitors can start their own plotted drawings.</p>
+
+<p>The workshop centered on the ReCode Project, which Matthew Epler started in 2012 to publish code for pioneering computer art from the 1960s and 1970s. Its three goals were to bring that work back into circulation, offer a resource for practitioners and educators, and build a community. When Gachadoat went to use it for a workshop in Nantes earlier this year, the site was offline. With participants from that workshop, he rebuilt it in about two weeks, with some AI help, and relaunched it in the spring using p5.js. Most entries come from Computer Graphics and Art, a 1970s magazine edited by Grace Hertlein at Chico State, with scans preserved by the Compart archive. He noted that some artists, including Manfred Mohr, have asked that their work not be recoded, and the site respects that. A submission form is planned.</p>
+
+<p>He then recoded John Roy’s Segrid (1973) live in the p5.js editor. Reading the artist’s published process notes alongside the image, he replaced the original ring-by-ring procedure with nested loops over a grid. Distance from the center, measured in concentric square rings, set how many lines each cell received. The key insight, which he said took him a while to find, was that each cell is one quarter-pattern rotated four times around its center. Letting lines run past the quarter created the interference patterns he finds most beautiful. With the grid at 17 by 17 and the right parameters, the original reappeared.</p>
+
+<p>The last part turned the recode into a new system. He rotated by 45 degrees, scaled each cell with a sine of the frame count, and offset the phase by distance from the mouse, then mapped opacity to scale for a sense of depth. He said he still loves this moment at 51, and that looking at work from the 1970s often makes him feel he is reinventing the wheel.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Recoding is a way to study history. Working out how a 1973 drawing was made, with punch cards and no screen preview, builds appreciation for the pioneers and their constraints (00:14:32–00:16:02).</li>
+  <li>Look for the hidden symmetry. Segrid’s pattern became simple once it was seen as one quarter rotated four times (00:31:06–00:42:06).</li>
+  <li>A recode is a starting point. Small changes to rotation, time and mouse input turned a historical system into new work (00:45:16–00:55:03).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>Adapted from the workshop: open Gachadoat’s Segrid sketch, change the rotation in the pattern loop from 90 to 45 degrees, then drive the number of lines per cell with sin(frameCount / 50). Pick one artwork from the ReCode Project and write down how you think it was made before reading its code.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=DeO_6MRhqfU">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://recodeproject.com/">ReCode Project</a></li>
+  <li><a href="https://recodeproject.com/artworks/v2n3-segrid">Segrid by John Roy on the ReCode Project</a></li>
+  <li><a href="https://github.com/v3ga/CCFest26#recoding--tracing-the-origins-of-generative-art">Workshop materials on GitHub</a></li>
+  <li><a href="https://editor.p5js.org/v3ga/sketches/MYba5nt-P">Segrid sketch in the p5.js editor</a></li>
+</ul>
+
+{% endraw %}

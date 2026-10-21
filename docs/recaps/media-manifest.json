@@ -1,0 +1,122 @@
+[
+  {
+    "source_recording": "GMT20261017-153948_Recording_2560x1440.mp4",
+    "source_at": "00:31:40",
+    "source_frame_sha256": "95d95694e95080cbaea8ee4d1984f0b7748d03cd8329c73891a41085c3dfe0f1",
+    "notion_asset_name": "shiffman-collage-together-v2.jpg",
+    "destination": "/assets/recaps/october-17-2026/shiffman-collage-720.webp",
+    "sha256": "1343747d9a9010a75cb5f4b7072d97a8f635e21d77778c778e64ea45e3fd9570",
+    "bytes": 23596,
+    "width": 720,
+    "height": 405,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-153948_Recording_2560x1440.mp4",
+    "source_at": "00:31:40",
+    "source_frame_sha256": "95d95694e95080cbaea8ee4d1984f0b7748d03cd8329c73891a41085c3dfe0f1",
+    "notion_asset_name": "shiffman-collage-together-v2.jpg",
+    "destination": "/assets/recaps/october-17-2026/shiffman-collage-1440.webp",
+    "sha256": "a713bddf973cb7d0e4e86bfe69022776552fe431facb51a570f18376ae986cee",
+    "bytes": 53540,
+    "width": 1440,
+    "height": 810,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-162944_Recording_1920x1050.mp4",
+    "source_at": "00:11:00",
+    "source_frame_sha256": "fe37ac1705fe6410b32b90655aa4971dee567e9b81a983105de5098d7b1a6f03",
+    "notion_asset_name": "cooper-reveal-sketch.jpg",
+    "destination": "/assets/recaps/october-17-2026/cooper-painting-720.webp",
+    "sha256": "e9135ad14b7a31aaba5e094b957079222db77a5a0204c3f0393455987cd154ee",
+    "bytes": 42780,
+    "width": 720,
+    "height": 394,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-162944_Recording_1920x1050.mp4",
+    "source_at": "00:11:00",
+    "source_frame_sha256": "fe37ac1705fe6410b32b90655aa4971dee567e9b81a983105de5098d7b1a6f03",
+    "notion_asset_name": "cooper-reveal-sketch.jpg",
+    "destination": "/assets/recaps/october-17-2026/cooper-painting-1440.webp",
+    "sha256": "5bb4c032595571d714889a1e57a17706869b5e0bfd663acf64a2c411a0c3e5af",
+    "bytes": 120606,
+    "width": 1440,
+    "height": 788,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-163212_Recording_1686x768.mp4",
+    "source_at": "00:34:00",
+    "source_frame_sha256": "f09694011d62f70590c6bb7725c3204ad11b908c2fc933d469aa41eaaf84dd4a",
+    "notion_asset_name": "soto-servo-creature.jpg",
+    "destination": "/assets/recaps/october-17-2026/soto-creature-720.webp",
+    "sha256": "f99bf9c1914c5eb97d6266043812ce17f9117e7dea9a3da0740bbd839e21e8b6",
+    "bytes": 26818,
+    "width": 720,
+    "height": 328,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-163212_Recording_1686x768.mp4",
+    "source_at": "00:34:00",
+    "source_frame_sha256": "f09694011d62f70590c6bb7725c3204ad11b908c2fc933d469aa41eaaf84dd4a",
+    "notion_asset_name": "soto-servo-creature.jpg",
+    "destination": "/assets/recaps/october-17-2026/soto-creature-1440.webp",
+    "sha256": "a641ef1f411bce7fcd075b4025aadf1f8231e94621a9090e0883c8befe2ab8bf",
+    "bytes": 58528,
+    "width": 1440,
+    "height": 656,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-175641_Recording_1920x1080.mp4",
+    "source_at": "00:57:00",
+    "source_frame_sha256": "05e5edb7d16fb273654a06e02138979001c7d10490a36d0fdff23765aca274be",
+    "notion_asset_name": "jovanic-cube-net.jpg",
+    "destination": "/assets/recaps/october-17-2026/jovanic-cube-720.webp",
+    "sha256": "6e4e96db7d9da73da12c40c8e54be6ab6c24ca23576f570e12a77bde1d8fca53",
+    "bytes": 26714,
+    "width": 720,
+    "height": 405,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-175641_Recording_1920x1080.mp4",
+    "source_at": "00:57:00",
+    "source_frame_sha256": "05e5edb7d16fb273654a06e02138979001c7d10490a36d0fdff23765aca274be",
+    "notion_asset_name": "jovanic-cube-net.jpg",
+    "destination": "/assets/recaps/october-17-2026/jovanic-cube-1440.webp",
+    "sha256": "dbd0d83d40ef0e862b05331af3500f556b106edbdaa7487192b79bf3b054f6a4",
+    "bytes": 72820,
+    "width": 1440,
+    "height": 810,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-180143_Recording_2560x1528.mp4",
+    "source_at": "00:21:00",
+    "source_frame_sha256": "921e9788b34a6a86faaa14779da770b31fe488fe4f2f154d06a0dd0b8e49e2ce",
+    "notion_asset_name": "oduro-hydra-tiles.jpg",
+    "destination": "/assets/recaps/october-17-2026/kofi-21m00-720.webp",
+    "sha256": "8c6e9f16a151712378ada201c4dcd480c0c466e7ce822ed8f3dae6f30c61e60a",
+    "bytes": 127534,
+    "width": 720,
+    "height": 430,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  },
+  {
+    "source_recording": "GMT20261017-180143_Recording_2560x1528.mp4",
+    "source_at": "00:21:00",
+    "source_frame_sha256": "921e9788b34a6a86faaa14779da770b31fe488fe4f2f154d06a0dd0b8e49e2ce",
+    "notion_asset_name": "oduro-hydra-tiles.jpg",
+    "destination": "/assets/recaps/october-17-2026/kofi-21m00-1440.webp",
+    "sha256": "ca7e8e7f105fa1bbab81a5075bc0f0831a3b537acf54b4ce7e782de8cfec7839",
+    "bytes": 396092,
+    "width": 1440,
+    "height": 860,
+    "status": "Publication explicitly authorized by Saber after preview review on October 20, 2026; not an independent rights clearance."
+  }
+]

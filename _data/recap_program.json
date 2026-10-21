@@ -1,0 +1,469 @@
+{
+  "event": {
+    "name": "Virtual CC Fest 2026",
+    "year": 2026,
+    "eyebrow": "10th anniversary edition · Online",
+    "summary": "A free gathering for creative coding — workshops, talks, and community.",
+    "date": "2026-10-17",
+    "format": "Virtual",
+    "cost": "Free",
+    "level": "All levels",
+    "lettered_name": "Virtual CC Fest",
+    "title_date": " October 17, "
+  },
+  "schedule": {
+    "zones": [
+      {
+        "label": "Pacific (PT)",
+        "utc_offset": -7,
+        "timezone": "America/Los_Angeles"
+      },
+      {
+        "label": "Eastern (ET)",
+        "utc_offset": -4,
+        "timezone": "America/New_York"
+      }
+    ],
+    "items": [
+      {
+        "id": "opening",
+        "kind": "keynote",
+        "title": "Welcome + Opening Keynote",
+        "start": "09:00",
+        "end": "09:30"
+      },
+      {
+        "id": "round-1",
+        "kind": "workshops",
+        "title": "1st Round of Sessions",
+        "start": "09:30",
+        "end": "10:30"
+      },
+      {
+        "id": "panel",
+        "kind": "panel",
+        "title": "Panel Discussion",
+        "start": "10:30",
+        "end": "11:00"
+      },
+      {
+        "id": "round-2",
+        "kind": "workshops",
+        "title": "2nd Round of Sessions",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "id": "closing",
+        "kind": "keynote",
+        "title": "Closing Keynote + Closing",
+        "start": "12:00",
+        "end": "12:30"
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "title": "Teaching Creativity Today",
+      "id": "teaching-creativity-today",
+      "format": "Panel",
+      "schedule_id": "panel",
+      "language": "English",
+      "tags": [
+        "Panel"
+      ],
+      "description": "When AI can write the code for us, what parts of creative coding are worth preserving? Creative coding has never been only about producing working code; its value is also in experimenting, getting stuck, debugging, making unexpected discoveries, and developing your own way of making. This panel explores what learners gain through that process, what may be lost when AI removes friction, and how we might design educational experiences that preserve the most valuable parts of learning.",
+      "presenters": [
+        {
+          "name": "Amy B. Woodman",
+          "pronouns": "she/they",
+          "photo": "/assets/people/amy-woodman.jpg",
+          "url": "https://www.amybwoodman.com",
+          "bio": "Amy Woodman is a Senior Program Manager at the [Processing Foundation](https://processingfoundation.org), where she supports open-source contributors, creative coding education, and programs that expand access to technology as a medium for expression. An educator, curriculum designer, and ceramic artist, she is especially interested in how creative coding can build agency and creative confidence and how we can protect the messy, exploratory process of making and learning in an AI-rich world."
+        },
+        {
+          "name": "Daniel Schneider",
+          "pronouns": "he/him",
+          "photo": "/assets/people/daniel-schneider.jpg",
+          "bio": "Dan taught high school math and computer science for several years, and now writes curriculum for [Code.org](https://code.org) and [Hello World CS](https://helloworldcs.org). He learned [Processing](https://processing.org) in college, taught p5js in summer camps (where you can be *really* creative), wrote lessons for Code.org's [Game Lab](https://code.org/educate/gamelab) built on top of [p5 play](https://p5play.org), and sometimes tinkers with [ml5js](https://ml5js.org)."
+        },
+        {
+          "name": "David DeLiema",
+          "pronouns": "he/him",
+          "photo": "/assets/people/david-deliema.jpg",
+          "url": "https://www.david-deliema.com/",
+          "bio": "David DeLiema is an educational researcher who studies the conversations, designs, and processes that shape how learning emerges from moments of impasse. In research-practice partnerships that foreground the knowledge and voices of teachers, students, and parents, his research examines cognitive and psychological processes in the context of social interaction, technology-rich settings, play-based activities, and embodied movement. In studies of children pretend-playing as bees trying to find nectar, middle schoolers debugging broken code, and youth working on challenging puzzle-based video games, his work provokes reflection on the open-ended, power-laden, and everyday nature of turning impasses into learning."
+        },
+        {
+          "name": "Adrienne Gifford",
+          "pronouns": "she/her",
+          "photo": "/assets/people/adrienne-gifford.jpg",
+          "bio": "Adrienne Gifford (she/her) is a public school computing and STEM teacher, curriculum designer, and researcher in the Seattle area. She loves collaborating with students to explore creative, identity-inclusive, and culturally responsive approaches to teaching and learning about computing. Her recent work has focused on creative coding with tools like p5.js and [Wordplay](https://wordplay.dev), both with students and in collaboration with other educators and researchers."
+        }
+      ]
+    },
+    {
+      "title": "Research-Paper-Monster-Mash",
+      "id": "shane-curry",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Intermediate",
+      "language": "English",
+      "tags": [
+        "Intermediate"
+      ],
+      "description": "Animator and songwriter Shane Curry shares how years of wrestling with creative software led him to start building his own tools with AI. Tools can make it faster to explore ideas and arrange data in artful ways. This talk explores some of the many creative choices being made in software that never gets exposed to the user, using examples from a series of educational experiments on microcontrollers that resulted in software.",
+      "presenters": [
+        {
+          "name": "Shane Curry",
+          "pronouns": "he/him",
+          "photo": "/assets/people/shane-curry.jpg",
+          "url": "https://www.shanecurry.com",
+          "bio": "Shane Curry is a professional animator and amateur software enthusiast. He's currently the Timing Supervisor on \"American Dad!\" (2019-Present) and has worked on shows like Duncanville, She-Ra, and Trolls. He is a self-taught artist and musician."
+        }
+      ]
+    },
+    {
+      "title": "Access Is the Interface: Coding in the Age of AI",
+      "id": "kemi-ukadike",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Intermediate",
+      "language": "English",
+      "tags": [
+        "Intermediate"
+      ],
+      "description": "Access Is the Interface is a creative-coding session on the convergence of accessibility, AI, and governance. Through a live p5.js demonstration, participants will see how voice, speech, APIs, and agentic systems can transform intention into action—while keeping people able to review, direct, authorize, and stop what happens. The session invites artists and coders to treat access not as a feature added afterward, but as a design practice for accountable creative systems.",
+      "resource_url": "https://ukadike.github.io/accessible-by-design-prototyping/access-agent-consent.html",
+      "presenters": [
+        {
+          "name": "Kemi Ukadike",
+          "pronouns": "she/her/hers",
+          "photo": "/assets/people/kemi-ukadike.jpg",
+          "url": "https://github.com/ukadike",
+          "bio": "Kemi Sijuwade-Ukadike is an artist, journalist, and creative-technology leader working at the intersection of accessibility, civic systems, and AI governance. She is founder of Small Systems Lab and previously led Artist Initiatives & Inclusion at [Eyebeam](https://eyebeam.org). Her work asks how creative code can expand participation while keeping human intention, consent, and accountability at the center."
+        }
+      ]
+    },
+    {
+      "title": "Machine Learning in Motion: Designing Better Technology for Athletes",
+      "id": "jessica-valarezo",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Intermediate",
+      "language": "English",
+      "tags": [
+        "Intermediate"
+      ],
+      "description": "How can machine learning help athletes reduce injury risk, improve training, and perform at their best? Using real-world examples from professional sports, we’ll explore how these models work, including the data they use, the predictions they make, and their possibilities and limitations.\n\nTogether, we’ll examine how intentionally designed models could play a role in narrowing critical gaps in resources and research between women’s and men’s sports. We’ll also imagine new technologies that could better support athletes.",
+      "presenters": [
+        {
+          "name": "Jessica Valarezo",
+          "pronouns": "she/her/hers",
+          "photo": "/assets/IMG_9674.jpeg",
+          "bio": "Jessica Valarezo is a software engineer and educator who builds and evaluates machine-learning systems. She is currently working in the early literacy space. She is interested in making machine learning fun and accessible, designing systems deliberately and thoughtfully, and finding cool, creative applications for it across fields!"
+        }
+      ]
+    },
+    {
+      "title": "Making a portfolio on Neocities",
+      "id": "naoto-hieda",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "In this introductory workshop, you will be guided step by step how to make a portfolio website on Neocities (it's free!) 🌐 This will be a great opportunity to showcase your cat photos, music review or even interactive p5.js sketches 😼🤖✨",
+      "presenters": [
+        {
+          "name": "Naoto Hieda",
+          "pronouns": "they",
+          "photo": "/assets/people/naoto-hieda.jpg",
+          "url": "https://naotohieda.com/",
+          "bio": "Naoto Hieda is a researcher and an artist from Japan based in Estonia enrolled in the PhD programme at the [School of Digital Technologies, Tallinn University](https://www.tlu.ee/en/dt). With a background in engineering, Naoto completed Diplom II (master's equivalent) with distinction from the [Academy of Media Arts Cologne](https://www.khm.de/en/), Germany and works internationally for theater productions and in the visual arts."
+        }
+      ]
+    },
+    {
+      "title": "Collage Machine, an Algorithmic Approach to Play",
+      "id": "matthew-raupp",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "Join designer and educator Matthew Raupp for a hands-on exploration of Collage Machine, a Processing tool for digital collaging that strikes a balance between artist control and chance. Matthew will share the evolution of the tool and how he integrates it into both his studio practice and classroom. Attendees will make a series of compositions using interactive controls to manually position, resize, and rotate elements, paired with randomizers that continuously generate playful, unexpected results.",
+      "resource_url": "https://www.instagram.com/p/DU3F776gNeA/?img_index=1",
+      "presenters": [
+        {
+          "name": "Matthew Raupp",
+          "pronouns": "He/Him/His",
+          "photo": "/assets/Matthew-Raupp-CCS-Associate-Professor-College-for-Creative-Studies - Matthew Raupp.jpeg",
+          "url": "https://www.instagram.com/raupp2112/",
+          "bio": "Matthew Raupp is a Communication Design educator with over 25 years of teaching experience and a former partner of Defrost Design. His practice centers on \"serious play,\" using code not just as a technical skill or means of production, but as a sandbox for experimentation. In an evolving technological landscape, Matthew views coding as a way to transition from a being a tool user to a tool maker, a philosophy that comes to life in his latest creative coding endeavor, Collage Machine, an algorithmic tool that strikes a balance between artist control and chance. By bringing these generative systems into both studio practice and the classroom, he helps designers shift beyond closed software constraints, using code to sketch, generate unexpected outcomes, and invent their own ways of making."
+        }
+      ]
+    },
+    {
+      "title": "Making Sense of Data with Live Visualization",
+      "id": "emily-thomforde",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "Let's get to grips with inputs, outputs, and variables in Scratch, Snap! and p5.js by creating time-series visualizations of changing values! Explore the programming structures involved in giving real-time user feedback: loops, variables, and mapping.  This lesson cluster is extendable for learners in grades 2-10.",
+      "resource_url": "https://docs.google.com/document/d/1IGF2V5PgZHwNOK4Bl_s5iEOtYTvHl5YR3d9j9gcYUpY/",
+      "presenters": [
+        {
+          "name": "Emily Thomforde",
+          "pronouns": "she/her",
+          "photo": "/assets/em_headshot_2023 - Emily Thomforde.jpg",
+          "url": "https://thegrene.github.io",
+          "bio": "Dr. Emily Thomforde is the Computer Science Department Chair at Reach University. She focuses on culturally sustaining pedagogy and making connections between computing and other disciplinary areas. Emily previously served as Computer Science Coordinator at the California Department of Education and San Mateo County Office of Education. She is a BAFTA-winning video game developer, and has ten years of experience teaching computer programming, software development and computing pedagogy at libraries, prisons, museums, and public schools locally and abroad. Her curriculum development credits include Vidcode, Hopscotch, Code.org, STEM from Dance, Code Combat, and BrainPOP. Emily holds a PhD in Artificial Intelligence from the University of Edinburgh in Scotland, UK."
+        }
+      ]
+    },
+    {
+      "title": "3D printing with p5.fab!",
+      "id": "blair-subbaraman",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "p5.fab is a Javascript library to control digital fabrication machines using creative code. In this workshop, we’ll introduce p5.fab and work through 3D printing examples to make physical things with creative code!",
+      "resource_url": "https://docs.copypastes.xyz/resources/guides/p5fab-primer/",
+      "presenters": [
+        {
+          "name": "Blair Subbaraman",
+          "pronouns": "he/him",
+          "photo": "/assets/blair - Blair Subbaraman.jpg",
+          "url": "https://blairsubbaraman.com/",
+          "bio": "Blair is a human-computer interaction researcher interested in how to use machines that manipulate the physical world for insight and expression. "
+        }
+      ]
+    },
+    {
+      "title": "Delightful motion loops",
+      "id": "sai-ram-ved-vijapurapu",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "In this workshop, we'll graph looping trigonometric easing functions in Desmos and bring them over to p5.js to let them drive the movement of simple shapes. We'll then see how to record these as perfectly looping animations to share over the interwebs!",
+      "resource_url": "https://itp-tracker.notion.site/Delightful-Motion-Loops-1a9d7eb4971b8087abc4f4dbe1f84304",
+      "presenters": [
+        {
+          "name": "Sai Ram Ved Vijapurapu",
+          "pronouns": "he/him",
+          "photo": "/assets/Portrait-square - Sai Ram Ved V.jpg",
+          "url": "https://motion.sairamved.com",
+          "bio": "Sai is an information designer crafting delightful experiences with data & technology who draws inspiration from natural phenomena, often using code as a means to that end. In the past, his work has been recognised and celebrated by CultureHub, Metropolitan Transportation Authority, Bangalore International Center and Information is Beautiful, among others. Sai is currently at SOOT where he continues to imbue interactivity in his work."
+        }
+      ]
+    },
+    {
+      "title": "The Nature of Code, but Python",
+      "id": "tristan-bunn",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Intermediate",
+      "language": "English",
+      "tags": [
+        "Intermediate"
+      ],
+      "description": "A session exploring how The Nature of Code (p5.js) translates into Python using py5. We'll look at which techniques translate directly, which require rethinking (particularly where substituting libraries is unavoidable), and where Python offers opportunities to simplify the original JavaScript implementation.",
+      "resource_url": "https://github.com/tabreturn/py5-nature-of-code",
+      "presenters": [
+        {
+          "name": "Tristan Bunn",
+          "pronouns": "he",
+          "photo": "/assets/tabreturn - tristan b.png",
+          "url": "https://tabreturn.com",
+          "bio": "Tristan is a creative coder, educator, and researcher working at the intersection of technology, interaction design, and creativity. He is the author of \"Learn Python Visually: Creative Coding with Processing.py\" and a long-time open source contributor and advocate for Python-related Processing projects."
+        }
+      ]
+    },
+    {
+      "title": "Livecoding with Scratch",
+      "id": "m-denardo",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "Scratch is a great live coding tool: in this class we will ideate and rapid prototype fun drawing and music applications that translate into performance pieces.",
+      "presenters": [
+        {
+          "name": "M DeNardo",
+          "pronouns": "they/them/we",
+          "photo": "/assets/MDN-bio-pic.png",
+          "url": "https://markdenardo.github.io/mdn/main.html",
+          "bio": "M DeNardo (they/them) composer/designer/educator … believes in learning software engineering through the lens of creative coding … has collaborated with Teenage Engineering, The GIANT Room, NEST+m, NYU … loves learning and listening."
+        }
+      ]
+    },
+    {
+      "title": "Recoding : Tracing the origins of generative art",
+      "id": "julien-gachadoat",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "“Recoding” is a short workshop exploring the logic of early generative art through the reinterpretation of a single historical artwork: Segrid (1973) by John Roy.\n\nThe workshop will focus on how the image is constructed through rules, repetition, variation, and algorithmic constraints, following approaches developed by pioneers of computer art in the 1960s and 70s.\n\nIt builds on the recent relaunch of recodeproject.com, a platform dedicated to preserving and revisiting historical generative artworks.",
+      "resource_url": "https://github.com/v3ga/CCFest26/blob/main/README.md#ccfest26--recoding--tracing-the-origins-of-generative-art",
+      "presenters": [
+        {
+          "name": "Julien Gachadoat",
+          "pronouns": "He/Him",
+          "photo": "/assets/Julien_Gachadoat_02-1920w - Julien Gachadoat.jpg",
+          "url": "https://www.v3ga.net",
+          "bio": "\"Julien Gachadoat (aka v3ga) has been exploring generative drawing for many years. He grew up in the 90s amid the avant-garde demo scene, making visuals with code. Ever since, programming languages have been his creative tool.\n\nCreating unique art with algorithms, he works with the emergence of abstract form. Combining monochrome, geometric shapes, he plays with repetition, using random operations to generate an element of surprise.\""
+        }
+      ]
+    },
+    {
+      "title": "Improv Digitally, Sensorial and with Self Awareness",
+      "id": "kofi-oduro-illestpreacha",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Advanced",
+      "language": "English",
+      "tags": [
+        "Advanced"
+      ],
+      "description": "What if Code was treated as a way to journal?\nAs a way to translate the meaning of the world as seen through your senses?\nWhen you have a thought, you see how it can be viewed through different perspectives?\nAn Improv, freestyle and/or Unplanned voyage into the moment, season you are weathering at that point in time?\n\nImprov, Digitally, Sensorial and with Self Awareness demonstrates how code can be thought beyond the concept of algorithm and technology but also a communication style that can be unique to one self.",
+      "presenters": [
+        {
+          "name": "Kofi Oduro (Illestpreacha)",
+          "pronouns": "He/Him",
+          "photo": "/assets/ProfileImage - Illest Preacha-2.jpg",
+          "url": "https://blog.illestpreacha.com/",
+          "bio": "Kofi Oduro (Illestpreacha)  is an award winning Experiential Storyteller, Creative Coder & Data Practitioner  that transforms sounds, images, data, words & code into experiences that nurtures discussion, reflection & interaction. He creates, designs and research through his decade plus involvement in performance and event production. \n\n\nBy combining  his sports & health background with technology, computational skill set and a multi-sensorial approach to design, his creative practice is an observation of the world around us that he puts into artworks & experiences  for others to relate to or disagree with. Through Videography, Poetry and Creative Coding, He tries to highlight the realms of human performance and the human mind in different scenarios. These situations can be described as social, internal, or even biological, which we face in our everyday lives."
+        }
+      ]
+    },
+    {
+      "title": "La tecnología como lenguaje creativo: de la IA al código, del código al mundo físico.",
+      "id": "sandra-soto",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Beginner",
+      "language": "Spanish",
+      "tags": [
+        "Beginner, Spanish"
+      ],
+      "description": "¿Qué sucede cuando la IA se integra en nuestro repertorio de herramientas creativas? En esta sesión práctica, exploraremos la tecnología como lenguaje creativo, pasando del código generado por IA a p5.js, del código a la creación física y de la pantalla al mundo real mediante micro:bit.",
+      "resource_url": "https://docs.google.com/document/d/1qJbGSXv_FrKMISCzob-2_aSragx4vd0_wa1O27J208I/edit?usp=sharing",
+      "presenters": [
+        {
+          "name": "Sandra Soto",
+          "pronouns": "She",
+          "photo": "/assets/Sandra Soto - sandra soto.png",
+          "url": "https://www.instagram.com/san8252000/",
+          "bio": "Sandra Soto, I’m an artist/educator and creative technologist from Buenos Aires, Argentina. I’ve been teaching programming and creative technologies since 2012, combining code, electronics, robotics, art, and education. I see technology as a creative palette and explore how AI can help students move from ideas to code, from code to making, and from making to new questions. (spanish version) Soy Sandra Soto, artista, educadora y tecnóloga creativa de Buenos Aires, Argentina. Imparto clases de programación y tecnologías creativas desde 2012, combinando código, electrónica, robótica, arte y educación. Concibo la tecnología como una paleta creativa y exploro cómo la IA puede ayudar a los estudiantes a pasar de las ideas al código, del código a la creación, y de la creación a nuevos interrogantes.\n"
+        }
+      ]
+    },
+    {
+      "title": "Take a spline for a walk",
+      "id": "aleksandra-jovanic",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Intermediate",
+      "language": "English",
+      "tags": [
+        "Intermediate"
+      ],
+      "description": "Let’s take a spline for a walk, from the screen to the paper, across pages and over the edges.\nIn this session, we’ll explore the new spline functions in p5.js 2.x and experiment with unfolding various paper structures (from one-page zines to simple 3D forms) to create line drawings that continue seamlessly from one face to the next. Once printed, the code outputs will be folded into small paper objects.",
+      "resource_url": "https://aleksandrajovanic.com/ccfest/",
+      "presenters": [
+        {
+          "name": "Aleksandra Jovanić",
+          "pronouns": "she/her",
+          "photo": "/assets/IMG_5213_smsq - Aleksandra Jovanic.jpg",
+          "url": "https://aleksandrajovanic.com",
+          "bio": "Aleksandra Jovanić is an artist and programmer from Belgrade, Serbia. She holds a doctorate in Digital Arts and a BSc in Computer Science. In her research and artistic practice she combines various media, mainly in the field of interactive art, art games, and generative art. Jovanić’s recent works focus on the aesthetic of data visualization and optical illusions, as well as explorations of accepted concepts of truth and reality. As an associate professor, she teaches at the New media department at the Faculty of Fine Arts in Belgrade."
+        }
+      ]
+    },
+    {
+      "title": "A Painting, a Circuit, a Story",
+      "id": "melissa-cooper",
+      "format": "Workshop",
+      "schedule_id": "round-1",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "How can a painted mark become an invitation to touch, notice, and discover a story? Through a brief demonstration using conductive paint, Arduino, and p5.js, artist and educator Missy Cooper explores how physical interaction can reveal layers of poetry and meaning, then invites participants to sketch their own story-responsive artwork. Together, we’ll consider what we gain from experimenting, getting stuck, and debugging, and what may be lost when AI removes that friction.",
+      "resource_url": "https://docs.google.com/document/d/1w7Df-bx0ASOUsNBPvcGrvqvcprrkC9U67bdbWkDfoak/edit?usp=sharing",
+      "presenters": [
+        {
+          "name": "Melissa Cooper",
+          "pronouns": "she/her",
+          "photo": "/assets/MissyCooper26 - Melissa Cooper.jpg",
+          "url": "https://quietlegacycollective.com/missy-cooper",
+          "bio": "Melissa “Missy” Cooper is an artist, educator, and creative technologist based in Port Orange, Florida. A former K–12 Art & CS teacher and former curriculum developer for Girls Who Code, she holds a master’s degree in Educational Media and Design. Her practice combines painting, poetry, p5.js, and physical computing to explore identity, vulnerability, and the ordinary moments we overlook. Her developing body of work, Duality, considers how softness, grief, humor, and survival coexist. Across her art and teaching, she is interested in how close observation, experimentation, and getting stuck help people develop their own ways of making."
+        }
+      ]
+    },
+    {
+      "title": "Declare Independence (from LLMs)",
+      "id": "caleb-foss",
+      "format": "Workshop",
+      "schedule_id": "round-2",
+      "level": "Beginner",
+      "language": "English",
+      "tags": [
+        "Beginner"
+      ],
+      "description": "Educators commonly teach creative coding using the imperative paradigm: working out the steps to achieve the desired result, like a recipe. This workshop introduces resources and techniques to instead use the declarative paradigm: describing the desired result itself, rather than the steps to achieve it. Like writing a prompt for an AI service, this focuses on effectively articulating what the creator wants, rather than translating that want into instructions.",
+      "presenters": [
+        {
+          "name": "Caleb Foss",
+          "pronouns": "they/them",
+          "photo": "/assets/PXL_20260519_162417545.MP~2 - Caleb Foss.jpg",
+          "url": "https://github.com/calebfoss",
+          "bio": "Caleb Foss (they/them) is an artist and educator who develops mess-making systems using media technologies. They make software, games, videos, digitally-fabricated objects, and multimedia performances. Foss' methods draw from amusement parks and magic tricks, and their work seeks opportunities for amorphousness in the future of human media interactions. Their work has been showcased in film festivals including Chicago Underground, Imagine Science (Brooklyn), and FRACTO (Berlin) as well as Hand Eye Society's WordPlay Festival for writing in games (Toronto) and BitBash at the Chicago Humanities Festival. They are an Assistant Professor of Web Development, Design, and Social Media at Joliet Junior College."
+        }
+      ]
+    }
+  ],
+  "keynotes": [
+    {
+      "label": "Keynote",
+      "schedule_id": "opening",
+      "name": "Daniel Shiffman",
+      "bio": "Daniel Shiffman is on a mission to share code with the world in an approachable, engaging way. He runs [The Coding Train](https://thecodingtrain.com/), a community for learning creative coding through beginner-friendly tutorials and coding challenges on YouTube. He is an Associate Arts Professor at [ITP, NYU Tisch School of the Arts](https://tisch.nyu.edu/itp), a co-founder of the [Processing Foundation](https://processingfoundation.org), and the author of *Learning Processing* and [*The Nature of Code*](https://natureofcode.com), an open-source book on simulating natural systems with code.",
+      "photo": "assets/people/dan-shiffman.jpg",
+      "url": "https://thecodingtrain.com/"
+    },
+    {
+      "label": "Keynote",
+      "schedule_id": "closing",
+      "name": "Lauren Lee McCarthy",
+      "bio": "Lauren Lee McCarthy is an artist, researcher, and educator whose practice examines how technologies shape social relationships, intimacy, and everyday life. Trained in both computer science and art, McCarthy is the creator of [p5.js](https://p5js.org), the open source creative coding platform that has introduced millions of people worldwide to programming through artistic practice. She is Professor of [Design Media Arts at UCLA](https://dma.ucla.edu) and co-director, with [Casey Reas](https://reas.com), of the [Social Software Lab](https://sosoft.arts.ucla.edu/), where art is used to question and reshape our relationships with technology.",
+      "photo": "assets/people/lauren-lee-mccarthy.jpg",
+      "url": "https://get-lauren.net/"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: Machine Learning in Motion — CC Fest
+description: 'Jessica Valarezo: Machine Learning in Motion. Recap, replay, takeaways
+  and resources from CC Fest on October 17, 2026.'
+heading: Machine Learning in Motion
+noindex: false
+recap_kind: session
+session_id: jessica-valarezo
+---
+{% raw %}
+<p>Jessica Valarezo, a former computer science teacher now working as an engineer at an education technology company, led a small, interactive session on how machine learning is used in sports, with attention to gaps between men’s and women’s athletics. Participants rated themselves around 2 out of 5 on machine learning, so she tailored the hour to fundamentals, using a set of browser simulations she built (with AI assistance and many rounds of revision) and shared as a single website.</p>
+
+<p>She laid out a sequence: data becomes inputs, inputs go to a model, the model produces an output, and people make decisions with that output. In a shot explorer trained on invented basketball shots, participants moved a shooter and defender to find the hardest and easiest shots; the model agreed with intuition that distance and a close defender make shots harder. An animation showed training as fitting a line to reduce error, and a 3D view showed the search for a low point on an error surface.</p>
+
+<p>In the coding section, participants changed a small logistic regression model and predicted the effect before retraining. Removing the defender input lowered test accuracy from 73 percent. Training only on close shots made accuracy collapse to roughly a coin flip on longer shots the model had never seen, which she connected to the question of who is in the data and who is missing. A clip from a dramatic late-game moment in this year’s NBA Finals, a game models had given long odds, prompted her to ask whether we even want a model to capture what made it thrilling.</p>
+
+<p>Further simulations used pose estimation of landings, where a hidden knee lowers the model’s confidence, and an injury-risk curve inspired by FC Barcelona research, where participants debated where to set an alert threshold. Valarezo then examined claims from published studies. One women’s football study showed improved knee mechanics after a program but did not track injuries or use a randomized comparison, so it could not show that the technology helped. A good prediction, she said, is not proof that a tool helps athletes. Women’s teams often face different schedules, travel and resources, and she cautioned against offering technology as a quick fix where more trained experts are the real need, drawing a parallel to classrooms where a tool can stand in for a well-resourced teacher.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Follow the chain from data to decision. Data, inputs, model, output and decision each involve choices about who benefits (00:06:28–00:09:06).</li>
+  <li>Missing data breaks models. Training only on close shots left the model guessing on long ones, a reminder to ask whose data is included (00:21:33–00:24:00, 00:47:00–00:49:18).</li>
+  <li>A good prediction is not proof of help. Claims that a tool helps athletes need outcomes such as injury rates and fair comparisons (00:42:34–00:46:00).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>From the workshop site: open the coding lab, write down a prediction, remove one input, and retrain. Then try the “close shots only” data and compare test accuracy. Discuss what a similar gap would mean for a model trained mostly on men’s games.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=KaUlvBaQee8">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://jessvalarezo.github.io/ml-in-motion/">ML in Motion workshop site</a> (Valarezo invited teachers to use it in class; studies are cited on the site)</li>
+  <li><a href="https://www.linkedin.com/in/jessicavalarezo/">Jessica Valarezo on LinkedIn</a></li>
+</ul>
+
+{% endraw %}

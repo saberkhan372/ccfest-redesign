@@ -1,0 +1,43 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: Making Sense of Data with Live Visualization — CC Fest
+description: 'Emily Thomforde: Making Sense of Data with Live Visualization. Recap,
+  replay, takeaways and resources from CC Fest on October 17, 2026.'
+heading: Making Sense of Data with Live Visualization
+noindex: false
+recap_kind: session
+session_id: emily-thomforde
+---
+{% raw %}
+<p>Emily Thomforde, a former computer science coordinator for the California Department of Education who now prepares new teachers, argued that creativity is not the first step. Before learners can make something with data, they need ways to make sense of it. She shared a set of free thinking routines, many adapted from Harvard’s Project Zero, including Think, Feel, Care for empathy and Parts, Purposes, Complexities for systems. The focus of the session was one of her own: Min, Max, Middle. For any input or output, learners name the component, say whether it is an input or output, note the units (or that there are none), and then decide the minimum, maximum and typical everyday value. She noted that the newly rewritten CSTA standards say little about sensor data as input and output.</p>
+
+<p>The coding moved from Scratch to Snap to p5.js. In Scratch she tied the cat’s size to microphone loudness, then turned it into a live graph by moving the cat one step across the screen while setting its y position from loudness. Making the graph fill the screen meant scaling with multiplication and shifting with subtraction, which she connected to the sixth-grade standards on transformation. A pi simulation got the same treatment, so learners could see the estimate wander above and below the expected line instead of seeing only the final number. In Snap she showed min and max operators that record the true extremes, and left writing the minimum as an exercise.</p>
+
+<p>For older students she offered a p5.js challenge: graph a bouncing ball’s height over time. The map() function replaces the multiply-and-shift steps, and she pointed out that its arguments are the same questions Min, Max, Middle asks. Graphing the ball’s velocity made the model’s abrupt reversal at each bounce visible, even though the animation looked plausible to the eye. Daniel Schneider joined as navigator to graph Scratch face-size sensing live. In the closing Q&amp;A, Thomforde said the biggest aha comes in physical computing, where knowing a sensor’s range spares students from guessing numbers.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Make sense of the numbers before creating with them. Min, Max, Middle gives learners a routine for any input or output: component, direction, units, minimum, maximum and typical value (00:06:04–00:09:57).</li>
+  <li>Graph values over time. A live graph keeps the history of a variable, so learners can see how they got to a result and check it (00:13:21–00:23:12).</li>
+  <li>Graphs can test a simulation. Plotting velocity showed a physics shortcut that looked right on screen but was not physically realistic (00:37:14–00:40:40).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>Adapted from Thomforde’s Scratch demo: add the face-sensing extension, set the cat’s y position to face size, and move it one step at a time with the pen down. Then adjust the scale and shift until the graph fills the stage, and record the minimum, maximum and middle values you observe.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=arvYvAOzrQ4">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://docs.google.com/document/d/1IGF2V5PgZHwNOK4Bl_s5iEOtYTvHl5YR3d9j9gcYUpY/">Session navigation document with all project links</a></li>
+  <li><a href="https://editor.p5js.org/emily0/sketches/WSTnVKvVd">Bouncing ball graphing starter (p5.js)</a></li>
+</ul>
+
+{% endraw %}

@@ -7,7 +7,7 @@ home: true
 copy_key: home
 ---
 {% assign copy = site.data.home %}
-{% assign event = site.data.generated_event | default: site.data.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
+{% assign event = site.data.recap_program.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
 
       <!-- ── Hero ── -->
       <section class="home-hero page-width" aria-label="CC Fest">
@@ -484,14 +484,14 @@ copy_key: home
       <section class="upcoming-band" aria-labelledby="upcoming-title">
         <div class="page-width upcoming-inner">
           <div class="upcoming-copy anim-scroll anim-upcoming-copy">
-            <p class="eyebrow upcoming-eyebrow">Upcoming · {{ event.format | escape }} · {{ event.cost | escape }}</p>
+            <p class="eyebrow upcoming-eyebrow">Event recap · {{ event.format | escape }} · {{ event.cost | escape }}</p>
             <h2 id="upcoming-title" aria-label="{{ event.name | escape }}" data-figma-node="218:127">{% include event-context.html %}{% if event_lettered_name == 'Virtual CC Fest' %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l </span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> F</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wght' 200, 'wdth' 100; font-weight: 200; font-style: italic; letter-spacing: 0em; text-transform: uppercase">{{ event_year | escape }}</span>{% else %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">{{ event_lettered_name | escape }}</span> {{ event_year | escape }}{% endif %}</h2>
             <p>
               Workshops, talks, and community for creative coders of all levels.
-              {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_pending %}{% endif %} — {% if registration_url != "" %}{% include editorial.html text=copy.states.registration_open_short %}{% else %}{% include editorial.html text=copy.states.registration_pending_short %}{% endif %}
+              {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_pending %}{% endif %} — explore the recap and all 19 recordings.
             </p>
             <p>{% include editorial.html text=copy.upcoming.body %}</p>
-            <a class="button button-light" href="register/">{{ copy.upcoming.link_label | escape }}</a>
+            <a class="button button-light" href="events/october-17-2026/">{{ copy.upcoming.link_label | escape }}</a>
           </div>
           <div class="upcoming-facts anim-scroll anim-upcoming-meta">
             <div><span>Format</span><strong>{{ event.format | escape }}</strong></div>

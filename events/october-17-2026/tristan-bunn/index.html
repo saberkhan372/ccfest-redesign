@@ -1,0 +1,46 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: The Nature of Code, but Python — CC Fest
+description: 'Tristan Bunn: The Nature of Code, but Python. Recap, replay, takeaways
+  and resources from CC Fest on October 17, 2026.'
+heading: The Nature of Code, but Python
+noindex: false
+recap_kind: session
+session_id: tristan-bunn
+---
+{% raw %}
+<p>Presenting from Australia at 3:35 in the morning, Tristan Bunn walked through his Python port of the second edition of Daniel Shiffman’s The Nature of Code. His tagline was “Python wearing a Processing costume.” He wanted the port to stay as close to the book as possible, so readers could follow each chapter, from random walks to neural networks, in Python instead of JavaScript.</p>
+
+<p>The port is built on py5, Jim Schmitz’s Python 3 library that runs on the Processing engine. Unlike the older <a href="http://Processing.py">Processing.py</a>, py5 can use the wider Python ecosystem, including NumPy, and can also load Processing’s Java libraries. Bunn wrote a plugin for Thonny, a beginner Python editor that bundles its own interpreter and runs portably from a desktop or USB drive. With the plugin and recommended settings, Thonny looks and behaves much like the Processing editor. He likes py5’s static mode for teaching because beginners can draw shapes before learning about setup and draw.</p>
+
+<p>He sorted the translation work into three kinds. Much of it carried over line by line: size() instead of createCanvas(), snake_case names such as mouse_x, remap() because map is a Python built-in, and dimension-specific vector classes. Some logic had to be rethought. Multi-file sketches became modules, global variables need Python’s global keyword, Matter.js gave way to Pymunk with a shared constants file to match its physics, toxiclibs ran directly as its original Java library, and ml5.js was replaced by scikit-learn, which trains the gesture classifier before the window opens. Finally, Python allowed simplifications he enjoys, such as operator overloading for vector math, comprehensions and slice notation. He said he finds math written in Python reads almost better than standard notation. He also pointed to Holly Grimm’s separate port, which places the book’s runnable examples in Jupyter notebooks.</p>
+
+<p>The talk finished early, and Bunn stayed for an extended conversation with a high school teacher about running py5 in VS Code. The answer: create a virtual environment, pip install py5, which brings the Processing libraries with it, then run sketches from the terminal. py5 also needs Java 17 or newer. The Thonny plugin offers to download Java the first time it runs; outside Thonny, follow the Java steps in py5’s <a href="https://py5coding.org/content/install.html">installation guide</a>.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>py5 brings Processing to Python 3. It runs on the Processing engine while opening up Python libraries such as NumPy and scikit-learn (00:07:57–00:10:01).</li>
+  <li>Thonny with a py5 plugin offers a Processing-like starting point for beginners, with a bundled interpreter and no system install required (00:10:01–00:13:58).</li>
+  <li>Porting is a design exercise. Some code translates line by line, some needs new logic, and some becomes simpler in the new language (00:14:55–00:25:34).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>Editorial suggestion: set up py5 (its documentation recommends Thonny with the py5 plugin for beginners), open the vectors chapter in the port repository, and rewrite one vector calculation from the p5.js version using operator overloading. Compare which version reads more like the math in the book.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=D-kuxp1MJlI">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://github.com/tabreturn/py5-nature-of-code">Nature of Code in py5 (port repository)</a>, also linked from the Nature of Code website under Additional Resources</li>
+  <li><a href="https://github.com/tabreturn/cc-fest-noc-py5">CC Fest talk materials and slides</a></li>
+  <li><a href="https://py5coding.org/">py5 documentation</a>, including the <a href="https://py5coding.org/content/install.html">installation guide</a></li>
+</ul>
+
+{% endraw %}

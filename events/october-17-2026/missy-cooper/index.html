@@ -1,0 +1,40 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: A Painting, a Circuit, a Story — CC Fest
+description: 'Missy Cooper: A Painting, a Circuit, a Story. Recap, replay, takeaways
+  and resources from CC Fest on October 17, 2026.'
+heading: A Painting, a Circuit, a Story
+noindex: false
+recap_kind: session
+session_id: missy-cooper
+---
+{% raw %}
+<p>Missy Cooper, a painter and creative technologist who has taught art and computer science, returned to CC Fest with a planning-first workshop on interactive art. Last year her participants virtually scratched away the surface of a painting to reveal the story beneath it. This year she took the artwork off the screen: a painting with conductive paint hidden in its black border, wired so that a touch reveals a line of text in a p5.js sketch. Instead of building the circuit live, she asked participants to plan, with only paper, a pen or their thoughts, and framed the hour as a game with levels. The question to carry throughout was what the interaction helps someone notice.</p>
+
+<p>Level one was quiet looking. Participants spent 30 seconds with an object within reach that “remembers a hand” and then wrote what trace the hand had left. Their responses in chat included scissors whose gold finish had worn through where they were held, fingerprints on a phone, and an embroidery tin rubbed bare by three generations of women. Cooper’s own object was a chair in her painting; touching its arm would reveal a line about a cushion holding a shape no one dared disturb.</p>
+
+<p>Level two mapped the path from touch to sensor to board to message to story, with three ways in depending on budget: paper and copper tape, a Makey Makey that turns a touch into a key press, or an Arduino with capacitive sensing. The sketch follows three rules: a new touch reveals the story, the reveal button does the same, and reset returns to rest. The “boss level” was a bug she kept on purpose. Holding a finger on the paint restarted the reveal over and over, so the sentence never settled long enough to read. The fix, edge detection, reacts only at the moment touch changes. She then asked whether the line should stay, fade or vanish when the finger lifts. If AI wrote the sketch, she said, it would make that storytelling choice for you, and it is one worth keeping. She also said AI can be a useful rubber duck and can make making more equitable for people with different abilities.</p>
+
+<p>Level three condensed each idea into one sentence: when someone does something, the work responds, because of a reason. “The hard part is usually the because,” she said. She repeated the walkthrough for late arrivals and promised facilitator, student and circuit guides with the slides.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Plan before building. One sentence, “when someone does this, the work responds, because…”, can anchor an interactive piece, and the “because” is the hard part (00:25:47–00:28:37).</li>
+  <li>React to the edge. If a held touch restarts an action, respond only when the input changes, not while it stays the same (00:20:09–00:23:06).</li>
+  <li>Keep the storytelling choices. Whether text stays, fades or vanishes is an artistic decision, not a default (00:23:06–00:25:47).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>From the workshop: choose an object near you that has been shaped by hands. Spend 30 seconds looking at it, write one line about the trace the hand left, and finish the sentence “When someone touches it, [response] appears, because [reason].” Prototype the touch with a key press in p5.js before wiring anything.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=u7Od8F-Xzk0">Watch on YouTube</a></p>
+
+{% endraw %}

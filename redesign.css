@@ -21,6 +21,7 @@
  *   9. Responsive
  *  10. Reduced motion
  *  11. Poster maker
+ *  12. Event recaps
  *
  * NOTES
  *   - Rules are one per line to keep this file short and scannable.
@@ -663,3 +664,71 @@ html:not(.js) .anim-stage * { animation-play-state: paused !important; transitio
 @media (max-width: 1000px) { .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .proof-grid { grid-template-columns: minmax(0, 1fr); } }
 @media print { .poster-maker-page .maker-controls,.poster-maker-page .maker-export-actions { display: none; } }
+
+/* --- 12. Event recaps: Notion-authored prose, site-owned presentation ------ */
+.recap-page { --recap-rule: var(--ink); }
+.recap-page .recap-hero { padding-top: clamp(2rem, 5vw, 5rem); padding-bottom: 2.5rem; }
+.recap-kicker { display: flex; justify-content: space-between; gap: 1.5rem; border-bottom: 1px solid var(--ink); padding-bottom: 1rem; margin-bottom: 2.5rem; }
+.recap-kicker p { margin: 0; }
+.recap-page .recap-hero h1 { font-size: clamp(3.6rem, 8.5vw, 8.4rem); font-weight: 650; font-stretch: 75%; line-height: .98; letter-spacing: -.065em; max-width: 1100px; margin: 0 0 2.5rem; text-wrap: balance; }
+.recap-page .recap-hero h1::after { display: none; }
+.recap-hero-bottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+.recap-page .hero-summary { font-size: clamp(1.05rem, 1.5vw, 1.3rem); max-width: 31rem; margin: 0; line-height: 1.6; }
+.recap-page .hero-actions { flex-shrink: 0; margin: 0; flex-wrap: wrap; }
+.recap-back { display: inline-block; margin: 0 0 1.6rem; color: var(--ink); font-size: .9rem; }
+.recap-cover { margin: 0 auto; padding-top: 1rem; padding-bottom: 2rem; }
+.recap-cover img { display: block; width: 100%; height: auto; border: 1px solid var(--ink); }
+.recap-cover figcaption, .recap-figure + p:has(> i:only-child) { font-size: .84rem; color: var(--muted); line-height: 1.5; margin: .75rem 0 0; }
+.recap-reading { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: clamp(2rem, 6vw, 6rem); align-items: start; padding-top: 3rem; padding-bottom: 5rem; }
+.recap-prose { min-width: 0; }
+.recap-prose p, .recap-prose li { font-size: 1.08rem; line-height: 1.85; }
+.recap-prose p, .recap-prose ul, .recap-prose ol { max-width: 740px; }
+.recap-prose p { margin: 0 0 1.25rem; }
+.recap-prose a:not(.recap-connections a) { color: var(--ink); text-underline-offset: .22em; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+.recap-prose a:hover { color: var(--accent); }
+.recap-prose code { font-size: .87em; overflow-wrap: anywhere; }
+.recap-prose pre { overflow-x: auto; }
+.recap-section { margin: 0 0 4rem; padding-top: 2rem; border-top: 1px solid var(--ink); scroll-margin-top: 7rem; }
+.recap-section:first-child { padding-top: 0; border-top: 0; }
+.recap-section > .eyebrow { font-size: .75rem; color: var(--muted); margin: 0 0 .8rem; }
+.recap-prose h2 { font-size: clamp(1.8rem, 3vw, 3.1rem); font-weight: 550; font-stretch: 85%; line-height: 1.12; letter-spacing: -.045em; margin: 0 0 1.5rem; text-wrap: balance; }
+.recap-prose h3 { font-size: 1.45rem; line-height: 1.35; }
+.recap-prose blockquote { border: 0; border-left: 5px solid var(--accent); background: var(--surface); margin: 2rem 0; padding: 1.6rem 2rem; }
+.recap-prose blockquote p { font-size: clamp(1.3rem, 2.3vw, 2rem); line-height: 1.4; letter-spacing: -.025em; font-weight: 450; margin: 0; }
+.recap-prose blockquote .recap-quote-attribution { font-family: 'Overpass Mono', monospace; font-size: .78rem; line-height: 1.6; letter-spacing: 0; font-weight: 400; margin-top: 1rem; }
+.recap-figure { margin: 2rem 0 .6rem; }
+.recap-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--soft-line); }
+.recap-connections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin-top: 2rem; border-top: 1px solid var(--soft-line); }
+.recap-connections a { display: block; border-bottom: 1px solid var(--soft-line); padding: 1rem .8rem 1rem 0; color: var(--ink); font-size: .9rem; line-height: 1.45; text-decoration: none; }
+.recap-connections a > span:first-child { display: block; font-family: 'Overpass Mono', monospace; font-size: .7rem; line-height: 1.6; color: var(--muted); margin-bottom: .25rem; }
+.recap-rail { position: sticky; top: 7rem; border-top: 1px solid var(--ink); padding-top: 1rem; font-size: .9rem; }
+.recap-rail .eyebrow { margin: 0 0 1rem; }
+.recap-rail a { display: block; color: var(--ink); text-decoration: none; padding: .65rem 0; border-bottom: 1px solid var(--soft-line); line-height: 1.5; }
+.recap-rail a:hover { color: var(--accent); }
+.recap-rail a small { display: block; color: var(--muted); font-size: .75rem; margin-top: .25rem; }
+.recap-rail .recap-playlist { margin-top: 1rem; color: var(--accent); }
+.recap-rail > .eyebrow:not(:first-child) { margin-top: 2rem; }
+.recap-directory { background: var(--lime); border-top: 1px solid var(--ink); padding: 4rem 0 5rem; scroll-margin-top: 6rem; }
+.recap-directory-heading { max-width: 760px; margin-bottom: 2.5rem; }
+.recap-directory h2, .recap-return h2 { font-size: clamp(2.6rem, 5.3vw, 5rem); font-stretch: 80%; font-weight: 600; line-height: 1.1; letter-spacing: -.055em; margin: .8rem 0 1rem; }
+.recap-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+.recap-card { min-width: 0; display: flex; flex-direction: column; color: var(--ink); padding: 1.6rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); text-decoration: none; background: var(--surface); transition: background .15s ease; }
+.recap-card:hover { background: var(--paper); }
+.recap-card-top { display: flex; justify-content: space-between; gap: 1rem; }
+.recap-card h3 { font-size: clamp(1.35rem, 2vw, 1.9rem); font-stretch: 85%; letter-spacing: -.035em; line-height: 1.22; margin: 1.8rem 0 .8rem; font-weight: 550; overflow-wrap: anywhere; }
+.recap-card p { font-size: .9rem; line-height: 1.5; margin: 0 0 1.5rem; }
+.recap-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--soft-line); font-family: 'Overpass Mono', monospace; font-size: .7rem; }
+.recap-card-footer > span { font-family: Anybody, sans-serif; font-size: 1.8rem; }
+.recap-page a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.recap-session-page .recap-hero h1 { font-size: clamp(2.65rem, 5.5vw, 5.5rem); max-width: 1100px; }
+.recap-session-page .recap-reading { border-top: 1px solid var(--ink); }
+.recap-session-page .recap-prose > h2 { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--ink); }
+.recap-return { border-top: 1px solid var(--ink); padding-top: 3rem; padding-bottom: 4rem; }
+@media (max-width: 1000px) { .recap-reading { grid-template-columns: minmax(0, 1fr) 190px; gap: 2.5rem; } .recap-hero-bottom { display: block; } .recap-page .hero-actions { margin-top: 1.5rem; } .recap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .recap-kicker { display: block; margin-bottom: 1.8rem; } .recap-kicker p + p { margin-top: .5rem; } .recap-reading { display: flex; flex-direction: column; padding-top: 1.5rem; } .recap-rail { order: -1; position: static; width: 100%; } .recap-rail nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; } .recap-rail .recap-playlist { display: none; } .recap-prose { width: 100%; } .recap-prose p, .recap-prose li { font-size: 1rem; line-height: 1.8; } .recap-prose blockquote { padding: 1.2rem; } .recap-connections { grid-template-columns: 1fr; } .recap-grid { grid-template-columns: 1fr; } .recap-section { margin-bottom: 3rem; } .recap-session-page .recap-rail { display: none; } .recap-page .hero-actions .button { font-size: .82rem; } .recap-card h3 { font-size: 1.65rem; } }
+@media (prefers-reduced-motion: reduce) { .recap-card { transition: none; } }
+
+.recap-program-link { padding-bottom: 1.5rem; }
+.recap-original { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--ink); }
+.recap-person { margin: 2rem 0; display: flow-root; }
+.recap-person img { width: 112px; height: 112px; object-fit: cover; float: left; margin: 0 1.5rem 1rem 0; }

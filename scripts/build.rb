@@ -8,11 +8,13 @@ Dir.chdir(root) do
   validation += ['--baseline', ENV['CONTENT_BASELINE']] unless ENV['CONTENT_BASELINE'].to_s.empty?
   abort('Content validation failed') unless system(*validation)
   abort('Event preparation failed') unless system('bundle', 'exec', 'ruby', 'scripts/prepare-event.rb')
+  abort('Recap import failed') unless system('bundle', 'exec', 'ruby', 'scripts/import-recaps.rb')
   abort('Typography generation failed') unless system('node', 'scripts/sync-typography.cjs')
   revision = ENV.fetch('GITHUB_SHA', '')
   File.write('_config.build.yml', {'github' => {'build_revision' => revision}}.to_yaml)
   abort('Jekyll build failed') unless system('bundle', 'exec', 'jekyll', 'build', '--safe', '--config', '_config.yml,_config.build.yml', '--destination', output)
   abort('Rendered content verification failed') unless system('bundle', 'exec', 'ruby', 'scripts/verify-rendered-content.rb', root, output)
+  abort('Recap verification failed') unless system('bundle', 'exec', 'ruby', 'scripts/verify-recaps.rb', output)
 ensure
   FileUtils.rm_f('_config.build.yml')
 end

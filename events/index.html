@@ -7,7 +7,7 @@ nav_current: events
 copy_key: events_page
 ---
 {% assign copy = site.data.events_page %}
-{% assign event = site.data.generated_event | default: site.data.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
+{% assign event = site.data.recap_program.event %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}    <main id="main-content">
       <section class="hero page-hero page-width" aria-labelledby="page-title">
         <p class="eyebrow">{{ copy.page.eyebrow | escape }}</p>
         <h1 id="page-title">{{ copy.page.heading | escape }}</h1>
@@ -25,12 +25,18 @@ copy_key: events_page
           </div>
 
           <ul class="event-list">
+{% for camp in site.data.camps.camps %}            {% include event-card.html camp=camp %}
+{% endfor %}          </ul>
+        </div>
+      </section>
+
+      <section class="section page-width" id="past-events" aria-labelledby="past-events-title"><div class="section-heading"><p>02</p><div><h2 id="past-events-title">Past events & recordings</h2><p>Return to the ideas, projects and conversations.</p></div></div><ul class="event-list">
             <li class="event-card event-card-orange">
               <div>
                 <p class="eyebrow">10th anniversary · {{ event.format | escape }} · {{ event.cost | escape }}</p>
                 <h3>{{ event.name | escape }}</h3>
-                <p>{% include editorial.html text=copy.states.event_intro %} {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_pending %}{% endif %} — {% if registration_url != "" %}{% include editorial.html text=copy.states.registration_open_short %}{% else %}{% include editorial.html text=copy.states.registration_pending_short %}{% endif %}</p>
-                <a class="button button-solid" href="../register/">{{ copy.upcoming.link_label | escape }}</a>
+                <p>{% include editorial.html text=copy.states.event_intro %} {% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_pending %}{% endif %} — nineteen sessions, with recaps and recordings.</p>
+                <a class="button button-solid" href="october-17-2026/">Read the recap & watch recordings →</a>
               </div>
               <dl>
                 <div><dt>{{ copy.upcoming.label | escape }}</dt><dd>{{ event.format | escape }}</dd></div>
@@ -39,14 +45,11 @@ copy_key: events_page
                 <div><dt>{{ copy.upcoming.label_4 | escape }}</dt><dd>{{ event.level | escape }}</dd></div>
               </dl>
             </li>
-{% for camp in site.data.camps.camps %}            {% include event-card.html camp=camp %}
-{% endfor %}          </ul>
-        </div>
-      </section>
+</ul></section>
 
       <section class="section page-width" id="more" aria-labelledby="more-title">
         <div class="section-heading">
-          <p>02</p>
+          <p>03</p>
           <div>
             <h2 id="more-title">{{ copy.more.heading | escape }}</h2>
             <p>{% include editorial.html text=copy.more.body %}</p>

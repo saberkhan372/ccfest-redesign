@@ -1,0 +1,46 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: 3D printing with p5.fab! — CC Fest
+description: 'Blair Subbaraman: 3D printing with p5.fab!. Recap, replay, takeaways
+  and resources from CC Fest on October 17, 2026.'
+heading: 3D printing with p5.fab!
+noindex: false
+recap_kind: session
+session_id: blair-subbaraman
+---
+{% raw %}
+<p>Blair Subbaraman, finishing a PhD at the University of Washington, introduced p5.fab, a p5.js library he started several years ago for writing machine instructions directly instead of modeling objects. Participants came with a wide range of experience, from people who make generative shapes and plotter parts to teachers looking for ways to bring code and 3D printing to high school students.</p>
+
+<p>He began with the usual workflow: design geometry in CAD, slice it into layers, and send the resulting G-code to the printer. That pipeline works, he said, but it separates geometry from settings and from the physical result, so every problem means a long trip back through the software. It is also hard to share, since a print depends on the machine, filament and calibration. Yet many failures are interesting. He showed prints from the “Cursed Benchies” community and work by artists who lean into the gap between digital plan and physical outcome, including filament sculptures generated with Processing, clay prints that pool where the printer pauses, and plotter drawings made with watercolor brushes that flex.</p>
+
+<p>p5.fab skips the slicer. Most G-code is just “move in a straight line,” with values for position, speed and how much material to extrude. In his browser editor, which needs no installation or printer, Subbaraman built up from moving to the center of the bed to extruding a line, a square and then stacked layers. He changed the extrusion multiplier the way you would change stroke weight in p5.js, adjusted speeds, and showed the G-code values change in response. Using circles whose diameter follows a sine wave, he grew a wavy vessel, then used map() to soften the curve so it could print without support. He showed the same basket-weave project printed in four materials, including homemade Play-Doh paste, and a remix graph on the site where people share settings that worked for them. A final video showed a MIDI controller changing print settings live as the machine ran.</p>
+
+<p>In Q&amp;A, participants asked about Bambu printers, pen plotters, Blender and AI tools. He described his PhD interviews about printer maintenance and his aim of helping people get to know their machines rather than tweaking settings in a slicer. One teacher planned to use the library to demystify printers for students, and another participant began writing a Bambu configuration during the session.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>G-code is approachable. Most of a print file is straight-line moves with position, speed and extrusion values, which you can write directly from code (00:09:43–00:16:01).</li>
+  <li>Treat settings as creative material. Extrusion, speed and layer height can be varied within a print, the way stroke weight is in a sketch (00:24:16–00:33:50).</li>
+  <li>Share settings, not just shapes. Because results depend on machine and material, sharing the code and settings that worked lets others adapt a print (00:44:04–00:45:00).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>Adapted from the workshop: open a new sketch in the copypastes editor, draw a stack of circles from z = 0 to 50, and set each circle’s diameter to 40 + 5 × sin(t), where t maps z from 0 to 2π. Preview it, then download the G-code if you have a printer.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=6kxCBhsPTmE">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://github.com/machineagency/p5.fab-workshop/">p5.fab workshop materials</a></li>
+  <li><a href="https://www.copypastes.xyz/sketch/new">copypastes editor</a></li>
+  <li><a href="https://microsoft.github.io/TRELLIS/">TRELLIS image-to-3D model</a> (shared by a participant in response to a question; not a presenter resource)</li>
+</ul>
+
+{% endraw %}

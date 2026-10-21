@@ -1,0 +1,45 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: Declare Independence (from LLMs) — CC Fest
+description: 'Caleb Foss: Declare Independence (from LLMs). Recap, replay, takeaways
+  and resources from CC Fest on October 17, 2026.'
+heading: Declare Independence (from LLMs)
+noindex: false
+recap_kind: session
+session_id: caleb-foss
+---
+{% raw %}
+<p>Caleb Foss teaches web development at a community college in Joliet, near Chicago, and has taught game design, physical computing and virtual reality. Their title nodded to Björk, and their aim was to lower barriers and intimidation for artists and designers learning code. They said they usually cherish days when AI is not mentioned but found the day’s conversations about it unusually thoughtful.</p>
+
+<p>Foss began with instructions as art. Yoko Ono’s Painting to Be Stepped On is a written score anyone can enact, and Sol LeWitt’s wall drawings describe a process in which each person copies the wavering line above, so small variations build into a pattern. Both resemble a prompt in some ways, so Foss asked how prompting a large language model differs. One participant, who prompts as an artist, said they iterate on a single prompt to study a model’s particular character, almost like a documentary photographer. Foss added environmental cost, the loss of human variation in the enactment, and the ideologies hidden in training data too large for anyone to know. Having studied machine learning a decade ago, when artists trained models on their own datasets, they described a sense of loss as the field moved to huge pre-trained models.</p>
+
+<p>Their alternative was a shift from imperative code, which spells out the steps like a recipe, to declarative code, which describes the result. Foss noticed that students describe their ideas declaratively (“I want this on the screen, and when you click it, this happens”), and that translating those descriptions into steps can be both rewarding and a barrier. Declarative code lets the creator focus on the result while keeping full control. A-Frame, an established library, builds 3D and VR scenes from HTML tags whose attributes name position, rotation and color, and its built-in inspector lets learners adjust a scene and paste the changes back into code.</p>
+
+<p>Foss then showed WebSpinner, a beginner-oriented library they have developed on and off for about five years. It offers custom HTML elements and a JavaScript interface for a 2D canvas, and it attaches properties such as anchor, angle, fill, velocity and origin directly to each shape, rather than transforming the whole canvas as p5.js does with push, translate and rotate. It uses full words instead of abbreviations, labeled values and the browser’s accessibility features. Nesting one element inside another makes it inherit movement. A shape can respond to its own clicks without manual hit testing, and each new shape appears as an element in the browser’s developer tools, where it can be edited live without the learner needing arrays. Foss invited collaborators, especially for documentation.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Prompts and scores differ. Comparing LLM prompts with Ono’s and LeWitt’s instructions raises questions about variation, cost and whose values fill the gaps (00:09:35–00:18:00).</li>
+  <li>Students often think declaratively. Code that describes the result can be a gentler entry point while keeping full creative control (00:18:00–00:21:00, 00:33:36–00:37:37).</li>
+  <li>Attach properties to things. In A-Frame and WebSpinner, position, color and motion live on the object itself, which makes them easy to find and change (00:21:00–00:27:51, 00:40:24–00:47:22).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>Editorial suggestion: write a one-paragraph description of a simple scene, then build it twice, once in A-Frame as tags with attributes and once in p5.js as a sequence of steps. Compare which version was easier to change.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=sMtlPHQP3Eo">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://docs.google.com/document/d/15ixhggxo_VhcuRHvrj382TelzkICW-zrdx9uPD1UXP4/edit?usp=sharing">Session links document</a>, with the A-Frame and WebSpinner CodePens, WebSpinner documentation and a feedback form</li>
+  <li><a href="https://aframe.io/">A-Frame</a></li>
+</ul>
+
+{% endraw %}

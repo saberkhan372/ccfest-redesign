@@ -1,0 +1,122 @@
+---
+layout: base
+body_class: event-page
+root: ../../../
+home_href: ../../../
+nav_current: events
+title: October 17, 2026 — Original program — CC Fest
+description: The original schedule, session descriptions and presenters for the October 17, 2026 CC Fest.
+hide_event_banner: true
+---
+{% assign copy = site.data.register %}
+{% assign event = site.data.recap_program.event %}{% assign keynotes = site.data.recap_program.keynotes %}{% assign sessions = site.data.recap_program.sessions %}{% assign keynote_count = 0 %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}{% assign keynote_count = keynote_count | plus: 1 %}{% endif %}{% endfor %}{% assign session_count = 0 %}{% for session in sessions %}{% assign session_title = session.title | default: "" | strip %}{% if session_title != "" %}{% assign session_count = session_count | plus: 1 %}{% endif %}{% endfor %}{% assign event_date = event.date | default: "" | strip %}{% assign registration_url = event.registration_url | default: "" | strip %}{% assign luma_event_id = event.luma_event_id | default: "" | strip %}{% assign donation_note = event.donation_note | default: "" | strip %}    <main id="main-content">
+      <section class="hero page-width" id="top" aria-labelledby="event-title">
+        <p class="eyebrow">Original program · October 17, 2026 · Event concluded</p>
+        <h1 id="event-title"{% if event_date == "" %} aria-label="{{ event.name | escape }}"{% endif %} data-figma-node="251:741">{% include event-context.html %}{% if event_lettered_name == 'Virtual CC Fest' %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">Virt</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: -0.07em; text-transform: uppercase">u</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 85, 'wght' 300; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">a</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">l</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 432; font-weight: 432; font-style: normal; letter-spacing: 0em; text-transform: uppercase">CC</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: uppercase"> </span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">F</span><span data-figma-run="8" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 65, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">e</span><span data-figma-run="9" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 100, 'wght' 472; font-weight: 472; font-style: normal; letter-spacing: 0em; text-transform: uppercase">st</span><span data-figma-run="10" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">{{ event_title_date | escape }}</span><span data-figma-run="11" style="font-family: 'Anybody'; font-variation-settings: 'wght' 100, 'wdth' 100; font-weight: 100; font-style: italic; letter-spacing: 0em; text-transform: none">{{ event_year | escape }}</span>{% else %}<span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wght' 300, 'wdth' 100; font-weight: 300; font-style: normal; letter-spacing: 0em; text-transform: uppercase">{{ event_lettered_name | escape }}</span>{{ event_title_date | escape }}{{ event_year | escape }}{% endif %}</h1>
+        <p class="hero-summary">{{ event.summary | escape }}</p>
+        <p>{% include editorial.html text=copy.top.body %}</p>
+        <div class="hero-actions">
+          <a class="button button-solid" href="../">Read the recap & watch recordings →</a>
+          <a class="button" href="#sessions">{{ copy.top.link_label_2 | escape }}</a>
+        </div>
+      </section>
+
+      <section class="event-facts" aria-label="Event details">
+        <div class="page-width facts-grid">
+          <div>
+            <span>Format</span>
+            <strong>{{ event.format | escape }}</strong>
+          </div>
+          <div>
+            <span>Date</span>
+            <strong>{% if event_date != "" %}{{ event.date | date: "%B %-d, %Y" }}{% else %}{% include editorial.html text=copy.states.date_unconfirmed %}{% endif %}</strong>
+          </div>
+          <div>
+            <span>Cost</span>
+            <strong>{{ event.cost | escape }}</strong>
+          </div>
+          <div>
+            <span>Experience</span>
+            <strong>{{ event.level | escape }}</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-width" id="keynotes" aria-labelledby="keynotes-title">
+        <div class="section-heading">
+          <p>01</p>
+          <div>
+            <h2 id="keynotes-title" data-figma-node="251:765"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">K</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 129, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">y</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">t</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
+{% if keynote_count == 0 %}            <p>{% include editorial.html text=copy.keynotes.body %}</p>
+{% endif %}
+          </div>
+        </div>
+
+        <div class="keynote-layout">
+          <img src="../../../assets/design/keynote-shape.svg" alt="" aria-hidden="true">
+{% if keynote_count == 0 %}          <article class="keynote-card">
+            <p class="eyebrow">{{ copy.keynotes.eyebrow | escape }}</p>
+            <h3>{{ copy.keynotes.heading | escape }}</h3>
+            <p>{% include editorial.html text=copy.keynotes.body_2 %}</p>
+          </article>
+          <article class="keynote-card">
+            <p class="eyebrow">{{ copy.keynotes.eyebrow_2 | escape }}</p>
+            <h3>{{ copy.keynotes.heading_2 | escape }}</h3>
+            <p>{% include editorial.html text=copy.keynotes.body_3 %}</p>
+          </article>
+{% else %}{% for keynote in keynotes %}{% assign keynote_name = keynote.name | default: "" | strip %}{% if keynote_name != "" %}          {% include keynote-card.html keynote=keynote %}
+{% endif %}{% endfor %}{% endif %}        </div>
+      </section>
+
+{% assign schedule = site.data.recap_program.schedule %}      <section class="section section-tinted" id="sessions" aria-labelledby="sessions-title">
+        <div class="page-width">
+          <div class="section-heading">
+            <p>02</p>
+            <div>
+              <h2 id="sessions-title" data-figma-node="251:788"><span data-figma-run="0" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 150, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">S</span><span data-figma-run="1" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 120, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">e</span><span data-figma-run="2" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="3" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 130, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span><span data-figma-run="4" style="font-family: 'Anybody'; font-variation-settings: 'wght' 700, 'wdth' 100; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">i</span><span data-figma-run="5" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 110, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">o</span><span data-figma-run="6" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 90, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">n</span><span data-figma-run="7" style="font-family: 'Anybody'; font-variation-settings: 'wdth' 125, 'wght' 700; font-weight: 700; font-style: normal; letter-spacing: 0em; text-transform: none">s</span></h2>
+              <p>{% if schedule.items.size > 0 %}{% if event_date != "" %}{{ event.date | date: "%A, %B %-d, %Y" }}. {% endif %}Original schedule. Session descriptions and biographies are preserved as published before the event.{% else %}{% include editorial.html text=copy.states.schedule_pending %}{% endif %}</p>
+            </div>
+          </div>
+
+{% if schedule.items.size == 0 %}          <div class="session-row">
+            <p class="session-time">{% include editorial.html text=copy.sessions.body %}</p>
+            <div class="session-presenter">
+              <p class="eyebrow">{{ copy.sessions.eyebrow | escape }}</p>
+              <strong>To be announced</strong>
+            </div>
+            <div class="session-details">
+              <div class="tag-row"><span>All levels</span><span>Workshops</span><span>Talks</span></div>
+              <h3>{{ copy.sessions.heading | escape }}</h3>
+              <p>{% include editorial.html text=copy.sessions.body_2 %}</p>
+            </div>
+          </div>
+{% else %}          <div id="schedule" class="schedule" tabindex="-1"{% if event_date != "" %} data-date="{{ event.date | date: '%Y-%m-%d' }}"{% endif %} data-utc-offset="{{ schedule.zones[0].utc_offset }}" data-event-name="{{ event.name | escape }}" data-page-url="https://ccfest.rocks/events/october-17-2026/program/">
+            <p class="schedule-zone" hidden><label for="schedule-zone-select">Show times in</label> <select id="schedule-zone-select"></select></p>
+            <ol class="schedule-blocks">
+{% for item in schedule.items %}{% assign in_block = sessions | where: "schedule_id", item.id %}{% capture who %}{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}{{ keynote.name | strip }}{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{% if session.format == "Panel" %}{{ session.title | strip }}{% endif %}{% endfor %}{% endif %}{% endcapture %}              <li class="schedule-block schedule-block-{{ item.kind | default: 'other' }}" id="{{ item.id | default: forloop.index | escape }}" data-start="{{ item.start | escape }}" data-end="{{ item.end | escape }}" data-kind="{{ item.kind | escape }}" data-summary="{{ item.title | escape }}{% if who != "" %} — {{ who | escape }}{% endif %}">
+                <div class="schedule-block-head">
+                  <h3>{{ item.title | escape }}</h3>
+                  <p class="schedule-times">{% for zone in schedule.zones %}{% assign shift = zone.utc_offset | minus: schedule.zones[0].utc_offset | times: 60 %}<span data-label="{{ zone.label | escape }}">{% include time-range.html from=item.start to=item.end shift=shift %} <small>{{ zone.label | escape }}</small></span>{% endfor %}<span class="schedule-local" hidden></span></p>
+                </div>
+{% if item.kind == "keynote" %}{% for keynote in keynotes %}{% if keynote.schedule_id == item.id %}                <p class="schedule-people"><a href="#keynote-{{ item.id | escape }}">{{ keynote.name | escape }}</a> <small>keynote</small></p>
+{% endif %}{% endfor %}{% elsif item.kind == "panel" %}{% for session in in_block %}{% if session.format == "Panel" %}                {% include session-card.html session=session root=page.root order=forloop.index %}
+{% endif %}{% endfor %}{% elsif item.kind == "workshops" %}                <div class="session-grid">
+{% for session in in_block %}                {% include session-card.html session=session root=page.root order=forloop.index %}
+{% endfor %}                  <p class="schedule-empty" hidden></p>
+                </div>
+{% endif %}              </li>
+{% endfor %}            </ol>
+{%- comment -%} A titled workshop is "to be announced" unless its schedule_id is exactly the id of a workshop round: a missing, empty, padded, mistyped or removed id all land here instead of vanishing. {%- endcomment -%}
+{% capture round_ids %}|{% for item in schedule.items %}{% if item.kind == "workshops" %}{{ item.id }}|{% endif %}{% endfor %}{% endcapture %}{% assign pending = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign round_key = "|" | append: session.schedule_id | append: "|" %}{% assign known_round = false %}{% if round_ids contains round_key %}{% assign known_round = true %}{% endif %}{% if pending_title != "" and session.format == "Workshop" and known_round == false %}{% assign pending = pending | plus: 1 %}{% endif %}{% endfor %}{% if pending > 0 %}            <section class="schedule-pending" aria-labelledby="pending-title">
+              <h3 id="pending-title">{{ copy.pending.heading | escape }}</h3>
+              <p>{% include editorial.html text=copy.pending.body %}</p>
+              <div class="session-grid">
+{% assign n = 0 %}{% for session in sessions %}{% assign pending_title = session.title | default: "" | strip %}{% assign round_key = "|" | append: session.schedule_id | append: "|" %}{% assign known_round = false %}{% if round_ids contains round_key %}{% assign known_round = true %}{% endif %}{% if pending_title != "" and session.format == "Workshop" and known_round == false %}{% assign n = n | plus: 1 %}                {% include session-card.html session=session root=page.root order=n pending=true %}
+{% endif %}{% endfor %}              </div>
+            </section>
+{% endif %}          </div>
+          <script src="{{ page.root }}schedule.js{% assign rev = site.github.build_revision | default: "" %}{% if rev != "" %}?v={{ rev }}{% endif %}" defer></script>
+{% endif %}        </div>
+      </section>
+
+    </main>

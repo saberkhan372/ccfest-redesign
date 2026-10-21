@@ -1,0 +1,44 @@
+---
+layout: recap
+body_class: inner-page recap-page recap-session-page
+root: "../../../"
+home_href: "../../../"
+nav_current: events
+title: Take a spline for a walk — CC Fest
+description: 'Aleksandra Jovanić: Take a spline for a walk. Recap, replay, takeaways
+  and resources from CC Fest on October 17, 2026.'
+heading: Take a spline for a walk
+noindex: false
+recap_kind: session
+session_id: aleksandra-jovanic
+---
+{% raw %}
+<p>Aleksandra Jovanić, a professor at the Faculty of Fine Arts of the University of Arts in Belgrade who teaches creative coding and physical computing, returned to CC Fest for the third time. Her session grew from an artist tutorial she made for the Processing Foundation on the spline functions introduced in p5.js 2.0, an implementation of Catmull-Rom curves that connect smoothly without the extra control-point bookkeeping the older curve functions required. The second part of that commission was an artwork, also called Take a Spline for a Walk.</p>
+
+<p>She placed the project in a line of her earlier work about what happens at an edge: a book onto which generative output is projected so every page turn shows a new variation, an interest in Myriorama picture cards that join seamlessly in any order, and plotted globes whose lines cross from face to face without a visible break. For this project she wanted lines that leave one page of a folded eight-page zine and continue on the correct next page, and she then animated them. She admitted, with a meme, that she had overestimated how much she could show in one session, so she walked through finished, working code in OpenProcessing’s tutorial mode rather than coding from scratch.</p>
+
+<p>The steps built up gradually. First, a single square page, with each point stored as a page number plus relative coordinates and edges numbered clockwise from the top. Next, lines enter from one edge and leave by a different edge, filtering out the current edge so a line never exits where it entered. Then a choice familiar from early Processing lessons: bounce off the edge or wrap around to the opposite side. With two pages joined like the front and back of a sheet, lines flip and change edges as they cross. She constrains random positions to roughly 0.2–0.8 along an edge so thick lines never hit a corner, where they could continue onto two different faces.</p>
+
+<p>Swapping straight lines for splines produced continuous curves, though with visible bends at the edges. For her globes she prefers Bézier curves, adding a tangent perpendicular to each edge so a line can cross smoothly. The final sketch draws a cube net in which every line continues correctly across all six faces, using a connection table that records, for each page and edge, which page comes next and how positions flip. It includes glue flaps so the result can be printed, folded and assembled. She said she had not found a general rule for other solids and that an AI chat tool had only restated her own approach, so she invited participants to fork the code and try other shapes.</p>
+
+<h2 id="three-takeaways">Three takeaways</h2>
+
+<ul>
+  <li>Splines connect smoothly by design. In p5.js 2.0, spline functions let curve segments join continuously without the old bookkeeping for first and last control points (00:04:55–00:08:08, 00:43:32–00:47:01).</li>
+  <li>Edges are design decisions. Bounce, wrap or continue onto another face; each choice needs explicit rules, especially when moving to paper or 3D (00:29:33–00:39:00).</li>
+  <li>Choose the curve for the join. Splines bend at page edges, while Béziers with tangents perpendicular to the edge let lines cross without a visible break (00:47:01–00:53:11).</li>
+</ul>
+
+<h2 id="try-it">Try it</h2>
+
+<p>From the session: fork Jovanić’s OpenProcessing tutorial, print the cube net, fold it and check that every line continues. Then change the random range along each edge from 0.2–0.8 to 0–1 and thicken the stroke to see why corners cause trouble.</p>
+
+<h2 id="watch-and-explore">Watch and explore</h2>
+
+<p>Replay: <a href="https://www.youtube.com/watch?v=-3SWX6bzIyY">Watch on YouTube</a></p>
+
+<ul>
+  <li><a href="https://aleksandrajovanic.com/ccfest/index.html">Session presentation with links to the OpenProcessing tutorial</a></li>
+</ul>
+
+{% endraw %}

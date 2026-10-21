@@ -2,7 +2,8 @@
             <p class="eyebrow">{{ include.keynote.label | escape }}</p>
             <h3>{{ include.keynote.name | escape }}</h3>
             {% include bio.html text=include.keynote.bio %}
+            <p><a href="/events/october-17-2026/{% if include.keynote.schedule_id == 'opening' %}daniel-shiffman{% else %}lauren-lee-mccarthy{% endif %}/">Read the recap & watch the replay →</a></p>
 {% assign url = include.keynote.url | default: "" | strip %}{% if url != "" %}            <a class="button" href="{{ include.keynote.url | escape }}" target="_blank" rel="noopener">More about {{ include.keynote.name | escape }} ↗</a>
 {% endif %}          </article>
-{% assign photo = include.keynote.photo | default: "" | strip %}{% assign lead = photo | slice: 0 %}{% if lead == "/" %}{% assign photo = photo | remove_first: "/" %}{% endif %}{% if photo != "" %}          <img class="keynote-photo" src="../{{ photo | escape }}" alt="Portrait of {{ include.keynote.name | escape }}" width="1500" height="1000" loading="lazy">
+{% assign photo = include.keynote.photo | default: "" | strip %}{% assign lead = photo | slice: 0 %}{% if lead == "/" %}{% assign photo = photo | remove_first: "/" %}{% endif %}{% if photo != "" %}          <img class="keynote-photo" src="{{ page.root }}{{ photo | escape }}" alt="Portrait of {{ include.keynote.name | escape }}" width="1500" height="1000" loading="lazy">
 {% endif %}

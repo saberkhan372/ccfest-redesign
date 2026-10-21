@@ -1,0 +1,12 @@
+{
+  "method": "Static GitHub Pages document: canonical link, fragment-aware location.replace, visible no-JavaScript fallback",
+  "routes": {
+    "/register/": "/events/october-17-2026/",
+    "/register/#registration": "/events/october-17-2026/",
+    "/register/#sessions": "/events/october-17-2026/#sessions",
+    "/register/#schedule": "/events/october-17-2026/program/#schedule",
+    "/register/#keynotes": "/events/october-17-2026/program/#keynotes"
+  },
+  "preserved_program_fragments": ["opening", "round-1", "panel", "round-2", "closing", "keynote-opening", "keynote-closing"],
+  "unpublished_preview_path_removed": "/recaps/october-17-2026/"
+}
