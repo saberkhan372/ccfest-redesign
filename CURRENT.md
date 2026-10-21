@@ -1,5 +1,14 @@
 # Current state — October 7, 2026
 
+## October 21, 2026 — first scheduled Notion recap sync
+
+VERIFIED locally: the hourly automation fetched all twenty allowlisted Notion sources. Only the event hub changed (native edit time `2026-10-21T15:28:30.753Z`): the opening event count/explanation, introductory wording, collage description in the snapshot and additional thanks to Francisca. The public prose is imported verbatim, including its current grammar and spacing. The nineteen session records, replay/material links, frozen program and media files are unchanged. The shared cover retains its existing generic alt text; the more specific edited description is preserved in the source snapshot. Person linking now generates 274 mentions.
+
+Fresh source validation, complete static build, twenty-one archive route/media/link checks, publication Chromium checks for all twenty-nine pages at 320/390/768/1440, legacy redirects and no-JavaScript content, and git diff --check passed. A second fetch confirmed the hub content and timestamp are stable; origin/main has no concurrent changes. Only the snapshot, generated hub, import manifest and this handoff are included. Publication is authorized by the recurring sync request; deployment and live verification follow the push and are recorded in the local sync receipt. No pipeline, layout or designer-owned changes. Manual session wrap used because session-wrap is unavailable.
+
+Next: continue the hourly source checks; notify only after publication or a new actionable failure. Cross-browser and screen-reader checks remain unverified.
+
+
 ## October 21, 2026 — link people throughout the event archive
 
 VERIFIED locally. At Saber's request, the archive now links 273 person mentions across all twenty-one pages, including the prose, captions, quote attributions, presenter headings and program bios. A reviewed directory covers forty-three people, including all twenty-two presenters and other referenced artists, educators and contributors. Personal sites are preferred; identified institutional, gallery or professional profiles fill the gaps. Ambiguous Dan/Daniel aliases are scoped to reviewed pages.
