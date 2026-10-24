@@ -63,6 +63,22 @@ strip %}
     aria-label="Ten years of creative coding"
     data-mode="creativity"
   >
+    <div class="stage-title" aria-label="10 Years">
+      <p>10 Years of</p>
+      <p id="labelRight" style="font-weight: 400">Curiosity</p>
+    </div>
+    <!-- Explainer for the selected mode. Copy lives in _data/mode_copy.json;
+         every mode's paragraph is rendered here at build time and
+         animations.js just shows the one matching the current mode, so this
+         needs no fetch at runtime (same as .stage-title's text). -->
+    <p class="stage-copy" id="stageCopy" aria-live="polite">
+      {%- for entry in site.data.mode_copy -%}
+        {%- unless entry[0] == '_note' -%}
+      <span data-copy-mode="{{ entry[0] }}"{% if entry[0] == 'creativity' %} class="is-active"{% endif %}>{{ entry[1].text | escape }}</span>
+        {%- endunless -%}
+      {%- endfor -%}
+    </p>
+
     <div class="modes-list" role="tablist" aria-label="CC Fest monogram modes">
       <p class="stage-intro">Ten ways to 'C'C. Pick one.</p>
       <button class="mode-btn" role="tab" data-mode="creativity">
@@ -497,9 +513,11 @@ strip %}
       />
     </svg>
 
-    <div class="cc-text cc-text-left" id="labelLeft">10 years of</div>
-    <div class="cc-text cc-text-right" id="labelRight" aria-live="polite">
-      Creativity
+    <p class="stage-copy" id="stageCopy" aria-live="polite"></p>
+
+    <div class="cc-text">
+      <div class="cc-text-top">FEST</div>
+      <div class="cc-text-bottom" aria-live="polite">2026</div>
     </div>
   </section>
 

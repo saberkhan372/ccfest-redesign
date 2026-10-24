@@ -50,9 +50,9 @@
  *
  * Clicking a .mode-btn swaps #monogramWrap's [data-mode] — animations.css
  * keys each mode's look (color, transforms, etc.) off that attribute on
- * the shared monogram markup. Also updates the "10 years of ___" label
- * and keeps each button's selected state (.is-active + aria-selected)
- * in sync.
+ * the shared monogram markup. Also updates the "10 years of ___" label,
+ * swaps in that mode's explainer copy, and keeps each button's selected
+ * state (.is-active + aria-selected) in sync.
  * ─────────────────────────────────────────────────────────────────── */
 
 (function () {
@@ -61,8 +61,20 @@
   const stageMain = document.querySelector('.anim-stage-main');
   const stage = document.querySelector('.anim-stage');
   const labelRight = document.getElementById('labelRight');
+  const stageCopy = document.getElementById('stageCopy');
 
   if (!modesNav || !monogramWrap) return;
+
+  // Every mode's explainer is already in the markup (Jekyll renders them
+  // from _data/mode_copy.json), so this just shows the matching one. No
+  // fetch — that failed outright when the page was opened over file:// or
+  // from an editor preview rather than a real server.
+  function applyCopy(mode) {
+    if (!stageCopy) return;
+    stageCopy.querySelectorAll('[data-copy-mode]').forEach(function (span) {
+      span.classList.toggle('is-active', span.dataset.copyMode === mode);
+    });
+  }
 
   function setMode(mode, label) {
     monogramWrap.dataset.mode = mode;
@@ -73,6 +85,7 @@
     // [data-mode="…"] .cc-text-* rules need this ancestor to carry it too.
     if (stage) stage.dataset.mode = mode;
     if (labelRight) labelRight.textContent = label;
+    applyCopy(mode);
 
     modesNav.querySelectorAll('.mode-btn').forEach(function (btn) {
       const isActive = btn.dataset.mode === mode;

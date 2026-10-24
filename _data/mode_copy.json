@@ -1,0 +1,53 @@
+{
+  "_note": "Explainer copy for each monogram mode, keyed by the data-mode slug on the .mode-btn buttons. animations.js fetches this and writes `text` into #stageCopy whenever the mode changes. `imagery` holds Shristi's visual notes for each mode — kept here so they aren't lost, but deliberately not rendered on the page.",
+
+  "creativity": {
+    "text": "One of the best questions to ask about the work one does. Does it make you feel creative? It's like making art, which can feel serious whereas creativity is about how you use interests, skills, to create, which is a lovely open-ended question. I am also fascinated by where creativity will lead you. For me wanting to be creative with code led to me to p5.js and Processing and it changed my life.",
+    "imagery": "scribbles revelaing how we sketch and think"
+  },
+
+  "change": {
+    "text": "Change comes up in many ways. First that animation and interaction play big roles in what we make and share. Being able to show change with code feels so powerful. But I also think about how the community is evolving. When CC Fest started, getting everyone to code was a big push. Now it seems like AI is taking over but I have a feeling that while things change some values, creativity, community, will keep guided.",
+    "imagery": "change forward and back, change is not linear"
+  },
+
+  "connection": {
+    "text": "Connection is probably the deepest goal of CC Fest, to form a community sure, but it get built through connection. Someone puts on a workshop, explains something well and you look at their portfolio and after the event, send them an email. One blessing about being in my position is making connections with folks all over the world but also seeing other folks connecting and spinning off their own projects.",
+    "imagery": "dots being connected"
+  },
+
+  "celebration": {
+    "text": "Celebration is what makes CC Fest different from class and school. As much as we gather to learn we are also celebrating the work we do and the community we are a part of. Celebrating the people and the work is how we form a community that gives back to the people to sustain it. Keep celebrating.",
+    "imagery": "shouting out"
+  },
+
+  "collaboration": {
+    "text": "Collaboration is the fuel that propels us forward. Many of us put out events and workshops because we are inviting participation and collaboration. The drive pushes us to share our work, even when we are shy, so we can connect with others and create opportunities. CC Fest would not be possible without the collaboration of the many folks over the past 10 years.",
+    "imagery": "handing things off to each other"
+  },
+
+  "creative-commons": {
+    "text": "Creative Commons is a guide for how we want to work to sustain a community. It is both: an acknowledgement that much of the work we do is dependent on the work of others and that we should share the work we do back to the community.",
+    "imagery": "bricks to make a building"
+  },
+
+  "conversations": {
+    "text": "Conversations, especially those that are unscheduled, are such a benefit of coming to an event. While a little more challenging in virtual settings and events, I hope CC Fest leads to conversations with people that push you forward.",
+    "imagery": "in a group facing forward two turn to each other"
+  },
+
+  "community": {
+    "text": "Community is none of us but all of us. Building and sustaining community is something the creative coding world does so well and we are happy to be a small part of it.",
+    "imagery": "one of many"
+  },
+
+  "curiosity": {
+    "text": "Curiosity is about caring and loving yourself as a learner and a creator. Once you do that you can find ways into other people ideas and contributions. Being curious is a great way to keep cyncism and nihilism at bay.",
+    "imagery": "inside out, heart to head"
+  },
+
+  "coding": {
+    "text": "Code is still ultimately the mechanism for interacting and propelling the computer to do your bidding. Being able to find joy in what others think is joyless, putting effort where others won’t, is a worthy goal.",
+    "imagery": "< >, writing"
+  }
+}

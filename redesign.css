@@ -462,9 +462,6 @@ body:has(> .event-banner:not([hidden])) .site-footer { padding-bottom: 5.5rem; }
 /* Her Connection layer is only as tall as its width allows, pinned to the top: at the size she recorded
    that is the whole stage, but on phones it sits under the mode buttons. Full height centres it everywhere. */
 .fx-connection-canvas { width: 100%; height: 100%; }
-
-.cc-text { font-family: Anybody, sans-serif; font-size: clamp(.8rem,2vmin,1.25rem); font-weight: 500; }
-.cc-text-right { color: var(--ink); }
 /* Without JavaScript the mode buttons are hidden and motion is frozen. */
 html:not(.js) .modes-list,html:not(.js) .stage-intro { display: none; }
 html:not(.js) .anim-stage * { animation-play-state: paused !important; transition: none !important; }

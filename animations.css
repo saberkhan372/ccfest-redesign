@@ -18,11 +18,9 @@
 :root{
   font-size: 16px;
    --cc-orange: #f44c2d;
-   --cc-pink: #FBDBEA;
+   --cc-pink: #FFE1EF;
    --cc-power-green: #84D136;
    --cc-neutral: #b7b7b7;
-   --pill-bg: #1e1f22;
-   --pill-fg: #f5f5f5;
 }
 
 /* ── Keyframes ─────────────────────────────────────────────────────── */
@@ -189,7 +187,7 @@
   flex-direction: column; 
   gap: 8px;
   z-index: 2;
-  inset: 3.25rem var(--page-pad) auto auto; 
+  inset: 3.25rem calc(var(--page-pad)*0.5) auto auto; 
   align-items: stretch; 
   justify-content: flex-start; 
   width: 180px; 
@@ -204,6 +202,7 @@
   font-weight: 400;
   padding: .6rem .2rem;
   color: var(--ink);
+  background-color: var(--surface);
   /* Same border-width as .is-active below (only the color differs) — if
      the active button were ever thicker than the rest, clicking a new
      tab would resize two buttons at once and reflow the whole column by
@@ -260,6 +259,49 @@
     font-weight: 400
 }
 
+.stage-title{
+    font-family:  Anybody, sans-serif; 
+    font-weight: 200;
+    font-size: 72px;
+    position: absolute;
+    inset: 3.25rem calc(var(--page-pad)*0.5); 
+    display: flex;
+    flex-direction: column;
+    line-height: 100%;
+    z-index: 2;
+}
+
+.stage-title > p{
+    padding: 0;
+    margin: 0;
+}
+
+/* Mode explainer, bottom-left. Shares .stage-title's left inset above so
+   the two line up on the same left edge. Every mode's paragraph is in the
+   markup (rendered from _data/mode_copy.json at build time); only the one
+   animations.js marks .is-active is shown, so no fetch is involved. */
+.stage-copy > span{
+    display: none;
+}
+
+.stage-copy > span.is-active{
+    display: block;
+}
+
+.stage-copy{
+    position: absolute;
+    left: calc(var(--page-pad) * 0.5);
+    bottom: 3.25rem;
+    z-index: 2;
+    max-width: 72ch;
+    margin: 0;
+    font-family: Anybody, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
 /* Phones: too narrow to fit the caption on one line and keep its left edge
    on the button stack's, so let it wrap and give .modes-list enough extra
    top clearance to clear it (it still sits above the monogram at 320px). */
@@ -273,6 +315,7 @@
     position: relative;
     width: min(1200px, 80vmin, 90vw);
     aspect-ratio: 1167 / 687;
+    z-index: 2;
 }
 
 .cc-mono {
@@ -287,31 +330,40 @@
     transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease;
 }
 
+/* Oversized ghost lettering behind the monogram. Each word is one line of
+   type scaled far past the stage, so only fragments of the glyphs show and
+   they read as a texture. .anim-stage clips the overflow; z-index keeps
+   them under the artwork, and pointer-events keeps them from swallowing
+   clicks meant for the monogram. */
 .cc-text {
     position: absolute;
-    top: 50%;
-    font-weight: 500;
-    font-size: clamp(1rem, 3.1vmin, 2rem);
+    top: 0;
+    padding: 4% 0;
+    left: -0.15em;
+    height: max-content;
+    font-family: Anybody, sans-serif;
+    font-weight: 356;
+    font-stretch: 150%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 35vw;
+    line-height: 0.75;
     white-space: nowrap;
+    color: var(--cc-pink);
+    z-index: 0;
     pointer-events: none;
-    z-index: 10;
-    font-family: caslon;
-    text-align: left;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
-.cc-text-left {
-    left: calc(50% - 0.14 * var(--mono-w));
-    transform: translate(-50%, -50%);
-    color: var(--ink);
-    
+/* One anchored to each edge, so they frame the monogram instead of
+   stacking on top of each other (both inherit no top/bottom of their own). */
+.cc-text-top {
+    margin-top: 1.2rem;
+    letter-spacing: -13%;
 }
 
-.cc-text-right {
-    left: calc(50% + 0.35 * var(--mono-w));
-    transform: translate(-50%, -50%);
-    color: var(--cc-neutral);
+.cc-text-bottom {
+    letter-spacing: -8%;
 }
 
 /* fx-layer hooks: one full-bleed overlay per mode-specific effect
