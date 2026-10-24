@@ -12,16 +12,13 @@
  * Always add a counterpart rule inside the prefers-reduced-motion
  * block at the bottom whenever you add a new animation.
  * ─────────────────────────────────────────────────────────────────── */
-@font-face {
-    font-family: 'caslon';
-    src: url('assets/caslon/LibreCaslonCondensed-Medium.woff2') format('woff2');
-    font-style: normal;
-    font-display: swap;
-}
+@font-face { font-family: Anybody; src: url('assets/fonts/Anybody[wdth,wght].ttf') format('truetype'); font-style: normal; font-weight: 100 900; font-stretch: 50% 150%; font-display: swap; }
+@font-face { font-family: Anybody; src: url('assets/fonts/Anybody-Italic[wdth,wght].ttf') format('truetype'); font-style: italic; font-weight: 100 900; font-stretch: 50% 150%; font-display: swap; }
 
 :root{
   font-size: 16px;
    --cc-orange: #f44c2d;
+   --cc-pink: #FBDBEA;
    --cc-power-green: #84D136;
    --cc-neutral: #b7b7b7;
    --pill-bg: #1e1f22;
@@ -179,10 +176,8 @@
   height: 95dvh;
   width: 100vw;
   min-height: 480px;
-  border-top: 1px dashed var(--line);
-  border-bottom: 1px dashed var(--line);
   overflow: hidden;
-
+  background: var(--surface);
 }
 
 /* ---------- mode buttons ---------- */
@@ -190,46 +185,54 @@
 
 .modes-list {
   position: absolute;
-  right: clamp(16px, 4vw, 48px);
-  top: clamp(16px, 3vh, 36px);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: end;
-  align-items: flex-end;
+  flex-direction: column; 
   gap: 8px;
   z-index: 2;
+  inset: 3.25rem var(--page-pad) auto auto; 
+  align-items: stretch; 
+  justify-content: flex-start; 
+  width: 180px; 
 }
 
 .modes-list > .mode-btn {
   appearance: none;
   border: none;
   cursor: pointer;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-family: caslon, 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
-  font-weight: normal;
-  background: var(--paper);
-  color: var(--accent);
-  transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
+  font-family: Anybody, sans-serif; 
+  font-size: 12px; 
+  font-weight: 400;
+  padding: .6rem .2rem;
+  color: var(--ink);
+  /* Same border-width as .is-active below (only the color differs) — if
+     the active button were ever thicker than the rest, clicking a new
+     tab would resize two buttons at once and reflow the whole column by
+     a couple of pixels for a frame. */
+  border: 0.12rem solid var(--ink);
+  border-radius: 0;
+  text-align: center;
 }
 
+.modes-list > .mode-btn.is-active {
+    background: var(--cc-pink);
+    color: var(--ink);
+    border: 0.12rem solid var(--cc-orange)
+}
+
+
 .modes-list > .mode-btn:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+  transition: cubic-bezier(0.65,0.05,0.36,1);
+  transition-duration: 0.2s;
 }
 
 .modes-list > .mode-btn:active {
   transform: translateY(0);
 }
 
-.modes-list > .mode-btn.is-active {
-  background: var(--cc-neutral);
-  color: var(--accent-ink);
-}
-
 .modes-list > .mode-btn:focus-visible {
-  outline: 2px solid var(--cc-neutral);
-  outline-offset: 2px;
+  outline: 0.12rem solid var(--ink);
+  outline-offset: 0.12rem;
 }
 
 /* ---------- monogram stage ---------- */
@@ -242,13 +245,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: 1px solid green;
+}
+
+.stage-intro { 
+    z-index: 2; 
+    width: max-content;
+    max-width: 180px;
+    white-space: nowrap;
+    margin: 0;
+    color: var(--muted);
+    text-align: left;
+    font-size: 14px;
+    font-family:  Anybody, sans-serif; 
+    font-weight: 400
+}
+
+/* Phones: too narrow to fit the caption on one line and keep its left edge
+   on the button stack's, so let it wrap and give .modes-list enough extra
+   top clearance to clear it (it still sits above the monogram at 320px). */
+@media (max-width: 650px) {
+  .modes-list { gap: .25rem; width: 110px; top: 3.6rem; }
+  .modes-list > .mode-btn { font-size: 11px; padding: .5rem; }
+  .stage-intro { top: .9rem; left: calc(100% - var(--page-pad) - 110px); }
 }
 
 .monogram-wrap {
     position: relative;
     width: min(1200px, 80vmin, 90vw);
-    aspect-ratio: 1072.4 / 618.16;
+    aspect-ratio: 1167 / 687;
 }
 
 .cc-mono {
