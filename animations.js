@@ -76,6 +76,28 @@
     });
   }
 
+  // Collaboration's cradle recolours the canvas on every hit. The palettes
+  // are [data-cc-theme="1".."4"] in animations.css; this only ever sets or
+  // clears that one attribute, so the colours stay in the stylesheet.
+  const THEME_COUNT = 4;
+
+  function nextTheme() {
+    // Never repeat the current one, or a collision would look like a no-op.
+    const current = stage ? stage.dataset.ccTheme : '';
+    let pick = current;
+    while (pick === current) pick = String(1 + Math.floor(Math.random() * THEME_COUNT));
+    return pick;
+  }
+
+  if (stage) {
+    // animationiteration bubbles up from .cc-unit-left; cradleBeat's period
+    // is offset so its boundary lands on the collision (see animations.css).
+    stage.addEventListener('animationiteration', function (e) {
+      if (e.animationName !== 'cradleBeat') return;
+      stage.dataset.ccTheme = nextTheme();
+    });
+  }
+
   function setMode(mode, label) {
     monogramWrap.dataset.mode = mode;
     // Mirrored onto .anim-stage-main too for creative commons
@@ -84,6 +106,9 @@
     // .anim-stage-main, not a descendant of it or #monogramWrap), so its
     // [data-mode="…"] .cc-text-* rules need this ancestor to carry it too.
     if (stage) stage.dataset.mode = mode;
+    // Full reset of the collision palette: without the attribute the
+    // :root defaults apply again, so no mode inherits another's colours.
+    if (stage) delete stage.dataset.ccTheme;
     if (labelRight) labelRight.textContent = label;
     applyCopy(mode);
 

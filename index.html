@@ -72,11 +72,14 @@ strip %}
          animations.js just shows the one matching the current mode, so this
          needs no fetch at runtime (same as .stage-title's text). -->
     <p class="stage-copy" id="stageCopy" aria-live="polite">
-      {%- for entry in site.data.mode_copy -%}
-        {%- unless entry[0] == '_note' -%}
-      <span data-copy-mode="{{ entry[0] }}"{% if entry[0] == 'creativity' %} class="is-active"{% endif %}>{{ entry[1].text | escape }}</span>
-        {%- endunless -%}
-      {%- endfor -%}
+      {%- for entry in site.data.mode_copy -%} {%- unless entry[0] == '_note'
+      -%}
+      <span
+        data-copy-mode="{{ entry[0] }}"
+        class="{% if entry[0] == 'creativity' %}is-active{% endif %}"
+        >{{ entry[1].text | escape }}</span
+      >
+      {%- endunless -%} {%- endfor -%}
     </p>
 
     <div class="modes-list" role="tablist" aria-label="CC Fest monogram modes">
@@ -284,15 +287,19 @@ strip %}
             </g>
           </g>
           <!---Newton's Cradle--->
-          <!-- Unique transformation on the string -->
+          <!-- The string hangs from the C's apex. animations.css mirrors this
+               left C with scaleX(-1) about its own fill-box centre (x=293.195),
+               which carries the circle's centre from x=343.5 to x=242.891 — so
+               the string's x matches the mirrored apex, not the path's written
+               one. The right C isn't mirrored, hence its plain x=923.5. -->
           <g>
             <g class="cc-unit cc-unit-left">
               <line
                 class="cc-string cc-string-left"
-                x1="343.5"
+                x1="242.891"
                 y1="-600px"
-                x2="343.5"
-                y2="10"
+                x2="242.891"
+                y2="10px"
                 vector-effect="non-scaling-stroke"
               />
               <path

@@ -17,11 +17,28 @@
 
 :root{
   font-size: 16px;
-   --cc-orange: #f44c2d;
-   --cc-pink: #FFE1EF;
+   /* The canvas theme: --cc-mark is the figure (the Cs, icons, active tab
+      border), --cc-wash the pale tint behind it (backdrop lettering, active
+      tab fill). These are the defaults; the palettes below temporarily
+      override them. */
+   --cc-mark: #f44c2d;
+   --cc-wash: #FFE1EF;
    --cc-power-green: #84D136;
    --cc-neutral: #b7b7b7;
 }
+
+/* Collision palettes. animations.js sets data-cc-theme on .anim-stage on
+   each Newton's-cradle hit, and clears it on any mode change — clearing is
+   the full reset, since the :root defaults above take over again.
+
+   Every mark is the same colour at a different hue: hsl(H, 90.05%, 56.67%).
+   Each wash is derived from its own mark by the relationship the :root pair
+   already had — hsl(H - 37.35deg, 100%, 94.12%). So the wash is the mark's
+   near neighbour on the wheel, lifted pale, not its complement. Changing a
+   mark means recomputing its wash by that same rule. */
+[data-cc-theme="1"]{ --cc-mark: #732DF4; --cc-wash: #E1E9FF; }
+[data-cc-theme="2"]{ --cc-mark: #F4872D; --cc-wash: #FFE1E6; }
+[data-cc-theme="3"]{ --cc-mark: #2D5FF4; --cc-wash: #D7DBFF; }
 
 /* ── Keyframes ─────────────────────────────────────────────────────── */
 
@@ -213,9 +230,9 @@
 }
 
 .modes-list > .mode-btn.is-active {
-    background: var(--cc-pink);
+    background: var(--cc-wash);
     color: var(--ink);
-    border: 0.12rem solid var(--cc-orange)
+    border: 0.12rem solid var(--cc-mark)
 }
 
 
@@ -326,7 +343,7 @@
 }
 
 .cc-path {
-    fill: var(--cc-orange);
+    fill: var(--cc-mark);
     transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease;
 }
 
@@ -350,7 +367,7 @@
     font-size: 35vw;
     line-height: 0.75;
     white-space: nowrap;
-    color: var(--cc-pink);
+    color: var(--cc-wash);
     z-index: 0;
     pointer-events: none;
 }
@@ -382,7 +399,7 @@
 
 [data-mode="creativity"] .cc-path {
     fill: none;
-    stroke: var(--cc-orange);
+    stroke: var(--cc-mark);
     stroke-width: 0.6rem;
 }
 
@@ -401,7 +418,7 @@
 }
 
 .cc-scribble {
-    fill: var(--cc-orange);
+    fill: var(--cc-mark);
 }
 
 /* Once a side has finished drawing in, creativity-scribble.js adds this
@@ -452,7 +469,7 @@
 }
 
 .cc-connection-piece {
-    fill: var(--cc-orange);
+    fill: var(--cc-mark);
     /* pointer-events: auto (the default SVG behavior, "visiblePainted")
        restricts hit-testing to each piece's own filled area — hovering
        empty space inside the canvas's (much larger) viewBox shouldn't
@@ -529,13 +546,22 @@
 ========*/
 
 .cc-string {
-    stroke: var(--ink);
-    stroke-width: 12px;
+    stroke: var(--muted);
+    stroke-width: 8px;
     opacity: 0;
 }
 
 [data-mode="collaboration"] .cc-string {
     opacity: 1;
+}
+
+/* Snap the recolour instead of cross-fading it. .cc-path carries a 0.3s
+   fill transition, and with a new palette every 0.9s the Cs would spend a
+   third of the time mid-blend — and blending two saturated hues passes
+   through muddy mid-tones (purple to orange goes via brown), which reads
+   as a smear rather than an impact. Other modes keep their transition. */
+[data-mode="collaboration"] .cc-path {
+    transition: none;
 }
 
 [data-mode="collaboration"] .cc-path-left {
@@ -544,17 +570,30 @@
     transform: scaleX(-1);
 }
 
+/* The collision point. At rotate(0deg) — the frame where they meet — the
+   mirrored left C's right arc apex sits at x=586.391 and the right C's left
+   arc apex at x=580, i.e. 6.391 units overlapped before any nudge. Easing
+   each one 3.196 units (3.196/586.39 = 0.545% of the unit's own box) *apart*
+   makes the two arcs exactly tangent, so they kiss on the curve instead of
+   driving into each other. */
 [data-mode="collaboration"] .cc-unit-left {
     transform-box: fill-box;
     transform-origin: 50% 0%;
-    translate: 12.006% 0;
-    animation: firstball 0.9s alternate ease-in infinite;
+    translate: -0.545% 0;
+    /* cradleBeat paints nothing — it exists so JS gets an animationiteration
+       event exactly on each hit. The swing is 0.9s `alternate`, so the Cs meet
+       at its halfway point (t = 0.45s, 1.35s, …); a 0.9s beat started half a
+       cycle early (-0.45s delay) has its iteration boundaries on those
+       same moments, which keeps the recolor locked to the animation rather
+       than to a timer that could drift. */
+    animation: firstball 0.9s alternate ease-in infinite,
+               cradleBeat 0.9s linear -0.45s infinite;
 }
 
 [data-mode="collaboration"] .cc-unit-right {
     transform-box: fill-box;
     transform-origin: 50% 0%;
-    translate: -12.006% 0;
+    translate: 0.545% 0;
     animation: lastball 0.9s alternate ease-out infinite;
 }
 
@@ -565,6 +604,12 @@
   50% {
     transform: rotate(0deg);
   }
+}
+
+/* Deliberately a no-op: only its iteration boundary is used (see above). */
+@keyframes cradleBeat {
+  from { opacity: 1; }
+  to { opacity: 1; }
 }
 
 @keyframes lastball {
@@ -635,7 +680,7 @@
    ===================================================================== */
 
 .cc-pacman {
-    fill: var(--cc-orange);
+    fill: var(--cc-mark);
     opacity: 0;
     display: none;
     transform-box: view-box;
@@ -857,9 +902,9 @@
 .cc-power-ring,
 .cc-power-line {
     /* coding-power.js alternates this custom property between
-       var(--cc-orange) and var(--cc-power-green) to suggest an on/off
+       var(--cc-mark) and var(--cc-power-green) to suggest an on/off
        signal, and overrides it immediately on click. */
-    fill: var(--cc-power-color, var(--cc-orange));
+    fill: var(--cc-power-color, var(--cc-mark));
     opacity: 0;
     display: none;
 }

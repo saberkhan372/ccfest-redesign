@@ -2,7 +2,7 @@
  * Owner: Shristi
  * animations.css already rotates each power ring into place and reveals
  * its line on #monogramWrap:hover (coding mode only). The alternating
- * var(--cc-orange) / var(--cc-power-green) color swap only runs while
+ * var(--cc-mark) / var(--cc-power-green) color swap only runs while
  * that hover is active — hovering starts it (icons begin on opposite
  * colors, so together they read as one "on" and one "off" signal
  * swapping back and forth), and leaving stops it. Clicking an icon
@@ -11,7 +11,7 @@
 
 (function () {
   const FLIP_INTERVAL = 1600; // ms between automatic color flips
-  const ORANGE = 'var(--cc-orange)';
+  const ORANGE = 'var(--cc-mark)';
   const GREEN = 'var(--cc-power-green)';
   const PRESS_CLASS = 'is-pressed';
 
