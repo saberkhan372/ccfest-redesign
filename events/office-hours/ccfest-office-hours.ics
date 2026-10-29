@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CC Fest//Office Hours//EN
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:America/Los_Angeles
+BEGIN:DAYLIGHT
+DTSTART:20070311T020000
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20071104T020000
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:office-hours-monthly@ccfest.rocks
+DTSTAMP:20261029T160000Z
+DTSTART;TZID=America/Los_Angeles:20261031T090000
+DTEND;TZID=America/Los_Angeles:20261031T110000
+RRULE:FREQ=MONTHLY;BYDAY=-1SA
+SUMMARY:CC Fest Office Hours
+LOCATION:https://us06web.zoom.us/j/81370457170
+URL:https://ccfest.rocks/events/office-hours/
+DESCRIPTION:Drop in to talk creative coding\, share a project\, or ask ques
+ tions. Usually the last Saturday of each month\, 9-11 a.m. Pacific. Check
+  the Office Hours page for schedule updates. Calendar copies do not update
+  automatically.\n\nJoin Zoom: https://us06web.zoom.us/j/81370457170\nOffic
+ e Hours: https://ccfest.rocks/events/office-hours/
+END:VEVENT
+END:VCALENDAR

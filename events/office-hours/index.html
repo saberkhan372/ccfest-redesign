@@ -1,0 +1,60 @@
+---
+layout: base
+title: "Office Hours — CC Fest"
+description: "Drop in for CC Fest Office Hours, usually the last Saturday each month, 9–11 a.m. Pacific. Join on Zoom and add the monthly series to your calendar."
+body_class: "inner-page office-hours-page"
+root: "../../"
+home_href: "../../"
+nav_current: "events"
+zoom_url: "https://us06web.zoom.us/j/81370457170"
+google_calendar_url: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=CC+Fest+Office+Hours&dates=20261031T090000%2F20261031T110000&ctz=America%2FLos_Angeles&recur=RRULE%3AFREQ%3DMONTHLY%3BBYDAY%3D-1SA&location=https%3A%2F%2Fus06web.zoom.us%2Fj%2F81370457170&details=Drop+in+to+talk+creative+coding%2C+share+a+project%2C+or+ask+questions.+Usually+the+last+Saturday+of+each+month%2C+9-11+a.m.+Pacific.+Check+the+Office+Hours+page+for+schedule+updates.+Calendar+copies+do+not+update+automatically.%0A%0AJoin+Zoom%3A+https%3A%2F%2Fus06web.zoom.us%2Fj%2F81370457170%0AOffice+Hours%3A+https%3A%2F%2Fccfest.rocks%2Fevents%2Foffice-hours%2F"
+---
+    <main id="main-content">
+      <section class="hero page-hero page-width" aria-labelledby="page-title">
+        <p class="eyebrow"><a href="../">Events</a> / A monthly community gathering</p>
+        <h1 id="page-title">Office Hours</h1>
+        <p class="hero-summary">Drop in to talk creative coding, share a project, or ask questions. Usually the last Saturday of each month, 9–11 a.m. Pacific.</p>
+        <div class="hero-actions">
+          <a class="button button-solid" href="{{ page.zoom_url | escape }}" target="_blank" rel="noopener">Join Zoom ↗</a>
+          <a class="button" href="#calendar">Add to your calendar</a>
+        </div>
+      </section>
+
+      <section class="section section-tinted" aria-labelledby="details-title">
+        <div class="page-width">
+          <div class="section-heading">
+            <p>01</p>
+            <div>
+              <h2 id="details-title">Come by when you can</h2>
+              <p>Join for part of the session or stay for the conversation.</p>
+            </div>
+          </div>
+          <dl class="camp-facts">
+            <div><dt>When</dt><dd>Usually the last Saturday each month</dd></div>
+            <div><dt>Time</dt><dd>9–11 a.m. Pacific</dd></div>
+            <div><dt>Where</dt><dd>Online, on Zoom</dd></div>
+            <div><dt>Meeting ID</dt><dd>813 7045 7170</dd></div>
+          </dl>
+          <p class="signup-note">We use the same Zoom link each month. Check this page for schedule updates before joining.</p>
+        </div>
+      </section>
+
+      <section class="section page-width" id="calendar" aria-labelledby="calendar-title">
+        <div class="section-heading">
+          <p>02</p>
+          <div>
+            <h2 id="calendar-title">Save the monthly series</h2>
+            <p>Keep the time and Zoom link together in your calendar.</p>
+          </div>
+        </div>
+        <div class="prose">
+          <p>The series starts Saturday, October 31, 2026, and repeats on the last Saturday of each month. It stays at 9–11 a.m. Pacific through daylight-saving changes; your calendar displays the time in your own time zone.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="button button-solid" href="{{ page.google_calendar_url | escape }}" target="_blank" rel="noopener">Add to Google Calendar ↗</a>
+          <a class="button" href="ccfest-office-hours.ics" download="ccfest-office-hours.ics">Apple / Outlook (.ics) ↓</a>
+        </div>
+        <p class="signup-note">In Google Calendar, review the event and select Save. For Apple Calendar or Outlook, open the downloaded file and import the series. These are saved copies, not a subscription: schedule changes won’t update automatically.</p>
+        <p class="signup-note">Questions? <a href="mailto:{{ site.data.site.email | escape }}?subject=CC%20Fest%20Office%20Hours">Email the organizer</a>.</p>
+      </section>
+    </main>

@@ -1,5 +1,16 @@
 # Current state — October 7, 2026
 
+## October 29, 2026 — Office Hours page
+
+Saber approved committing and pushing to `main`; the Pages run and live check follow the push. Codex started `/events/office-hours/` in this worktree; Claude Code finished and verified it. The page has a Join Zoom button, an Add to Google Calendar link and an Apple/Outlook `.ics` file. Both calendar options add a monthly series: last Saturday, 9–11 a.m. America/Los_Angeles, starting October 31, 2026. The Zoom link and first date match Saber's own "CC Fest Office Hours" Google Calendar event. The Events card is an `office-hours` entry in `_data/camps.yml`, rendered by the shared include, so Pages CMS can edit, reorder or remove it.
+
+VERIFIED: the `.ics` has CRLF line endings and no line over 75 octets. Its VTIMEZONE matches the tz database for 2026–2030. An independent parser (`recurring-ical-events`) expands all fifteen occurrences through December 2027 to 9–11 a.m. Pacific on the last Saturday, across both DST changes (16:00 UTC in summer, 17:00 UTC in winter). The Google link's start, end, zone, rule, title and Zoom link match the `.ics`. Baseline (`ac2f2b3`) and changed builds both pass every `scripts/build.rb` step, run by hand on Ruby 3.4. The built output differs only in the Events page (the new card) and the new folder, and Jekyll copies the `.ics` byte for byte. `verify-publish.cjs` passes on both at 320/390/768/1440, including the new page. `VERIFY_INTERACTIONS_ONLY=1 verify.cjs` passes. Desktop and phone screenshots were inspected, and the Events card click-through works. `git diff --check` is clean.
+
+NOT VERIFIED: importing the `.ics` into Apple Calendar or Outlook, and saving from Google Calendar's form (both need Saber's accounts). Whether the Zoom meeting asks for a passcode is unknown; the link has none, as in Saber's calendar. The series includes December 26, 2026 and December 25, 2027. Saved calendar copies won't update, so a skipped month needs a note on the page.
+
+Next: change the time or skip a month by editing all four places listed in GOTCHAS.
+
+
 ## October 21, 2026 — first scheduled Notion recap sync
 
 VERIFIED locally: the hourly automation fetched all twenty allowlisted Notion sources. Only the event hub changed (native edit time `2026-10-21T15:28:30.753Z`): the opening event count/explanation, introductory wording, collage description in the snapshot and additional thanks to Francisca. The public prose is imported verbatim, including its current grammar and spacing. The nineteen session records, replay/material links, frozen program and media files are unchanged. The shared cover retains its existing generic alt text; the more specific edited description is preserved in the source snapshot. Person linking now generates 274 mentions.

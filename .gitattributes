@@ -1,0 +1,2 @@
+# Calendar files need CRLF line endings (RFC 5545): never convert them, and do not report the CR as trailing whitespace.
+*.ics -text whitespace=cr-at-eol

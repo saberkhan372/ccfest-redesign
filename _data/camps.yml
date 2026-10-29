@@ -1,4 +1,17 @@
 camps:
+- id: office-hours
+  name: CC Fest Office Hours
+  eyebrow: Monthly · Online
+  description: Drop in to talk creative coding, share a project, or ask questions.
+  url: office-hours/
+  link_text: Join & add to your calendar
+  facts:
+  - label: When
+    value: Usually the last Saturday each month
+  - label: Time
+    value: 9–11 a.m. Pacific
+  - label: Where
+    value: Zoom
 - id: visible-java
   name: 'Visible Java: Processing for AP CS A'
   eyebrow: Educator camp · Online · Free

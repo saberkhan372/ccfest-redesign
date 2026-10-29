@@ -126,3 +126,8 @@ Saber approved the plan, commit, push to main and publication. `/events/october-
 ## 2026-10-21 — Curated person links as static archive presentation
 
 Link known people throughout the October 17 archive using `_data/recap_people.json`, including documented aliases and per-page ambiguous short names. Prefer personal websites; use verified institutional, gallery or professional profiles when needed. The normal build enriches only the twenty-one archive pages after Jekyll renders their prose and bios, preserving the historical program and Notion snapshots. It checks text and existing-link preservation. Navigation cards, existing links, code, attributes and interactive labels are not rewritten. No runtime lookup, browser script, extra dependency or Jekyll plugin is required. Publication remains through the checked main workflow already authorized by Saber.
+
+## 2026-10-29 — Office Hours: static calendar copies, card in the camps list
+
+`/events/office-hours/` offers a Google Calendar template link and a static `.ics` file. Both encode the monthly rule (last Saturday, 9–11 a.m. `America/Los_Angeles`, with an embedded VTIMEZONE), so the time follows Pacific daylight saving in every viewer's zone. The Events card is an entry in `_data/camps.yml` ("Camps and programmes"), rendered by `_includes/event-card.html`, rather than markup typed into `events/index.html`, so the CMS controls the whole Upcoming list.
+**Rejected:** A subscribable feed (needs a host that updates it; the site is static). A hand-written card in the Events template (invisible to the CMS). Moving the page copy into a new CMS form (the calendar files can't follow a CMS edit, so editable copy would drift from them).

@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { chromium } = require('playwright');
 const base = process.argv[2] || 'http://127.0.0.1:8876/';
-const paths = ['', 'register/', 'events/', 'events/visible-java/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'].concat(require('../docs/recaps/import-manifest.json').routes.map(route => route.replace(/^\//, '')));
+const paths = ['', 'register/', 'events/', 'events/visible-java/', 'events/office-hours/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'].concat(require('../docs/recaps/import-manifest.json').routes.map(route => route.replace(/^\//, '')));
 (async () => {
   const browser = await chromium.launch({ headless: true, ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}) });
   const errors = [];

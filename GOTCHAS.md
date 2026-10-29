@@ -1,5 +1,7 @@
 # Project gotchas
 
+- **The Office Hours time lives in four places.** These are the `office-hours` card in `_data/camps.yml` (editable in Pages CMS), the facts and copy in `events/office-hours/index.html`, its `google_calendar_url` front matter, and `events/office-hours/ccfest-office-hours.ics`. A CMS edit changes only the card. Change the rest by hand, and keep the `.ics` lines CRLF (`.gitattributes` protects them) and at most 75 octets. Calendar copies people already saved never update.
+
 - Use the CC Fest preview on port 8876. The in-app browser retained another project at 8765 even after reload; fresh Chrome tests did not expose this. Verify the actual user-facing browser tab before delivering a preview. The precise cache mechanism was not diagnosed.
 
 - **Liquid's `blank` does not work in Jekyll 3.10 here.** `nil == blank` evaluates false and `"" != blank` evaluates true, so `{% if thing != blank %}` is not a usable emptiness test. Every optional value in the templates is normalised with `| default: "" | strip` and compared against `""`; optional lists are tested with `| size`. This matters because Pages CMS saves a cleared field as an empty string, not as a missing key — without the normalisation, clearing the event date renders an empty slot instead of "To be confirmed".

@@ -29,7 +29,7 @@ const { chromium } = require('playwright');
 const base = process.argv[2] || 'http://127.0.0.1:8876/';
 
 /* Paths are relative to `base`. '' is the homepage. */
-const PAGES = ['', 'register/', 'events/', 'events/visible-java/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'].concat(require('../docs/recaps/import-manifest.json').routes.map(route => route.replace(/^\//, '')));
+const PAGES = ['', 'register/', 'events/', 'events/visible-java/', 'events/office-hours/', 'history/', 'mailing-list/', 'code-of-conduct/', 'poster-maker/'].concat(require('../docs/recaps/import-manifest.json').routes.map(route => route.replace(/^\//, '')));
 // After verify-publish.cjs has checked every page at all four widths, run only
 // this suite's additional homepage/time-zone/no-JS interactions without duplicating screenshots.
 const WIDTHS = process.env.VERIFY_INTERACTIONS_ONLY === '1' ? [] : [320, 390, 768, 1440];
